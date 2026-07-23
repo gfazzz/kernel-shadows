@@ -59,22 +59,27 @@
 `mission.md` с блоком «Требования среды», единая форма `starter/`, и **воспроизводимый
 тест на фикстуре** (зелёный без root, идёт на Linux/macOS/WSL).
 
-**Episodes 01–02 пересобраны в 7 серий** (старые папки `episode-01…`/`episode-02…`
-сохранены до полной миграции Этапа 1):
+**Episodes 01–03 пересобраны в 10 серий** (старые папки `episode-01…03` сохранены
+до полной миграции Этапа 1):
 
-| Серия | Из ep | Концепт | Задача (артефакт) | Тест |
-|-------|-------|---------|-------------------|------|
-| [s01e01](s01e01-terminal-awakening/) | 01 | `pwd` — где я в дереве ФС | `whereami.sh` | 6/6 |
-| [s01e02](s01e02-ls-look-around/) | 01 | `ls` — что вокруг (вкл. скрытое) | `look_around.sh` | 7/7 |
-| [s01e03](s01e03-cd-cat-navigate/) | 01 | `cd` + `cat`/`less` — дойти и прочитать | `read_briefing.sh` | 7/7 |
-| [s01e04](s01e04-find-automation/) | 01 | `find` + первый скрипт (капстоун) | `find_files.sh` | 8/8 |
-| [s01e05](s01e05-variables-ping/) | 02 | переменные + exit code (`$?`) | `check_host.sh` | 8/8 |
-| [s01e06](s01e06-conditions-loops/) | 02 | условия + циклы (`while read`) | `check_all.sh` | 9/9 |
-| [s01e07](s01e07-logging-monitor/) | 02 | логирование + капстоун | `server_monitor.sh` | 9/9 |
+| Серия | Из ep | Концепт | Задача (артефакт) | Type | Тест |
+|-------|-------|---------|-------------------|------|------|
+| [s01e01](s01e01-terminal-awakening/) | 01 | `pwd` — где я в дереве ФС | `whereami.sh` | A | 6/6 |
+| [s01e02](s01e02-ls-look-around/) | 01 | `ls` — что вокруг (вкл. скрытое) | `look_around.sh` | A | 7/7 |
+| [s01e03](s01e03-cd-cat-navigate/) | 01 | `cd` + `cat`/`less` — дойти и прочитать | `read_briefing.sh` | A | 7/7 |
+| [s01e04](s01e04-find-automation/) | 01 | `find` + первый скрипт (капстоун) | `find_files.sh` | A | 8/8 |
+| [s01e05](s01e05-variables-ping/) | 02 | переменные + exit code (`$?`) | `check_host.sh` | A | 8/8 |
+| [s01e06](s01e06-conditions-loops/) | 02 | условия + циклы (`while read`) | `check_all.sh` | A | 9/9 |
+| [s01e07](s01e07-logging-monitor/) | 02 | логирование + капстоун | `server_monitor.sh` | A | 9/9 |
+| [s01e08](s01e08-grep-pipes/) | 03 | `grep` + конвейеры | `filter_attack.sh` | A | 7/7 |
+| [s01e09](s01e09-awk-stats/) | 03 | `awk` + `sort`/`uniq` (статистика) | `top_attackers.sh` | A | 8/8 |
+| [s01e10](s01e10-sed-log-analyzer/) | 03 | `sed` + отчёт (капстоун) | `log_analyzer.sh` | **B** | 10/10 |
 
-Прогнать тест серии: `bash s01e05-variables-ping/tests/test.sh`.
-Сетевые серии (ep02) тестируются **без живой сети** — `ping` подменяется мок-версией (§5.3).
-**В очереди:** Episodes 03–04 → серии `s01e08+`.
+Прогнать тест серии: `bash s01e08-grep-pipes/tests/test.sh`.
+Сетевые серии (ep02) тестируются **без живой сети** — `ping` мокается (§5.3);
+серии анализа логов (ep03) — на фикстурах-логах. Forward-dep **T1 (`awk`) закрыт**:
+`awk` вводится в s01e09, а не «утекает» в ep02.
+**В очереди:** Episode 04 → серии `s01e11+`.
 
 ---
 

@@ -59,7 +59,7 @@ KERNEL SHADOWS — Season 2
 **Персонажи в Москве:**
 - **Viktor Petrov** — координатор операции, седые волосы, чёрный костюм
 - **Алекс Соколов** — твой двоюродный брат, ex-FSB, security expert
-- **Анна Ковалева** — ex-FSB, forensics expert, blue team lead
+- **Анна Ковалёва** — ex-FSB, forensics expert, blue team lead
 - **Дмитрий Орлов** — DevOps engineer, embedded specialist
 
 **Эпизоды:**
@@ -240,7 +240,7 @@ KERNEL SHADOWS — Season 2
 **Персонажи:**
 - **Виктор Петров** — координатор, решение о VPN в Цюрихе
 - **Алекс Соколов** — security expert, эмоциональная предыстория
-- **Анна Ковалева** — forensics, обнаружила DPI угрозу
+- **Анна Ковалёва** — forensics, обнаружила DPI угрозу
 - **Дмитрий Орлов** — DevOps, VPN infrastructure setup
 - **Макс Соколов** — главный герой, junior → competent (16 дней)
 - **LILITH v2.5** — Security Mode (синий режим — encryption)

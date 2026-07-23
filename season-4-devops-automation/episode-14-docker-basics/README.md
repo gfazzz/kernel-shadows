@@ -2624,7 +2624,7 @@ cd ~/kernel-shadows/season-4-devops-automation/episode-14-docker-basics
 **Эти навыки будут использоваться в:**
 - Episode 15: CI/CD (автоматическая сборка Docker images)
 - Episode 16: Ansible (deploy containers with Ansible)
-- Season 5: Kubernetes (orchestration at scale)
+- Season 7: Kubernetes (orchestration at scale)
 
 ---
 

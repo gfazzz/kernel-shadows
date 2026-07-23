@@ -53,7 +53,7 @@
 - **Виктор Петров** — координатор операции
 - **Алекс Соколов** — security lead (брат Макса)
 - **Дмитрий Орлов** — DevOps engineer
-- **Анна Ковалева** — forensics expert
+- **Анна Ковалёва** — forensics expert
 - **LILITH v7.0** — AI-помощник (Production Mode)
 
 ### Исландские эксперты (новые):
@@ -275,7 +275,7 @@ Sigríður Einarsdóttir: *"Security is war. Attackers never stop. SELinux = man
 
 **Viktor** (видеозвонок, все локальные эксперты присутствуют):
 
-*"Макс, Season 7 complete. Kubernetes — готов. Monitoring — активен. Performance — оптимизирован. Security — hardened. 50+ серверов по всему миру работают как единая система. От Новосибирска до Исландии. 48 дней. 11 стран. Junior sysadmin → Production Architect."*
+*"Макс, Season 7 complete. Kubernetes — готов. Monitoring — активен. Performance — оптимизирован. Security — hardened. 50+ серверов по всему миру работают как единая система. От Новосибирска до Исландии. 48 дней. 8 стран. Junior sysadmin → Production Architect."*
 
 **Viktor:** *"Season 8 starts in 4 days. Final operation. 'Новая Эра' готовит глобальную атаку. Крылов координирует из Москвы. 72 часа без сна. Используй всё что выучил. Вся команда будет с тобой."*
 
@@ -285,7 +285,7 @@ Sigríður Einarsdóttir: *"Security is war. Attackers never stop. SELinux = man
 *"Макс. 48 дней назад ты не знал что такое pwd. Сегодня управляешь distributed production systems. Kubernetes, Prometheus, SELinux. От команд к архитектуре. Season 8 — финальная битва. Покажи на что способен."*
 
 **Макс** (смотрит на северное сияние над Исландией):
-*"От терминала до production infrastructure. Через 11 стран. 48 дней. Всё что выучил — для этого момента. Season 8... я готов."*
+*"От терминала до production infrastructure. Через 8 стран. 48 дней. Всё что выучил — для этого момента. Season 8... я готов."*
 
 ---
 

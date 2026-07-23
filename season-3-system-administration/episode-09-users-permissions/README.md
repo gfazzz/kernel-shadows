@@ -20,7 +20,7 @@
 - **Андрей Волков** — ex-профессор Unix (ЛЭТИ), ментор
 - **Виктор Петров** — координатор операции
 - **Алекс Соколов** — ваш двоюродный брат, ex-FSB, security expert
-- **Анна Ковалева** — forensics expert, blue team lead
+- **Анна Ковалёва** — forensics expert, blue team lead
 - **Дмитрий Орлов** — DevOps engineer
 - **LILITH** — AI-помощник (я!)
 

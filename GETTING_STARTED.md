@@ -277,7 +277,7 @@ kernel-shadows/
 ├── LICENSE
 ├── season-1-shell-foundations/
 │   ├── episode-01-terminal-awakening/
-│   ├── episode-02-shell-scripting-basics/
+│   ├── episode-02-shell-scripting/
 │   └── ...
 └── ...
 ```
@@ -380,7 +380,7 @@ chmod +x test.sh
 
 ### Шаг 7: Следующий эпизод
 ```bash
-cd ../../episode-02-shell-scripting-basics
+cd ../../episode-02-shell-scripting
 less README.md
 ```
 

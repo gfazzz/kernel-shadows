@@ -878,7 +878,7 @@ Dmitry: *"50 серверов вручную? Нет. Docker, Ansible, CI/CD. Е
 - 🐍 Python (IoT automation, MQTT security)
 - 📊 JSON (MQTT payloads, configs)
 - 🔧 Device configs (config.txt, device tree, secure boot)
-- 📡 UART/I2C/SPI protocols (включая hardware exploitation)
+- 📡 Device drivers и модули ядра (Episode 24; выделенная серия UART/I2C/SPI — descoped, см. §6 плана)
 - 🚁 MAVLink протокол + шифрование команд
 - 🔐 IoT Security (firmware reverse engineering, MQTT TLS, secure updates)
 - 📝 Shell scripts (startup automation)
@@ -951,38 +951,10 @@ Viktor: *"Нужна разведка. Дроны. Летишь в Шэньчж�
 
 ---
 
-### Episode 23: Industrial Protocols (UART/I2C/SPI)
-**Тема:** Протоколы для embedded устройств
-**Время:** 3-4ч
-**Миссия:** Интегрировать сенсоры для мониторинга.
-
-**Теория:**
-- UART: serial communication
-- I2C: multi-device bus
-- SPI: high-speed communication
-- Debugging: logic analyzer, oscilloscope
-
-**Практика:**
-- Подключить датчики через I2C
-- Чтение данных через UART
-- Написать драйвер для кастомного устройства
-
-**Артефакты:**
-- `i2c_sensor.c` — чтение с I2C датчика
-- `uart_logger.c` — логирование через UART
-- `device_protocol.md` — документация протокола
-
-**Сюжет:**
-- Dmitry: "Нам нужны датчики движения и температуры для безопасности."
-- Интеграция: 5 датчиков через I2C bus
-- LILITH: "Embedded протоколы как языки. Выучи их, или твои устройства не заговорят."
-
----
-
-### Episode 24: IoT Integration (MQTT)
-**Тема:** IoT экосистема, MQTT протокол
-**Время:** 3-4ч
-**Миссия:** Создать распределённую сеть датчиков.
+### Episode 23: IoT Security & MQTT
+**Тема:** IoT-экосистема, протокол MQTT, безопасность
+**Время:** 4-5ч
+**Миссия:** Создать защищённую распределённую сеть датчиков.
 
 **Теория:**
 - MQTT: publish/subscribe model
@@ -993,8 +965,7 @@ Viktor: *"Нужна разведка. Дроны. Летишь в Шэньчж�
 **Практика:**
 - Установить Mosquitto broker
 - Подключить Raspberry Pi и датчики через MQTT
-- Мониторинг в реальном времени
-- Алерты при аномалиях
+- Мониторинг в реальном времени, алерты при аномалиях
 
 **Артефакты:**
 - `mqtt_publisher.py` — публикация данных
@@ -1003,10 +974,44 @@ Viktor: *"Нужна разведка. Дроны. Летишь в Шэньчж�
 
 **Сюжет:**
 - Anna: "Нам нужен мониторинг 20 точек. Реал-тайм. MQTT."
-- Результат: Распределённая сеть датчиков, алерты на Telegram
+- Результат: распределённая сеть датчиков, алерты на Telegram
 - LILITH: "IoT — это не 'Internet of Things'. Это 'Internet of Threats'."
 
-**Итог Season 6:** Embedded Linux освоен. Дроны и IoT система работает. Разведка Krylov успешна. Max возвращается из Китая с критическими данными.
+---
+
+### Episode 24: Kernel Modules & Device Drivers (SEASON FINALE)
+**Тема:** Программирование в kernel space, загружаемые модули ядра
+**Время:** 5-6ч
+**Миссия:** Написать и загрузить модуль ядра для кастомного устройства.
+
+**Теория:**
+- Kernel space vs user space
+- Загружаемые модули (LKM): `insmod`, `rmmod`, `modinfo`
+- Взаимодействие с ядром: `dmesg`, `/proc`, `/sys`
+- Device drivers (базово)
+
+**Практика:**
+- Собрать модуль ядра (`Makefile` + `obj-m`)
+- Загрузить/выгрузить `.ko`, читать вывод в `dmesg`
+- Написать простой символьный драйвер
+
+**Артефакты:**
+- `hello.ko` — учебный модуль ядра
+- `scripts/load_module.sh` — загрузчик модуля
+- `Makefile` — сборка модуля
+
+> ⚠️ **Долг v2.0 (T5, план §2.4):** solution ep24 — заглушка (16-строчный загрузчик
+> на `/path/to/hello_complete.ko`, готового `.ko` нет). Достраивается на Этапе 4.
+
+**Сюжет:**
+- Li Wei: "Kernel space — здесь нет прощения. Один segfault — kernel panic."
+- Финал сезона: разведка Krylov успешна, Max возвращается из Китая с критическими данными.
+
+> **Descoped:** ранее планировалась отдельная серия **Industrial Protocols (UART/I2C/SPI)**.
+> В текущей структуре её нет (Season 6 = RPi/GPIO → дроны → IoT/MQTT → kernel modules).
+> Тема — кандидат на возврат отдельной серией в будущих версиях (см. `V2.0_UPGRADE_PLAN.md` §6, T5).
+
+**Итог Season 6:** Embedded Linux освоен — от GPIO и дронов до IoT/MQTT и модулей ядра. Разведка Krylov успешна. Max возвращается из Китая с критическими данными.
 
 ---
 

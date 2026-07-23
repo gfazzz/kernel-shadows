@@ -456,25 +456,24 @@ LILITH активируется в Episode 01 и сопровождает вас
 
 ```
 season-1-shell-foundations/
-├── README.md                          # Этот файл
+├── README.md                          # Этот файл (карта серий — выше)
 │
-└── episode-01-terminal-awakening/
-    ├── README.md                      # Интегрированное руководство (v0.1.3+)
-    ├── starter.sh                     # Шаблон скрипта
-    │
-    ├── solution/
-    │   └── find_files.sh              # Референсное решение
-    │
-    ├── artifacts/
-    │   ├── README.md                  # Как использовать
-    │   └── test_environment/          # Тестовые файлы
-    │       ├── documents/
-    │       │   ├── briefing.txt
-    │       │   └── .secret_location
-    │       └── .next_server
-    │
-    └── tests/
-        └── test.sh                    # Автоматические тесты
+├── data/                              # Учебные данные для практики (см. data/README.md)
+│   ├── test_environment/              # «сервер»-песочница: briefing + скрытые файлы
+│   ├── access.log                     # реальный лог атаки (~4400 строк)
+│   ├── servers.txt · suspicious_ips.txt · required_tools.txt · report_template.txt
+│   └── generate_log.sh                # генератор access.log
+│
+├── s01e01-terminal-awakening/         # каждая серия — единый шаблон v2.0:
+│   ├── README.md                      #   cold open → теория(1 концепт) → задача → debrief
+│   ├── mission.md                     #   ТЗ + критерии + блок «Требования среды»
+│   ├── starter/                       #   каркас с TODO
+│   ├── solution/                      #   эталон (после попытки)
+│   ├── theory.md                      #   углубление + вынесенные дампы
+│   ├── tests/test.sh                  #   воспроизводимый тест (зелёный без root)
+│   └── artifacts/                     #   рабочая папка студента
+│
+└── s01e02-… … s01e12-batch-report/    # ещё 11 серий той же структуры (см. карту выше)
 ```
 
 ---

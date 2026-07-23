@@ -276,21 +276,25 @@ kernel-shadows/
 ├── CURRICULUM.md
 ├── LICENSE
 ├── season-1-shell-foundations/
-│   ├── episode-01-terminal-awakening/
-│   ├── episode-02-shell-scripting/
-│   └── ...
+│   ├── data/                          # учебные данные для практики
+│   ├── s01e01-terminal-awakening/     # атомарные серии v2.0 (sNNeNN)
+│   ├── s01e02-ls-look-around/
+│   └── … s01e12-batch-report/
 └── ...
 ```
 
 ---
 
-## 🚀 Первый эпизод
+## 🚀 Первая серия
 
-Теперь вы готовы к первой миссии! **Episode 01: Terminal Awakening**
+Курс v2.0 разбит на **атомарные серии** `sNNeNN` (один концепт — одна задача).
+Начните с первой — **s01e01: Terminal Awakening**. Ниже — общий порядок; точные
+команды и артефакт каждой серии смотрите в её `README.md` и `mission.md`
+(карта всех 12 серий Season 1 — в [season-1 README](season-1-shell-foundations/README.md)).
 
 ### Шаг 1: Перейдите в директорию эпизода
 ```bash
-cd ~/projects/kernel-shadows/season-1-shell-foundations/episode-01-terminal-awakening
+cd ~/projects/kernel-shadows/season-1-shell-foundations/s01e01-terminal-awakening
 ```
 
 ### Шаг 2: Прочитайте интегрированное руководство
@@ -313,7 +317,7 @@ cat README.md | less
 # (если есть GUI)
 xdg-open README.md  # Linux
 # или просто читайте на GitHub:
-# https://github.com/gfazzz/kernel-shadows/tree/main/season-1-shell-foundations/episode-01-terminal-awakening
+# https://github.com/gfazzz/kernel-shadows/tree/main/season-1-shell-foundations/s01e01-terminal-awakening
 ```
 
 ### Шаг 4: Запустите starter script (если есть)
@@ -380,7 +384,7 @@ chmod +x test.sh
 
 ### Шаг 7: Следующий эпизод
 ```bash
-cd ../../episode-02-shell-scripting
+cd ../s01e02-ls-look-around
 less README.md
 ```
 
@@ -549,17 +553,17 @@ sudo nano /etc/hosts
 git clone https://github.com/gfazzz/kernel-shadows.git
 cd kernel-shadows
 
-# 2. Перейти к Episode 01
-cd season-1-shell-foundations/episode-01-terminal-awakening
+# 2. Перейти к первой серии
+cd season-1-shell-foundations/s01e01-terminal-awakening
 
-# 3. Прочитать интегрированное руководство
-less README.md
+# 3. Прочитать руководство и ТЗ
+less README.md && cat mission.md
 
-# 4. Запустить starter
-./starter.sh
+# 4. Взять каркас и выполнить задание
+cp starter/whereami.sh ./whereami.sh   # допишите TODO по README
 
-# 5. Выполнить миссию
-# (следуйте инструкциям)
+# 5. Проверить решение (воспроизводимый тест, без root)
+bash tests/test.sh
 
 # 6. Проверить решение
 cd tests && ./test.sh

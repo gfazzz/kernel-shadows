@@ -156,14 +156,15 @@
 git clone https://github.com/gfazzz/kernel-shadows.git
 cd kernel-shadows
 
-# 2. Перейти к Episode 01
-cd season-1-shell-foundations/episode-01-terminal-awakening
+# 2. Перейти к первой серии (v2.0: атомарные серии sNNeNN)
+cd season-1-shell-foundations/s01e01-terminal-awakening
 
-# 3. Запустить starter script
-chmod +x starter.sh && ./starter.sh
-
-# 4. Прочитать интегрированное руководство
+# 3. Прочитать руководство и собрать первый инструмент
 less README.md
+cp starter/whereami.sh ./whereami.sh   # выполни задание по README
+
+# 4. Проверить решение — воспроизводимый тест (без root)
+bash tests/test.sh
 ```
 
 ### 📖 Детальная инструкция для новичков

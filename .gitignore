@@ -119,6 +119,9 @@ season-*/episode-*/artifacts/test_environment/*
 *.tmp
 .cache/
 
+# v2.0: sample practice data (per-season data/) — realistic логи-пропсы коммитим
+!**/data/*.log
+
 # System files (но НЕ example configs!)
 .env
 .env.local

@@ -612,7 +612,7 @@ fi
 - Ментор по security
 - Защищает Макса, но втягивает в опасность
 
-**Анна Ковалева, Дмитрий Орлов, Eva Zimmerman:**
+**Анна Ковалёва, Дмитрий Орлов, Eva Zimmerman:**
 - См. **SCENARIO.md** для деталей
 
 ### LILITH комментарии
@@ -731,7 +731,7 @@ fi
 
 **KERNEL SHADOWS v0.8.0** — КУРС ЗАВЕРШЁН! ✅✅✅
 
-**Прогресс:** 100% (32/32 episodes) | **Статус:** COMPLETE 🏆
+**Прогресс:** структурно 32/32 episodes | **Статус:** 🚧 рефакторинг до v2.0.0 (см. [STATUS.md](STATUS.md), [V2.0_UPGRADE_PLAN.md](V2.0_UPGRADE_PLAN.md))
 
 **Season 8 FINALE:** Все 4 эпизода готовы, Krylov defeated, операция завершена!
 

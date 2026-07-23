@@ -349,5 +349,5 @@ Zhang Mei: *"MQTT TLS configured. Real-time monitoring. Если что-то д�
 
 ---
 
-**Season 6 Status:** 🚧 Episode 21 in development  
-**Next:** [Episode 21: Raspberry Pi & GPIO Programming](./episode-21-raspberry-pi/)
+**Season 6 Status:** структурно 4/4 эпизода на месте (ep21–24). Открытые долги v2.0: достроить ep24 (готовый `.ko` вместо заглушки) и ep23; обновить CURRICULUM (ep23/24); см. [STATUS.md](../STATUS.md).
+**Первый эпизод:** [Episode 21: Raspberry Pi & GPIO Programming](./episode-21-raspberry-pi/)

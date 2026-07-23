@@ -6,8 +6,8 @@
 **"In the shadows of the kernel, we control everything."**
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Version](https://img.shields.io/badge/version-0.8.0-orange.svg)](https://github.com/gfazzz/kernel-shadows)
-[![Status](https://img.shields.io/badge/status-COMPLETE_100%25-success.svg)]()
+[![Version](https://img.shields.io/badge/version-0.8.x--dev-orange.svg)](https://github.com/gfazzz/kernel-shadows)
+[![Status](https://img.shields.io/badge/status-v2.0__refactoring-yellow.svg)]()
 
 </div>
 
@@ -34,7 +34,7 @@
 - **MOONLIGHT (C):** Вы создаёте инструменты
 - **KERNEL SHADOWS (Linux):** Вы управляете инфраструктурой для этих инструментов
 
-Персонажи, сюжет, операции — **одна вселенная**. Виктор Петров, Алекс Соколов, Анна Ковалева продолжают свою миссию, но теперь на уровне системной инфраструктуры.
+Персонажи, сюжет, операции — **одна вселенная**. Виктор Петров, Алекс Соколов, Анна Ковалёва продолжают свою миссию, но теперь на уровне системной инфраструктуры.
 
 ---
 
@@ -228,9 +228,9 @@ lsb_release -a
 
 ## 📊 Прогресс курса
 
-**Версия:** 0.8.0 (KERNEL SHADOWS — COURSE COMPLETE! 🎉🌍🏆)
-**Статус:** ✅ ВСЕ 32 ЭПИЗОДА ГОТОВЫ! (ALL 8 Seasons Complete!)
-**Прогресс:** 100% (32/32 episodes complete)
+**Версия:** 0.8.0 (архивный baseline) → 2.0.0 (рефакторинг, ветка `v2.0-refactor`)
+**Статус:** 🚧 v0.8.x с открытыми долгами — все 32 эпизода структурно на месте, но курс **не** «100% complete» (открытые долги — в [STATUS.md](STATUS.md) и [V2.0_UPGRADE_PLAN.md](V2.0_UPGRADE_PLAN.md))
+**Структурная готовность:** 32/32 эпизода имеют `README + starter + solution + tests` (это **не** значит «воспроизводимо зелёные тесты» — см. STATUS.md)
 
 ### Roadmap:
 - [x] Концепция и сюжет (глобальная распределённая операция)
@@ -272,14 +272,15 @@ lsb_release -a
   - [x] Episode 30: Око бури (forensics, hardening)
   - [x] Episode 31: Контрнаступление (offensive ops, botnet cleanup)
   - [x] Episode 32: Финальная защита (rootkit, Krylov defeated, FINALE!)
-- [ ] LILITH AI интеграция (CLI tools ready)
+- [x] LILITH — диегетический наставник во всех 32/32 эпизодах; CLI-прототип `tools/lilith.sh` (не live-AI)
 - [ ] Community testing & feedback (приоритет!)
 - [ ] Documentation final polish
+- [ ] **v2.0:** воспроизводимые тесты, нумерация `sNNeNN`, дробление серий, кумулятивность (см. [V2.0_UPGRADE_PLAN.md](V2.0_UPGRADE_PLAN.md))
 
 ### 📝 Аудит курса
 **Проведён:** 4 октября 2025
 **Оценка:** 4.2/5 (A-) → 4.6/5 (A) после Phase 1
-**Текущий статус:** ✅ **ALL SEASONS COMPLETE! (100% — 32/32 episodes)**
+**Текущий статус:** 🚧 **v0.8.x — структурно 32/32, идёт рефакторинг до v2.0.0** (честный статус и открытые долги — в [STATUS.md](STATUS.md))
 
 ### 📚 Рекомендуемые ресурсы
 - [RESOURCES.md](RESOURCES.md) — кураторский список качественных материалов
@@ -405,7 +406,7 @@ KERNEL SHADOWS — это open source проект под лицензией **G
 
 Концепция курса **KERNEL SHADOWS** родилась на платформе [Eurecable.com](https://eurecable.com/ideas/973) (3 октября 2025).
 
-Первоначально рассматривался вариант **приквела** к MOONLIGHT (предыстория Алекса "Shadow" Ковалёва), но в итоге выбран формат **спин-оффа** с новым главным героем (Макс Соколов) для большей независимости и гибкости сюжета.
+Первоначально рассматривался вариант **приквела** к MOONLIGHT, но в итоге выбран формат **спин-оффа** с новым главным героем (**Макс Соколов**) для большей независимости и гибкости сюжета.
 
 ---
 
@@ -425,13 +426,13 @@ KERNEL SHADOWS — это open source проект под лицензией **G
 
 ---
 
-**KERNEL SHADOWS v0.8.0** — КУРС ЗАВЕРШЁН! ✅✅✅
+**KERNEL SHADOWS v0.8.x → v2.0.0** — рефакторинг в процессе
 
 *"Операция завершена. Все 50 серверов целы. Вы прошли путь от junior admin до expert. Welcome to the shadows."* — LILITH
 
-**Прогресс:** 100% (32/32 episodes) | **Статус:** COMPLETE 🏆
-**Season 8 FINALE:** Дни 57-60 — Финальная битва, Krylov defeated, The Architect revealed
-**Операция KERNEL SHADOWS:** ✅ ЗАВЕРШЕНА
+**Структурно:** 32/32 эпизода | **Статус:** 🚧 рефакторинг до v2.0.0 (см. [STATUS.md](STATUS.md))
+**Season 8 FINALE:** Дни 57-60 — финальная битва; The Architect (Кирилл Соболев) раскрыт
+**Операция KERNEL SHADOWS:** сюжетно завершена; курс — в доработке (v2.0)
 
 ---
 

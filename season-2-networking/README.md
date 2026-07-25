@@ -100,17 +100,30 @@ KERNEL SHADOWS — Season 2
 Сетевые серии тестируются **без живой сети** — `ping`/`ss` подменяются мок-версиями
 (mock-first, §5.3).
 
-**Episode 05 пересобран в 3 серии** (старые `episode-05…08` сохранены до миграции Этапа 1):
+**Season 2 полностью пересобран: Episodes 05–08 → 9 атомарных серий ✅**
+(старые `episode-05…08` убраны; данные-пропсы сохранены в [`data/`](data/)):
 
 | Серия | Из ep | Концепт | Задача (артефакт) | Type | Тест |
 |-------|-------|---------|-------------------|------|------|
 | [s02e01](s02e01-tcpip-addressing/) | 05 | IPv4-адресация + модель TCP/IP | `ipinfo.sh` | A | 11/11 |
-| [s02e02](s02e02-ports-sockets/) | 05 | порты/сокеты (`ss`), неожиданные порты | `check_ports.sh` | A | 8/8 |
+| [s02e02](s02e02-ports-sockets/) | 05 | порты/сокеты (`ss`) | `check_ports.sh` | A | 8/8 |
 | [s02e03](s02e03-net-diagnostics/) | 05 | диагностика `ping`/`traceroute` (капстоун) | `net_diag.sh` | A | 8/8 |
+| [s02e04](s02e04-dns-lookup/) | 06 | DNS-резолвинг (`dig`), типы записей | `dns_lookup.sh` | B | 7/7 |
+| [s02e05](s02e05-dns-spoofing-guard/) | 06 | детект DNS-спуфинга (капстоун) | `dns_guard.sh` | B | 8/8 |
+| [s02e06](s02e06-firewall-ufw/) | 07 | firewall `ufw`, аудит правил | `fw_audit.sh` | B | 8/8 |
+| [s02e07](s02e07-block-botnet/) | 07 | блокировка ботнета (капстоун) | `block_botnet.sh` | B | 9/9 |
+| [s02e08](s02e08-ssh-keys/) | 08 | SSH-ключи (ed25519, права) | `ssh_key_check.sh` | A | 9/9 |
+| [s02e09](s02e09-ssh-hardening/) | 08 | hardening sshd + туннели (финал) | `sshd_harden_check.sh` | B | 9/9 |
 
-Сезонный проект — **`netshield`** (firewall/DNS/VPN-конфиги, растёт поверх `shadow_toolkit`;
-см. [`PROJECTS.md`](../PROJECTS.md)).
-**В очереди:** Episodes 06–08 (DNS, Firewalls, VPN) → серии `s02e04+`.
+**Итого Season 2: 9 серий, 77 проверок — все зелёные без root/сети** (сетевые команды
+`ping`/`ss`/`dig`/`ufw`/`dpkg` мокаются или работают на фикстурах; §5.3). Реальные данные
+для практики — в [`data/`](data/).
+
+Сезонный проект — **`netshield`** (адресация → защита DNS → firewall → шифрованный доступ;
+см. [`PROJECTS.md`](../PROJECTS.md)). Закрытые forward-deps: **T2** (`systemd-resolved` —
+только read-only `resolvectl`, `systemctl` → Season 3) и **T4** (`fail2ban` — превью, полноценно
+Season 5).
+**В очереди:** Season 3 «System Administration» (Episodes 09–12) → серии `s03e01+`.
 
 ---
 
@@ -532,6 +545,6 @@ wireguard         # Современный VPN
 
 **[← Season 1](../season-1-shell-foundations/README.md) | [Season 3 →](../season-3-system-administration/README.md)**
 
-**[Episode 05 →](episode-05-tcp-ip-fundamentals/README.md)**
+**[Первая серия: s02e01 →](s02e01-tcpip-addressing/README.md)**
 
 </div>

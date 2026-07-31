@@ -128,6 +128,6 @@ Red:
 ---
 
 ```
-Навигация:  ◀ Season 1 (s01e13)   │   Season 2   │   s02e02 — порты/ss ▶
+Навигация:  ◀ Season 1 (s01e14)   │   Season 2   │   s02e02 — порты/ss ▶
 Season README: ../README.md    Курс: ../../README.md
 ```

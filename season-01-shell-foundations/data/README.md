@@ -11,20 +11,20 @@
 
 | Файл | Для серий | Что это |
 |------|-----------|---------|
-| `test_environment/` | s01e02–s01e05 | «сервер»-песочница: `documents/briefing.txt` (брифинг Виктора), скрытые `.secret_location` (координаты встречи) и `.next_server` (доступ к следующему серверу). Найди их через `ls -la` / `find`, прочитай через `cat`. |
-| `servers.txt` | s01e06–s01e08 | список серверов (`имя IP`), в т.ч. заведомо online (8.8.8.8, 1.1.1.1, 127.0.0.1) и offline (192.168.255.255) — для `check_host`/`check_all`/`server_monitor`. |
-| `access.log` | s01e09–s01e11 | реалистичный лог веб-сервера (~4400 строк): легитимный трафик + атака 03:47 (SQLi, сканеры, Tor exit node 185.220.101.47). Практика `grep`/`awk`/`sort`/`uniq`/`sed`. |
-| `generate_log.sh` | s01e09–s01e11 | генератор `access.log` — можно пересоздать данные: `bash generate_log.sh`. |
-| `suspicious_ips.txt` | s01e11 | база известных угроз (10 IP) для сверки в `log_analyzer.sh`. |
-| `report_template.txt` | s01e11 | шаблон security-отчёта (ориентир структуры). |
-| `required_tools.txt` | s01e12–s01e13 | манифест инструментов операции для `pkg_check`/`install_report_generator`. |
+| `test_environment/` | s01e02–s01e06 | «сервер»-песочница: `documents/briefing.txt` (брифинг Виктора), скрытые `.secret_location` (координаты встречи) и `.next_server` (доступ к следующему серверу). Найди их через `ls -la` / `find`, прочитай через `cat`. |
+| `servers.txt` | s01e07–s01e09 | список серверов (`имя IP`), в т.ч. заведомо online (8.8.8.8, 1.1.1.1, 127.0.0.1) и offline (192.168.255.255) — для `check_host`/`check_all`/`server_monitor`. |
+| `access.log` | s01e10–s01e12 | реалистичный лог веб-сервера (~4400 строк): легитимный трафик + атака 03:47 (SQLi, сканеры, Tor exit node 185.220.101.47). Практика `grep`/`awk`/`sort`/`uniq`/`sed`. |
+| `generate_log.sh` | s01e10–s01e12 | генератор `access.log` — можно пересоздать данные: `bash generate_log.sh`. |
+| `suspicious_ips.txt` | s01e12 | база известных угроз (10 IP) для сверки в `log_analyzer.sh`. |
+| `report_template.txt` | s01e12 | шаблон security-отчёта (ориентир структуры). |
+| `required_tools.txt` | s01e13–s01e14 | манифест инструментов операции для `pkg_check`/`install_report_generator`. |
 
 ## Как пользоваться
 
 ```bash
 # пример: прогнать свой анализатор по реальному логу
 cd season-01-shell-foundations
-./s01e11-sed-log-analyzer/solution/log_analyzer.sh data/access.log data/suspicious_ips.txt /tmp/report.txt
+./s01e12-sed-log-analyzer/solution/log_analyzer.sh data/access.log data/suspicious_ips.txt /tmp/report.txt
 
 # пример: осмотреть «сервер»-песочницу
 ls -la data/test_environment

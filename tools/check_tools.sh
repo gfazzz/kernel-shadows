@@ -21,20 +21,20 @@ cd "${ROOT}"
 
 # инструмент|регулярка поиска|серия, где вводится (или NONE — не преподаётся нигде)
 TOOLS='
-cp|\bcp\s|NONE
-mv|\bmv\s|NONE
-mkdir|\bmkdir\b|NONE
-touch|\btouch\b|NONE
-rm|\brm\s+-|NONE
+cp|\bcp\s|s01e04
+mv|\bmv\s|s01e04
+mkdir|\bmkdir\b|s01e04
+touch|\btouch\b|s01e04
+rm|\brm\s+-|s01e04
 chmod|\bchmod\b|NONE
 sudo|sudo (apt|systemctl|ufw)|s03e09
-man|\bman\s+[a-z]|NONE
-pipe|\|\s*(wc|grep|sort|head|awk)|s01e09
-wc|\bwc\s+-l|s01e09
-grep|\bgrep\b|s01e09
-sort|\bsort\b|s01e10
-redirect|>\s*[a-z_]+\.(txt|log|conf)|s01e08
-editor|\b(nano|vim|vi)\b|s01e04
+man|\bman\s+[a-z]|s01e04
+pipe|\|\s*(wc|grep|sort|head|awk)|s01e10
+wc|\bwc\s+-l|s01e10
+grep|\bgrep\b|s01e10
+sort|\bsort\b|s01e11
+redirect|>\s*[a-z_]+\.(txt|log|conf)|s01e09
+editor|\b(nano|vim|vi)\b|s01e05
 ssh|\bssh\s|s02e08
 tar|\btar\s+-|NONE
 curl|curl -[a-zA-Z]|NONE
@@ -64,12 +64,29 @@ while IFS='|' read -r tool re intro; do
     done
     [ -z "${first}" ] && continue   # инструмент вообще не встречается
 
+    # Помечен ли ранний показ как осознанный предпросмотр? Правило THEORY_MAP
+    # разрешает использовать инструмент раньше ввода, если рядом стоит пометка
+    # «предпросмотр» и он не входит в зачётный код.
+    preview=0
+    early_dir=$(find . -maxdepth 2 -type d -name "${first}-*" | head -1)
+    if [ -n "${early_dir}" ] && grep -qi 'предпросмотр' "${early_dir}/README.md" "${early_dir}/mission.md" 2>/dev/null; then
+        preview=1
+    fi
+
     if [ "${intro}" = "NONE" ]; then
-        printf '%-10s %-12s %-12s %s\n' "${tool}" "${first}" "—" "НЕ ПРЕПОДАЁТСЯ"
-        violations=$((violations + 1))
+        if [ "${preview}" -eq 1 ]; then
+            printf '%-10s %-12s %-12s %s\n' "${tool}" "${first}" "—" "предпросмотр (помечен)"
+        else
+            printf '%-10s %-12s %-12s %s\n' "${tool}" "${first}" "—" "НЕ ПРЕПОДАЁТСЯ"
+            violations=$((violations + 1))
+        fi
     elif [[ "${first}" < "${intro}" ]]; then
-        printf '%-10s %-12s %-12s %s\n' "${tool}" "${first}" "${intro}" "РАНЬШЕ ВВОДА"
-        violations=$((violations + 1))
+        if [ "${preview}" -eq 1 ]; then
+            printf '%-10s %-12s %-12s %s\n' "${tool}" "${first}" "${intro}" "предпросмотр (помечен)"
+        else
+            printf '%-10s %-12s %-12s %s\n' "${tool}" "${first}" "${intro}" "РАНЬШЕ ВВОДА"
+            violations=$((violations + 1))
+        fi
     else
         printf '%-10s %-12s %-12s %s\n' "${tool}" "${first}" "${intro}" "ok"
     fi

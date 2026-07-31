@@ -21,6 +21,7 @@ rules="${1:?Использование: fw_audit.sh UFW_STATUS_FILE}"
 sensitive="3306 5432 6379 27017 9200 11211"
 
 issues=0
+reported=" "                  # уже отмеченные порты: правило дублируется для (v6)
 echo "=== ALLOW-правила ==="
 while IFS= read -r line; do
     case "${line}" in *ALLOW*) ;; *) continue ;; esac
@@ -28,8 +29,11 @@ while IFS= read -r line; do
     port="${port%%/*}"        # отрезаем /tcp
     echo "  ALLOW: ${line}"
     for s in ${sensitive}; do
+        # сравнение ЦЕЛЫМ значением: 33060 не должен совпасть с 3306
         if [ "${port}" = "${s}" ] && printf '%s' "${line}" | grep -qi "Anywhere"; then
+            case "${reported}" in *" ${port} "*) continue ;; esac
             echo "    ⚠️ чувствительный порт ${port} открыт наружу (Anywhere)!"
+            reported="${reported}${port} "
             issues=$((issues + 1))
         fi
     done

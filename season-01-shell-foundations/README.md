@@ -69,7 +69,7 @@
 | [s01e03](s01e03-cd-cat-navigate/) | 01 | `cd` + `cat` — дойти и прочитать | `intel.txt` | **C** | 9/9 |
 | [s01e04](s01e04-file-operations/) | — | **`mkdir`/`cp`/`mv`/`rm`/`touch` + `man`** | `workspace/` | **B** | 10/10 |
 | [s01e05](s01e05-editing-files/) | — | **правка файлов: `nano`, `vim`** | `agent.conf` | **B** | 10/10 |
-| [s01e06](s01e06-find-automation/) | 01 | `find` + первый скрипт (капстоун) | `find_files.sh` | A | 8/8 |
+| [s01e06](s01e06-find-automation/) | 01 | `find` — обход дерева с условиями | `audit_tree.sh` | A | 10/10 |
 | [s01e07](s01e07-variables-ping/) | 02 | переменные + exit code (`$?`) | `check_host.sh` | A | 8/8 |
 | [s01e08](s01e08-conditions-loops/) | 02 | условия + циклы (`while read`) | `check_all.sh` | A | 9/9 |
 | [s01e09](s01e09-logging-monitor/) | 02 | логирование + капстоун | `server_monitor.sh` | A | 9/9 |

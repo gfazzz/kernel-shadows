@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 
 # KERNEL SHADOWS - Progress Tracker
-# Отслеживание прогресса студента по эпизодам
+# Отслеживание прогресса студента по сериям курса.
+#
+# v2.0: курс мигрирует с монолитных эпизодов (episode-NN) на атомарные серии
+# (sNNeNN). Трекер работает с ОБЕИМИ схемами одновременно и обнаруживает
+# единицы прохождения на диске, а не по хардкоду. Каталоги сезонов: season-NN-*.
 
 set -euo pipefail
 
@@ -14,272 +18,249 @@ readonly CYAN='\033[0;36m'
 readonly GRAY='\033[0;90m'
 readonly NC='\033[0m'
 
-# Путь к проекту
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
-
-# Файл для сохранения прогресса
 PROGRESS_FILE="$PROJECT_ROOT/.progress"
 
-# Создать файл прогресса если не существует
+# ============================================================================
+# Обнаружение единиц прохождения
+# ============================================================================
+
+# Каталог сезона по номеру (1 или 01 -> season-01-*)
+season_dir() {
+  local n; n=$(printf '%02d' "$((10#${1#0}))" 2>/dev/null || echo "$1")
+  compgen -G "$PROJECT_ROOT/season-${n}-*" 2>/dev/null | head -1
+}
+
+# Список единиц сезона: сначала серии sNNeNN, иначе старые episode-NN
+season_units() {
+  local dir; dir="$(season_dir "$1")"
+  [[ -z "$dir" || ! -d "$dir" ]] && return 0
+  local units=()
+  mapfile -t units < <(find "$dir" -maxdepth 1 -type d -name 's[0-9][0-9]e[0-9][0-9]-*' 2>/dev/null | sort)
+  if [[ ${#units[@]} -eq 0 ]]; then
+    mapfile -t units < <(find "$dir" -maxdepth 1 -type d -name 'episode-[0-9][0-9]-*' 2>/dev/null | sort)
+  fi
+  [[ ${#units[@]} -gt 0 ]] && printf '%s\n' "${units[@]}"
+}
+
+# Ключ прогресса из пути: s01e01-... -> s01e01; episode-09-... в сезоне 3 -> s03e09
+unit_key() {
+  local base season; base="$(basename "$1")"; season="$2"
+  case "$base" in
+    s[0-9][0-9]e[0-9][0-9]-*) echo "${base%%-*}" ;;
+    episode-*) local ep="${base#episode-}"; ep="${ep%%-*}"; printf 's%02de%s\n' "$((10#${season#0}))" "$ep" ;;
+    *) echo "$base" ;;
+  esac
+}
+
+# Человекочитаемое название единицы
+unit_title() {
+  local base; base="$(basename "$1")"
+  local name="${base#s[0-9][0-9]e[0-9][0-9]-}"; name="${name#episode-[0-9][0-9]-}"
+  echo "$name" | tr '-' ' '
+}
+
+all_units_count() {
+  local total=0 s
+  for s in 1 2 3 4 5 6 7 8; do
+    local n; n=$(season_units "$s" | wc -l | tr -d ' ')
+    total=$((total + n))
+  done
+  echo "$total"
+}
+
+# ============================================================================
+# Файл прогресса
+# ============================================================================
+
 init_progress_file() {
   if [[ ! -f "$PROGRESS_FILE" ]]; then
     cat > "$PROGRESS_FILE" << 'EOF'
 # KERNEL SHADOWS Progress Tracker
-# Этот файл автоматически создаётся tools/progress.sh
-# Формат: season-episode:status:timestamp
+# Создаётся автоматически tools/progress.sh
+# Формат: sNNeNN:status:timestamp
 # Статусы: not_started, in_progress, completed
 EOF
   fi
 }
 
-# Получить статус эпизода
-get_episode_status() {
-  local season="$1"
-  local episode="$2"
-  local key="s${season}-e${episode}"
-
-  if [[ -f "$PROGRESS_FILE" ]]; then
-    local line=$(grep "^$key:" "$PROGRESS_FILE" 2>/dev/null || echo "")
-    if [[ -n "$line" ]]; then
-      echo "$line" | cut -d: -f2
-      return 0
-    fi
-  fi
-
-  echo "not_started"
+get_status() {
+  local key="$1"
+  [[ -f "$PROGRESS_FILE" ]] || { echo "not_started"; return; }
+  local line; line=$(grep "^${key}:" "$PROGRESS_FILE" 2>/dev/null || echo "")
+  [[ -n "$line" ]] && echo "$line" | cut -d: -f2 || echo "not_started"
 }
 
-# Установить статус эпизода
-set_episode_status() {
-  local season="$1"
-  local episode="$2"
-  local status="$3"
-  local key="s${season}-e${episode}"
-  local timestamp=$(date +%Y-%m-%d)
-
+set_status() {
+  local key="$1" status="$2"
   init_progress_file
-
-  # Удалить старую запись если есть
-  sed -i "/^$key:/d" "$PROGRESS_FILE" 2>/dev/null || true
-
-  # Добавить новую запись
-  echo "$key:$status:$timestamp" >> "$PROGRESS_FILE"
+  sed -i.bak "/^${key}:/d" "$PROGRESS_FILE" 2>/dev/null || sed -i "/^${key}:/d" "$PROGRESS_FILE" 2>/dev/null || true
+  rm -f "${PROGRESS_FILE}.bak" 2>/dev/null || true
+  echo "${key}:${status}:$(date +%Y-%m-%d)" >> "$PROGRESS_FILE"
 }
 
-# Проверить завершённость эпизода (по тестам)
-check_episode_completion() {
-  local season="$1"
-  local episode="$2"
-
-  local episode_path="$PROJECT_ROOT/season-${season}-*/episode-${episode}-*"
-
-  if ! compgen -G "$episode_path" > /dev/null; then
-    return 1
-  fi
-
-  local ep_dir=$(compgen -G "$episode_path" | head -1)
-  local test_script="$ep_dir/tests/test.sh"
-
-  if [[ ! -f "$test_script" ]]; then
-    return 1
-  fi
-
-  # Запустить тесты тихо
-  cd "$ep_dir" || return 1
-  bash "$test_script" &>/dev/null
-
-  return $?
+# Проверка через тесты серии
+check_completion() {
+  local dir="$1"
+  local test_script="$dir/tests/test.sh"
+  [[ -f "$test_script" ]] || return 1
+  ( cd "$dir" && bash "$test_script" &>/dev/null )
 }
 
-# Прогресс бар
+# Найти каталог единицы по ключу (s01e01) в любом сезоне
+find_unit_by_key() {
+  local want="$1" s dir
+  for s in 1 2 3 4 5 6 7 8; do
+    while IFS= read -r dir; do
+      [[ -z "$dir" ]] && continue
+      [[ "$(unit_key "$dir" "$s")" == "$want" ]] && { echo "$dir"; return 0; }
+    done < <(season_units "$s")
+  done
+  return 1
+}
+
+# ============================================================================
+# Вывод
+# ============================================================================
+
 print_progress_bar() {
-  local completed="${1:-0}"
-  local total="${2:-32}"
-  local width=40
-
-  # Защита от деления на 0
+  local completed="${1:-0}" total="${2:-1}" width=40
   [[ $total -eq 0 ]] && total=1
-
-  # Безопасные вычисления
   local percent=$(( (completed * 100) / total ))
   local filled=$(( (completed * width) / total ))
-  local empty=$(( width - filled ))
-
+  local empty=$(( width - filled )) i
   echo -ne "${BLUE}["
-
-  # Заполненная часть
-  local i
-  for ((i=0; i<filled; i++)); do
-    echo -ne "█"
-  done
-
-  # Пустая часть
-  for ((i=0; i<empty; i++)); do
-    echo -ne "░"
-  done
-
+  for ((i=0; i<filled; i++)); do echo -ne "█"; done
+  for ((i=0; i<empty; i++)); do echo -ne "░"; done
   echo -ne "]${NC} ${percent}%"
 }
 
-# Эмодзи статуса
-get_status_emoji() {
-  local status="$1"
-  case "$status" in
-    completed)
-      echo -e "${GREEN}✅${NC}"
-      ;;
-    in_progress)
-      echo -e "${YELLOW}⏳${NC}"
-      ;;
-    not_started)
-      echo -e "${GRAY}⭕${NC}"
-      ;;
-    *)
-      echo -e "${GRAY}❓${NC}"
-      ;;
+status_emoji() {
+  case "$1" in
+    completed)   echo -e "${GREEN}[x]${NC}" ;;
+    in_progress) echo -e "${YELLOW}[~]${NC}" ;;
+    *)           echo -e "${GRAY}[ ]${NC}" ;;
   esac
 }
 
-# Показать общий прогресс
 show_overall_progress() {
   echo -e "${PURPLE}╔══════════════════════════════════════════════════════════════╗${NC}"
   echo -e "${PURPLE}║  KERNEL SHADOWS - Progress Tracker                           ║${NC}"
   echo -e "${PURPLE}╚══════════════════════════════════════════════════════════════╝${NC}"
   echo ""
 
-  local total_episodes=32
-  local completed=0
-  local in_progress=0
-
-  # Подсчитать завершённые эпизоды
+  local total completed=0 in_progress=0
+  total="$(all_units_count)"
+  # grep -c при нуле совпадений печатает 0 И возвращает код 1 — поэтому
+  # без `|| true` сработал бы фолбэк и склеил бы "0" + "0" в "00".
   if [[ -f "$PROGRESS_FILE" ]]; then
-    completed=$(grep -c ":completed:" "$PROGRESS_FILE" 2>/dev/null)
-    in_progress=$(grep -c ":in_progress:" "$PROGRESS_FILE" 2>/dev/null)
+    completed=$(grep -c ":completed:" "$PROGRESS_FILE" 2>/dev/null || true)
+    in_progress=$(grep -c ":in_progress:" "$PROGRESS_FILE" 2>/dev/null || true)
   fi
-
-  # Убедиться что переменные числовые (удалить любые не-цифры)
-  completed=$(echo "$completed" | tr -cd '0-9')
-  in_progress=$(echo "$in_progress" | tr -cd '0-9')
-
-  # Если пустые - установить 0
-  : ${completed:=0}
-  : ${in_progress:=0}
+  completed=$(printf '%s' "${completed:-0}" | head -1 | tr -cd '0-9'); : "${completed:=0}"
+  in_progress=$(printf '%s' "${in_progress:-0}" | head -1 | tr -cd '0-9'); : "${in_progress:=0}"
 
   echo -e "${CYAN}Общий прогресс:${NC}"
-  echo -ne "  "
-  print_progress_bar "$completed" "$total_episodes"
-  echo " ($completed/$total_episodes эпизодов)"
+  echo -ne "  "; print_progress_bar "$completed" "$total"
+  echo " ($completed/$total единиц курса)"
   echo ""
-
   echo -e "${CYAN}Статистика:${NC}"
-  echo -e "  ${GREEN}✅ Завершено:${NC} $completed"
-  echo -e "  ${YELLOW}⏳ В процессе:${NC} $in_progress"
-  echo -e "  ${GRAY}⭕ Не начато:${NC} $((total_episodes - completed - in_progress))"
+  echo -e "  ${GREEN}Завершено:${NC}  $completed"
+  echo -e "  ${YELLOW}В процессе:${NC} $in_progress"
+  echo -e "  ${GRAY}Не начато:${NC}  $((total - completed - in_progress))"
+  echo ""
+  echo -e "${GRAY}Курс мигрирует на атомарные серии (sNNeNN); сезоны без миграции${NC}"
+  echo -e "${GRAY}считаются по монолитным эпизодам.${NC}"
   echo ""
 }
 
-# Показать прогресс сезона
 show_season_progress() {
   local season="${1:-1}"
+  local dir; dir="$(season_dir "$season")"
 
   echo -e "${PURPLE}╔══════════════════════════════════════════════════════════════╗${NC}"
-  echo -e "${PURPLE}║  Season $season Progress                                          ║${NC}"
+  printf "${PURPLE}║  Season %-53s║${NC}\n" "$season"
   echo -e "${PURPLE}╚══════════════════════════════════════════════════════════════╝${NC}"
   echo ""
 
-  # Определить эпизоды сезона
-  local episodes_per_season=4
-  local start_ep=$(( (season - 1) * episodes_per_season + 1 ))
-  local end_ep=$(( season * episodes_per_season ))
+  if [[ -z "$dir" ]]; then
+    echo -e "  ${GRAY}Сезон не найден${NC}"; echo ""; return
+  fi
 
-  local season_completed=0
+  local units=() u key status total=0 done_n=0
+  mapfile -t units < <(season_units "$season")
+  total=${#units[@]}
 
-  for ep in $(seq -w $start_ep $end_ep); do
-    local status=$(get_episode_status "$season" "$ep")
-    local emoji=$(get_status_emoji "$status")
+  if [[ $total -eq 0 ]]; then
+    echo -e "  ${GRAY}Единиц прохождения не найдено${NC}"; echo ""; return
+  fi
 
-    # Название эпизода (если существует)
-    local episode_path="$PROJECT_ROOT/season-${season}-*/episode-${ep}-*"
-    local episode_name="Episode $ep"
-
-    if compgen -G "$episode_path" > /dev/null 2>&1; then
-      local ep_dir=$(compgen -G "$episode_path" | head -1)
-      episode_name=$(basename "$ep_dir" | sed 's/episode-[0-9]*-//' | tr '-' ' ' | sed 's/\b\w/\u&/g')
-      episode_name="Episode $ep: $episode_name"
-
-      if [[ "$status" == "completed" ]]; then
-        ((season_completed++))
-      fi
-    else
-      episode_name="Episode $ep: (В разработке)"
-    fi
-
-    echo -e "  $emoji  $episode_name"
+  for u in "${units[@]}"; do
+    key="$(unit_key "$u" "$season")"
+    status="$(get_status "$key")"
+    [[ "$status" == "completed" ]] && ((done_n++)) || true
+    printf "  %b %-10s %s\n" "$(status_emoji "$status")" "$key" "$(unit_title "$u")"
   done
 
   echo ""
   echo -e "${CYAN}Прогресс сезона:${NC}"
-  echo -ne "  "
-  print_progress_bar "$season_completed" "$episodes_per_season"
-  echo " ($season_completed/$episodes_per_season)"
+  echo -ne "  "; print_progress_bar "$done_n" "$total"
+  echo " ($done_n/$total)"
   echo ""
 }
 
-# Показать все сезоны
 show_all_seasons() {
   show_overall_progress
-
   echo -e "${CYAN}═══════════════════════════════════════════════════════════════${NC}"
   echo ""
-
-  # Season 1
-  show_season_progress 1
-
-  # Season 2-8 (заглушка)
-  for season in {2..8}; do
-    echo -e "${GRAY}Season $season: В разработке${NC}"
+  local s
+  for s in 1 2 3 4 5 6 7 8; do
+    [[ -n "$(season_dir "$s")" ]] && show_season_progress "$s"
   done
-
-  echo ""
-  echo -e "${PURPLE}> Продолжай работать. Каждый эпизод — шаг к мастерству.${NC}"
+  echo -e "${PURPLE}> Продолжай работать. Каждая серия — шаг к мастерству.${NC}"
 }
 
-# Отметить эпизод как начатый
+# ============================================================================
+# Команды
+# ============================================================================
+
+resolve_key() {   # принимает "s01e01" ЛИБО "<season> <episode>"
+  if [[ "${1:-}" =~ ^s[0-9]{2}e[0-9]{2}$ ]]; then echo "$1"; return 0; fi
+  [[ $# -lt 2 ]] && return 1
+  printf 's%02de%02d\n' "$((10#${1#0}))" "$((10#${2#0}))"
+}
+
 mark_started() {
-  local season="$1"
-  local episode="$2"
-
-  set_episode_status "$season" "$episode" "in_progress"
-  echo -e "${YELLOW}⏳ Episode $episode помечен как 'в процессе'${NC}"
+  local key; key="$(resolve_key "$@")" || { echo -e "${YELLOW}Использование: progress.sh start s01e01${NC}"; exit 1; }
+  set_status "$key" "in_progress"
+  echo -e "${YELLOW}$key помечена как 'в процессе'${NC}"
 }
 
-# Отметить эпизод как завершённый
 mark_completed() {
-  local season="$1"
-  local episode="$2"
-
-  # Проверить через тесты
-  if check_episode_completion "$season" "$episode"; then
-    set_episode_status "$season" "$episode" "completed"
-    echo -e "${GREEN}✅ Episode $episode помечен как 'завершён'!${NC}"
+  local key; key="$(resolve_key "$@")" || { echo -e "${YELLOW}Использование: progress.sh complete s01e01${NC}"; exit 1; }
+  local dir; dir="$(find_unit_by_key "$key" || true)"
+  if [[ -n "$dir" ]] && check_completion "$dir"; then
+    set_status "$key" "completed"
+    echo -e "${GREEN}$key завершена — тесты пройдены${NC}"
   else
-    echo -e "${YELLOW}⚠ Тесты не пройдены. Эпизод отмечен как 'в процессе'${NC}"
-    set_episode_status "$season" "$episode" "in_progress"
+    set_status "$key" "in_progress"
+    if [[ -z "$dir" ]]; then
+      echo -e "${YELLOW}$key: каталог не найден; отмечено как 'в процессе'${NC}"
+    else
+      echo -e "${YELLOW}$key: тесты не пройдены; отмечено как 'в процессе'${NC}"
+    fi
   fi
 }
 
-# Сбросить прогресс
 reset_progress() {
   if [[ -f "$PROGRESS_FILE" ]]; then
-    rm "$PROGRESS_FILE"
-    echo -e "${GREEN}✓ Прогресс сброшен${NC}"
+    rm -f "$PROGRESS_FILE"; echo -e "${GREEN}Прогресс сброшен${NC}"
   else
-    echo -e "${YELLOW}⚠ Файл прогресса не найден${NC}"
+    echo -e "${YELLOW}Файл прогресса не найден${NC}"
   fi
 }
 
-# Помощь
 show_help() {
   echo -e "${PURPLE}╔══════════════════════════════════════════════════════════════╗${NC}"
   echo -e "${PURPLE}║  KERNEL SHADOWS - Progress Tracker                           ║${NC}"
@@ -289,71 +270,35 @@ show_help() {
   echo "  progress.sh [команда] [аргументы]"
   echo ""
   echo -e "${CYAN}Команды:${NC}"
-  echo "  (нет)             Показать общий прогресс"
-  echo "  season <N>        Показать прогресс сезона N"
-  echo "  all               Показать все сезоны"
-  echo "  start <S> <E>     Отметить эпизод как начатый (Season Episode)"
-  echo "  complete <S> <E>  Отметить эпизод как завершённый"
-  echo "  reset             Сбросить весь прогресс"
-  echo "  help              Показать эту справку"
+  echo "  (нет)                Общий прогресс"
+  echo "  season <N>           Прогресс сезона N (1-8)"
+  echo "  all                  Все сезоны"
+  echo "  start <key>          Отметить начатой:    progress.sh start s01e01"
+  echo "  complete <key>       Отметить завершённой (запускает тесты серии)"
+  echo "  reset                Сбросить прогресс"
+  echo "  help                 Эта справка"
   echo ""
-  echo -e "${CYAN}Примеры:${NC}"
-  echo "  progress.sh                    # Общий прогресс"
-  echo "  progress.sh season 1           # Прогресс Season 1"
-  echo "  progress.sh all                # Все сезоны"
-  echo "  progress.sh start 1 01         # Начать Episode 01"
-  echo "  progress.sh complete 1 01      # Завершить Episode 01"
+  echo -e "${CYAN}Ключи:${NC}"
+  echo "  sNNeNN — серия v2.0 (s01e01). Для несмигрированных сезонов ключ"
+  echo "  строится из номера эпизода: episode-09 в сезоне 3 -> s03e09."
+  echo "  Допускается и старая форма: progress.sh start 1 01"
   echo ""
 }
 
-# Главная функция
 main() {
   init_progress_file
-
   local command="${1:-default}"
-
   case "$command" in
-    default)
-      show_overall_progress
-      ;;
-    all)
-      show_all_seasons
-      ;;
-    season)
-      shift
-      show_season_progress "${1:-1}"
-      ;;
-    start)
-      shift
-      if [[ $# -lt 2 ]]; then
-        echo -e "${YELLOW}⚠ Использование: progress.sh start <season> <episode>${NC}"
-        exit 1
-      fi
-      mark_started "$1" "$2"
-      ;;
-    complete)
-      shift
-      if [[ $# -lt 2 ]]; then
-        echo -e "${YELLOW}⚠ Использование: progress.sh complete <season> <episode>${NC}"
-        exit 1
-      fi
-      mark_completed "$1" "$2"
-      ;;
-    reset)
-      reset_progress
-      ;;
-    help|--help|-h)
-      show_help
-      ;;
+    default)  show_overall_progress ;;
+    all)      show_all_seasons ;;
+    season)   shift; show_season_progress "${1:-1}" ;;
+    start)    shift; mark_started "$@" ;;
+    complete) shift; mark_completed "$@" ;;
+    reset)    reset_progress ;;
+    help|--help|-h) show_help ;;
     *)
-      echo -e "${YELLOW}⚠ Неизвестная команда: $command${NC}"
-      echo ""
-      show_help
-      exit 1
-      ;;
+      echo -e "${YELLOW}Неизвестная команда: $command${NC}"; echo ""; show_help; exit 1 ;;
   esac
 }
 
-# Запуск
 main "$@"
-

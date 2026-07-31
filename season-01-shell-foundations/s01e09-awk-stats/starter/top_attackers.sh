@@ -6,7 +6,7 @@
 # Формат Apache Combined Log: первое поле ($1) — IP.
 #
 # Как проходить:
-#   1. cp starter/top_attackers.sh ./top_attackers.sh
+#   1. cp starter/top_attackers.sh artifacts/top_attackers.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

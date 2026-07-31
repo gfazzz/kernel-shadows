@@ -77,7 +77,7 @@ Bash здесь — оркестратор: он вызывает специал
 Собери `log_analyzer.sh` (**Type B**): отчёт из one-liner'ов — статистика, топ-IP, статусы, `sed`-очистка таймстампа, сверка с базой угроз, сохранение в файл.
 
 ```bash
-cp starter/log_analyzer.sh ./log_analyzer.sh
+cp starter/log_analyzer.sh artifacts/log_analyzer.sh
 # заменить TODO (wc/awk/sort/uniq one-liners + sed + сверка)
 bash tests/test.sh
 ```

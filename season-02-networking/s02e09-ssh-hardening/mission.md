@@ -12,11 +12,11 @@
 которыми воспользуется Крылов. Собери капстоун `sshd_harden_check.sh`: аудит `sshd_config`
 по ключевым директивам закалки.
 
-**Артефакт:** `sshd_harden_check.sh` (в корне серии).
+**Артефакт:** `sshd_harden_check.sh` (в artifacts/).
 Использование: `./sshd_harden_check.sh /etc/ssh/sshd_config`.
 
 ```bash
-cp starter/sshd_harden_check.sh ./sshd_harden_check.sh
+cp starter/sshd_harden_check.sh artifacts/sshd_harden_check.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

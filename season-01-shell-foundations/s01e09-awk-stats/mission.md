@@ -12,11 +12,11 @@
 самый активный. Собери `top_attackers.sh`: извлекает IP (первое поле) через `awk`
 и строит рейтинг по числу запросов классическим конвейером.
 
-**Артефакт:** `top_attackers.sh` (в корне серии).
+**Артефакт:** `top_attackers.sh` (в artifacts/).
 Использование: `./top_attackers.sh access.log 5` (топ-5).
 
 ```bash
-cp starter/top_attackers.sh ./top_attackers.sh
+cp starter/top_attackers.sh artifacts/top_attackers.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

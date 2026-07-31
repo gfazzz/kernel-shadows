@@ -6,7 +6,7 @@
 # HOST / STATUS (UP|DOWN) / RTT (мс из вывода ping), плюс итог UP/DOWN.
 #
 # Как проходить:
-#   1. cp starter/net_diag.sh ./net_diag.sh
+#   1. cp starter/net_diag.sh artifacts/net_diag.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh   (ping мокается — root/сеть не нужны)
 #

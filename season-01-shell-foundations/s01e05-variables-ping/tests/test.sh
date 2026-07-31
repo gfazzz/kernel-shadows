@@ -13,11 +13,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                        then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/check_host.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/check_host.sh"
 elif [ -f "${SERIES_DIR}/check_host.sh" ];         then SCRIPT="${SERIES_DIR}/check_host.sh"
-elif [ -f "${SERIES_DIR}/artifacts/check_host.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/check_host.sh"
 else SCRIPT="${SERIES_DIR}/solution/check_host.sh"
      echo "ℹ️  Свой check_host.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/check_host.sh ./check_host.sh"; echo ""
+     echo "   Создай своё:  cp starter/check_host.sh artifacts/check_host.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

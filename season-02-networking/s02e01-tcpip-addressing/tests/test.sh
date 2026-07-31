@@ -10,11 +10,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                   then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/ipinfo.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/ipinfo.sh"
 elif [ -f "${SERIES_DIR}/ipinfo.sh" ];        then SCRIPT="${SERIES_DIR}/ipinfo.sh"
-elif [ -f "${SERIES_DIR}/artifacts/ipinfo.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/ipinfo.sh"
 else SCRIPT="${SERIES_DIR}/solution/ipinfo.sh"
      echo "ℹ️  Свой ipinfo.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/ipinfo.sh ./ipinfo.sh"; echo ""
+     echo "   Создай своё:  cp starter/ipinfo.sh artifacts/ipinfo.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

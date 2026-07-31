@@ -6,7 +6,7 @@
 # «где я сейчас в дереве файловой системы?».
 #
 # Как проходить:
-#   1. Скопируй этот файл в корень серии:  cp starter/whereami.sh ./whereami.sh
+#   1. Скопируй файл в рабочую папку:  cp starter/whereami.sh artifacts/whereami.sh
 #   2. Замени TODO своим кодом.
 #   3. Проверь:  bash tests/test.sh
 #

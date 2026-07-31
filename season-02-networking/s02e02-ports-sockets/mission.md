@@ -12,11 +12,11 @@
 показывает слушающие TCP-порты (через `ss`) и, сверяясь с allowlist, помечает
 **неожиданные** порты — потенциальные бэкдоры.
 
-**Артефакт:** `check_ports.sh` (в корне серии).
+**Артефакт:** `check_ports.sh` (в artifacts/).
 Использование: `./check_ports.sh allow.txt` (allow.txt — разрешённые порты, по одному на строку).
 
 ```bash
-cp starter/check_ports.sh ./check_ports.sh
+cp starter/check_ports.sh artifacts/check_ports.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

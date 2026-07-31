@@ -13,11 +13,11 @@
 статистика, топ-IP, распределение статусов, сверка с базой известных угроз,
 сохранение в файл.
 
-**Артефакт:** `log_analyzer.sh` (в корне серии).
+**Артефакт:** `log_analyzer.sh` (в artifacts/).
 Использование: `./log_analyzer.sh access.log suspicious_ips.txt report.txt`.
 
 ```bash
-cp starter/log_analyzer.sh ./log_analyzer.sh
+cp starter/log_analyzer.sh artifacts/log_analyzer.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

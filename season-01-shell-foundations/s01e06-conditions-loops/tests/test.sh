@@ -10,11 +10,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                       then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/check_all.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/check_all.sh"
 elif [ -f "${SERIES_DIR}/check_all.sh" ];         then SCRIPT="${SERIES_DIR}/check_all.sh"
-elif [ -f "${SERIES_DIR}/artifacts/check_all.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/check_all.sh"
 else SCRIPT="${SERIES_DIR}/solution/check_all.sh"
      echo "ℹ️  Свой check_all.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/check_all.sh ./check_all.sh"; echo ""
+     echo "   Создай своё:  cp starter/check_all.sh artifacts/check_all.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

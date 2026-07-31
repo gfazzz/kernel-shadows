@@ -10,11 +10,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                       then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/dns_lookup.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/dns_lookup.sh"
 elif [ -f "${SERIES_DIR}/dns_lookup.sh" ];        then SCRIPT="${SERIES_DIR}/dns_lookup.sh"
-elif [ -f "${SERIES_DIR}/artifacts/dns_lookup.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/dns_lookup.sh"
 else SCRIPT="${SERIES_DIR}/solution/dns_lookup.sh"
      echo "ℹ️  Свой dns_lookup.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/dns_lookup.sh ./dns_lookup.sh"; echo ""
+     echo "   Создай своё:  cp starter/dns_lookup.sh artifacts/dns_lookup.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

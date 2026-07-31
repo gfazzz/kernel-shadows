@@ -11,11 +11,11 @@ SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 NAME="install_report_generator.sh"
 
 if   [ -n "${SUBJECT:-}" ];                    then SCRIPT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/${NAME}" ];           then SCRIPT="${SERIES_DIR}/${NAME}"
 elif [ -f "${SERIES_DIR}/artifacts/${NAME}" ]; then SCRIPT="${SERIES_DIR}/artifacts/${NAME}"
+elif [ -f "${SERIES_DIR}/${NAME}" ];           then SCRIPT="${SERIES_DIR}/${NAME}"
 else SCRIPT="${SERIES_DIR}/solution/${NAME}"
      echo "ℹ️  Свой ${NAME} не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/${NAME} ./${NAME}"; echo ""
+     echo "   Создай своё:  cp starter/${NAME} artifacts/${NAME}"; echo ""
 fi
 
 PASS=0; FAIL=0

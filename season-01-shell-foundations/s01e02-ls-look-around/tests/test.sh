@@ -9,7 +9,7 @@
 #
 # Без root, без сети. Объект разведки лежит в репозитории.
 #
-# Выбор отчёта: SUBJECT=... | <серия>/recon.txt | artifacts/recon.txt | solution/ (фолбэк).
+# Выбор отчёта: SUBJECT=... | artifacts/recon.txt (основное место) | <серия>/recon.txt | solution/.
 
 set -uo pipefail
 
@@ -17,11 +17,11 @@ SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 TARGET="${SERIES_DIR}/../data/test_environment"
 
 if   [ -n "${SUBJECT:-}" ];                     then REPORT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/recon.txt" ];          then REPORT="${SERIES_DIR}/recon.txt"
 elif [ -f "${SERIES_DIR}/artifacts/recon.txt" ];then REPORT="${SERIES_DIR}/artifacts/recon.txt"
+elif [ -f "${SERIES_DIR}/recon.txt" ];          then REPORT="${SERIES_DIR}/recon.txt"
 else REPORT="${SERIES_DIR}/solution/recon.txt"
      echo "ℹ️  Свой recon.txt не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Начни своё:  cp starter/recon.txt ./recon.txt"; echo ""
+     echo "   Начни своё:  cp starter/recon.txt artifacts/recon.txt"; echo ""
 fi
 
 PASS=0; FAIL=0

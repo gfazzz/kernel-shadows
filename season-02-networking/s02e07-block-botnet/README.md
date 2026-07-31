@@ -76,7 +76,7 @@ done < botnet_ips.txt > block_rules.sh
 Собери `block_botnet.sh`: из списка IP генерирует валидный bash-скрипт с `ufw deny from <ip>` (не применяя), пропуская комментарии/пустые. Это `Type B`.
 
 ```bash
-cp starter/block_botnet.sh ./block_botnet.sh
+cp starter/block_botnet.sh artifacts/block_botnet.sh
 # заменить TODO (цикл по IP → echo "ufw deny from $ip" в файл)
 bash tests/test.sh
 ```

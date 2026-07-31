@@ -13,11 +13,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                       then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/pkg_check.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/pkg_check.sh"
 elif [ -f "${SERIES_DIR}/pkg_check.sh" ];         then SCRIPT="${SERIES_DIR}/pkg_check.sh"
-elif [ -f "${SERIES_DIR}/artifacts/pkg_check.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/pkg_check.sh"
 else SCRIPT="${SERIES_DIR}/solution/pkg_check.sh"
      echo "ℹ️  Свой pkg_check.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/pkg_check.sh ./pkg_check.sh"; echo ""
+     echo "   Создай своё:  cp starter/pkg_check.sh artifacts/pkg_check.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

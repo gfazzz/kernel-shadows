@@ -13,11 +13,11 @@
 **логирует** каждую строку с таймстампом в файл, печатает `SUMMARY` и выдаёт
 `ALERT`, если есть недоступные.
 
-**Артефакт:** `server_monitor.sh` (в корне серии).
+**Артефакт:** `server_monitor.sh` (в artifacts/).
 Использование: `./server_monitor.sh servers.txt monitor.log`.
 
 ```bash
-cp starter/server_monitor.sh ./server_monitor.sh
+cp starter/server_monitor.sh artifacts/server_monitor.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

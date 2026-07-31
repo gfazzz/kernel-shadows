@@ -6,7 +6,7 @@
 # Принимает домен и (опционально) тип записи (A/AAAA/MX/NS/CNAME/TXT).
 #
 # Как проходить:
-#   1. cp starter/dns_lookup.sh ./dns_lookup.sh
+#   1. cp starter/dns_lookup.sh artifacts/dns_lookup.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh   (dig подменяется мок-версией — сеть не нужна)
 #

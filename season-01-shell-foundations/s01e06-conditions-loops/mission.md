@@ -12,11 +12,11 @@
 читает файл со списком серверов (строка = «имя IP»), проходит по нему циклом,
 пингует каждый, по условию помечает `UP`/`DOWN` и печатает итог (сколько каких).
 
-**Артефакт:** `check_all.sh` (в корне серии). Принимает путь к списку:
+**Артефакт:** `check_all.sh` (в artifacts/). Принимает путь к списку:
 `./check_all.sh servers.txt`.
 
 ```bash
-cp starter/check_all.sh ./check_all.sh
+cp starter/check_all.sh artifacts/check_all.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

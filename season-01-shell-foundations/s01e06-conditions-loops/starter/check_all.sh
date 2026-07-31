@@ -9,7 +9,7 @@
 # Пустые строки и строки-комментарии (#...) пропускать.
 #
 # Как проходить:
-#   1. cp starter/check_all.sh ./check_all.sh
+#   1. cp starter/check_all.sh artifacts/check_all.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh   (ping мокается — сеть не нужна)
 #

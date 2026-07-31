@@ -8,7 +8,7 @@
 # Формат списка: строка = "имя  # комментарий". Строки-# и пустые пропускать.
 #
 # Как проходить:
-#   1. cp starter/pkg_check.sh ./pkg_check.sh
+#   1. cp starter/pkg_check.sh artifacts/pkg_check.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh   (dpkg подменяется мок-версией — root/apt не нужны)
 #

@@ -9,7 +9,7 @@
 #     broadcast (255.255.255.255) или public.
 #
 # Как проходить:
-#   1. cp starter/ipinfo.sh ./ipinfo.sh
+#   1. cp starter/ipinfo.sh artifacts/ipinfo.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

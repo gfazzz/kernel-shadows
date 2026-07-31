@@ -10,11 +10,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                   then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/fw_audit.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/fw_audit.sh"
 elif [ -f "${SERIES_DIR}/fw_audit.sh" ];      then SCRIPT="${SERIES_DIR}/fw_audit.sh"
-elif [ -f "${SERIES_DIR}/artifacts/fw_audit.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/fw_audit.sh"
 else SCRIPT="${SERIES_DIR}/solution/fw_audit.sh"
      echo "ℹ️  Свой fw_audit.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/fw_audit.sh ./fw_audit.sh"; echo ""
+     echo "   Создай своё:  cp starter/fw_audit.sh artifacts/fw_audit.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

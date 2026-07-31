@@ -6,7 +6,7 @@
 # отметить неожиданные порты (которых нет в списке разрешённых).
 #
 # Как проходить:
-#   1. cp starter/check_ports.sh ./check_ports.sh
+#   1. cp starter/check_ports.sh artifacts/check_ports.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh   (ss подменяется мок-версией — root/сеть не нужны)
 #

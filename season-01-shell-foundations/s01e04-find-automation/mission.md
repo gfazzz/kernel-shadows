@@ -13,10 +13,10 @@
 `find_files.sh`, который **сам** находит три файла рекурсивно (`find`), читает их
 (`cat`) и сохраняет отчёт в `report.txt`.
 
-**Артефакт:** `find_files.sh` (в корне серии).
+**Артефакт:** `find_files.sh` (в artifacts/).
 
 ```bash
-cp starter/find_files.sh ./find_files.sh
+cp starter/find_files.sh artifacts/find_files.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

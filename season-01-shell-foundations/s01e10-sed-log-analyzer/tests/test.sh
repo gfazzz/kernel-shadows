@@ -11,11 +11,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                          then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/log_analyzer.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/log_analyzer.sh"
 elif [ -f "${SERIES_DIR}/log_analyzer.sh" ];         then SCRIPT="${SERIES_DIR}/log_analyzer.sh"
-elif [ -f "${SERIES_DIR}/artifacts/log_analyzer.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/log_analyzer.sh"
 else SCRIPT="${SERIES_DIR}/solution/log_analyzer.sh"
      echo "ℹ️  Свой log_analyzer.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/log_analyzer.sh ./log_analyzer.sh"; echo ""
+     echo "   Создай своё:  cp starter/log_analyzer.sh artifacts/log_analyzer.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

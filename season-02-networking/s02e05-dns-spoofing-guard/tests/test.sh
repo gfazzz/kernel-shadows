@@ -10,11 +10,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                     then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/dns_guard.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/dns_guard.sh"
 elif [ -f "${SERIES_DIR}/dns_guard.sh" ];       then SCRIPT="${SERIES_DIR}/dns_guard.sh"
-elif [ -f "${SERIES_DIR}/artifacts/dns_guard.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/dns_guard.sh"
 else SCRIPT="${SERIES_DIR}/solution/dns_guard.sh"
      echo "ℹ️  Свой dns_guard.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/dns_guard.sh ./dns_guard.sh"; echo ""
+     echo "   Создай своё:  cp starter/dns_guard.sh artifacts/dns_guard.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

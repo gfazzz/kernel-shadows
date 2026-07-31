@@ -45,7 +45,7 @@ LILITH не даёт приступить к поиску, пока ты не о
 
 ## Критерии приёмки
 
-- [ ] Файл `whereami.sh` создан в корне серии, начинается с shebang (`#!/usr/bin/env bash`).
+- [ ] Файл `whereami.sh` создан в рабочей папке artifacts/, начинается с shebang (`#!/usr/bin/env bash`).
 - [ ] Проходит `bash -n` — синтаксис без ошибок.
 - [ ] Печатает текущий каталог, полученный **через `pwd`**, а не записанный строкой.
 - [ ] Печатает домашний каталог (`$HOME`).
@@ -70,7 +70,7 @@ LILITH не даёт приступить к поиску, пока ты не о
 ## Выполнение
 
 ```bash
-cp starter/whereami.sh ./whereami.sh
+cp starter/whereami.sh artifacts/whereami.sh
 # заменить TODO своим кодом
 bash tests/test.sh
 ```

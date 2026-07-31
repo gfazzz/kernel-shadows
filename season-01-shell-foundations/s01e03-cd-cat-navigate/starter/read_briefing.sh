@@ -6,7 +6,7 @@
 #   documents/briefing.txt, .secret_location, .next_server
 #
 # Как проходить:
-#   1. cp starter/read_briefing.sh ./read_briefing.sh
+#   1. cp starter/read_briefing.sh artifacts/read_briefing.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

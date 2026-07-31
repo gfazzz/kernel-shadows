@@ -8,7 +8,7 @@
 # Публичные (*.pub) не проверять.
 #
 # Как проходить:
-#   1. cp starter/ssh_key_check.sh ./ssh_key_check.sh
+#   1. cp starter/ssh_key_check.sh artifacts/ssh_key_check.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

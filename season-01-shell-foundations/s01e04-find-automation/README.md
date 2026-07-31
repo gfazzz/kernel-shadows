@@ -80,7 +80,7 @@ find / -name "*.log" -size +100M
 Собери `find_files.sh`: **сам** находит три файла рекурсивно (`find`), читает их (`cat`) и сохраняет отчёт в `report.txt`. Это `Type A` и финал Episode 01 — здесь `pwd`→`ls`→`cd`/`cat`→`find` соединяются в один инструмент.
 
 ```bash
-cp starter/find_files.sh ./find_files.sh
+cp starter/find_files.sh artifacts/find_files.sh
 # заменить TODO (find + подстановка команды + отчёт в файл)
 bash tests/test.sh
 ```

@@ -12,11 +12,11 @@
 Собери капстоун `block_botnet.sh`: из списка IP **генерирует** скрипт с правилами
 `ufw deny from <ip>` (не применяя их — применение требует root).
 
-**Артефакт:** `block_botnet.sh` (в корне серии).
+**Артефакт:** `block_botnet.sh` (в artifacts/).
 Использование: `./block_botnet.sh botnet_ips.txt block_rules.sh`.
 
 ```bash
-cp starter/block_botnet.sh ./block_botnet.sh
+cp starter/block_botnet.sh artifacts/block_botnet.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

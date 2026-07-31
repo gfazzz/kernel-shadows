@@ -13,10 +13,10 @@
 сообщает, где оказался, и читает все три файла — `documents/briefing.txt`,
 `.secret_location`, `.next_server`.
 
-**Артефакт:** `read_briefing.sh` (в корне серии).
+**Артефакт:** `read_briefing.sh` (в artifacts/).
 
 ```bash
-cp starter/read_briefing.sh ./read_briefing.sh
+cp starter/read_briefing.sh artifacts/read_briefing.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

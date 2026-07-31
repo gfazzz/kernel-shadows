@@ -25,14 +25,14 @@ SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 # ---- выбор артефакта -------------------------------------------------------
 if [ -n "${SUBJECT:-}" ]; then
     SCRIPT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/whereami.sh" ]; then
-    SCRIPT="${SERIES_DIR}/whereami.sh"
 elif [ -f "${SERIES_DIR}/artifacts/whereami.sh" ]; then
     SCRIPT="${SERIES_DIR}/artifacts/whereami.sh"
+elif [ -f "${SERIES_DIR}/whereami.sh" ]; then
+    SCRIPT="${SERIES_DIR}/whereami.sh"
 else
     SCRIPT="${SERIES_DIR}/solution/whereami.sh"
     echo "ℹ️  Свой whereami.sh не найден — проверяю ЭТАЛОН (solution/)."
-    echo "   Создай своё решение:  cp starter/whereami.sh ./whereami.sh"
+    echo "   Создай своё решение:  cp starter/whereami.sh artifacts/whereami.sh"
     echo ""
 fi
 

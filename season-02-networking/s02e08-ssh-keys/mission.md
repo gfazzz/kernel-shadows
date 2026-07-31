@@ -12,11 +12,11 @@
 ключ с неправильными правами SSH просто откажется использовать. Собери `ssh_key_check.sh`:
 проверяет приватные ключи в каталоге на права (600/400) и тип (ed25519 предпочтителен).
 
-**Артефакт:** `ssh_key_check.sh` (в корне серии).
+**Артефакт:** `ssh_key_check.sh` (в artifacts/).
 Использование: `./ssh_key_check.sh ~/.ssh`.
 
 ```bash
-cp starter/ssh_key_check.sh ./ssh_key_check.sh
+cp starter/ssh_key_check.sh artifacts/ssh_key_check.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

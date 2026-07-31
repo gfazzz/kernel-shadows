@@ -6,7 +6,7 @@
 # прочитать их (cat) и сохранить отчёт в report.txt.
 #
 # Как проходить:
-#   1. cp starter/find_files.sh ./find_files.sh
+#   1. cp starter/find_files.sh artifacts/find_files.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

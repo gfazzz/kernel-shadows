@@ -80,7 +80,7 @@ code=$?                                    # $? = exit code: 0 = дошло, и�
 Собери `check_host.sh`: пингует хост (аргумент `$1`), сохраняет exit code в переменную и печатает `HOST` / `STATUS` (`UP`/`DOWN`) / `EXIT_CODE`. Это `Type A` и первый кирпич будущего `server_monitor.sh`.
 
 ```bash
-cp starter/check_host.sh ./check_host.sh
+cp starter/check_host.sh artifacts/check_host.sh
 # заменить TODO (ping → $? → status), кавычки вокруг переменных
 bash tests/test.sh
 ```

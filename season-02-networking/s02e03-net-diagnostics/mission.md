@@ -13,11 +13,11 @@
 `HOST / STATUS / RTT` + итог. Это объединяет навыки Season 1 (ping/exit code, цикл по
 файлу, `sed`) в сетевой аудит.
 
-**Артефакт:** `net_diag.sh` (в корне серии).
+**Артефакт:** `net_diag.sh` (в artifacts/).
 Использование: `./net_diag.sh hosts.txt`.
 
 ```bash
-cp starter/net_diag.sh ./net_diag.sh
+cp starter/net_diag.sh artifacts/net_diag.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

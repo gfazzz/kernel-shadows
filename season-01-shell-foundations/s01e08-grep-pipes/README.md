@@ -73,7 +73,7 @@ grep -v " 200 " access.log | wc -l    # отфильтровать → посч�
 Собери `filter_attack.sh`: выделяет из `access.log` подозрительные запросы (статус не 200) и считает их конвейером. Это `Type A`.
 
 ```bash
-cp starter/filter_attack.sh ./filter_attack.sh
+cp starter/filter_attack.sh artifacts/filter_attack.sh
 # заменить TODO (grep -v + grep | wc)
 bash tests/test.sh
 ```

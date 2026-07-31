@@ -12,11 +12,11 @@
 инструмент, который по IP скажет главное: валиден ли он, какого класса и виден ли из
 интернета. Собери `ipinfo.sh`.
 
-**Артефакт:** `ipinfo.sh` (в корне серии). Принимает адрес аргументом:
+**Артефакт:** `ipinfo.sh` (в artifacts/). Принимает адрес аргументом:
 `./ipinfo.sh 10.50.1.100`.
 
 ```bash
-cp starter/ipinfo.sh ./ipinfo.sh
+cp starter/ipinfo.sh artifacts/ipinfo.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

@@ -10,11 +10,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                           then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/top_attackers.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/top_attackers.sh"
 elif [ -f "${SERIES_DIR}/top_attackers.sh" ];         then SCRIPT="${SERIES_DIR}/top_attackers.sh"
-elif [ -f "${SERIES_DIR}/artifacts/top_attackers.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/top_attackers.sh"
 else SCRIPT="${SERIES_DIR}/solution/top_attackers.sh"
      echo "ℹ️  Свой top_attackers.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/top_attackers.sh ./top_attackers.sh"; echo ""
+     echo "   Создай своё:  cp starter/top_attackers.sh artifacts/top_attackers.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

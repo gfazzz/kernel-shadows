@@ -12,11 +12,11 @@
 читает вывод `ufw status` и помечает опасные правила — чувствительные порты (БД/кэши),
 торчащие в интернет (`Anywhere`).
 
-**Артефакт:** `fw_audit.sh` (в корне серии).
+**Артефакт:** `fw_audit.sh` (в artifacts/).
 Использование: `./fw_audit.sh ufw_status.txt`.
 
 ```bash
-cp starter/fw_audit.sh ./fw_audit.sh
+cp starter/fw_audit.sh artifacts/fw_audit.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

@@ -47,7 +47,7 @@
 
 ## Критерии приёмки
 
-- [ ] Файл `recon.txt` создан в корне серии (`cp starter/recon.txt ./recon.txt`).
+- [ ] Отчёт создан в рабочей папке: `artifacts/recon.txt` (`cp starter/recon.txt artifacts/recon.txt`).
 - [ ] Все шесть полей заполнены — пустых значений нет.
 - [ ] Числа совпадают с реальным содержимым объекта (тест вычисляет их заново).
 - [ ] `hidden_names` — через запятую, без пробелов, по алфавиту.
@@ -71,7 +71,7 @@
 ## Выполнение
 
 ```bash
-cp starter/recon.txt ./recon.txt
+cp starter/recon.txt artifacts/recon.txt
 cd ../data/test_environment && ls -A && cd -
 # заполни recon.txt значениями, которые увидел
 bash tests/test.sh

@@ -77,7 +77,7 @@ echo "[$(ts)] [UP] ${host}" >> "${log}"
 Собери `server_monitor.sh`: проходит по списку, пингует, **логирует** каждую строку с таймстампом, печатает `SUMMARY` и выдаёт `ALERT` при недоступных. Здесь соединяется весь Episode 02: переменные → ping/exit → условия → цикл → лог.
 
 ```bash
-cp starter/server_monitor.sh ./server_monitor.sh
+cp starter/server_monitor.sh artifacts/server_monitor.sh
 # заменить TODO (date + >> + tee + ALERT)
 bash tests/test.sh
 ```

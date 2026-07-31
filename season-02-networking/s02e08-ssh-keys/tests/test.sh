@@ -10,11 +10,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                        then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/ssh_key_check.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/ssh_key_check.sh"
 elif [ -f "${SERIES_DIR}/ssh_key_check.sh" ];      then SCRIPT="${SERIES_DIR}/ssh_key_check.sh"
-elif [ -f "${SERIES_DIR}/artifacts/ssh_key_check.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/ssh_key_check.sh"
 else SCRIPT="${SERIES_DIR}/solution/ssh_key_check.sh"
      echo "ℹ️  Свой ssh_key_check.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/ssh_key_check.sh ./ssh_key_check.sh"; echo ""
+     echo "   Создай своё:  cp starter/ssh_key_check.sh artifacts/ssh_key_check.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

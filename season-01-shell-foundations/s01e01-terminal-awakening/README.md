@@ -183,7 +183,7 @@ Linux — это **одно дерево**, растущее из корня `/`
 
 ```bash
 # 1. взять каркас
-cp starter/whereami.sh ./whereami.sh
+cp starter/whereami.sh artifacts/whereami.sh
 
 # 2. заменить TODO своим кодом (подсказка: команда из трёх букв)
 

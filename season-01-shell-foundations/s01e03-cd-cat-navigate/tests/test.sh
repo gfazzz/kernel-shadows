@@ -11,11 +11,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                             then SCRIPT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/read_briefing.sh" ];           then SCRIPT="${SERIES_DIR}/read_briefing.sh"
 elif [ -f "${SERIES_DIR}/artifacts/read_briefing.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/read_briefing.sh"
+elif [ -f "${SERIES_DIR}/read_briefing.sh" ];           then SCRIPT="${SERIES_DIR}/read_briefing.sh"
 else SCRIPT="${SERIES_DIR}/solution/read_briefing.sh"
      echo "ℹ️  Свой read_briefing.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/read_briefing.sh ./read_briefing.sh"; echo ""
+     echo "   Создай своё:  cp starter/read_briefing.sh artifacts/read_briefing.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

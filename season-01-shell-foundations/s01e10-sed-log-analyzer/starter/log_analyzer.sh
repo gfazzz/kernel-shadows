@@ -14,7 +14,7 @@
 #   - сохранить отчёт в REPORT_FILE
 #
 # Как проходить:
-#   1. cp starter/log_analyzer.sh ./log_analyzer.sh
+#   1. cp starter/log_analyzer.sh artifacts/log_analyzer.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

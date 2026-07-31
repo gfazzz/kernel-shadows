@@ -10,11 +10,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                             then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/server_monitor.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/server_monitor.sh"
 elif [ -f "${SERIES_DIR}/server_monitor.sh" ];          then SCRIPT="${SERIES_DIR}/server_monitor.sh"
-elif [ -f "${SERIES_DIR}/artifacts/server_monitor.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/server_monitor.sh"
 else SCRIPT="${SERIES_DIR}/solution/server_monitor.sh"
      echo "ℹ️  Свой server_monitor.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/server_monitor.sh ./server_monitor.sh"; echo ""
+     echo "   Создай своё:  cp starter/server_monitor.sh artifacts/server_monitor.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

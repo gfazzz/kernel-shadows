@@ -72,7 +72,7 @@ Firewall блокирует нежелательные подключения, �
 Собери `sshd_harden_check.sh`: аудит `sshd_config` по директивам закалки, с учётом только активных строк. Это `Type B`.
 
 ```bash
-cp starter/sshd_harden_check.sh ./sshd_harden_check.sh
+cp starter/sshd_harden_check.sh artifacts/sshd_harden_check.sh
 # заменить TODO (getval → сравнить с "no" → счётчик)
 bash tests/test.sh
 ```

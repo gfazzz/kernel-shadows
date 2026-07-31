@@ -76,7 +76,7 @@ awk '{print $1}' access.log | sort | uniq -c | sort -rn | head
 Собери `top_attackers.sh`: извлекает IP через `awk`, строит рейтинг `sort | uniq -c | sort -rn` и берёт топ-N (`head`). Это `Type A`.
 
 ```bash
-cp starter/top_attackers.sh ./top_attackers.sh
+cp starter/top_attackers.sh artifacts/top_attackers.sh
 # заменить TODO (awk '{print $1}' | sort | uniq -c | sort -rn | head)
 bash tests/test.sh
 ```

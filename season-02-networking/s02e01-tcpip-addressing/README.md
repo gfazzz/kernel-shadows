@@ -72,7 +72,7 @@ Season 2: Networking               Серия s02e01 (Episode 05, ч.1)
 Собери `ipinfo.sh`: по IPv4 из аргумента печатает валидность, класс и тип (private/public/loopback/broadcast). Это `Type A` и первый кирпич сезонного проекта `netshield`.
 
 ```bash
-cp starter/ipinfo.sh ./ipinfo.sh
+cp starter/ipinfo.sh artifacts/ipinfo.sh
 # заменить TODO (валидация октетов + класс + тип)
 bash tests/test.sh
 ```

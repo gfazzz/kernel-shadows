@@ -82,7 +82,7 @@ done < servers.txt
 Собери `check_all.sh`: читает файл-список (строка = «имя IP»), проходит циклом, пингует каждый, по условию помечает `UP`/`DOWN` и печатает итог (`UP=… DOWN=…`). Пустые строки и комментарии (`#…`) — пропускать. Это `Type A`.
 
 ```bash
-cp starter/check_all.sh ./check_all.sh
+cp starter/check_all.sh artifacts/check_all.sh
 # заменить TODO (while read + if ping + счётчики)
 bash tests/test.sh
 ```

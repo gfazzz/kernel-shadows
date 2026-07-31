@@ -67,7 +67,7 @@ grep -v '^#' tools.txt | awk '{print $1}' | xargs sudo apt install -y
 Собери `install_report_generator.sh` (**Type B**): по списку — статус каждого пакета (`✓` с версией / `✗`), статистика `N / M`, и batch one-liner для недостающего. Отчёт — в файл.
 
 ```bash
-cp starter/install_report_generator.sh ./install_report_generator.sh
+cp starter/install_report_generator.sh artifacts/install_report_generator.sh
 # заменить TODO (dpkg + awk версия + счётчики + xargs-строка)
 bash tests/test.sh
 ```

@@ -110,7 +110,7 @@ $ ls -A
 Объект разведки — «сервер» Виктора: каталог [`../data/test_environment`](../data/). Твоя задача — обойти его командами и заполнить отчёт `recon.txt`: сколько объектов, сколько скрытых, как их зовут, что внутри `documents/`.
 
 ```bash
-cp starter/recon.txt ./recon.txt
+cp starter/recon.txt artifacts/recon.txt
 # заполни значения, выяснив их командами (ни одно не нужно угадывать)
 bash tests/test.sh
 ```

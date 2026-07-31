@@ -8,7 +8,7 @@
 #   - one-liner для batch-установки недостающего (xargs).
 #
 # Как проходить:
-#   1. cp starter/install_report_generator.sh ./install_report_generator.sh
+#   1. cp starter/install_report_generator.sh artifacts/install_report_generator.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh   (dpkg мокается — root/apt не нужны)
 #

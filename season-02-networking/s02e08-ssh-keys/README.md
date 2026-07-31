@@ -67,7 +67,7 @@ chmod 600 ~/.ssh/id_ed25519      # приватный: только владел
 Собери `ssh_key_check.sh`: проверяет приватные ключи в каталоге на права (600/400) и тип (ed25519/rsa/dsa). Это `Type A`.
 
 ```bash
-cp starter/ssh_key_check.sh ./ssh_key_check.sh
+cp starter/ssh_key_check.sh artifacts/ssh_key_check.sh
 # заменить TODO (проверка прав + тип по имени)
 bash tests/test.sh
 ```

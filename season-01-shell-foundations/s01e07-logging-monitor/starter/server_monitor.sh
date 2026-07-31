@@ -10,7 +10,7 @@
 #   - если есть DOWN — выдать ALERT.
 #
 # Как проходить:
-#   1. cp starter/server_monitor.sh ./server_monitor.sh
+#   1. cp starter/server_monitor.sh artifacts/server_monitor.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh   (ping мокается — сеть не нужна)
 #

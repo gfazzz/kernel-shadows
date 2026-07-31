@@ -68,7 +68,7 @@ dig google.com MX +short    # 5 gmail-smtp-in.l.google.com.  (почта)
 Собери `dns_lookup.sh`: запрос через `dig`, вывод значения записи и их количества, обработка отсутствующего домена. Это `Type B`.
 
 ```bash
-cp starter/dns_lookup.sh ./dns_lookup.sh
+cp starter/dns_lookup.sh artifacts/dns_lookup.sh
 # заменить TODO (dig ... +short → проверка пустого → вывод)
 bash tests/test.sh
 ```

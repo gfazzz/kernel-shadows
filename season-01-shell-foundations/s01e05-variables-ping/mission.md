@@ -12,11 +12,11 @@
 Собери `check_host.sh` — пингует хост, кладёт результат в переменные и печатает
 статус (`UP`/`DOWN`) вместе с exit code.
 
-**Артефакт:** `check_host.sh` (в корне серии). Принимает хост аргументом:
+**Артефакт:** `check_host.sh` (в artifacts/). Принимает хост аргументом:
 `./check_host.sh shadow-server-01`.
 
 ```bash
-cp starter/check_host.sh ./check_host.sh
+cp starter/check_host.sh artifacts/check_host.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

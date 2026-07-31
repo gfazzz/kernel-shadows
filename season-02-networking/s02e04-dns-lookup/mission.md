@@ -11,11 +11,11 @@
 DNS в дата-центре под атакой (cache poisoning). Прежде чем защищать, научись читать:
 собери `dns_lookup.sh` — делает запрос через `dig` и выводит значение записи нужного типа.
 
-**Артефакт:** `dns_lookup.sh` (в корне серии).
+**Артефакт:** `dns_lookup.sh` (в artifacts/).
 Использование: `./dns_lookup.sh google.com A` (тип по умолчанию — A).
 
 ```bash
-cp starter/dns_lookup.sh ./dns_lookup.sh
+cp starter/dns_lookup.sh artifacts/dns_lookup.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

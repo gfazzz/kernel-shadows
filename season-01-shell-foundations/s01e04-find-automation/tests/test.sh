@@ -11,11 +11,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                          then SCRIPT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/find_files.sh" ];           then SCRIPT="${SERIES_DIR}/find_files.sh"
 elif [ -f "${SERIES_DIR}/artifacts/find_files.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/find_files.sh"
+elif [ -f "${SERIES_DIR}/find_files.sh" ];           then SCRIPT="${SERIES_DIR}/find_files.sh"
 else SCRIPT="${SERIES_DIR}/solution/find_files.sh"
      echo "ℹ️  Свой find_files.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/find_files.sh ./find_files.sh"; echo ""
+     echo "   Создай своё:  cp starter/find_files.sh artifacts/find_files.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

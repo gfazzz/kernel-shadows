@@ -6,7 +6,7 @@
 # и посчитать их количество через конвейер (pipe).
 #
 # Как проходить:
-#   1. cp starter/filter_attack.sh ./filter_attack.sh
+#   1. cp starter/filter_attack.sh artifacts/filter_attack.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

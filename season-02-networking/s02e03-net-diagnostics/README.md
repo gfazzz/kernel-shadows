@@ -68,7 +68,7 @@ ping -c 1 -W 2 8.8.8.8
 Собери `net_diag.sh`: по списку хостов пингует каждый, парсит RTT из вывода и печатает таблицу `HOST / STATUS / RTT` + итог. Здесь соединяются адресация → порты → диагностика в аудит сети.
 
 ```bash
-cp starter/net_diag.sh ./net_diag.sh
+cp starter/net_diag.sh artifacts/net_diag.sh
 # заменить TODO (ping + $? + sed по time=)
 bash tests/test.sh
 ```

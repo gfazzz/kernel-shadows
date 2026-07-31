@@ -11,11 +11,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                     then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/net_diag.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/net_diag.sh"
 elif [ -f "${SERIES_DIR}/net_diag.sh" ];        then SCRIPT="${SERIES_DIR}/net_diag.sh"
-elif [ -f "${SERIES_DIR}/artifacts/net_diag.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/net_diag.sh"
 else SCRIPT="${SERIES_DIR}/solution/net_diag.sh"
      echo "ℹ️  Свой net_diag.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/net_diag.sh ./net_diag.sh"; echo ""
+     echo "   Создай своё:  cp starter/net_diag.sh artifacts/net_diag.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

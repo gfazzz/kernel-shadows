@@ -6,7 +6,7 @@
 # в переменные (host, status, exit code). Напечатать статус.
 #
 # Как проходить:
-#   1. cp starter/check_host.sh ./check_host.sh
+#   1. cp starter/check_host.sh artifacts/check_host.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh   (тест сам подменит ping — живая сеть не нужна)
 #

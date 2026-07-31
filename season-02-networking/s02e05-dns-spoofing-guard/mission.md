@@ -12,11 +12,11 @@
 нашего. `dig` вернёт «нормальный» IP — но не тот. Собери капстоун `dns_guard.sh`: по
 baseline (домен → известный правильный IP) резолвит каждый и ловит расхождения.
 
-**Артефакт:** `dns_guard.sh` (в корне серии).
+**Артефакт:** `dns_guard.sh` (в artifacts/).
 Использование: `./dns_guard.sh baseline.txt` (строки `домен ожидаемый_IP`).
 
 ```bash
-cp starter/dns_guard.sh ./dns_guard.sh
+cp starter/dns_guard.sh artifacts/dns_guard.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

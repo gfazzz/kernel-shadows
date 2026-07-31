@@ -75,7 +75,7 @@ dpkg -L nmap               # какие файлы принёс пакет
 Собери `pkg_check.sh`: читает список пакетов и через `dpkg` помечает каждый установленным/отсутствующим, выводит итог. Это `Type B` — работу делает `dpkg`, bash лишь читает список и считает.
 
 ```bash
-cp starter/pkg_check.sh ./pkg_check.sh
+cp starter/pkg_check.sh artifacts/pkg_check.sh
 # заменить TODO (dpkg -l | grep '^ii')
 bash tests/test.sh
 ```

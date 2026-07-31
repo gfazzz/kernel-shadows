@@ -10,11 +10,11 @@ set -uo pipefail
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
 if   [ -n "${SUBJECT:-}" ];                       then SCRIPT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/block_botnet.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/block_botnet.sh"
 elif [ -f "${SERIES_DIR}/block_botnet.sh" ];      then SCRIPT="${SERIES_DIR}/block_botnet.sh"
-elif [ -f "${SERIES_DIR}/artifacts/block_botnet.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/block_botnet.sh"
 else SCRIPT="${SERIES_DIR}/solution/block_botnet.sh"
      echo "ℹ️  Свой block_botnet.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/block_botnet.sh ./block_botnet.sh"; echo ""
+     echo "   Создай своё:  cp starter/block_botnet.sh artifacts/block_botnet.sh"; echo ""
 fi
 
 PASS=0; FAIL=0

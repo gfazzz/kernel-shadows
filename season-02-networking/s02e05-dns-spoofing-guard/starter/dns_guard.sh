@@ -8,7 +8,7 @@
 # Формат baseline: "домен  ожидаемый_IP" (# и пустые пропускать).
 #
 # Как проходить:
-#   1. cp starter/dns_guard.sh ./dns_guard.sh
+#   1. cp starter/dns_guard.sh artifacts/dns_guard.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh   (dig мокается — сеть не нужна)
 #

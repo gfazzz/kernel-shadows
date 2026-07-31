@@ -12,11 +12,11 @@
 понять, **что уже установлено**. Собери `pkg_check.sh`: читает список пакетов и через
 `dpkg` помечает каждый как установленный/отсутствующий, выводит итог.
 
-**Артефакт:** `pkg_check.sh` (в корне серии).
+**Артефакт:** `pkg_check.sh` (в artifacts/).
 Использование: `./pkg_check.sh required_tools.txt`.
 
 ```bash
-cp starter/pkg_check.sh ./pkg_check.sh
+cp starter/pkg_check.sh artifacts/pkg_check.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

@@ -8,7 +8,7 @@
 # Для каждой — ✓ если безопасно, ⚠️ + счётчик иначе.
 #
 # Как проходить:
-#   1. cp starter/sshd_harden_check.sh ./sshd_harden_check.sh
+#   1. cp starter/sshd_harden_check.sh artifacts/sshd_harden_check.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

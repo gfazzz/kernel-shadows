@@ -12,11 +12,11 @@
 Собери `filter_attack.sh`: выделяет подозрительные запросы (HTTP-статус **не 200**)
 и считает их через конвейер.
 
-**Артефакт:** `filter_attack.sh` (в корне серии). Принимает лог аргументом:
+**Артефакт:** `filter_attack.sh` (в artifacts/). Принимает лог аргументом:
 `./filter_attack.sh access.log`.
 
 ```bash
-cp starter/filter_attack.sh ./filter_attack.sh
+cp starter/filter_attack.sh artifacts/filter_attack.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

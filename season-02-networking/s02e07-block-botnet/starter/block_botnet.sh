@@ -6,7 +6,7 @@
 # (ufw deny from <ip>) — НЕ применяя их. Пропускать # и пустые строки.
 #
 # Как проходить:
-#   1. cp starter/block_botnet.sh ./block_botnet.sh
+#   1. cp starter/block_botnet.sh artifacts/block_botnet.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

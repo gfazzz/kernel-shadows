@@ -68,7 +68,7 @@ MySQL (3306) торчит в интернет — любой может долб
 Собери `fw_audit.sh`: читает `ufw status` и помечает чувствительные порты, открытые на `Anywhere`. Это `Type B`.
 
 ```bash
-cp starter/fw_audit.sh ./fw_audit.sh
+cp starter/fw_audit.sh artifacts/fw_audit.sh
 # заменить TODO (парсинг ALLOW-строк + сверка с sensitive + Anywhere)
 bash tests/test.sh
 ```

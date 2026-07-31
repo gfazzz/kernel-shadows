@@ -12,11 +12,11 @@
 (и каких версий), чего не хватает, и как доустановить недостающее одной командой.
 Собери капстоун `install_report_generator.sh` (**Type B**).
 
-**Артефакт:** `install_report_generator.sh` (в корне серии).
+**Артефакт:** `install_report_generator.sh` (в artifacts/).
 Использование: `./install_report_generator.sh required_tools.txt install_report.txt`.
 
 ```bash
-cp starter/install_report_generator.sh ./install_report_generator.sh
+cp starter/install_report_generator.sh artifacts/install_report_generator.sh
 # отредактируй TODO, затем:
 bash tests/test.sh
 ```

@@ -6,7 +6,7 @@
 # чувствительные порты (БД/кэши), открытые наружу («Anywhere»).
 #
 # Как проходить:
-#   1. cp starter/fw_audit.sh ./fw_audit.sh
+#   1. cp starter/fw_audit.sh artifacts/fw_audit.sh
 #   2. заменить TODO
 #   3. bash tests/test.sh
 #

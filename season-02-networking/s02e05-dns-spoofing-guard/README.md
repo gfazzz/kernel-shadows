@@ -71,7 +71,7 @@ Baseline знает только заранее известные домены 
 Собери `dns_guard.sh`: по baseline (`домен ожидаемый_IP`) резолвит каждый через `dig` и ловит расхождения, выдаёт итог + `ALERT`. Это `Type B`.
 
 ```bash
-cp starter/dns_guard.sh ./dns_guard.sh
+cp starter/dns_guard.sh artifacts/dns_guard.sh
 # заменить TODO (dig +short | head -1 → сравнить с expected → счётчики)
 bash tests/test.sh
 ```

@@ -77,7 +77,7 @@ FROM: Viktor Petrov ...
 Собери `read_briefing.sh`: заходит на «сервер» (директория-аргумент), сообщает, где оказался, и читает все три файла миссии — `documents/briefing.txt`, `.secret_location`, `.next_server`. Это `Type A`.
 
 ```bash
-cp starter/read_briefing.sh ./read_briefing.sh
+cp starter/read_briefing.sh artifacts/read_briefing.sh
 # заменить TODO (cd + cat, относительные пути)
 bash tests/test.sh
 ```

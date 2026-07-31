@@ -72,7 +72,7 @@ LISTEN  127.0.0.1:3306      # MySQL только на localhost
 Собери `check_ports.sh`: показывает слушающие порты (`ss`) и по allowlist помечает неожиданные (потенциальные бэкдоры). Это `Type A`.
 
 ```bash
-cp starter/check_ports.sh ./check_ports.sh
+cp starter/check_ports.sh artifacts/check_ports.sh
 # заменить TODO (ss | awk $4 → порт → сверка с allowlist)
 bash tests/test.sh
 ```

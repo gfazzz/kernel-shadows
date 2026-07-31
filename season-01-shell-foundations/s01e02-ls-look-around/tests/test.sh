@@ -1,21 +1,27 @@
 #!/usr/bin/env bash
 #
-# s01e02 «Осмотреться» — воспроизводимый unit-тест (fixture/TEST_ROOT, без root).
-# Проверяет, что артефакт студента показывает СКРЫТЫЕ файлы (использует ls -a/-la),
-# а не обычный ls. Не трогает живой хост.
+# s01e02 «Осмотреться» — тест разведки (Type C).
 #
-# Выбор артефакта: SUBJECT=... | <серия>/look_around.sh | artifacts/ | solution/ (фолбэк).
+# Проверяет НЕ скрипт, а находки студента: отчёт recon.txt сверяется с реальным
+# содержимым объекта разведки. Эталон вычисляется здесь же командами — в тесте
+# нет ни одного захардкоженного числа, поэтому при изменении учебных данных
+# тест не разъезжается с реальностью (план §4.2, §4.3).
+#
+# Без root, без сети. Объект разведки лежит в репозитории.
+#
+# Выбор отчёта: SUBJECT=... | <серия>/recon.txt | artifacts/recon.txt | solution/ (фолбэк).
 
 set -uo pipefail
 
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+TARGET="${SERIES_DIR}/../data/test_environment"
 
-if   [ -n "${SUBJECT:-}" ];                         then SCRIPT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/look_around.sh" ];         then SCRIPT="${SERIES_DIR}/look_around.sh"
-elif [ -f "${SERIES_DIR}/artifacts/look_around.sh" ];then SCRIPT="${SERIES_DIR}/artifacts/look_around.sh"
-else SCRIPT="${SERIES_DIR}/solution/look_around.sh"
-     echo "ℹ️  Свой look_around.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/look_around.sh ./look_around.sh"; echo ""
+if   [ -n "${SUBJECT:-}" ];                     then REPORT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/recon.txt" ];          then REPORT="${SERIES_DIR}/recon.txt"
+elif [ -f "${SERIES_DIR}/artifacts/recon.txt" ];then REPORT="${SERIES_DIR}/artifacts/recon.txt"
+else REPORT="${SERIES_DIR}/solution/recon.txt"
+     echo "ℹ️  Свой recon.txt не найден — проверяю ЭТАЛОН (solution/)."
+     echo "   Начни своё:  cp starter/recon.txt ./recon.txt"; echo ""
 fi
 
 PASS=0; FAIL=0
@@ -23,42 +29,62 @@ ok(){ echo "  PASS: $1"; PASS=$((PASS+1)); }
 no(){ echo "  FAIL: $1"; FAIL=$((FAIL+1)); }
 
 echo "════════════════════════════════════════════════════════════"
-echo " s01e02 tests — subject: ${SCRIPT#"$SERIES_DIR"/}"
+echo " s01e02 tests — отчёт: ${REPORT#"$SERIES_DIR"/}"
 echo "════════════════════════════════════════════════════════════"
 
-# Фикстура: директория с видимыми и скрытыми объектами.
-TEST_ROOT="$(mktemp -d 2>/dev/null || mktemp -d -t s01e02)"
-trap 'rm -rf "${TEST_ROOT}"' EXIT
-SANDBOX="${TEST_ROOT}/server"
-mkdir -p "${SANDBOX}/documents"
-echo "brief" > "${SANDBOX}/briefing.txt"
-echo "59.9386,30.3141" > "${SANDBOX}/.secret_location"
-echo "10.0.0.42" > "${SANDBOX}/.next_server"
-
-# TEST 1-3: файл, синтаксис, shebang
-[ -f "${SCRIPT}" ] && ok "look_around.sh найден" || no "look_around.sh не найден"
-bash -n "${SCRIPT}" 2>/dev/null && ok "синтаксис bash корректен" || no "ошибка синтаксиса"
-head -1 "${SCRIPT}" | grep -q '^#!.*sh' && ok "есть shebang" || no "нет shebang"
-
-# Прогон на фикстуре
-OUT="$(bash "${SCRIPT}" "${SANDBOX}" 2>/dev/null)" || true
-
-# TEST 4-5: видит СКРЫТЫЕ файлы (значит, использует ls -a/-la, а не обычный ls)
-printf '%s' "${OUT}" | grep -qF ".secret_location" && ok "показывает .secret_location (использует ls -a)" || no "не видит .secret_location (нужен ls -a/-la)"
-printf '%s' "${OUT}" | grep -qF ".next_server"     && ok "показывает .next_server"                    || no "не видит .next_server"
-
-# TEST 6: видит и обычный файл
-printf '%s' "${OUT}" | grep -qF "briefing.txt" && ok "показывает обычные файлы (briefing.txt)" || no "не показывает обычные файлы"
-
-# TEST 7: негатив — обычный ls (без -a) НЕ должен проходить.
-#         Собираем «наивный» скрипт и убеждаемся, что тест его отвергает.
-NAIVE="${TEST_ROOT}/naive.sh"
-printf '#!/usr/bin/env bash\nls "%s"\n' "${SANDBOX}" > "${NAIVE}"
-NAIVE_OUT="$(bash "${NAIVE}" 2>/dev/null)" || true
-if printf '%s' "${NAIVE_OUT}" | grep -qF ".secret_location"; then
-    no "самопроверка теста: обычный ls не должен показывать скрытое"
+# ---- предусловия -----------------------------------------------------------
+if [ ! -d "${TARGET}" ]; then
+    echo "  FAIL: объект разведки не найден: ${TARGET}" >&2
+    echo "  (ожидается season-01-shell-foundations/data/test_environment)" >&2
+    exit 1
+fi
+if [ -f "${REPORT}" ]; then
+    ok "отчёт recon.txt найден"
 else
-    ok "самопроверка: обычный ls скрытое не показывает (тест дискриминирует)"
+    no "recon.txt не найден"
+    echo " Итог: ${PASS} passed, ${FAIL} failed"
+    exit 1
+fi
+
+# ---- эталон: вычисляется из реальных данных --------------------------------
+exp_total=$(ls -A "${TARGET}" | wc -l | tr -d ' ')
+exp_hidden=$(ls -A "${TARGET}" | grep -c '^\.' || true)
+exp_dirs=$(find "${TARGET}" -maxdepth 1 -mindepth 1 -type d | wc -l | tr -d ' ')
+exp_hnames=$(ls -A "${TARGET}" | grep '^\.' | sort | paste -sd, - | tr -d ' ')
+exp_docs=$(ls -A "${TARGET}/documents" 2>/dev/null | wc -l | tr -d ' ')
+exp_dochidden=$(ls -A "${TARGET}/documents" 2>/dev/null | grep '^\.' | head -1)
+
+# ---- чтение отчёта студента ------------------------------------------------
+val() {  # val <ключ> — значение из recon.txt, без пробелов и комментариев
+    grep -E "^[[:space:]]*$1[[:space:]]*=" "${REPORT}" 2>/dev/null \
+        | grep -v '^[[:space:]]*#' | tail -1 | cut -d= -f2- | tr -d ' \t\r'
+}
+
+check() {  # check <ключ> <эталон> <описание>
+    local key="$1" want="$2" desc="$3" got
+    got="$(val "${key}")"
+    if [ -z "${got}" ]; then
+        no "${desc}: значение не заполнено (${key}=)"
+    elif [ "${got}" = "${want}" ]; then
+        ok "${desc}: ${got}"
+    else
+        no "${desc}: указано '${got}', в системе '${want}'"
+    fi
+}
+
+check total_entries         "${exp_total}"     "объектов в корне сервера"
+check hidden_entries        "${exp_hidden}"    "из них скрытых"
+check dirs                  "${exp_dirs}"      "каталогов в корне"
+check hidden_names          "${exp_hnames}"    "имена скрытых объектов"
+check documents_entries     "${exp_docs}"      "объектов в documents/"
+check documents_hidden_name "${exp_dochidden}" "скрытый файл в documents/"
+
+# ---- дискриминатор: обычный ls не увидел бы скрытое ------------------------
+visible_only=$(ls "${TARGET}" | wc -l | tr -d ' ')
+if [ "${exp_total}" -gt "${visible_only}" ]; then
+    ok "самопроверка: обычный ls показывает ${visible_only} из ${exp_total} — скрытое требует -a"
+else
+    no "самопроверка: в объекте нет скрытых объектов, задание вырождено"
 fi
 
 echo "════════════════════════════════════════════════════════════"

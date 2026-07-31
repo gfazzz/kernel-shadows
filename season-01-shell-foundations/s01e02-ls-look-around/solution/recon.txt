@@ -1,0 +1,17 @@
+# ОТЧЁТ РАЗВЕДКИ — s01e02 (ЭТАЛОН, открывать после своей попытки)
+# Объект: season-01-shell-foundations/data/test_environment
+#
+# Как получены значения:
+#   total_entries       ls -A data/test_environment | wc -l
+#   hidden_entries      ls -A data/test_environment | grep -c '^\.'
+#   dirs                find data/test_environment -maxdepth 1 -mindepth 1 -type d | wc -l
+#   hidden_names        ls -A data/test_environment | grep '^\.' | sort
+#   documents_entries   ls -A data/test_environment/documents | wc -l
+#   documents_hidden_name  ls -A data/test_environment/documents | grep '^\.'
+
+total_entries=2
+hidden_entries=1
+dirs=1
+hidden_names=.next_server
+documents_entries=2
+documents_hidden_name=.secret_location

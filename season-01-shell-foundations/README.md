@@ -565,7 +565,7 @@ history          # Показать последние команды
 - **Новые персонажи:** Алекс (лично), Анна (лично), Erik Johansson, Katarina Lindström
 - **Дни операции:** 9-16 (из 60)
 
-**→ Continue: [Season 2 README](../../season-02-networking/README.md)** (в разработке)
+**→ Continue: [Season 2 README](../season-02-networking/README.md)**
 
 ---
 

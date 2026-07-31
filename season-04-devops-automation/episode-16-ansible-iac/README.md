@@ -1923,7 +1923,7 @@ episode-16-ansible-iac/
 
 **SEASON 4 FINALE!**
 
-[⬅️ Episode 15: CI/CD](../episode-15-cicd-pipelines/README.md) | [⬆️ Season 4 Overview](../README.md) | [➡️ Season 5 Premiere](../../season-05-security/)
+[⬅️ Episode 15: CI/CD](../episode-15-cicd-pipelines/README.md) | [⬆️ Season 4 Overview](../README.md) | [➡️ Season 5 Premiere](../../season-05-security-pentesting/README.md)
 
 </div>
 

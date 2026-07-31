@@ -279,7 +279,7 @@ kernel-shadows/
 │   ├── data/                          # учебные данные для практики
 │   ├── s01e01-terminal-awakening/     # атомарные серии v2.0 (sNNeNN)
 │   ├── s01e02-ls-look-around/
-│   └── … s01e12-batch-report/
+│   └── … s01e13-batch-report/
 └── ...
 ```
 

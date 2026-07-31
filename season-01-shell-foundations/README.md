@@ -59,31 +59,36 @@
 `mission.md` с блоком «Требования среды», единая форма `starter/`, и **воспроизводимый
 тест на фикстуре** (зелёный без root, идёт на Linux/macOS/WSL).
 
-**Season 1 полностью пересобран: Episodes 01–04 → 12 атомарных серий ✅**
-(старые папки `episode-01…04` сохранены до полной миграции Этапа 1):
+**Season 1 пересобран: Episodes 01–04 → 13 атомарных серий**
+(включая новую s01e04 про редактор — её в исходном курсе не было):
 
 | Серия | Из ep | Концепт | Задача (артефакт) | Type | Тест |
 |-------|-------|---------|-------------------|------|------|
 | [s01e01](s01e01-terminal-awakening/) | 01 | `pwd` — где я в дереве ФС | `whereami.sh` | A | 6/6 |
-| [s01e02](s01e02-ls-look-around/) | 01 | `ls` — что вокруг (вкл. скрытое) | `look_around.sh` | A | 7/7 |
-| [s01e03](s01e03-cd-cat-navigate/) | 01 | `cd` + `cat`/`less` — дойти и прочитать | `read_briefing.sh` | A | 7/7 |
-| [s01e04](s01e04-find-automation/) | 01 | `find` + первый скрипт (капстоун) | `find_files.sh` | A | 8/8 |
-| [s01e05](s01e05-variables-ping/) | 02 | переменные + exit code (`$?`) | `check_host.sh` | A | 8/8 |
-| [s01e06](s01e06-conditions-loops/) | 02 | условия + циклы (`while read`) | `check_all.sh` | A | 9/9 |
-| [s01e07](s01e07-logging-monitor/) | 02 | логирование + капстоун | `server_monitor.sh` | A | 9/9 |
-| [s01e08](s01e08-grep-pipes/) | 03 | `grep` + конвейеры | `filter_attack.sh` | A | 7/7 |
-| [s01e09](s01e09-awk-stats/) | 03 | `awk` + `sort`/`uniq` (статистика) | `top_attackers.sh` | A | 8/8 |
-| [s01e10](s01e10-sed-log-analyzer/) | 03 | `sed` + отчёт (капстоун) | `log_analyzer.sh` | **B** | 10/10 |
-| [s01e11](s01e11-apt-dpkg/) | 04 | `apt`/`dpkg` — управление пакетами | `pkg_check.sh` | **B** | 9/9 |
-| [s01e12](s01e12-batch-report/) | 04 | `xargs` batch + отчёт (капстоун сезона) | `install_report_generator.sh` | **B** | 10/10 |
+| [s01e02](s01e02-ls-look-around/) | 01 | `ls` — что вокруг (вкл. скрытое) | `recon.txt` | **C** | 8/8 |
+| [s01e03](s01e03-cd-cat-navigate/) | 01 | `cd` + `cat` — дойти и прочитать | `intel.txt` | **C** | 9/9 |
+| [s01e04](s01e04-editing-files/) | — | **правка файлов: `nano`, `vim`** | `agent.conf` | **B** | 10/10 |
+| [s01e05](s01e05-find-automation/) | 01 | `find` + первый скрипт (капстоун) | `find_files.sh` | A | 8/8 |
+| [s01e06](s01e06-variables-ping/) | 02 | переменные + exit code (`$?`) | `check_host.sh` | A | 8/8 |
+| [s01e07](s01e07-conditions-loops/) | 02 | условия + циклы (`while read`) | `check_all.sh` | A | 9/9 |
+| [s01e08](s01e08-logging-monitor/) | 02 | логирование + капстоун | `server_monitor.sh` | A | 9/9 |
+| [s01e09](s01e09-grep-pipes/) | 03 | `grep` + конвейеры | `filter_attack.sh` | A | 7/7 |
+| [s01e10](s01e10-awk-stats/) | 03 | `awk` + `sort`/`uniq` (статистика) | `top_attackers.sh` | A | 8/8 |
+| [s01e11](s01e11-sed-log-analyzer/) | 03 | `sed` + отчёт (капстоун) | `log_analyzer.sh` | **B** | 10/10 |
+| [s01e12](s01e12-apt-dpkg/) | 04 | `apt`/`dpkg` — управление пакетами | `pkg_check.sh` | **B** | 9/9 |
+| [s01e13](s01e13-batch-report/) | 04 | `xargs` batch + отчёт (капстоун сезона) | `install_report_generator.sh` | **B** | 10/10 |
 
-**Итого Season 1: 12 серий, 98 проверок — все зелёные без root.** Прогнать всё:
-`for d in s01e*/; do bash "$d/tests/test.sh"; done`.
+Прогнать весь курс: `bash ../tools/run_tests.sh`. Проверить ссылки: `bash ../tools/check_links.sh`.
 
-Приёмы воспроизводимости: ep02 сетевые серии мокают `ping`, ep04 — `dpkg` (mock-first §5.3);
-ep03 работает на фикстурах-логах. **Закрытые forward-deps: T1 (`awk` — в s01e09, не в ep02)
-и T3 (`docker-ce` не ставится заранее — Docker в Season 4).**
-**В очереди:** Season 2 «Networking» (Episodes 05–08 → `s02e01+`).
+Приёмы воспроизводимости: сетевые серии мокают `ping`/`ss`/`dig`, пакетные — `dpkg`
+(mock-first §5.3); серии-разведки (`Type C`) сверяют находки студента с реальными
+данными в [`data/`](data/), вычисляя эталон при каждом запуске.
+
+**Закрытые forward-deps:** T1 (`awk` вводится в s01e10, не раньше), T3 (Docker — только
+в Season 4), **T5 (редактор)** — раньше студент писал файлы с первой серии, а как их
+править, курс не объяснял нигде; теперь это s01e04, до первого написания скрипта.
+
+**В очереди:** литературизация остальных серий S1 и S2 по DoD §15.
 
 ---
 
@@ -473,7 +478,7 @@ season-01-shell-foundations/
 │   ├── tests/test.sh                  #   воспроизводимый тест (зелёный без root)
 │   └── artifacts/                     #   рабочая папка студента
 │
-└── s01e02-… … s01e12-batch-report/    # ещё 11 серий той же структуры (см. карту выше)
+└── s01e02-… … s01e13-batch-report/    # ещё 11 серий той же структуры (см. карту выше)
 ```
 
 ---

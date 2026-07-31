@@ -1,21 +1,27 @@
 #!/usr/bin/env bash
 #
-# s01e03 «Дойти и прочитать» — воспроизводимый unit-тест (fixture/TEST_ROOT, без root).
-# Проверяет, что артефакт студента переходит в директорию (cd) и читает (cat)
-# файл из поддиректории и два скрытых файла. Живой хост не затрагивается.
+# s01e03 «Дойти и прочитать» — тест разведданных (Type C).
 #
-# Выбор артефакта: SUBJECT=... | <серия>/read_briefing.sh | artifacts/ | solution/ (фолбэк).
+# Проверяет не скрипт, а извлечённые факты: intel.txt сверяется с содержимым трёх
+# файлов «сервера». Эталон вычисляется здесь же из самих источников — ни одного
+# захардкоженного значения (план §4.2), поэтому правка учебных данных не ломает
+# задание, а автоматически меняет ожидаемый ответ.
+#
+# Без root, без сети. Источники лежат в репозитории.
+#
+# Выбор отчёта: SUBJECT=... | artifacts/intel.txt (основное место) | <серия>/intel.txt | solution/.
 
 set -uo pipefail
 
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+SRV="${SERIES_DIR}/../data/test_environment"
 
-if   [ -n "${SUBJECT:-}" ];                             then SCRIPT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/artifacts/read_briefing.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/read_briefing.sh"
-elif [ -f "${SERIES_DIR}/read_briefing.sh" ];           then SCRIPT="${SERIES_DIR}/read_briefing.sh"
-else SCRIPT="${SERIES_DIR}/solution/read_briefing.sh"
-     echo "ℹ️  Свой read_briefing.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/read_briefing.sh artifacts/read_briefing.sh"; echo ""
+if   [ -n "${SUBJECT:-}" ];                     then REPORT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/intel.txt" ];then REPORT="${SERIES_DIR}/artifacts/intel.txt"
+elif [ -f "${SERIES_DIR}/intel.txt" ];          then REPORT="${SERIES_DIR}/intel.txt"
+else REPORT="${SERIES_DIR}/solution/intel.txt"
+     echo "ℹ️  Свой intel.txt не найден — проверяю ЭТАЛОН (solution/)."
+     echo "   Начни своё:  cp starter/intel.txt artifacts/intel.txt"; echo ""
 fi
 
 PASS=0; FAIL=0
@@ -23,35 +29,65 @@ ok(){ echo "  PASS: $1"; PASS=$((PASS+1)); }
 no(){ echo "  FAIL: $1"; FAIL=$((FAIL+1)); }
 
 echo "════════════════════════════════════════════════════════════"
-echo " s01e03 tests — subject: ${SCRIPT#"$SERIES_DIR"/}"
+echo " s01e03 tests — разведданные: ${REPORT#"$SERIES_DIR"/}"
 echo "════════════════════════════════════════════════════════════"
 
-# Фикстура: "сервер" с поддиректорией и скрытыми файлами, уникальные маркеры.
-TEST_ROOT="$(mktemp -d 2>/dev/null || mktemp -d -t s01e03)"
-trap 'rm -rf "${TEST_ROOT}"' EXIT
-SRV="${TEST_ROOT}/server"
-mkdir -p "${SRV}/documents"
-echo "BRIEFING-MARKER-8842 Viktor Petrov" > "${SRV}/documents/briefing.txt"
-echo "SECRET-GUM-14:00"                   > "${SRV}/.secret_location"
-echo "NEXT-185.192.47.203:2222"           > "${SRV}/.next_server"
+# ---- предусловия -----------------------------------------------------------
+for f in "${SRV}/documents/briefing.txt" "${SRV}/documents/.secret_location" "${SRV}/.next_server"; do
+    if [ ! -f "${f}" ]; then
+        echo "  FAIL: источник не найден: ${f}" >&2
+        exit 1
+    fi
+done
+if [ -f "${REPORT}" ]; then
+    ok "отчёт intel.txt найден"
+else
+    no "intel.txt не найден"
+    echo " Итог: ${PASS} passed, ${FAIL} failed"
+    exit 1
+fi
 
-# TEST 1-3
-[ -f "${SCRIPT}" ] && ok "read_briefing.sh найден" || no "read_briefing.sh не найден"
-bash -n "${SCRIPT}" 2>/dev/null && ok "синтаксис bash корректен" || no "ошибка синтаксиса"
-head -1 "${SCRIPT}" | grep -q '^#!.*sh' && ok "есть shebang" || no "нет shebang"
+# ---- эталон: извлекается из самих источников -------------------------------
+exp_clearance=$(grep -E '^CLEARANCE:' "${SRV}/documents/briefing.txt" | grep -oE 'Level [0-9]+' | grep -oE '[0-9]+')
+exp_lat=$(grep -E '^Latitude:' "${SRV}/documents/.secret_location" | awk '{print $2}')
+exp_lon=$(grep -E '^Longitude:' "${SRV}/documents/.secret_location" | awk '{print $2}')
+exp_time=$(grep -E '^Time:' "${SRV}/documents/.secret_location" | grep -oE '[0-9]{2}:[0-9]{2}')
+exp_ip=$(grep -E '^IP Address:' "${SRV}/.next_server" | awk '{print $3}')
+exp_port=$(grep -E '^Port:' "${SRV}/.next_server" | awk '{print $2}')
+exp_user=$(grep -E '^Username:' "${SRV}/.next_server" | awk '{print $2}')
 
-# Прогон: запускаем из ПОСТОРОННЕЙ директории, передав путь к серверу.
-# Так проверяем, что скрипт реально навигирует, а не полагается на CWD теста.
-OUT="$(cd "${TEST_ROOT}" && bash "${SCRIPT}" "${SRV}" 2>/dev/null)" || true
+# ---- чтение отчёта студента ------------------------------------------------
+val() {
+    grep -E "^[[:space:]]*$1[[:space:]]*=" "${REPORT}" 2>/dev/null \
+        | grep -v '^[[:space:]]*#' | tail -1 | cut -d= -f2- | tr -d ' \t\r'
+}
 
-# TEST 4: прочитал briefing из ПОДдиректории (значит, дошёл и прочитал)
-printf '%s' "${OUT}" | grep -qF "BRIEFING-MARKER-8842" && ok "прочитал documents/briefing.txt" || no "не прочитал documents/briefing.txt"
-# TEST 5-6: прочитал оба скрытых файла
-printf '%s' "${OUT}" | grep -qF "SECRET-GUM-14:00"     && ok "прочитал .secret_location" || no "не прочитал .secret_location"
-printf '%s' "${OUT}" | grep -qF "NEXT-185.192.47.203"  && ok "прочитал .next_server"     || no "не прочитал .next_server"
+check() {  # check <ключ> <эталон> <описание>
+    local key="$1" want="$2" desc="$3" got
+    got="$(val "${key}")"
+    if [ -z "${got}" ]; then
+        no "${desc}: не заполнено (${key}=)"
+    elif [ "${got}" = "${want}" ]; then
+        ok "${desc}: ${got}"
+    else
+        no "${desc}: указано '${got}', в источнике '${want}'"
+    fi
+}
 
-# TEST 7: сообщил, где находится (использовал pwd после навигации)
-printf '%s' "${OUT}" | grep -qF "${SRV}" && ok "печатает текущий путь после cd" || no "не печатает путь (использована ли навигация?)"
+check clearance_level "${exp_clearance}" "уровень допуска (briefing.txt)"
+check latitude        "${exp_lat}"       "широта (.secret_location)"
+check longitude       "${exp_lon}"       "долгота (.secret_location)"
+check meeting_time    "${exp_time}"      "время встречи"
+check next_ip         "${exp_ip}"        "IP следующего узла (.next_server)"
+check next_port       "${exp_port}"      "порт SSH"
+check next_user       "${exp_user}"      "имя пользователя"
+
+# ---- дискриминатор: данные лежат на разной глубине и в скрытых файлах -------
+if [ -f "${SRV}/.next_server" ] && [ -f "${SRV}/documents/.secret_location" ]; then
+    ok "самопроверка: источники на разных уровнях, два из трёх скрыты — нужен обход дерева"
+else
+    no "самопроверка: структура источников нарушена"
+fi
 
 echo "════════════════════════════════════════════════════════════"
 echo " Итог: ${PASS} passed, ${FAIL} failed"

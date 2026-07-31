@@ -1,0 +1,15 @@
+# РАЗВЕДДАННЫЕ — s01e03 (ЭТАЛОН, открывать после своей попытки)
+#
+# Как добыто:
+#   cd ../data/test_environment
+#   cat documents/briefing.txt          | grep CLEARANCE
+#   cat documents/.secret_location      | grep -E 'Latitude|Longitude|Time:'
+#   cat .next_server                    | grep -E 'IP Address|Port|Username'
+
+clearance_level=1
+latitude=55.7558°N
+longitude=37.6173°E
+meeting_time=14:00
+next_ip=185.192.45.119
+next_port=2223
+next_user=max_operator

@@ -43,7 +43,8 @@ report="${3:-report.txt}"
         while IFS= read -r ip; do
             [ -z "${ip}" ] && continue
             case "${ip}" in \#*) continue ;; esac
-            count=$(grep -c "${ip}" "${log}" || true)
+            # -w: совпадение как целое слово, иначе 10.0.0.5 найдётся внутри 10.0.0.50
+            count=$(grep -cw "${ip}" "${log}" || true)
             [ "${count}" -gt 0 ] && echo "  FOUND: ${ip} (${count} запросов)"
         done < "${threats}"
         echo ""

@@ -38,7 +38,7 @@ for key in "${keydir}"/id_*; do
     case "${name}" in
         id_ed25519) echo "     тип: ed25519 (рекомендуется)" ;;
         id_rsa)     echo "     тип: rsa (ок для старых серверов; ed25519 лучше)" ;;
-        id_dsa)     echo "     ⚠️ тип: dsa (устарел и небезопасен — замени на ed25519)"; issues=$((issues + 1)) ;;
+        id_dsa)     echo "     ⚠️ ${name}: тип dsa устарел и небезопасен — замени на ed25519"; issues=$((issues + 1)) ;;
     esac
 done
 

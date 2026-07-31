@@ -28,14 +28,24 @@ echo "════════════════════════�
 TEST_ROOT="$(mktemp -d 2>/dev/null || mktemp -d -t s01e11)"
 trap 'rm -rf "${TEST_ROOT}"' EXIT
 
-# Фикстура: 66.66.66.66 ×5 (главный атакующий), 77.77.77.77 ×3, 10.0.0.5 ×1, 10.0.0.6 ×1.
+# Фикстура: строки намеренно ПЕРЕМЕШАНЫ — без `sort` перед `uniq -c`
+# счёт распадётся на несколько групп на один адрес.
+# Счётчики: 66.* ×10, 77.* ×9, 10.0.0.5 ×3, 10.0.0.6 ×1.
 LOG="${TEST_ROOT}/access.log"
 {
-  for i in 1 2 3 4 5; do echo "66.66.66.66 - - [t] \"GET /admin HTTP/1.1\" 403 0"; done
-  for i in 1 2 3;     do echo "77.77.77.77 - - [t] \"GET /login HTTP/1.1\" 401 0"; done
-  echo '10.0.0.5 - - [t] "GET /index HTTP/1.1" 200 512'
+  for i in $(seq 1 10); do
+    echo "66.66.66.66 - - [t] \"GET /admin HTTP/1.1\" 403 0"
+    [ "$i" -le 9 ] && echo "77.77.77.77 - - [t] \"GET /login HTTP/1.1\" 401 0"
+    [ "$i" -le 3 ] && echo "10.0.0.5 - - [t] \"GET /index HTTP/1.1\" 200 512"
+  done
   echo '10.0.0.6 - - [t] "GET /about HTTP/1.1" 200 634'
 } > "${LOG}"
+
+# Ожидания ВЫЧИСЛЯЮТСЯ по фикстуре, а не записаны константами.
+EXP_TOP="$(awk '{print $1}' "${LOG}" | sort | uniq -c | sort -rn | head -1 | awk '{print $2}')"
+EXP_TOP_N="$(awk '{print $1}' "${LOG}" | sort | uniq -c | sort -rn | head -1 | awk '{print $1}')"
+EXP_2ND="$(awk '{print $1}' "${LOG}" | sort | uniq -c | sort -rn | sed -n 2p | awk '{print $2}')"
+EXP_2ND_N="$(awk '{print $1}' "${LOG}" | sort | uniq -c | sort -rn | sed -n 2p | awk '{print $1}')"
 
 # TEST 1-3
 [ -f "${SCRIPT}" ] && ok "top_attackers.sh найден" || no "top_attackers.sh не найден"
@@ -44,17 +54,39 @@ head -1 "${SCRIPT}" | grep -q '^#!.*sh' && ok "есть shebang" || no "нет s
 
 OUT="$(bash "${SCRIPT}" "${LOG}" 3 2>/dev/null)" || true
 
-# TEST 4: главный атакующий с верным счётом (5 66.66.66.66)
-printf '%s' "${OUT}" | grep -qE '(^| )5 +66\.66\.66\.66' && ok "66.66.66.66 посчитан 5 раз" || no "неверный счёт для 66.66.66.66"
-# TEST 5: 77.77.77.77 посчитан 3 раза
-printf '%s' "${OUT}" | grep -qE '(^| )3 +77\.77\.77\.77' && ok "77.77.77.77 посчитан 3 раза" || no "неверный счёт для 77.77.77.77"
-# TEST 6: ранжирование — первая строка данных = самый активный (66.66.66.66)
-first_data="$(printf '%s\n' "${OUT}" | grep -E '[0-9]+ +[0-9.]+' | head -1)"
-printf '%s' "${first_data}" | grep -q '66\.66\.66\.66' && ok "топ-1 = самый активный IP (sort -rn)" || no "рейтинг не по убыванию (нет sort -rn?)"
-# TEST 7: head ограничивает вывод N=3 строками данных
-lines="$(printf '%s\n' "${OUT}" | grep -cE '[0-9]+ +[0-9.]+')"
-[ "${lines}" -le 3 ] && ok "head -n ограничивает топ (<=3 строк)" || no "не ограничен топ (head?)"
-# TEST 8: отсутствующий файл → ненулевой exit
+# Только строки данных вида «<число> <IP>»
+DATA="$(printf '%s\n' "${OUT}" | grep -E '^[[:space:]]*[0-9]+[[:space:]]+[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+[[:space:]]*$')"
+
+# TEST 4: лидер посчитан верно
+printf '%s\n' "${DATA}" | grep -qE "^[[:space:]]*${EXP_TOP_N}[[:space:]]+${EXP_TOP//./\\.}[[:space:]]*$" \
+    && ok "${EXP_TOP} посчитан ${EXP_TOP_N} раз" || no "неверный счёт для ${EXP_TOP} (ожидалось ${EXP_TOP_N})"
+
+# TEST 5: второй посчитан верно
+printf '%s\n' "${DATA}" | grep -qE "^[[:space:]]*${EXP_2ND_N}[[:space:]]+${EXP_2ND//./\\.}[[:space:]]*$" \
+    && ok "${EXP_2ND} посчитан ${EXP_2ND_N} раз" || no "неверный счёт для ${EXP_2ND} (ожидалось ${EXP_2ND_N})"
+
+# TEST 6: каждый адрес встречается в рейтинге РОВНО один раз (есть sort перед uniq)
+dupes="$(printf '%s\n' "${DATA}" | awk '{print $2}' | sort | uniq -d)"
+[ -z "${dupes}" ] && ok "каждый адрес в рейтинге один раз (sort перед uniq)" \
+    || no "адрес повторяется в рейтинге — нет sort перед uniq -c: ${dupes}"
+
+# TEST 7: топ-1 — действительно самый активный
+first="$(printf '%s\n' "${DATA}" | head -1 | awk '{print $2}')"
+[ "${first}" = "${EXP_TOP}" ] && ok "топ-1 = самый активный адрес" \
+    || no "топ-1 = ${first}, ожидался ${EXP_TOP}"
+
+# TEST 8: порядок строго по убыванию числа запросов
+if printf '%s\n' "${DATA}" | awk '{if (NR>1 && $1 > prev) exit 1; prev=$1}'; then
+    ok "рейтинг упорядочен по убыванию"
+else
+    no "рейтинг не по убыванию — нужен sort -rn после uniq -c"
+fi
+
+# TEST 9: head ограничивает вывод запрошенным N
+lines="$(printf '%s\n' "${DATA}" | grep -c .)"
+[ "${lines}" -le 3 ] && ok "head -n ограничивает топ (<=3 строк)" || no "не ограничен топ (head?), строк: ${lines}"
+
+# TEST 10: отсутствующий файл → ненулевой exit
 bash "${SCRIPT}" "${TEST_ROOT}/nope.log" >/dev/null 2>&1
 [ $? -ne 0 ] && ok "нет файла → ненулевой exit" || no "не обработан отсутствующий файл"
 

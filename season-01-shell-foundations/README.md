@@ -5,7 +5,7 @@
 СЕЗОН: 1 — Shell & Foundations
 ЛОКАЦИЯ: 🇷🇺 Новосибирск, Россия (Академгородок)
 ДНИ ОПЕРАЦИИ: 1-8 (из 60) — День 1: вербовка в Москве, Дни 2-8: работа из Новосибирска
-СТАТУС: v2.0 — 14 атомарных серий s01e01–14; литературизация по DoD §15: готовы s01e01–06
+СТАТУС: v2.0 — 14 атомарных серий s01e01–14; литературизация по DoD §15: ВЕСЬ СЕЗОН
 КАЧЕСТВО: 4.75/5 average (историческая оценка старых Episodes 01-04)
 ```
 
@@ -72,12 +72,12 @@
 | [s01e06](s01e06-find-automation/) | 01 | `find` — обход дерева с условиями | `audit_tree.sh` | A | 10/10 |
 | [s01e07](s01e07-variables-ping/) | 02 | переменные + exit code (`$?`) | `check_host.sh` | A | 8/8 |
 | [s01e08](s01e08-conditions-loops/) | 02 | условия + циклы (`while read`) | `check_all.sh` | A | 9/9 |
-| [s01e09](s01e09-logging-monitor/) | 02 | логирование + капстоун | `server_monitor.sh` | A | 9/9 |
-| [s01e10](s01e10-grep-pipes/) | 03 | `grep` + конвейеры | `filter_attack.sh` | A | 7/7 |
-| [s01e11](s01e11-awk-stats/) | 03 | `awk` + `sort`/`uniq` (статистика) | `top_attackers.sh` | A | 8/8 |
-| [s01e12](s01e12-sed-log-analyzer/) | 03 | `sed` + отчёт (капстоун) | `log_analyzer.sh` | **B** | 10/10 |
-| [s01e13](s01e13-apt-dpkg/) | 04 | `apt`/`dpkg` — управление пакетами | `pkg_check.sh` | **B** | 9/9 |
-| [s01e14](s01e14-batch-report/) | 04 | `xargs` batch + отчёт (капстоун сезона) | `install_report_generator.sh` | **B** | 10/10 |
+| [s01e09](s01e09-logging-monitor/) | 02 | логирование + капстоун | `server_monitor.sh` | A | 11/11 |
+| [s01e10](s01e10-grep-pipes/) | 03 | `grep` + конвейеры | `filter_attack.sh` | A | 10/10 |
+| [s01e11](s01e11-awk-stats/) | 03 | `awk` + `sort`/`uniq` (статистика) | `top_attackers.sh` | A | 10/10 |
+| [s01e12](s01e12-sed-log-analyzer/) | 03 | `sed` + отчёт (капстоун) | `log_analyzer.sh` | **B** | 14/14 |
+| [s01e13](s01e13-apt-dpkg/) | 04 | `apt`/`dpkg` — управление пакетами | `pkg_check.sh` | **B** | 12/12 |
+| [s01e14](s01e14-batch-report/) | 04 | `xargs` batch + отчёт (капстоун сезона) | `install_report_generator.sh` | **B** | 15/15 |
 
 Прогнать весь курс: `bash ../tools/run_tests.sh`. Проверить ссылки: `bash ../tools/check_links.sh`.
 
@@ -93,14 +93,14 @@ T3 (Docker — только в Season 4), **T5 (редактор)** и **T6 (ф�
 [`tools/check_tools.sh`](../tools/check_tools.sh): он ищет forward-deps по инструментам,
 а не только по концептам.
 
-**В очереди:** литературизация остальных серий S1 и S2 по DoD §15.
+**Литературизация по DoD §15 завершена для всего Season 1** (README 180–280 строк прозой,
+`theory.md` — воспоминание от первого лица, `mission.md` — брифинг). В очереди — Season 2.
 
 ---
 
 ## 🎯 Чему вы научитесь
 
 ### Episode 01: Terminal Awakening
-- ✅ Подключение к серверу через SSH
 - ✅ Навигация по файловой системе (`cd`, `pwd`, `ls`)
 - ✅ Работа с файлами (`cat`, `less`, `head`, `tail`)
 - ✅ Поиск файлов (`find`)

@@ -157,7 +157,7 @@ git clone https://github.com/gfazzz/kernel-shadows.git
 cd kernel-shadows
 
 # 2. Перейти к первой серии (v2.0: атомарные серии sNNeNN)
-cd season-1-shell-foundations/s01e01-terminal-awakening
+cd season-01-shell-foundations/s01e01-terminal-awakening
 
 # 3. Прочитать руководство и собрать первый инструмент
 less README.md

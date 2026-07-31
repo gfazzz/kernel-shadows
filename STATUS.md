@@ -1541,7 +1541,7 @@ Episodes 01-02 соответствуют ВСЕМ критериям:
 ### Как протестировать Episode 01:
 
 ```bash
-cd /home/fazzz/kernel-shadows/season-1-shell-foundations/episode-01-terminal-awakening/
+cd /home/fazzz/kernel-shadows/season-01-shell-foundations/episode-01-terminal-awakening/
 
 # 1. Открыть интегрированное руководство
 less README.md
@@ -1782,7 +1782,7 @@ cd ../../tests/
 
 ### v0.1.7 (8 октября 2025) — Season Projects Removal ⭐
 - ✅ **Season projects удалены из всего курса:**
-  - season-1-shell-foundations/season-project/ удалён
+  - season-01-shell-foundations/season-project/ удалён
   - Все упоминания убраны из README.md, CURRICULUM.md, STATUS.md
   - Навыки из каждого эпизода естественно используются в следующих сезонах
   - Season 8 финал — ultimate integration всех навыков

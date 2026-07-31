@@ -86,7 +86,7 @@ show_help() {
 # Подсказка для эпизода
 show_hint() {
   local episode="${1:-01}"
-  local episode_path="$PROJECT_ROOT/season-1-shell-foundations/episode-${episode}-*"
+  local episode_path="$PROJECT_ROOT/season-01-shell-foundations/episode-${episode}-*"
 
   if ! compgen -G "$episode_path" > /dev/null; then
     echo -e "${RED}✗ Episode $episode не найден${NC}"
@@ -127,7 +127,7 @@ show_hint() {
 # Проверить решение эпизода
 check_episode() {
   local episode="${1:-01}"
-  local episode_path="$PROJECT_ROOT/season-1-shell-foundations/episode-${episode}-*"
+  local episode_path="$PROJECT_ROOT/season-01-shell-foundations/episode-${episode}-*"
 
   if ! compgen -G "$episode_path" > /dev/null; then
     echo -e "${RED}✗ Episode $episode не найден${NC}"

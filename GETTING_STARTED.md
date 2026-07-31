@@ -275,7 +275,7 @@ kernel-shadows/
 ├── SCENARIO.md
 ├── CURRICULUM.md
 ├── LICENSE
-├── season-1-shell-foundations/
+├── season-01-shell-foundations/
 │   ├── data/                          # учебные данные для практики
 │   ├── s01e01-terminal-awakening/     # атомарные серии v2.0 (sNNeNN)
 │   ├── s01e02-ls-look-around/
@@ -290,11 +290,11 @@ kernel-shadows/
 Курс v2.0 разбит на **атомарные серии** `sNNeNN` (один концепт — одна задача).
 Начните с первой — **s01e01: Terminal Awakening**. Ниже — общий порядок; точные
 команды и артефакт каждой серии смотрите в её `README.md` и `mission.md`
-(карта всех 12 серий Season 1 — в [season-1 README](season-1-shell-foundations/README.md)).
+(карта всех 12 серий Season 1 — в [season-1 README](season-01-shell-foundations/README.md)).
 
 ### Шаг 1: Перейдите в директорию эпизода
 ```bash
-cd ~/projects/kernel-shadows/season-1-shell-foundations/s01e01-terminal-awakening
+cd ~/projects/kernel-shadows/season-01-shell-foundations/s01e01-terminal-awakening
 ```
 
 ### Шаг 2: Прочитайте интегрированное руководство
@@ -317,7 +317,7 @@ cat README.md | less
 # (если есть GUI)
 xdg-open README.md  # Linux
 # или просто читайте на GitHub:
-# https://github.com/gfazzz/kernel-shadows/tree/main/season-1-shell-foundations/s01e01-terminal-awakening
+# https://github.com/gfazzz/kernel-shadows/tree/main/season-01-shell-foundations/s01e01-terminal-awakening
 ```
 
 ### Шаг 4: Запустите starter script (если есть)
@@ -554,7 +554,7 @@ git clone https://github.com/gfazzz/kernel-shadows.git
 cd kernel-shadows
 
 # 2. Перейти к первой серии
-cd season-1-shell-foundations/s01e01-terminal-awakening
+cd season-01-shell-foundations/s01e01-terminal-awakening
 
 # 3. Прочитать руководство и ТЗ
 less README.md && cat mission.md
@@ -593,7 +593,7 @@ man man     # Документация по man (мета!)
 ### 4. Автодополнение — ваш друг
 Нажмите `Tab` для автодополнения:
 ```bash
-cd sea<Tab>  # Автоматически дополнится до season-1-shell-foundations/
+cd sea<Tab>  # Автоматически дополнится до season-01-shell-foundations/
 ```
 
 ### 5. История команд

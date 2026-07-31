@@ -30,7 +30,7 @@
 
 **Получить подсказку:**
 ```bash
-cd season-1-shell-foundations/s01e01-terminal-awakening
+cd season-01-shell-foundations/s01e01-terminal-awakening
 ../../tools/lilith.sh hint 01
 ```
 

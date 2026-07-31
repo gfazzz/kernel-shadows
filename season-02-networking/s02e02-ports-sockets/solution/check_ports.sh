@@ -29,7 +29,7 @@ if [ -n "${allow}" ] && [ -f "${allow}" ]; then
     echo "--- Проверка по allowlist (${allow}) ---"
     flagged=0
     for p in ${ports}; do
-        if grep -qxE "${p}" "${allow}"; then
+        if grep -qxF "${p}" "${allow}"; then
             echo "  ✓ ${p} — разрешён"
         else
             echo "  ⚠️ ${p} — НЕ в allowlist (неожиданный порт!)"

@@ -2,7 +2,18 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "🧪 Run Episode Tests",
+      "label": "🧪 Run All Tests (make check)",
+      "type": "shell",
+      "command": "make -C ${workspaceFolder} check",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "🧪 Run Series Tests",
       "type": "shell",
       "command": "cd ${fileDirname} && if [ -f tests/test.sh ]; then bash tests/test.sh; else echo 'No tests found in this directory'; fi",
       "group": {
@@ -73,7 +84,7 @@
     {
       "label": "📊 Show Progress",
       "type": "shell",
-      "command": "bash ${workspaceFolder}/tools/progress.sh",
+      "command": "make -C ${workspaceFolder} progress",
       "group": "none",
       "presentation": {
         "reveal": "always",

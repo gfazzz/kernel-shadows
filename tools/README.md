@@ -47,23 +47,63 @@ cd season-01-shell-foundations/s01e01-terminal-awakening
 
 ---
 
-## 🧪 run_tests.sh — Прогон тестов курса
+## 🧪 Makefile — единый вход
 
-Запускает `tests/test.sh` всех серий и печатает сводку. Нужен для приёмки на
-чистом клоне (план §7.4) и проверки воспроизводимости (§4.3).
+Всё, что проверяется механически, запускается одной командой из корня проекта.
+Логика живёт в скриптах этой папки, `Makefile` только даёт им имена (план §7.1).
 
 ```bash
-bash tools/run_tests.sh                  # все серии
-bash tools/run_tests.sh season-01-*      # только один сезон
-REPEAT=2 bash tools/run_tests.sh         # два прогона подряд
-LC_ALL=C bash tools/run_tests.sh         # прогон со сменой локали
+make                 # список целей
+make test            # unit-тесты всех серий (без root и сети)
+make test SEASON=season-01-shell-foundations
+make test SERIES=s01e10          # одна серия по подстроке имени
+make test VERBOSE=1              # печатать вывод упавших серий целиком
+make test-repeat                 # два прогона подряд — воспроизводимость (§4.3)
+make test-locale                 # прогон под LC_ALL=C и чужим TZ
+make test-integration            # тесты, которым нужен живой хост
+make links                       # ссылки между документами (§4.9)
+make tools                       # аудит forward-deps по инструментам
+make check                       # links + tools + test — то, что гоняет CI
+make progress                    # где я остановился
+make clean-clone                 # приёмка на чистом клоне (§7.4)
 ```
-
-Код возврата: `0` — все зелёные, `1` — есть падения (список в конце вывода).
 
 ---
 
-## 🔗 check_links.sh — Проверка внутренних ссылок
+## 🧪 run_tests.sh — прогон unit-тестов
+
+Обходит серии `sNNeNN`, запускает `tests/test.sh` каждой, пишет лог по сезонам
+и печатает сводку. При падении называет упавшие серии и команду для повтора.
+
+```bash
+bash tools/run_tests.sh                  # все серии
+bash tools/run_tests.sh season-01-*      # позиционный фильтр
+SEASON=season-02-networking bash tools/run_tests.sh
+SERIES=s01e10 bash tools/run_tests.sh    # одна серия
+REPEAT=2 bash tools/run_tests.sh         # два прогона подряд
+VERBOSE=1 bash tools/run_tests.sh        # полный вывод упавших
+```
+
+**Логи:** `tests/logs/<сезон>.log` — по файлу на сезон, перезаписываются при
+каждом прогоне. Каталог в `.gitignore`; в CI выкладывается артефактом, в том
+числе при падении (§7.3).
+
+Код возврата: `0` — все зелёные, `1` — есть падения.
+
+---
+
+## 🧩 run_integration.sh — тесты, требующие живого хоста
+
+Двухуровневая модель (§7.1): unit обязателен и работает на фикстурах, integration
+нужен там, где без systemd, Docker или root не обойтись. Такой тест объявляется
+файлом `<серия>/tests/integration.sh` и декларацией требований в её `mission.md`.
+
+**Сейчас интеграционных тестов нет:** все 23 серии S1–S2 проходят на unit-уровне.
+Цель существует заранее — для S3 (systemd), S4 (Docker) и S6 (модуль ядра).
+
+---
+
+## 🔗 check_links.sh — проверка внутренних ссылок
 
 Обходит все `.md` курса и проверяет, что цели markdown-ссылок существуют
 (план §4.9). Ручная вычитка такие ошибки не ловит.
@@ -72,75 +112,52 @@ LC_ALL=C bash tools/run_tests.sh         # прогон со сменой лок
 bash tools/check_links.sh
 ```
 
-Код возврата: `0` — битых ссылок нет, `1` — есть (список с указанием файла-источника).
+---
+
+## 🛠 check_tools.sh — аудит forward-deps по инструментам
+
+Проверяет, что команда или программа не используется в сериях раньше, чем
+курс её объясняет. Ищет не по концептам, а именно по инструментам: редактор,
+`cp`, `chmod`, `man`, `grep`, `>`, `ssh`, `systemctl`. Отличает честно
+помеченный «предпросмотр» от нарушения.
+
+```bash
+bash tools/check_tools.sh
+```
+
+Таблица инструментов и серий, где они вводятся, — в начале самого скрипта;
+найденные нарушения записываются в [`THEORY_MAP.md`](../THEORY_MAP.md) под номером `T`.
 
 ---
 
-## 📊 progress.sh — Отслеживание прогресса
+## 📊 progress.sh — где я остановился
 
-Показывает прогресс по курсу. Обнаруживает единицы прохождения на диске и
-работает с обеими схемами одновременно: атомарные серии `sNNeNN` (мигрированные
-сезоны) и монолитные `episode-NN` (ещё не мигрированные — ключ строится как
-`episode-09` в сезоне 3 → `s03e09`).
+Считает прогресс **по факту**, а не по самоотметке (план §7.5). Серия пройдена,
+если выполнены оба условия:
 
-### Использование:
+1. в `<серия>/artifacts/` лежит работа студента;
+2. тест серии на этой работе зелёный.
+
+Наличие `solution/` не засчитывается никогда — эталон лежит в репозитории
+с самого начала.
+
 ```bash
-./tools/progress.sh [команда]
+bash tools/progress.sh                 # полная картина
+bash tools/progress.sh --quiet         # только следующая цель (для скриптов)
+SEASON=season-02-networking bash tools/progress.sh
 ```
 
-### Команды:
-
-| Команда | Описание | Пример |
-|---------|----------|--------|
-| (нет) | Общий прогресс | `./tools/progress.sh` |
-| `all` | Все сезоны | `./tools/progress.sh all` |
-| `season <N>` | Прогресс сезона | `./tools/progress.sh season 1` |
-| `start <key>` | Отметить как начатую | `./tools/progress.sh start s01e01` |
-| `complete <key>` | Отметить завершённой (**запускает тесты серии**) | `./tools/progress.sh complete s01e01` |
-| `reset` | Сбросить прогресс | `./tools/progress.sh reset` |
-
-Старая форма аргументов тоже принимается: `./tools/progress.sh start 1 01`.
-
-### Примеры:
-
-**Общий прогресс:**
-```bash
-./tools/progress.sh
-
-# Output:
-# ╔══════════════════════════════════════════════════════════════╗
-# ║  KERNEL SHADOWS - Progress Tracker                           ║
-# ╚══════════════════════════════════════════════════════════════╝
-#
-# Общий прогресс:
-#   [████████░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░] 12% (4/32 эпизодов)
-#
-# Статистика:
-#   ✅ Завершено: 4
-#   ⏳ В процессе: 1
-#   ⭕ Не начато: 27
+```
+  shell foundations            [####........] 4/14
+   [x] s01e01-terminal-awakening
+   [~] s01e05-editing-files   (работа есть, тест красный)
+   [ ] s01e06-find-automation
+  Следующая цель: season-01-shell-foundations/s01e05-editing-files
 ```
 
-**Прогресс Season 1:**
-```bash
-./tools/progress.sh season 1
-
-# Output:
-# ╔══════════════════════════════════════════════════════════════╗
-# ║  Season 1 Progress                                           ║
-# ╚══════════════════════════════════════════════════════════════╝
-#
-#   ✅  Episode 01: Terminal Awakening
-#   ⏳  Episode 02: Shell Scripting Basics
-#   ⭕  Episode 03: Text Processing Masters
-#   ⭕  Episode 04: Package Management
-```
-
-**Отметить эпизод завершённым:**
-```bash
-./tools/progress.sh complete 1 01
-# ✅ Episode 01 помечен как 'завершён'!
-```
+Прежняя версия вела учёт в файле `.progress` командами `start`/`complete`.
+Этот способ верил отметкам «я сделал»; теперь считается результат, и файл
+`.progress` больше не используется.
 
 ---
 
@@ -155,33 +172,14 @@ bash tools/check_links.sh
 - `Ctrl+Shift+P` → `Tasks: Run Task` → выбрать задачу
 
 **Доступные задачи:**
-- 🧪 Run Episode Tests
+- 🧪 Run Series Tests (`make test`)
 - ▶️ Run Current Script
 - 🔍 Shellcheck Current File
 - 🚀 Run Starter Script
 - 🤖 LILITH Help
-- 📊 Show Progress
+- 📊 Show Progress (`make progress`)
 - 🧹 Clean Test Environment
 - 📝 Format Current Shell Script
-
----
-
-## 📝 .progress файл
-
-Прогресс сохраняется в `.progress` (в корне проекта).
-
-**Формат:**
-```
-s1-e01:completed:2025-10-04
-s1-e02:in_progress:2025-10-05
-```
-
-**Статусы:**
-- `not_started` — не начат
-- `in_progress` — в процессе
-- `completed` — завершён
-
-**Примечание:** Файл автоматически создаётся при первом запуске `progress.sh`.
 
 ---
 

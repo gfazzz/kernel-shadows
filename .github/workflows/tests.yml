@@ -1,0 +1,137 @@
+name: tests
+
+# План §7: unit-тесты гоняются на чистом Ubuntu без root и без сети.
+# Матрица по сезонам с fail-fast: false — падение одного сезона не должно
+# скрывать состояние остальных (§7.3). Логи выкладываются всегда, включая
+# случай падения: без них отладка в CI встаёт.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    name: unit (${{ matrix.season }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        season:
+          - season-01-shell-foundations
+          - season-02-networking
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Версии инструментов
+        run: |
+          bash --version | head -1
+          awk --version 2>/dev/null | head -1 || awk -W version 2>&1 | head -1
+          sed --version | head -1
+          grep --version | head -1
+          echo "uname: $(uname -srm)"
+          echo "locale: LANG=${LANG:-unset} LC_ALL=${LC_ALL:-unset} TZ=${TZ:-unset}"
+
+      - name: Unit-тесты сезона
+        run: make test SEASON=${{ matrix.season }}
+
+      - name: Логи прогона
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-${{ matrix.season }}
+          path: tests/logs/
+          if-no-files-found: warn
+          retention-days: 14
+
+  reproducibility:
+    name: воспроизводимость и локаль
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # §4.3: тест не должен зависеть ни от номера прогона, ни от локали и TZ.
+      - name: Два прогона подряд
+        run: make test-repeat
+
+      - name: LC_ALL=C и чужой часовой пояс
+        run: make test-locale
+
+      - name: Логи прогона
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-reproducibility
+          path: tests/logs/
+          if-no-files-found: warn
+          retention-days: 14
+
+  docs:
+    name: ссылки и forward-deps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ссылки между документами (§4.9)
+        run: make links
+
+      - name: Аудит forward-deps по инструментам
+        run: make tools
+
+  clean-clone:
+    name: приёмка на чистом клоне (§7.4)
+    runs-on: ubuntu-latest
+    steps:
+      # fetch-depth: 0 — чтобы `git clone .` внутри цели видел полную историю.
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Ловит файлы, съеденные .gitignore, забытые git add и потерянные права
+      # на test.sh: фикстуры курса — это логи, конфиги и ключи, то есть ровно
+      # то, что типовые правила игнорирования и вычёркивают (§11.3).
+      - name: make clean-clone
+        run: make clean-clone
+
+  artifacts-guard:
+    name: PR не тащит чужие решения (§11.1)
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # artifacts/ — рабочая папка студента: он форкает курс и коммитит туда
+      # свои решения. В PR к самому курсу они попадать не должны, а попадают
+      # легко — одним `git add -A` перед правкой опечатки.
+      - name: Проверить диф
+        run: |
+          base="origin/${{ github.base_ref }}"
+          git fetch --quiet origin "${{ github.base_ref }}"
+          touched="$(git diff --name-only "$base"...HEAD -- '*/artifacts/*' || true)"
+          if [ -n "$touched" ]; then
+            echo "В pull request попали файлы из artifacts/:"
+            printf '  %s\n' $touched
+            echo
+            echo "Убрать из индекса и переоформить ветку от чистого main:"
+            echo "  git rm --cached -r -- '*/artifacts/*'"
+            echo "  git commit -m 'chore: убрать студенческие артефакты из PR'"
+            exit 1
+          fi
+          echo "artifacts/ не затронуты — порядок."
+
+  integration:
+    name: integration (по требованию)
+    runs-on: ubuntu-latest
+    # Интеграционных тестов в курсе пока нет; работа существует, чтобы у S3+
+    # было куда класть проверки, которым нужны systemd, Docker или root.
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Интеграционные тесты
+        run: make test-integration

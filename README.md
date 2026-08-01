@@ -319,12 +319,16 @@ lsb_release -a
 ./tools/lilith.sh check 01    # Проверить решение
 ```
 
-**📊 `tools/progress.sh`** — отслеживание прогресса
+**🧪 `make`** — всё, что проверяется механически
 ```bash
-./tools/progress.sh           # Общий прогресс (%)
-./tools/progress.sh season 1  # Прогресс Season 1
-./tools/progress.sh all       # Все сезоны
+make test                     # тесты всех серий (без root и сети)
+make test SERIES=s01e10       # одна серия
+make progress                 # где я остановился
+make check                    # ссылки + forward-deps + тесты (как в CI)
 ```
+
+**📊 `make progress`** считает по факту: серия пройдена, если в её `artifacts/`
+лежит твоя работа и тест на ней зелёный. Наличие `solution/` не засчитывается.
 
 Подробнее: [tools/README.md](tools/README.md)
 

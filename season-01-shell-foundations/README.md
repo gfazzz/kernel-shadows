@@ -79,7 +79,7 @@
 | [s01e13](s01e13-apt-dpkg/) | 04 | `apt`/`dpkg` — управление пакетами | `pkg_check.sh` | **B** | 12/12 |
 | [s01e14](s01e14-batch-report/) | 04 | `xargs` batch + отчёт (капстоун сезона) | `install_report_generator.sh` | **B** | 15/15 |
 
-Прогнать весь курс: `bash ../tools/run_tests.sh`. Проверить ссылки: `bash ../tools/check_links.sh`.
+Прогнать весь курс: `make test` из корня (или `make test SEASON=season-01-shell-foundations`). Всё разом — `make check`.
 
 Приёмы воспроизводимости: сетевые серии мокают `ping`/`ss`/`dig`, пакетные — `dpkg`
 (mock-first §5.3); серии-разведки (`Type C`) сверяют находки студента с реальными

@@ -1,20 +1,29 @@
 #!/usr/bin/env bash
 #
-# s02e06 «Читаем стену» — воспроизводимый unit-тест (без root, без сети).
-# Работает над фикстурой-выводом `ufw status` — реальный ufw/ядро не нужны.
+# s02e06 «Что у нас вообще открыто» — тест разведки (Type C).
 #
-# Выбор артефакта: SUBJECT=... | <серия>/fw_audit.sh | artifacts/ | solution/.
+# Проверяет НЕ скрипт, а находки студента: отчёт fw_report.txt сверяется с реальным
+# содержимым объекта разведки — снимка `ufw status verbose` из data/, плюс снимка
+# `ss -tuln` из s02e02. Эталон вычисляется здесь же командами: в тесте нет ни одного
+# захардкоженного значения (§4.2, §4.3).
+#
+# Без root, без сети. Объект разведки лежит в репозитории.
+#
+# Выбор отчёта: SUBJECT=... | artifacts/fw_report.txt | <серия>/fw_report.txt | solution/.
 
 set -uo pipefail
 
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+DATA="${SERIES_DIR}/../data"
+FW="${DATA}/ufw_status_moscow1.txt"
+SNAP="${DATA}/ss_listen_moscow1.txt"
 
-if   [ -n "${SUBJECT:-}" ];                   then SCRIPT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/artifacts/fw_audit.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/fw_audit.sh"
-elif [ -f "${SERIES_DIR}/fw_audit.sh" ];      then SCRIPT="${SERIES_DIR}/fw_audit.sh"
-else SCRIPT="${SERIES_DIR}/solution/fw_audit.sh"
-     echo "ℹ️  Свой fw_audit.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/fw_audit.sh artifacts/fw_audit.sh"; echo ""
+if   [ -n "${SUBJECT:-}" ];                         then REPORT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/fw_report.txt" ];then REPORT="${SERIES_DIR}/artifacts/fw_report.txt"
+elif [ -f "${SERIES_DIR}/fw_report.txt" ];          then REPORT="${SERIES_DIR}/fw_report.txt"
+else REPORT="${SERIES_DIR}/solution/fw_report.txt"
+     echo "ℹ️  Свой fw_report.txt не найден — проверяю ЭТАЛОН (solution/)."
+     echo "   Начни своё:  cp starter/fw_report.txt artifacts/fw_report.txt"; echo ""
 fi
 
 PASS=0; FAIL=0
@@ -22,71 +31,101 @@ ok(){ echo "  PASS: $1"; PASS=$((PASS+1)); }
 no(){ echo "  FAIL: $1"; FAIL=$((FAIL+1)); }
 
 echo "════════════════════════════════════════════════════════════"
-echo " s02e06 tests — subject: ${SCRIPT#"$SERIES_DIR"/}"
+echo " s02e06 tests — отчёт: ${REPORT#"$SERIES_DIR"/}"
 echo "════════════════════════════════════════════════════════════"
 
-TEST_ROOT="$(mktemp -d 2>/dev/null || mktemp -d -t s02e06)"
-trap 'rm -rf "${TEST_ROOT}"' EXIT
+# ---- предусловия -----------------------------------------------------------
+for f in "${FW}" "${SNAP}"; do
+    if [ ! -f "${f}" ]; then
+        echo "  FAIL: не найден объект разведки: ${f}" >&2
+        exit 1
+    fi
+done
+if [ -f "${REPORT}" ]; then
+    ok "отчёт fw_report.txt найден"
+else
+    no "fw_report.txt не найден"
+    echo " Итог: ${PASS} passed, ${FAIL} failed"
+    exit 1
+fi
 
-# фикстура: вывод `ufw status`. 3306 (MySQL) открыт наружу — проблема;
-# 6379 (Redis) только с 127.0.0.1 — ок.
-RULES="${TEST_ROOT}/ufw_status.txt"
-cat > "${RULES}" <<'EOF'
-Status: active
+# ---- эталон: вычисляется из снимков ----------------------------------------
+allow_rules() { grep -E '[[:space:]]ALLOW' "${FW}"; }
+port_col()    { awk '{print $1}' | sed 's|/.*||' | grep -E '^[0-9]+$'; }
 
-To                         Action      From
---                         ------      ----
-22/tcp                     ALLOW       Anywhere
-80/tcp                     ALLOW       Anywhere
-443/tcp                    ALLOW       Anywhere
-3306                       ALLOW       Anywhere
-3306 (v6)                  ALLOW       Anywhere (v6)
-5432/tcp                   ALLOW       10.50.0.0/24
-6379                       ALLOW       127.0.0.1
-33060                      ALLOW       Anywhere
-9200/tcp                   ALLOW       Anywhere
-27017                      DENY        Anywhere
-EOF
+exp_default=$(grep -i '^Default:' "${FW}" | sed 's/.*Default: *//' | tr ',' '\n' \
+                | grep -i 'incoming' | awk '{print $1}' | tr -d ' ')
+exp_allow=$(grep -cE '[[:space:]]ALLOW' "${FW}" | tr -d ' ')
+exp_deny=$(grep -cE '[[:space:]]DENY' "${FW}" | tr -d ' ')
+exp_world=$(allow_rules | grep -E 'Anywhere' | port_col | sort -un | paste -sd, - | tr -d ' ')
+exp_lan=$(allow_rules | grep -E '10\.50\.0\.0/24' | port_col | sort -un | paste -sd, - | tr -d ' ')
+exp_blanket=$(allow_rules | awk '$1=="Anywhere"{print $NF}' | head -1 | tr -d ' ')
 
-# TEST 1-3
-[ -f "${SCRIPT}" ] && ok "fw_audit.sh найден" || no "fw_audit.sh не найден"
-bash -n "${SCRIPT}" 2>/dev/null && ok "синтаксис bash корректен" || no "ошибка синтаксиса"
-head -1 "${SCRIPT}" | grep -q '^#!.*sh' && ok "есть shebang" || no "нет shebang"
+sensitive="3306 5432 6379 9200 27017 11211"
+exp_sens=""
+for p in $(allow_rules | grep -E 'Anywhere' | port_col | sort -un); do
+    for s in ${sensitive}; do [ "${p}" = "${s}" ] && exp_sens="${exp_sens},${p}"; done
+done
+exp_sens="${exp_sens#,}"
 
-OUT="$(bash "${SCRIPT}" "${RULES}" 2>&1)" || true
+ruled=$(allow_rules | port_col | sort -un)
+exp_unruled=""
+for p in $(awk '/^LISTEN/{print $4}' "${SNAP}" | grep -E '^(0\.0\.0\.0|\[::\]):' \
+             | sed 's/.*://' | grep -E '^[0-9]+$' | sort -un); do
+    printf '%s\n' "${ruled}" | grep -qxF "${p}" || exp_unruled="${exp_unruled},${p}"
+done
+exp_unruled="${exp_unruled#,}"
 
-WARN="$(printf '%s\n' "${OUT}" | grep -E 'чувствительный порт|⚠')"
+# Фаервол защищает что-либо только при политике deny для входящих.
+if printf '%s' "${exp_default}" | grep -qi '^deny$'; then exp_effective="yes"; else exp_effective="no"; fi
 
-# TEST 4: 3306 открытый наружу — помечен проблемой
-printf '%s' "${WARN}" | grep -q '3306' && ok "3306 (MySQL, Anywhere) → флаг" || no "3306 не помечен опасным"
+# ---- чтение отчёта студента ------------------------------------------------
+val() {
+    grep -E "^[[:space:]]*$1[[:space:]]*=" "${REPORT}" 2>/dev/null \
+        | grep -v '^[[:space:]]*#' | tail -1 | cut -d= -f2- | tr -d ' \t\r'
+}
 
-# TEST 5: 9200 (Elasticsearch) со слэшем в порту — тоже помечен
-printf '%s' "${WARN}" | grep -q '9200' && ok "9200/tcp распознан со слэшем и помечен" || no "порт со слэшем (9200/tcp) не распознан"
+check() {  # check <ключ> <эталон> <описание>
+    local key="$1" want="$2" desc="$3" got
+    got="$(val "${key}")"
+    if [ -z "${got}" ]; then
+        no "${desc}: значение не заполнено (${key}=)"
+    elif [ "${got}" = "${want}" ]; then
+        ok "${desc}: ${got}"
+    else
+        no "${desc}: указано '${got}', в снимке '${want}'"
+    fi
+}
 
-# TEST 6: 6379 на петле — НЕ помечен
-printf '%s' "${WARN}" | grep -q '6379' && no "6379 (127.0.0.1) ошибочно помечен" || ok "порт на localhost не флагуется"
+check default_incoming      "${exp_default}"   "политика по умолчанию (входящие)"
+check allow_lines           "${exp_allow}"     "строк ALLOW"
+check deny_lines            "${exp_deny}"      "строк DENY"
+check open_to_world         "${exp_world}"     "порты, открытые из интернета"
+check open_to_lan           "${exp_lan}"       "порты только для внутренней сети"
+check exposed_sensitive     "${exp_sens}"      "чувствительные наружу"
+check blanket_allow_from    "${exp_blanket}"   "источник правила «разрешить всё»"
+check listening_but_unruled "${exp_unruled}"   "слушают наружу, но правил нет"
+check firewall_effective    "${exp_effective}" "защищает ли фаервол при такой политике"
 
-# TEST 7: 5432 с конкретной подсетью — НЕ помечен
-printf '%s' "${WARN}" | grep -q '5432' && no "5432 с источником 10.50.0.0/24 ошибочно помечен" || ok "порт, ограниченный подсетью, не флагуется"
+# ---- самопроверки: задание не должно быть вырожденным ----------------------
+uniq_ports=$(allow_rules | port_col | sort -un | wc -l | tr -d ' ')
+if [ "${exp_allow}" -gt "${uniq_ports}" ]; then
+    ok "самопроверка: ${exp_allow} строк ALLOW против ${uniq_ports} портов — дубли (v6) есть"
+else
+    no "самопроверка: в снимке нет дублей (v6), задание вырождено"
+fi
 
-# TEST 8: ЛОВУШКА — 33060 не должен считаться портом 3306
-printf '%s' "${WARN}" | grep -qE '(^|[^0-9])33060([^0-9]|$)' \
-    && no "33060 помечен как чувствительный — сравнение по вхождению" || ok "33060 не принят за 3306"
+if [ -n "${exp_blanket}" ]; then
+    ok "самопроверка: правило «разрешить всё с подсети» в снимке присутствует"
+else
+    no "самопроверка: в снимке нет правила без указания порта, задание вырождено"
+fi
 
-# TEST 9: DENY-строка не считается разрешением
-printf '%s' "${WARN}" | grep -q '27017' && no "27017 с действием DENY принят за разрешение" || ok "строки DENY не считаются разрешениями"
-
-# TEST 10: правило (v6) не удваивает счётчик по тому же порту
-n_3306="$(printf '%s\n' "${WARN}" | grep -c '3306')"
-[ "${n_3306}" -le 1 ] && ok "правило (v6) не удваивает проблему по 3306" || no "порт 3306 отмечен ${n_3306} раза — дубль из-за (v6)"
-
-# TEST 11: счётчик согласован с числом предупреждений
-n_warn="$(printf '%s\n' "${WARN}" | grep -c .)"
-printf '%s' "${OUT}" | grep -qE "Проблем: ${n_warn}([^0-9]|$)" \
-    && ok "счётчик проблем = ${n_warn} и согласован с выводом" || no "счётчик не совпадает с числом предупреждений (${n_warn})"
-
-# TEST 12: нет файла → ненулевой exit
-bash "${SCRIPT}" "${TEST_ROOT}/nope.txt" >/dev/null 2>&1; [ $? -ne 0 ] && ok "нет файла → ненулевой exit" || no "не обработан отсутствующий файл"
+if [ -n "${exp_unruled}" ]; then
+    ok "самопроверка: снимки ss и ufw расходятся (${exp_unruled}) — есть что найти"
+else
+    no "самопроверка: расхождения между ss и ufw нет, задание вырождено"
+fi
 
 echo "════════════════════════════════════════════════════════════"
 echo " Итог: ${PASS} passed, ${FAIL} failed"

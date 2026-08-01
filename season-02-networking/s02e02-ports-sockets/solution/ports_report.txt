@@ -1,0 +1,34 @@
+# ОТЧЁТ РАЗВЕДКИ — s02e02 (ЭТАЛОН, открывать после своей попытки)
+# Объект: season-02-networking/data/ss_listen_moscow1.txt
+#
+# Как получены значения (SNAP — файл-снимок, D — каталог data/):
+#   ports()          awk '/^LISTEN/{print $4}' "$SNAP" | sed 's/.*://' | grep -E '^[0-9]+$'
+#   listen_lines     grep -c '^LISTEN' "$SNAP"
+#   unique_ports     ports | sort -un | wc -l
+#   all_ports        ports | sort -un | paste -sd, -
+#   public_ports     awk '/^LISTEN/{print $4}' "$SNAP" | grep -E '^(0\.0\.0\.0|\[::\]):' \
+#                      | sed 's/.*://' | sort -un | paste -sd, -
+#   loopback_ports   то же с grep -E '^127\.0\.0\.'
+#   unexpected_ports для каждого порта: grep -qxF "$p" "$D/allowed_ports.txt" || в список
+#   exposed_sensitive пересечение public_ports со списком 3306 5432 6379 9200 27017 11211
+#   metrics_bind     awk '/^LISTEN/{print $4}' "$SNAP" | grep ':9100$'
+#   suspect_port     публичный порт, отсутствующий в known_services.txt
+
+listen_lines=14
+unique_ports=11
+all_ports=22,53,80,443,3306,4444,5432,6379,9100,9200,33060
+public_ports=22,80,443,3306,4444,9200,33060
+loopback_ports=53,5432,6379
+unexpected_ports=53,3306,4444,9100,9200,33060
+exposed_sensitive=3306,9200
+metrics_bind=10.50.1.100:9100
+suspect_port=4444
+
+# Читается это так:
+#   - 14 строк LISTEN дают всего 11 портов: 22, 80, 443 и 3306 продублированы для IPv6;
+#   - 9100 привязан к адресу интерфейса, а не к 0.0.0.0 — снаружи ЦОД он недоступен,
+#     и именно поэтому его нет ни в публичных, ни в локальных;
+#   - 53 на 127.0.0.53 — это systemd-resolved, он и должен быть только локальным;
+#   - 3306 и 9200 наружу — то, ради чего аудит и делался;
+#   - 33060 поднимается вместе с mysqld и уедет вместе с ним;
+#   - 4444 не поднимал никто из команды.

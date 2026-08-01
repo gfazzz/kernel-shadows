@@ -1,21 +1,30 @@
 #!/usr/bin/env bash
 #
-# s02e02 «Что слушает на сервере» — воспроизводимый unit-тест (без root, БЕЗ сети).
-# Принцип mock-first (§5.3): ss подменяется мок-версией с фиксированным выводом
-# LISTEN-сокетов. Так тест зелёный на любой машине.
+# s02e02 «Что слушает на сервере» — тест разведки (Type C).
 #
-# Выбор артефакта: SUBJECT=... | <серия>/check_ports.sh | artifacts/ | solution/.
+# Проверяет НЕ скрипт, а находки студента: отчёт ports_report.txt сверяется
+# с реальным содержимым объекта разведки — снимка `ss -tuln`, лежащего в data/.
+# Эталон вычисляется здесь же командами: в тесте нет ни одного захардкоженного
+# числа, поэтому правка учебных данных не разъезжается с проверкой (§4.2, §4.3).
+#
+# Без root, без сети. Объект разведки лежит в репозитории.
+#
+# Выбор отчёта: SUBJECT=... | artifacts/ports_report.txt | <серия>/ports_report.txt | solution/.
 
 set -uo pipefail
 
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+DATA="${SERIES_DIR}/../data"
+SNAP="${DATA}/ss_listen_moscow1.txt"
+ALLOW="${DATA}/allowed_ports.txt"
+KNOWN="${DATA}/known_services.txt"
 
-if   [ -n "${SUBJECT:-}" ];                       then SCRIPT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/artifacts/check_ports.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/check_ports.sh"
-elif [ -f "${SERIES_DIR}/check_ports.sh" ];       then SCRIPT="${SERIES_DIR}/check_ports.sh"
-else SCRIPT="${SERIES_DIR}/solution/check_ports.sh"
-     echo "ℹ️  Свой check_ports.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/check_ports.sh artifacts/check_ports.sh"; echo ""
+if   [ -n "${SUBJECT:-}" ];                            then REPORT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/ports_report.txt" ];then REPORT="${SERIES_DIR}/artifacts/ports_report.txt"
+elif [ -f "${SERIES_DIR}/ports_report.txt" ];          then REPORT="${SERIES_DIR}/ports_report.txt"
+else REPORT="${SERIES_DIR}/solution/ports_report.txt"
+     echo "ℹ️  Свой ports_report.txt не найден — проверяю ЭТАЛОН (solution/)."
+     echo "   Начни своё:  cp starter/ports_report.txt artifacts/ports_report.txt"; echo ""
 fi
 
 PASS=0; FAIL=0
@@ -23,91 +32,105 @@ ok(){ echo "  PASS: $1"; PASS=$((PASS+1)); }
 no(){ echo "  FAIL: $1"; FAIL=$((FAIL+1)); }
 
 echo "════════════════════════════════════════════════════════════"
-echo " s02e02 tests — subject: ${SCRIPT#"$SERIES_DIR"/}"
+echo " s02e02 tests — отчёт: ${REPORT#"$SERIES_DIR"/}"
 echo "════════════════════════════════════════════════════════════"
 
-TEST_ROOT="$(mktemp -d 2>/dev/null || mktemp -d -t s02e02)"
-trap 'rm -rf "${TEST_ROOT}"' EXIT
-
-# Мок ss: реалистичный вывод -tln.
-#   [::]:80        — IPv6-сокет: ломает разбор по ПЕРВОМУ двоеточию;
-#   22 дважды      — дубликат на разных адресах: проверяет sort -u;
-#   44 при 443 в allowlist — ловушка для сверки по подстроке (grep без -x/-F);
-#   9200 и 4444    — неожиданные: забытый Elasticsearch и чужой сервис.
-FAKEBIN="${TEST_ROOT}/bin"; mkdir -p "${FAKEBIN}"
-cat > "${FAKEBIN}/ss" <<'MOCK'
-#!/usr/bin/env bash
-cat <<'OUT'
-State  Recv-Q Send-Q Local Address:Port  Peer Address:Port Process
-LISTEN 0      128    0.0.0.0:22          0.0.0.0:*
-LISTEN 0      128    10.50.1.100:22      0.0.0.0:*
-LISTEN 0      128    [::]:80             [::]:*
-LISTEN 0      128    127.0.0.1:443       0.0.0.0:*
-LISTEN 0      128    0.0.0.0:44          0.0.0.0:*
-LISTEN 0      128    0.0.0.0:9200        0.0.0.0:*
-LISTEN 0      128    0.0.0.0:4444        0.0.0.0:*
-OUT
-MOCK
-chmod +x "${FAKEBIN}/ss"
-
-ALLOW="${TEST_ROOT}/allow.txt"
-printf '22\n80\n443\n' > "${ALLOW}"
-
-# Ожидания ВЫЧИСЛЯЮТСЯ по выводу мока, а не записаны константами.
-EXP_PORTS="$(PATH="${FAKEBIN}:${PATH}" ss -tln | awk 'NR>1{print $4}' | sed 's/.*://' | grep -E '^[0-9]+$' | sort -un)"
-EXP_FLAGGED=0
-for p in ${EXP_PORTS}; do grep -qxF "${p}" "${ALLOW}" || EXP_FLAGGED=$((EXP_FLAGGED + 1)); done
-
-# TEST 1-3
-[ -f "${SCRIPT}" ] && ok "check_ports.sh найден" || no "check_ports.sh не найден"
-bash -n "${SCRIPT}" 2>/dev/null && ok "синтаксис bash корректен" || no "ошибка синтаксиса"
-head -1 "${SCRIPT}" | grep -q '^#!.*sh' && ok "есть shebang" || no "нет shebang"
-
-OUT="$(PATH="${FAKEBIN}:${PATH}" bash "${SCRIPT}" "${ALLOW}" 2>/dev/null)" || true
-
-CHECK="$(printf '%s\n' "${OUT}" | sed -n '/--- Проверка/,$p')"
-FLAGGED_LINES="$(printf '%s\n' "${CHECK}" | grep -E 'НЕ в allowlist|неожид' | grep -vi 'Неожиданных портов')"
-
-# TEST 4: показаны слушающие сокеты
-printf '%s' "${OUT}" | grep -q ":22" && printf '%s' "${OUT}" | grep -q ":4444" \
-    && ok "показаны слушающие сокеты (вкл. 4444)" || no "не показаны слушающие сокеты"
-
-# TEST 5: разрешённый порт отмечен разрешённым
-printf '%s' "${CHECK}" | grep -qE '22.*разрешён' && ok "22 → разрешён (в allowlist)" || no "22 не отмечен разрешённым"
-
-# TEST 6: ЛОВУШКА IPv6 — порт 80 должен попасть В ПРОВЕРКУ, а не только в сырой список
-printf '%s' "${CHECK}" | grep -qE '(^|[^0-9])80([^0-9]|$)' \
-    && ok "порт 80 извлечён из IPv6-сокета [::]:80" \
-    || no "порт из [::]:80 не извлечён — разбор идёт по первому двоеточию"
-
-# TEST 7: неожиданные помечены — оба (9200 и 4444)
-if printf '%s' "${FLAGGED_LINES}" | grep -q '4444' && printf '%s' "${FLAGGED_LINES}" | grep -q '9200'; then
-    ok "неожиданные порты помечены (9200 и 4444)"
+# ---- предусловия -----------------------------------------------------------
+for f in "${SNAP}" "${ALLOW}" "${KNOWN}"; do
+    if [ ! -f "${f}" ]; then
+        echo "  FAIL: не найден объект разведки: ${f}" >&2
+        exit 1
+    fi
+done
+if [ -f "${REPORT}" ]; then
+    ok "отчёт ports_report.txt найден"
 else
-    no "не помечены все неожиданные порты"
+    no "ports_report.txt не найден"
+    echo " Итог: ${PASS} passed, ${FAIL} failed"
+    exit 1
 fi
 
-# TEST 8: счётчик совпадает с посчитанным по моку и allowlist
-printf '%s' "${OUT}" | grep -qE "Неожиданных портов: ${EXP_FLAGGED}([^0-9]|$)" \
-    && ok "счётчик неожиданных = ${EXP_FLAGGED}" || no "неверный счётчик (ожидалось ${EXP_FLAGGED})"
+# ---- эталон: вычисляется из снимка -----------------------------------------
+listen_addrs() { awk '/^LISTEN/{print $4}' "${SNAP}"; }
+ports_of()     { sed 's/.*://' | grep -E '^[0-9]+$'; }
 
-# TEST 9: счётчик согласован с числом помеченных строк
-n_lines="$(printf '%s\n' "${FLAGGED_LINES}" | grep -c .)"
-[ "${n_lines}" -eq "${EXP_FLAGGED}" ] && ok "счётчик согласован со строками отчёта" \
-    || no "помеченных строк ${n_lines}, а в счётчике ${EXP_FLAGGED}"
+exp_lines=$(grep -c '^LISTEN' "${SNAP}" | tr -d ' ')
+exp_unique=$(listen_addrs | ports_of | sort -un | wc -l | tr -d ' ')
+exp_all=$(listen_addrs | ports_of | sort -un | paste -sd, - | tr -d ' ')
+exp_public=$(listen_addrs | grep -E '^(0\.0\.0\.0|\[::\]):' | ports_of | sort -un | paste -sd, - | tr -d ' ')
+exp_loop=$(listen_addrs | grep -E '^127\.0\.0\.' | ports_of | sort -un | paste -sd, - | tr -d ' ')
+exp_metrics=$(listen_addrs | grep ':9100$' | head -1 | tr -d ' ')
 
-# TEST 10: разрешённые порты не флагуются
-printf '%s' "${FLAGGED_LINES}" | grep -qE '(^|[^0-9])(22|80|443)([^0-9]|$)' \
-    && no "разрешённый порт ошибочно помечен неожиданным" || ok "разрешённые порты не флагуются"
+allow_list=$(grep -vE '^[[:space:]]*(#|$)' "${ALLOW}" | tr -d ' ')
+known_list=$(awk '!/^[[:space:]]*#/ && NF {print $1}' "${KNOWN}")
 
-# TEST 11: ЛОВУШКА подстроки — порт 44 не в allowlist, но «44» есть внутри строки «443»
-printf '%s' "${FLAGGED_LINES}" | grep -qE '(^|[^0-9])44([^0-9]|$)' \
-    && ok "сверка со списком идёт по целой строке" \
-    || no "порт 44 принят за разрешённый — совпадение с подстрокой «443» (нужен grep -qxF)"
+exp_unexp=""
+for p in $(listen_addrs | ports_of | sort -un); do
+    printf '%s\n' "${allow_list}" | grep -qxF "${p}" || exp_unexp="${exp_unexp},${p}"
+done
+exp_unexp="${exp_unexp#,}"
 
-# TEST 12: дубликат 22 на двух адресах не удвоился в проверке
-dups="$(printf '%s\n' "${CHECK}" | grep -cE '(^|[^0-9])22 — разрешён')"
-[ "${dups}" -le 1 ] && ok "дубликаты портов не удваиваются (sort -u)" || no "порт 22 проверен дважды — нет sort -u"
+sensitive="3306 5432 6379 9200 27017 11211"
+exp_sens=""
+for p in $(listen_addrs | grep -E '^(0\.0\.0\.0|\[::\]):' | ports_of | sort -un); do
+    for s in ${sensitive}; do [ "${p}" = "${s}" ] && exp_sens="${exp_sens},${p}"; done
+done
+exp_sens="${exp_sens#,}"
+
+exp_suspect=""
+for p in $(listen_addrs | grep -E '^(0\.0\.0\.0|\[::\]):' | ports_of | sort -un); do
+    printf '%s\n' "${known_list}" | grep -qxF "${p}" || exp_suspect="${exp_suspect},${p}"
+done
+exp_suspect="${exp_suspect#,}"
+
+# ---- чтение отчёта студента ------------------------------------------------
+val() {
+    grep -E "^[[:space:]]*$1[[:space:]]*=" "${REPORT}" 2>/dev/null \
+        | grep -v '^[[:space:]]*#' | tail -1 | cut -d= -f2- | tr -d ' \t\r'
+}
+
+check() {  # check <ключ> <эталон> <описание>
+    local key="$1" want="$2" desc="$3" got
+    got="$(val "${key}")"
+    if [ -z "${got}" ]; then
+        no "${desc}: значение не заполнено (${key}=)"
+    elif [ "${got}" = "${want}" ]; then
+        ok "${desc}: ${got}"
+    else
+        no "${desc}: указано '${got}', в снимке '${want}'"
+    fi
+}
+
+check listen_lines      "${exp_lines}"    "строк LISTEN в снимке"
+check unique_ports      "${exp_unique}"   "уникальных портов"
+check all_ports         "${exp_all}"      "все порты"
+check public_ports      "${exp_public}"   "порты, открытые наружу"
+check loopback_ports    "${exp_loop}"     "порты только на петле"
+check unexpected_ports  "${exp_unexp}"    "портов нет в allowlist"
+check exposed_sensitive "${exp_sens}"     "чувствительные наружу"
+check metrics_bind      "${exp_metrics}"  "привязка экспортёра метрик"
+check suspect_port      "${exp_suspect}"  "порт, который никто не поднимал"
+
+# ---- самопроверки: задание не должно быть вырожденным ----------------------
+if [ "${exp_lines}" -gt "${exp_unique}" ]; then
+    ok "самопроверка: строк ${exp_lines} против ${exp_unique} портов — дубли IPv6 присутствуют"
+else
+    no "самопроверка: в снимке нет дублей IPv4/IPv6, задание вырождено"
+fi
+
+if printf '%s' "${exp_public}" | grep -q . && printf '%s' "${exp_loop}" | grep -q .; then
+    ok "самопроверка: в снимке есть и публичные, и локальные привязки"
+else
+    no "самопроверка: снимок не различает привязки, задание вырождено"
+fi
+
+# метрики привязаны к адресу интерфейса — значит, не попадают ни в один из двух списков
+mport="${exp_metrics##*:}"
+if ! printf '%s' "${exp_public},${exp_loop}" | tr ',' '\n' | grep -qx "${mport}"; then
+    ok "самопроверка: порт ${mport} привязан к адресу интерфейса, а не к 0.0.0.0 или петле"
+else
+    no "самопроверка: привязка к конкретному адресу в снимке отсутствует"
+fi
 
 echo "════════════════════════════════════════════════════════════"
 echo " Итог: ${PASS} passed, ${FAIL} failed"

@@ -1,0 +1,36 @@
+# ОТЧЁТ РАЗВЕДКИ — s02e06 (ЭТАЛОН, открывать после своей попытки)
+# Объект: season-02-networking/data/ufw_status_moscow1.txt
+#
+# Как получены значения (F — снимок ufw, S — снимок ss из s02e02):
+#   default_incoming   grep -i '^Default:' "$F" | sed 's/.*Default: *//' | tr ',' '\n' \
+#                        | grep -i incoming | awk '{print $1}'
+#   allow_lines        grep -cE '[[:space:]]ALLOW' "$F"
+#   deny_lines         grep -cE '[[:space:]]DENY'  "$F"
+#   rules()            grep -E '[[:space:]]ALLOW' "$F"
+#   open_to_world      rules | grep Anywhere | awk '{print $1}' | sed 's|/.*||' \
+#                        | grep -E '^[0-9]+$' | sort -un | paste -sd, -
+#   open_to_lan        то же с grep '10\.50\.0\.0/24'
+#   exposed_sensitive  пересечение open_to_world со списком 3306 5432 6379 9200 27017 11211
+#   blanket_allow_from rules | awk '$1=="Anywhere"{print $NF}'
+#   listening_but_unruled  публичные порты из снимка ss, которых нет ни в одном правиле
+
+default_incoming=allow
+allow_lines=13
+deny_lines=1
+open_to_world=22,80,443,3306,9200
+open_to_lan=5432,9100
+exposed_sensitive=3306,9200
+blanket_allow_from=185.14.29.0/24
+listening_but_unruled=4444,33060
+firewall_effective=no
+
+# Читается это так:
+#   - политика по умолчанию для входящих — allow: всё, что не запрещено явно,
+#     разрешено, и правила ALLOW ничего не добавляют к защите. Отсюда firewall_effective=no;
+#   - тринадцать строк ALLOW дают восемь портов: 22, 80, 443 и 3306 продублированы для (v6);
+#   - 5432 и 9100 ограничены внутренней подсетью — так и должно быть;
+#   - 3306 и 9200 открыты в интернет: те же две базы, что нашлись в s02e02;
+#   - правило `Anywhere ALLOW IN 185.14.29.0/24` разрешает с этой подсети ВСЁ,
+#     включая порты, о которых никто не думал. Это и есть «на время отладки» из июля;
+#   - 4444 и 33060 слушают наружу, но в правилах не упомянуты вовсе — при политике
+#     allow они доступны, и ни одна строка отчёта об этом бы не сказала.

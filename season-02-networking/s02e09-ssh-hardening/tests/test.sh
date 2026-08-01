@@ -29,22 +29,45 @@ echo "════════════════════════�
 TEST_ROOT="$(mktemp -d 2>/dev/null || mktemp -d -t s02e09)"
 trap 'rm -rf "${TEST_ROOT}"' EXIT
 
-# фикстура 1: НЕзакалённый конфиг (root разрешён, пароли включены, empty не задано)
+# Фикстура 1: НЕзакалённый конфиг.
+#   закомментированная «правильная» строка ПОСЛЕ активной небезопасной —
+#   ловушка для разбора без якоря и без фильтра комментариев;
+#   PermitEmptyPasswords не задан вовсе (действует умолчание).
 WEAK="${TEST_ROOT}/sshd_weak.conf"
 cat > "${WEAK}" <<'EOF'
 # sshd_config (небезопасный пример)
 Port 22
-#PermitRootLogin no
 PermitRootLogin yes
+#PermitRootLogin no
 PasswordAuthentication yes
 X11Forwarding no
 EOF
 
-# фикстура 2: закалённый конфиг
+# Фикстура 2: полностью закалённый конфиг — аудит обязан молчать.
 HARD="${TEST_ROOT}/sshd_hard.conf"
 cat > "${HARD}" <<'EOF'
 Port 22
 PermitRootLogin no
+PasswordAuthentication no
+PermitEmptyPasswords no
+X11Forwarding no
+EOF
+
+# Фикстура 3: то же закалённое, но с отступами и другим регистром директив.
+CASE="${TEST_ROOT}/sshd_case.conf"
+cat > "${CASE}" <<'EOF'
+Port 22
+   permitrootlogin no
+	PasswordAuthentication NO
+PERMITEMPTYPASSWORDS no
+   x11forwarding no
+EOF
+
+# Фикстура 4: PermitRootLogin prohibit-password — не «yes», но и не «no».
+PROHIB="${TEST_ROOT}/sshd_prohibit.conf"
+cat > "${PROHIB}" <<'EOF'
+Port 22
+PermitRootLogin prohibit-password
 PasswordAuthentication no
 PermitEmptyPasswords no
 X11Forwarding no
@@ -57,19 +80,56 @@ head -1 "${SCRIPT}" | grep -q '^#!.*sh' && ok "есть shebang" || no "нет s
 
 WOUT="$(bash "${SCRIPT}" "${WEAK}" 2>&1)" || true
 HOUT="$(bash "${SCRIPT}" "${HARD}" 2>&1)" || true
+COUT="$(bash "${SCRIPT}" "${CASE}" 2>&1)" || true
+POUT="$(bash "${SCRIPT}" "${PROHIB}" 2>&1)" || true
 
-# TEST 4: PermitRootLogin yes — помечен проблемой (и активное значение, а не закомментированное)
-printf '%s' "${WOUT}" | grep -qE 'PermitRootLogin.*yes' && ok "PermitRootLogin yes → флаг" || no "PermitRootLogin не помечен"
+WWARN="$(printf '%s\n' "${WOUT}" | grep -E '⚠')"
+
+# TEST 4: PermitRootLogin yes — помечен проблемой
+printf '%s' "${WWARN}" | grep -qi 'PermitRootLogin' && ok "PermitRootLogin yes → флаг" || no "PermitRootLogin не помечен"
+
 # TEST 5: PasswordAuthentication yes — помечен
-printf '%s' "${WOUT}" | grep -qiE 'PasswordAuthentication.*(yes|парол)' && ok "PasswordAuthentication yes → флаг" || no "PasswordAuthentication не помечен"
-# TEST 6: PermitEmptyPasswords не задано — помечен (<не задано>)
-printf '%s' "${WOUT}" | grep -qE 'PermitEmptyPasswords' && ok "PermitEmptyPasswords (не задано) → флаг" || no "PermitEmptyPasswords не проверен"
-# TEST 7: слабый конфиг → проблем >= 3
-printf '%s' "${WOUT}" | grep -qE 'Проблем: [3-9]' && ok "слабый конфиг → проблем >= 3" || no "недооценил проблемы слабого конфига"
-# TEST 8: закалённый конфиг → 0 проблем
-printf '%s' "${HOUT}" | grep -qE 'Проблем: 0' && ok "закалённый конфиг → 0 проблем" || no "ложные срабатывания на закалённом конфиге"
-# TEST 9: закомментированный PermitRootLogin no НЕ засчитан как ок в слабом конфиге
-printf '%s' "${WOUT}" | grep -qE 'PermitRootLogin = no \(ок\)' && no "закомментированная строка засчитана как активная" || ok "комментарии игнорируются (берётся активное значение)"
+printf '%s' "${WWARN}" | grep -qi 'PasswordAuthentication' && ok "PasswordAuthentication yes → флаг" || no "PasswordAuthentication не помечен"
+
+# TEST 6: не заданная директива — тоже проблема
+printf '%s' "${WWARN}" | grep -qi 'PermitEmptyPasswords' && ok "PermitEmptyPasswords (не задано) → флаг" || no "не заданная директива не помечена"
+
+# TEST 7: корректное значение не флагуется даже в слабом конфиге
+printf '%s' "${WWARN}" | grep -qi 'X11Forwarding' && no "корректный X11Forwarding no помечен проблемой" || ok "верные значения не флагуются"
+
+# TEST 8: ЛОВУШКА — закомментированная строка не считается активным значением
+printf '%s' "${WOUT}" | grep -qiE 'PermitRootLogin = no \(ок\)' \
+    && no "закомментированная строка засчитана как активная" || ok "комментарии игнорируются"
+
+# TEST 9: счётчик слабого конфига согласован с числом предупреждений
+n_w="$(printf '%s\n' "${WWARN}" | grep -c .)"
+printf '%s' "${WOUT}" | grep -qE "Проблем: ${n_w}([^0-9]|$)" \
+    && ok "слабый конфиг: проблем ${n_w}, счётчик согласован" || no "счётчик не совпадает с числом предупреждений (${n_w})"
+
+# TEST 10: слабый конфиг даёт не меньше трёх проблем
+[ "${n_w}" -ge 3 ] && ok "слабый конфиг → проблем >= 3" || no "недооценены проблемы слабого конфига (${n_w})"
+
+# TEST 11: закалённый конфиг → 0 проблем
+printf '%s' "${HOUT}" | grep -qE 'Проблем: 0([^0-9]|$)' && ok "закалённый конфиг → 0 проблем" || no "ложные срабатывания на закалённом конфиге"
+
+# TEST 12: ЛОВУШКА — отступы и другой регистр директив
+printf '%s' "${COUT}" | grep -qE 'Проблем: 0([^0-9]|$)' \
+    && ok "отступы и регистр директив не мешают разбору" \
+    || no "директивы с отступом или в другом регистре не распознаны"
+
+# TEST 13: ЛОВУШКА — prohibit-password не равен no
+printf '%s' "${POUT}" | grep -E '⚠' | grep -qi 'PermitRootLogin' \
+    && ok "prohibit-password не принят за no" \
+    || no "PermitRootLogin prohibit-password засчитан как безопасный (проверка «не yes»?)"
+
+# TEST 14: ALERT при проблемах идёт в stderr; нет файла → ненулевой код
+ERR="$(bash "${SCRIPT}" "${WEAK}" 2>&1 >/dev/null)"
+bash "${SCRIPT}" "${TEST_ROOT}/nope.conf" >/dev/null 2>&1; rc=$?
+if printf '%s' "${ERR}" | grep -q "ALERT" && [ "${rc}" -ne 0 ]; then
+    ok "ALERT в stderr, отсутствующий файл → ненулевой exit"
+else
+    no "нет ALERT в stderr либо не обработан отсутствующий файл"
+fi
 
 echo "════════════════════════════════════════════════════════════"
 echo " Итог: ${PASS} passed, ${FAIL} failed"

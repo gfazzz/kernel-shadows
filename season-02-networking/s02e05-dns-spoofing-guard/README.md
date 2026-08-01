@@ -109,7 +109,7 @@ ALERT: обнаружена возможная подмена DNS (1)
 ```bash
 cp starter/dns_guard.sh artifacts/dns_guard.sh
 # заменить TODO (dig +short | head -1 → сравнение → счётчики → ALERT)
-bash artifacts/dns_guard.sh ../data/dns_zones.txt
+bash artifacts/dns_guard.sh ../data/dns_baseline.txt
 bash tests/test.sh
 ```
 

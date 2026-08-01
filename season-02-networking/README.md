@@ -105,17 +105,17 @@ KERNEL SHADOWS — Season 2
 
 | Серия | Из ep | Концепт | Задача (артефакт) | Type | Тест |
 |-------|-------|---------|-------------------|------|------|
-| [s02e01](s02e01-tcpip-addressing/) | 05 | IPv4-адресация + модель TCP/IP | `ipinfo.sh` | A | 11/11 |
-| [s02e02](s02e02-ports-sockets/) | 05 | порты/сокеты (`ss`) | `check_ports.sh` | A | 8/8 |
-| [s02e03](s02e03-net-diagnostics/) | 05 | диагностика `ping`/`traceroute` (капстоун) | `net_diag.sh` | A | 8/8 |
-| [s02e04](s02e04-dns-lookup/) | 06 | DNS-резолвинг (`dig`), типы записей | `dns_lookup.sh` | B | 7/7 |
-| [s02e05](s02e05-dns-spoofing-guard/) | 06 | детект DNS-спуфинга (капстоун) | `dns_guard.sh` | B | 8/8 |
-| [s02e06](s02e06-firewall-ufw/) | 07 | firewall `ufw`, аудит правил | `fw_audit.sh` | B | 8/8 |
-| [s02e07](s02e07-block-botnet/) | 07 | блокировка ботнета (капстоун) | `block_botnet.sh` | B | 9/9 |
-| [s02e08](s02e08-ssh-keys/) | 08 | SSH-ключи (ed25519, права) | `ssh_key_check.sh` | A | 9/9 |
-| [s02e09](s02e09-ssh-hardening/) | 08 | hardening sshd + туннели (финал) | `sshd_harden_check.sh` | B | 9/9 |
+| [s02e01](s02e01-tcpip-addressing/) | 05 | IPv4-адресация + модель TCP/IP | `ipinfo.sh` | A | 16/16 |
+| [s02e02](s02e02-ports-sockets/) | 05 | порты/сокеты (`ss`) | `check_ports.sh` | A | 12/12 |
+| [s02e03](s02e03-net-diagnostics/) | 05 | диагностика `ping`/`traceroute` (капстоун) | `net_diag.sh` | A | 12/12 |
+| [s02e04](s02e04-dns-lookup/) | 06 | DNS-резолвинг (`dig`), типы записей | `dns_lookup.sh` | B | 11/11 |
+| [s02e05](s02e05-dns-spoofing-guard/) | 06 | детект DNS-спуфинга (капстоун) | `dns_guard.sh` | B | 12/12 |
+| [s02e06](s02e06-firewall-ufw/) | 07 | firewall `ufw`, аудит правил | `fw_audit.sh` | B | 12/12 |
+| [s02e07](s02e07-block-botnet/) | 07 | блокировка ботнета (капстоун) | `block_botnet.sh` | B | 15/15 |
+| [s02e08](s02e08-ssh-keys/) | 08 | SSH-ключи (ed25519, права) | `ssh_key_check.sh` | A | 13/13 |
+| [s02e09](s02e09-ssh-hardening/) | 08 | hardening sshd + туннели (финал) | `sshd_harden_check.sh` | B | 14/14 |
 
-**Итого Season 2: 9 серий, 77 проверок — все зелёные без root/сети** (сетевые команды
+**Итого Season 2: 9 серий, 117 проверок — все зелёные без root/сети** (сетевые команды
 `ping`/`ss`/`dig`/`ufw`/`dpkg` мокаются или работают на фикстурах; §5.3). Реальные данные
 для практики — в [`data/`](data/).
 
@@ -123,6 +123,12 @@ KERNEL SHADOWS — Season 2
 см. [`PROJECTS.md`](../PROJECTS.md)). Закрытые forward-deps: **T2** (`systemd-resolved` —
 только read-only `resolvectl`, `systemctl` → Season 3) и **T4** (`fail2ban` — превью, полноценно
 Season 5).
+
+**Литературизация по DoD §15 завершена для всего Season 2** (README 180–280 строк прозой,
+`theory.md` — воспоминание от первого лица, `mission.md` — брифинг с диагностикой).
+Все тесты усилены дискриминаторами: ожидания вычисляются по фикстурам, а не хранятся
+константами, и каждый ловит конкретную реальную ошибку.
+
 **В очереди:** Season 3 «System Administration» (Episodes 09–12) → серии `s03e01+`.
 
 ---

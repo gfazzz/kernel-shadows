@@ -108,14 +108,14 @@ KERNEL SHADOWS — Season 2
 | [s02e01](s02e01-tcpip-addressing/) | 05 | IPv4-адресация + модель TCP/IP | `ipinfo.sh` | A | 16/16 |
 | [s02e02](s02e02-ports-sockets/) | 05 | порты/сокеты (`ss`), адрес привязки | `ports_report.txt` | **C** | 13/13 |
 | [s02e03](s02e03-net-diagnostics/) | 05 | диагностика `ping`/`traceroute` (капстоун) | `net_diag.sh` | A | 12/12 |
-| [s02e04](s02e04-dns-lookup/) | 06 | DNS-резолвинг (`dig`), типы записей | `dns_lookup.sh` | B | 11/11 |
+| [s02e04](s02e04-dns-lookup/) | 06 | DNS-резолвинг (`dig`), типы записей | `dns_report.txt` | **C** | 15/15 |
 | [s02e05](s02e05-dns-spoofing-guard/) | 06 | детект DNS-спуфинга (капстоун) | `dns_guard.sh` | B | 12/12 |
 | [s02e06](s02e06-firewall-ufw/) | 07 | firewall `ufw`, разбор правил | `fw_report.txt` | **C** | 13/13 |
 | [s02e07](s02e07-block-botnet/) | 07 | блокировка ботнета (капстоун) | `block_botnet.sh` | B | 15/15 |
 | [s02e08](s02e08-ssh-keys/) | 08 | SSH-ключи (ed25519, права) | `ssh_key_check.sh` | A | 13/13 |
-| [s02e09](s02e09-ssh-hardening/) | 08 | hardening sshd + туннели (финал) | `sshd_harden_check.sh` | B | 14/14 |
+| [s02e09](s02e09-ssh-hardening/) | 08 | закалка `sshd_config` + туннели (финал) | `sshd_config` | **B** | 14/14 |
 
-**Итого Season 2: 9 серий, 119 проверок — все зелёные без root/сети** (сетевые команды
+**Итого Season 2: 9 серий, 123 проверки — все зелёные без root/сети** (сетевые команды
 `ping`/`ss`/`dig`/`ufw`/`dpkg` мокаются или работают на фикстурах; §5.3). Реальные данные
 для практики — в [`data/`](data/).
 

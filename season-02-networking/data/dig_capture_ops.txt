@@ -1,0 +1,68 @@
+# KERNEL SHADOWS — записанные ответы DNS
+# Снято Эриком Йоханссоном в Bahnhof Pionen, 10 октября, 11:00
+# Команда: dig <домен> <тип>   (полный вывод, вырезаны только строки ;; Query time)
+#
+# Файл нужен, чтобы разбирать DNS без живой сети: ответы уже получены,
+# осталось их прочитать.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+;; ===== dig ops.internal A =====
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 41022
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0
+;; ANSWER SECTION:
+ops.internal.		300	IN	A	10.50.1.100
+ops.internal.		300	IN	A	10.50.1.101
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+
+;; ===== dig ops.internal MX =====
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 15873
+;; flags: qr rd ra; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 0
+;; ANSWER SECTION:
+ops.internal.		3600	IN	MX	20 mail-backup.ops.internal.
+ops.internal.		3600	IN	MX	10 mail-relay.ops.internal.
+ops.internal.		3600	IN	MX	5 mail-primary.ops.internal.
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+
+;; ===== dig ops.internal NS =====
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 60117
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0
+;; ANSWER SECTION:
+ops.internal.		86400	IN	NS	ns1.ops.internal.
+ops.internal.		86400	IN	NS	ns2.ops.internal.
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+
+;; ===== dig ops.internal TXT =====
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 33940
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+;; ANSWER SECTION:
+ops.internal.		3600	IN	TXT	"v=spf1 ip4:10.50.1.0/24 -all"
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+
+;; ===== dig www.ops.internal A =====
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 22456
+;; flags: qr rd ra; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 0
+;; ANSWER SECTION:
+www.ops.internal.	300	IN	CNAME	ops.internal.
+ops.internal.		300	IN	A	10.50.1.100
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+
+;; ===== dig shadow-05.ops.internal A =====
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 51284
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 0
+;; ANSWER SECTION:
+shadow-05.ops.internal.	60	IN	A	185.220.101.52
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+
+;; ===== dig backup.ops.internal A =====
+;; ->>HEADER<<- opcode: QUERY, status: NXDOMAIN, id: 9004
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 0
+;; AUTHORITY SECTION:
+ops.internal.		600	IN	SOA	ns1.ops.internal. admin.ops.internal. 2025100901 7200 3600 604800 600
+;; SERVER: 127.0.0.53#53(127.0.0.53)
+
+;; ===== dig ops.internal AAAA =====
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 7719
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 1, ADDITIONAL: 0
+;; AUTHORITY SECTION:
+ops.internal.		600	IN	SOA	ns1.ops.internal. admin.ops.internal. 2025100901 7200 3600 604800 600
+;; SERVER: 127.0.0.53#53(127.0.0.53)

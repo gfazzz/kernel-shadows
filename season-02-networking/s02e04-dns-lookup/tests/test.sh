@@ -1,20 +1,26 @@
 #!/usr/bin/env bash
 #
-# s02e04 «Телефонная книга интернета» — воспроизводимый unit-тест (без root, БЕЗ сети).
-# Принцип mock-first (§5.3): dig подменяется мок-версией с фиксированными ответами.
+# s02e04 «Кто отвечает на вопрос где» — тест разведки (Type C).
 #
-# Выбор артефакта: SUBJECT=... | <серия>/dns_lookup.sh | artifacts/ | solution/.
+# Проверяет НЕ скрипт, а находки студента: отчёт dns_report.txt сверяется
+# с записанными ответами dig из data/dig_capture_ops.txt. Эталон вычисляется
+# здесь же командами — констант в тесте нет (§4.2, §4.3).
+#
+# Без root, без сети: ответы DNS уже получены и лежат в репозитории.
+#
+# Выбор отчёта: SUBJECT=... | artifacts/dns_report.txt | <серия>/dns_report.txt | solution/.
 
 set -uo pipefail
 
 SERIES_DIR="$(cd "$(dirname "$0")/.." && pwd)"
+CAP="${SERIES_DIR}/../data/dig_capture_ops.txt"
 
-if   [ -n "${SUBJECT:-}" ];                       then SCRIPT="${SUBJECT}"
-elif [ -f "${SERIES_DIR}/artifacts/dns_lookup.sh" ]; then SCRIPT="${SERIES_DIR}/artifacts/dns_lookup.sh"
-elif [ -f "${SERIES_DIR}/dns_lookup.sh" ];        then SCRIPT="${SERIES_DIR}/dns_lookup.sh"
-else SCRIPT="${SERIES_DIR}/solution/dns_lookup.sh"
-     echo "ℹ️  Свой dns_lookup.sh не найден — проверяю ЭТАЛОН (solution/)."
-     echo "   Создай своё:  cp starter/dns_lookup.sh artifacts/dns_lookup.sh"; echo ""
+if   [ -n "${SUBJECT:-}" ];                          then REPORT="${SUBJECT}"
+elif [ -f "${SERIES_DIR}/artifacts/dns_report.txt" ];then REPORT="${SERIES_DIR}/artifacts/dns_report.txt"
+elif [ -f "${SERIES_DIR}/dns_report.txt" ];          then REPORT="${SERIES_DIR}/dns_report.txt"
+else REPORT="${SERIES_DIR}/solution/dns_report.txt"
+     echo "ℹ️  Свой dns_report.txt не найден — проверяю ЭТАЛОН (solution/)."
+     echo "   Начни своё:  cp starter/dns_report.txt artifacts/dns_report.txt"; echo ""
 fi
 
 PASS=0; FAIL=0
@@ -22,80 +28,98 @@ ok(){ echo "  PASS: $1"; PASS=$((PASS+1)); }
 no(){ echo "  FAIL: $1"; FAIL=$((FAIL+1)); }
 
 echo "════════════════════════════════════════════════════════════"
-echo " s02e04 tests — subject: ${SCRIPT#"$SERIES_DIR"/}"
+echo " s02e04 tests — отчёт: ${REPORT#"$SERIES_DIR"/}"
 echo "════════════════════════════════════════════════════════════"
 
-TEST_ROOT="$(mktemp -d 2>/dev/null || mktemp -d -t s02e04)"
-trap 'rm -rf "${TEST_ROOT}"' EXIT
-
-# мок dig: разбирает домен и тип из аргументов (+short игнор), фиксированные ответы.
-FAKEBIN="${TEST_ROOT}/bin"; mkdir -p "${FAKEBIN}"
-cat > "${FAKEBIN}/dig" <<'MOCK'
-#!/usr/bin/env bash
-domain=""; type="A"
-for a in "$@"; do
-  case "$a" in
-    +*) ;;
-    A|AAAA|MX|NS|CNAME|TXT|PTR) type="$a" ;;
-    *) domain="$a" ;;
-  esac
-done
-case "${domain}:${type}" in
-  google.com:A)  echo "142.250.185.46" ;;
-  google.com:MX) echo "5 gmail-smtp-in.l.google.com." ; echo "10 alt1.gmail-smtp-in.l.google.com." ;;
-  google.com:TXT) echo '"v=spf1 include:_spf.google.com ~all"' ;;
-  google.com:*)  ;;                   # существующий домен, но записи такого типа нет
-  shadow.onion:A) echo "185.192.45.118" ;;
-  nxdomain.test:*) ;;                 # пусто — домена нет
-  *:A) echo "10.0.0.1" ;;
-esac
-MOCK
-chmod +x "${FAKEBIN}/dig"
-
-run(){ PATH="${FAKEBIN}:${PATH}" bash "${SCRIPT}" "$@" 2>/dev/null; }
-
-# TEST 1-3
-[ -f "${SCRIPT}" ] && ok "dns_lookup.sh найден" || no "dns_lookup.sh не найден"
-bash -n "${SCRIPT}" 2>/dev/null && ok "синтаксис bash корректен" || no "ошибка синтаксиса"
-head -1 "${SCRIPT}" | grep -q '^#!.*sh' && ok "есть shebang" || no "нет shebang"
-
-# Эталонные ответы берутся из САМОГО мока, а не записаны константами.
-EXP_A="$(PATH="${FAKEBIN}:${PATH}" dig google.com A +short)"
-EXP_MX_N="$(PATH="${FAKEBIN}:${PATH}" dig google.com MX +short | grep -c .)"
-
-# TEST 4: A-запись по умолчанию (без второго аргумента)
-printf '%s' "$(run google.com)" | grep -qF "${EXP_A}" && ok "google.com → A ${EXP_A} (тип по умолчанию)" || no "A-запись не разобрана"
-
-# TEST 5: явный тип MX передан в dig
-printf '%s' "$(run google.com MX)" | grep -q "gmail-smtp-in" && ok "google.com MX → mail exchange" || no "MX-запись не разобрана"
-
-# TEST 6: выведены ВСЕ значения многозначного ответа, а не только первое
-mx_out="$(run google.com MX)"
-if printf '%s' "${mx_out}" | grep -q "5 gmail-smtp-in" && printf '%s' "${mx_out}" | grep -q "10 alt1"; then
-    ok "выведены все ${EXP_MX_N} записи MX"
+# ---- предусловия -----------------------------------------------------------
+if [ ! -f "${CAP}" ]; then
+    echo "  FAIL: объект разведки не найден: ${CAP}" >&2
+    exit 1
+fi
+if [ -f "${REPORT}" ]; then
+    ok "отчёт dns_report.txt найден"
 else
-    no "выведена только часть ответа (взят head -1?)"
+    no "dns_report.txt не найден"
+    echo " Итог: ${PASS} passed, ${FAIL} failed"
+    exit 1
 fi
 
-# TEST 7: счётчик совпадает с числом записей из мока
-printf '%s' "${mx_out}" | grep -qE "Записей: ${EXP_MX_N}([^0-9]|$)" && ok "счётчик записей = ${EXP_MX_N}" || no "неверный счётчик (ожидалось ${EXP_MX_N})"
+# ---- эталон: вычисляется из записанных ответов -----------------------------
+sec() {  # sec "<домен> <тип>" — вырезать одну секцию снимка
+    awk -v h=";; ===== dig $1 =====" '$0==h{f=1;next} /^;; =====/{f=0} f' "${CAP}"
+}
 
-# TEST 8: счётчик согласован с числом напечатанных значений
-printed="$(printf '%s\n' "${mx_out}" | grep -cE '^[0-9]+ ')"
-[ "${printed}" -eq "${EXP_MX_N}" ] && ok "счётчик согласован с выводом" || no "напечатано ${printed} записей, а счётчик другой"
+exp_a=$(sec "ops.internal A" | awk '$4=="A"{print $5}' | sort -t. -k4 -n | paste -sd, - | tr -d ' ')
+exp_mx_count=$(sec "ops.internal MX" | awk '$4=="MX"' | wc -l | tr -d ' ')
+exp_mx_primary=$(sec "ops.internal MX" | awk '$4=="MX"{print $5, $6}' | sort -n | head -1 | awk '{print $2}')
+exp_ns_count=$(sec "ops.internal NS" | awk '$4=="NS"' | wc -l | tr -d ' ')
+exp_spf=$(sec "ops.internal TXT" | awk '$4=="TXT"' | tr -d '"' | awk '{print $NF}')
+exp_cname=$(sec "www.ops.internal A" | awk '$4=="CNAME"{print $5}')
+exp_s5_ip=$(sec "shadow-05.ops.internal A" | awk '$4=="A"{print $5}')
+exp_s5_ttl=$(sec "shadow-05.ops.internal A" | awk '$4=="A"{print $2}')
 
-# TEST 9: другой тип (TXT) тоже проходит
-printf '%s' "$(run google.com TXT)" | grep -q "v=spf1" && ok "google.com TXT → SPF-запись" || no "TXT-запись не разобрана"
+# имя секции, где сервер ответил NXDOMAIN
+exp_nx=$(awk '/^;; ===== dig /{name=$4} /status: NXDOMAIN/{print name; exit}' "${CAP}")
+# тип запроса, где NOERROR при нулевом ANSWER
+exp_empty=$(awk '/^;; ===== dig /{name=$4; type=$5; st=""}
+                 /status: NOERROR/{st="ok"}
+                 st=="ok" && /ANSWER: 0/{print type; exit}' "${CAP}")
 
-# TEST 10: несуществующий домен → ненулевой код
-run nxdomain.test >/dev/null 2>&1; [ $? -ne 0 ] && ok "nxdomain.test → ненулевой exit" || no "не обработан отсутствующий домен"
+# ---- чтение отчёта студента ------------------------------------------------
+val() {
+    grep -E "^[[:space:]]*$1[[:space:]]*=" "${REPORT}" 2>/dev/null \
+        | grep -v '^[[:space:]]*#' | tail -1 | cut -d= -f2- | tr -d ' \t\r'
+}
 
-# TEST 11: существующий домен, но записи такого типа нет → тоже ненулевой код и без «Записей: 1»
-empty_out="$(run google.com AAAA 2>&1)"; empty_rc=$?
-if [ "${empty_rc}" -ne 0 ] && ! printf '%s' "${empty_out}" | grep -qE 'Записей: [1-9]'; then
-    ok "пустой ответ у существующего домена → ошибка, счётчик не печатается"
+check() {  # check <ключ> <эталон> <описание>
+    local key="$1" want="$2" desc="$3" got
+    got="$(val "${key}")"
+    if [ -z "${got}" ]; then
+        no "${desc}: значение не заполнено (${key}=)"
+    elif [ "${got}" = "${want}" ]; then
+        ok "${desc}: ${got}"
+    else
+        no "${desc}: указано '${got}', в снимке '${want}'"
+    fi
+}
+
+check a_records          "${exp_a}"          "адреса зоны"
+check mx_count           "${exp_mx_count}"   "записей MX"
+check mx_primary         "${exp_mx_primary}" "основной почтовый сервер"
+check ns_count           "${exp_ns_count}"   "серверов имён"
+check spf_policy         "${exp_spf}"        "политика SPF"
+check www_cname_target   "${exp_cname}"      "цель CNAME для www"
+check shadow05_ip        "${exp_s5_ip}"      "адрес shadow-05"
+check shadow05_ttl       "${exp_s5_ttl}"     "TTL записи shadow-05"
+check nxdomain_name      "${exp_nx}"         "имя с ответом NXDOMAIN"
+check noerror_empty_type "${exp_empty}"      "тип с NOERROR и нулём ответов"
+
+# ---- согласованность отчёта ------------------------------------------------
+if [ "$(val nxdomain_name)" != "$(val noerror_empty_type)" ]; then
+    ok "самопроверка отчёта: два разных «нет» различены"
 else
-    no "пустой ответ обработан как успех (dig возвращает 0 и при отсутствии записи)"
+    no "самопроверка отчёта: NXDOMAIN и пустой NOERROR записаны одинаково"
+fi
+
+# ---- самопроверки: снимок содержит то, ради чего написан -------------------
+if [ -n "${exp_nx}" ] && [ -n "${exp_empty}" ]; then
+    ok "самопроверка данных: в снимке есть и NXDOMAIN, и пустой NOERROR"
+else
+    no "самопроверка данных: одного из двух «нет» в снимке нет, задание вырождено"
+fi
+
+mx_first_in_file=$(sec "ops.internal MX" | awk '$4=="MX"{print $6; exit}')
+if [ "${mx_first_in_file}" != "${exp_mx_primary}" ]; then
+    ok "самопроверка данных: первая строка MX в ответе — не приоритетный сервер"
+else
+    no "самопроверка данных: порядок MX совпал с приоритетом, ловушка исчезла"
+fi
+
+ttl_other=$(sec "ops.internal A" | awk '$4=="A"{print $2; exit}')
+if [ "${exp_s5_ttl}" -lt "${ttl_other}" ]; then
+    ok "самопроверка данных: TTL у shadow-05 (${exp_s5_ttl}) короче обычного (${ttl_other})"
+else
+    no "самопроверка данных: аномально короткий TTL исчез, зацепка для s02e05 потеряна"
 fi
 
 echo "════════════════════════════════════════════════════════════"

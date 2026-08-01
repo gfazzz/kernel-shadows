@@ -1,0 +1,45 @@
+# ОТЧЁТ РАЗВЕДКИ — s02e04 (ЭТАЛОН, открывать после своей попытки)
+# Объект: season-02-networking/data/dig_capture_ops.txt
+#
+# Как получены значения. Сначала вырезается нужная секция, потом читается ответ:
+#
+#   sec() { awk -v h=";; ===== dig $1 =====" '$0==h{f=1;next} /^;; =====/{f=0} f' "$C"; }
+#
+#   a_records          sec "ops.internal A"  | awk '$4=="A"{print $5}' | sort -t. -k4 -n | paste -sd, -
+#   mx_count           sec "ops.internal MX" | awk '$4=="MX"' | wc -l
+#   mx_primary         sec "ops.internal MX" | awk '$4=="MX"{print $5, $6}' | sort -n | head -1 | awk '{print $2}'
+#   ns_count           sec "ops.internal NS" | awk '$4=="NS"' | wc -l
+#   spf_policy         sec "ops.internal TXT"| awk '$4=="TXT"' | tr -d '"' | awk '{print $NF}'
+#   www_cname_target   sec "www.ops.internal A" | awk '$4=="CNAME"{print $5}'
+#   shadow05_ip/ttl    sec "shadow-05.ops.internal A" | awk '$4=="A"{print $5, $2}'
+#   nxdomain_name      секция, где в HEADER стоит status: NXDOMAIN
+#   noerror_empty_type секция со status: NOERROR и ANSWER: 0
+
+a_records=10.50.1.100,10.50.1.101
+mx_count=3
+mx_primary=mail-primary.ops.internal.
+ns_count=2
+spf_policy=-all
+www_cname_target=ops.internal.
+shadow05_ip=185.220.101.52
+shadow05_ttl=60
+nxdomain_name=backup.ops.internal
+noerror_empty_type=AAAA
+
+# Два разных «нет»
+#
+#   NXDOMAIN            имени backup.ops.internal НЕ СУЩЕСТВУЕТ вовсе.
+#   NOERROR + ANSWER: 0 имя ops.internal существует, но записи AAAA у него нет.
+#
+# Оба выглядят одинаково в `dig +short` — там просто пусто. Различить их можно
+# только по заголовку полного ответа. Разница важная: в первом случае опечатка
+# в имени или домен не заведён, во втором — имя в порядке, а спрашивают не тот
+# тип записи (типичная история с IPv6).
+#
+# Что ещё стоит заметить в этом снимке:
+#   - у MX меньшее число означает более высокий приоритет: первым пробуют
+#     mail-primary (5), а не mail-backup (20), хотя тот и стоит в ответе выше;
+#   - www — это CNAME на вершину зоны, поэтому в ответе две записи: сам алиас
+#     и адрес, к которому он привёл;
+#   - у shadow-05 TTL равен 60 при 300 у остальных, и адрес публичный, хотя
+#     сервер внутренний. Оба признака вместе — не совпадение (см. s02e05).

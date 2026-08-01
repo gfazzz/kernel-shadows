@@ -12,7 +12,8 @@
 | `allowed_ports.txt` | s02e02 | согласованный allowlist слушающих TCP-портов операции. |
 | `ss_listen_moscow1.txt` | s02e02 | снятый на сервере вывод `ss -tuln` — **объект разведки** серии (Type C). |
 | `ufw_status_moscow1.txt` | s02e06 | снятый вывод `ufw status verbose` — **объект разведки** серии (Type C). |
-| `dns_zones.txt` | s02e04–s02e05 | примеры DNS-зон/записей для разбора `dig`. |
+| `dns_zones.txt` | s02e04–s02e05 | список внутренних доменов операции. |
+| `dig_capture_ops.txt` | s02e04 | записанные ответы `dig` по доменам операции — **объект разведки** серии (Type C). |
 | `suspicious_domains.txt` | s02e05 | подозрительные/отравленные домены (следы Крылова) — для детекта спуфинга. |
 | `botnet_ips.txt` | s02e06–s02e07 | реальный список IP ботнета (Tor exit nodes + атака) — для `block_botnet.sh`. |
 

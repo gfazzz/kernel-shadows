@@ -73,8 +73,8 @@
 | [s01e07](s01e07-variables-ping/) | 02 | переменные + exit code (`$?`) | `check_host.sh` | A | 8/8 |
 | [s01e08](s01e08-conditions-loops/) | 02 | условия + циклы (`while read`) | `check_all.sh` | A | 9/9 |
 | [s01e09](s01e09-logging-monitor/) | 02 | логирование + капстоун | `server_monitor.sh` | A | 11/11 |
-| [s01e10](s01e10-grep-pipes/) | 03 | `grep` + конвейеры | `filter_attack.sh` | A | 10/10 |
-| [s01e11](s01e11-awk-stats/) | 03 | `awk` + `sort`/`uniq` (статистика) | `top_attackers.sh` | A | 10/10 |
+| [s01e10](s01e10-grep-pipes/) | 03 | `grep` + конвейеры | `attack_report.txt` | **C** | 15/15 |
+| [s01e11](s01e11-awk-stats/) | 03 | `awk` + `sort`/`uniq` (статистика) | `attackers_report.txt` | **C** | 15/15 |
 | [s01e12](s01e12-sed-log-analyzer/) | 03 | `sed` + отчёт (капстоун) | `log_analyzer.sh` | **B** | 14/14 |
 | [s01e13](s01e13-apt-dpkg/) | 04 | `apt`/`dpkg` — управление пакетами | `pkg_check.sh` | **B** | 12/12 |
 | [s01e14](s01e14-batch-report/) | 04 | `xargs` batch + отчёт (капстоун сезона) | `install_report_generator.sh` | **B** | 15/15 |

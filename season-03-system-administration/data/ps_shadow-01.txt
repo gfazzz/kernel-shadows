@@ -1,0 +1,62 @@
+# Снимок таблицы процессов shadow-server-01
+# Снят 17 октября в 07:42, сразу после звонка А. Ковалёвой.
+#
+# Команда:
+#   ps -eo user,pid,ppid,pcpu,pmem,stat,start,command --sort=pid
+#
+# Поля:
+#   USER   владелец процесса (effective UID, переведённый в имя)
+#   PID    номер процесса
+#   PPID   номер родителя
+#   %CPU   доля процессора с момента запуска (не «сейчас»)
+#   %MEM   доля резидентной памяти
+#   STAT   состояние: S спит, R выполняется, D непрерываемый сон,
+#          Z зомби, T остановлен; суффиксы: s лидер сессии, l многопоточный,
+#          + в группе переднего плана, < повышенный приоритет, N пониженный
+#   START  время запуска
+#   COMMAND строка команды из /proc/PID/cmdline; ИМЯ В КВАДРАТНЫХ СКОБКАХ —
+#          поток ядра, у которого cmdline пуст, и ps берёт имя из comm
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+USER       PID  PPID %CPU %MEM STAT START COMMAND
+root         1     0  0.0  0.4 Ss   Oct09 /sbin/init
+root         2     0  0.0  0.0 S    Oct09 [kthreadd]
+root         3     2  0.0  0.0 I<   Oct09 [rcu_gp]
+root         4     2  0.0  0.0 I<   Oct09 [rcu_par_gp]
+root        11     2  0.0  0.0 I    Oct09 [rcu_sched]
+root        12     2  0.0  0.0 S    Oct09 [migration/0]
+root        13     2  0.0  0.0 S    Oct09 [ksoftirqd/0]
+root        29     2  0.0  0.0 S    Oct09 [kswapd0]
+root        94     2  0.0  0.0 I<   Oct09 [kworker/0:1H-kblockd]
+root       118     2  0.0  0.0 I<   Oct09 [jbd2/vda1-8]
+root       402     1  0.0  0.6 Ss   Oct09 /lib/systemd/systemd-journald
+root       431     1  0.0  0.3 Ss   Oct09 /lib/systemd/systemd-udevd
+systemd+   688     1  0.0  0.3 Ssl  Oct09 /lib/systemd/systemd-resolved
+message+   701     1  0.0  0.2 Ss   Oct09 /usr/bin/dbus-daemon --system --address=systemd: --nofork
+root       709     1  0.0  0.5 Ssl  Oct09 /usr/sbin/rsyslogd -n -iNONE
+root       712     1  0.0  0.4 Ss   Oct09 /usr/sbin/cron -f
+postgres   980     1  0.4  4.1 Ss   Oct09 /usr/lib/postgresql/14/bin/postgres -D /var/lib/postgresql/14/main
+postgres  1012   980  0.0  0.7 Ss   Oct09 postgres: 14/main: checkpointer
+postgres  1013   980  0.0  0.3 Ss   Oct09 postgres: 14/main: background writer
+postgres  1014   980 12.3  2.8 Rs   07:31 postgres: 14/main: max ops_db 10.0.7.14(51882) SELECT
+redis     1031     1  0.3  1.1 Ssl  Oct09 /usr/bin/redis-server 127.0.0.1:6379
+root      1043     1  0.0  0.3 Ss   Oct09 /usr/sbin/sshd -D
+www-data  1102     1  0.0  0.9 Ss   Oct09 nginx: master process /usr/sbin/nginx -g daemon on; master_process on;
+www-data  1103  1102  0.2  0.6 S    Oct09 nginx: worker process
+www-data  1104  1102  0.2  0.6 S    Oct09 nginx: worker process
+prometh+  1188     1  1.7  3.4 Ssl  Oct09 /usr/bin/prometheus --config.file=/etc/prometheus/prometheus.yml
+root      1240     1  0.1  0.5 Ssl  Oct09 /usr/bin/containerd
+root      2701  1043  0.0  0.4 Ss   06:58 sshd: max [priv]
+max       2744  2701  0.0  0.3 S    06:58 sshd: max@pts/0
+max       2745  2744  0.0  0.2 Ss   06:58 -bash
+max       4381  2745  0.0  0.2 S+   07:40 ps -eo user,pid,ppid,pcpu,pmem,stat,start,command --sort=pid
+root      4400     1  0.0  0.2 Ss   03:15 /bin/bash /usr/local/sbin/backup-rotate.sh
+root      4412  4400  0.0  0.0 Z    03:15 [tar] <defunct>
+dmitry    5507  1043  0.0  0.3 Ss   07:02 sshd: dmitry@pts/1
+dmitry    5508  5507  0.0  0.2 Ss   07:02 -bash
+monitor+  6301     1  0.9  1.2 Ssl  Oct14 /usr/bin/python3 /opt/monitoring/collector.py --daemon
+root      6623     1  7.4  2.1 Ssl  Oct14 sshd: root@notty
+root      6641  6623  0.1  0.4 S    Oct14 /usr/bin/curl --retry 60 --retry-delay 900 -sk https://185.220.101.47/beacon
+root      7180     1  0.0  0.3 Ss   Oct14 /usr/sbin/sshd -D
+anna      8022  1043  0.0  0.3 Ss   07:39 sshd: anna@pts/2
+anna      8023  8022  0.0  0.2 Ss   07:39 -bash
+root      8110     2  0.0  0.0 I    07:41 [kworker/1:2-events]

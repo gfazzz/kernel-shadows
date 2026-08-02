@@ -1,0 +1,47 @@
+# Отчёт по процессам shadow-server-01 — s03e04 (ЭТАЛОН)
+#
+# Команда, которой добыто каждое значение, — в комментарии над ним.
+# D=../data
+
+# --- Кто настоящий -----------------------------------------------------------
+# awk '/^=== /{p=$0; gsub(/[^0-9]/,"",p)} /^exe -> \/usr\/sbin\/sshd$/{print p}' $D/proc_shadow-01.txt
+real_sshd_pid=1043
+
+# awk '/^=== /{p=$0; gsub(/[^0-9]/,"",p)} /^exe -> /{print p, $3}' $D/proc_shadow-01.txt
+#   → 7180 запущен не из /usr/sbin/sshd, хотя cmdline у него именно такой
+impostor_sshd_pid=7180
+impostor_sshd_exe=/usr/local/sbin/sshd
+
+# --- Маскировка --------------------------------------------------------------
+# grep -B2 'deleted' $D/proc_shadow-01.txt
+masquerade_pid=6623
+masquerade_exe=/tmp/.ICE-unix/sshd
+masquerade_cwd=/home/devops
+
+# awk '$3==6623 {print $2}' $D/ps_shadow-01.txt
+masquerade_child_pid=6641
+# grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' — из строки запуска curl
+beacon_ip=185.220.101.47
+
+# --- Состояния ---------------------------------------------------------------
+# awk '$6 ~ /^Z/ {print $2, $3}' $D/ps_shadow-01.txt
+zombie_pid=4412
+zombie_parent_pid=4400
+
+# awk '$2==2 || $3==2' $D/ps_shadow-01.txt | wc -l
+#   НЕ grep -c '\[' — под эту скобку попадает и [tar] <defunct>, а это зомби,
+#   а не поток ядра: 11 против правильных 10.
+kernel_threads=10
+
+# sort -k4 -nr — наибольший %CPU у штатного запроса postgres, а не у закладки
+top_cpu_pid=1014
+
+# awk '$1 ~ /^monitor/' — ps обрезает имена длиннее 8 символов и ставит «+»,
+# поэтому grep monitoring по этому файлу не находит ничего
+monitoring_procs=1
+
+# --- Сигналы -----------------------------------------------------------------
+# kill -l | grep -n TERM   (или man 7 signal)
+signal_graceful=15
+signal_uncatchable=9
+signal_reload=1

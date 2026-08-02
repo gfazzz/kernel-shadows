@@ -1,0 +1,76 @@
+# /etc/sudoers.d/ops-team — политика доступа команды операции (ЭТАЛОН)
+#
+# Проверить синтаксис ДО установки:   visudo -c -f ops-team
+# Установить:                         install -m 0440 -o root -g root ops-team \
+#                                             /etc/sudoers.d/ops-team
+#
+# Права раздаются группам, а не людям: состав группы меняется одной командой
+# `gpasswd`, состав политики — правкой файла, которую надо проверять visudo.
+#
+# Комментарий к каждому решению — в конце файла.
+
+# --- Общие правила ---------------------------------------------------------
+Defaults        env_reset
+Defaults        secure_path="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+Defaults        logfile="/var/log/sudo.log"
+Defaults        timestamp_timeout=5
+Defaults:max    log_input, log_output
+
+# --- Наборы команд ---------------------------------------------------------
+Cmnd_Alias NET_DIAG = /usr/sbin/ip, /usr/bin/ss, /usr/sbin/ufw status, /usr/sbin/ufw status numbered
+Cmnd_Alias LOG_READ = /usr/bin/journalctl --no-pager, /usr/bin/journalctl --no-pager *
+Cmnd_Alias OPS_SVC  = /usr/bin/systemctl status ops-monitor, /usr/bin/systemctl restart ops-monitor, /usr/bin/systemctl status nginx, /usr/bin/systemctl restart nginx
+
+# --- Кто что может ---------------------------------------------------------
+%ops-net        ALL=(root) NET_DIAG
+%ops-logs       ALL=(root) LOG_READ
+%ops-services   ALL=(root) OPS_SVC
+max             ALL=(ALL:ALL) ALL
+
+# ---------------------------------------------------------------------------
+# ПОЧЕМУ ИМЕННО ТАК
+#
+# %sudo убран целиком.
+#   В снимке /etc/group в группе sudo состоят max, viktor, devops и monitoring.
+#   Две последние — подсаженные учётные записи из s03e01. Строка
+#   `%sudo ALL=(ALL:ALL) ALL` выдавала им root; никакая узкая строка ниже
+#   этого не отменяет, потому что при запросе `sudo bash` совпадает именно она.
+#   Проверить состав:
+#     awk -F: '$1=="sudo"{print $4}' ../data/group_shadow-01.txt
+#
+# viktor не упомянут вовсе.
+#   Координатору операции root не нужен ни разу. Отсутствие правила — тоже
+#   решение, и его надо принимать явно.
+#
+# Права выданы группам ops-net / ops-logs / ops-services.
+#   Они уже существуют в снимке и содержат ровно тех, кому нужны:
+#     awk -F: '$1 ~ /^ops-/ {printf "%-14s %s\n", $1, $4}' ../data/group_shadow-01.txt
+#
+# У alex забран vim, у anna — less.
+#   Из `vim` выходят в оболочку по `:!sh`, из `less` — по `!sh`. Команда,
+#   выданная через sudo, выполняется от root, и оболочка из неё тоже будет
+#   root — независимо от того, зачем её выдавали.
+#
+# journalctl только с --no-pager.
+#   Без этого journalctl сам запускает less, и получается тот же `!sh`.
+#   Вторая строка алиаса с `*` разрешает аргументы после --no-pager:
+#   `sudo journalctl --no-pager -u ssh --since today`.
+#
+# systemctl ограничен юнитами.
+#   `/usr/bin/systemctl` без аргументов разрешает и `systemctl edit`, который
+#   открывает редактор от root, и `systemctl mask` для чего угодно.
+#
+# NOPASSWD не использован нигде.
+#   Пароль здесь не про «злоумышленник не знает пароль» — он про паузу перед
+#   действием от root и про то, что чужая сессия в терминале не превращается
+#   в root одной командой.
+#
+# max — единственный полный доступ, с log_input/log_output.
+#   Кто-то должен уметь всё, иначе восстанавливать систему будет некому.
+#   Разница между «все могут всё» и «один человек может всё, и это пишется
+#   в журнал» — и есть принцип наименьших привилегий на практике.
+#
+# env_reset и secure_path вернули на место.
+#   `env_keep += "LD_PRELOAD"` в стартере — это готовый root для любого, кто
+#   имеет хоть одно правило sudo: подставляется своя библиотека, и она
+#   загружается в процесс, запущенный от root.

@@ -94,7 +94,7 @@ Season 3 мигрирует с монолитных `episode-NN` (2667–3440 с
 | [s03e02](s03e02-permissions/) | 09 | права, SUID/SGID/sticky | `perms_report.txt` | **C** | ✅ 17/17 |
 | [s03e03](s03e03-sudo/) | 09 | `sudo`, наименьшие привилегии (капстоун) | `sudoers.d/ops-team` | **B** | ✅ 22/22 |
 | [s03e04](s03e04-processes/) | 10 | процессы и сигналы; системные вызовы | `proc_report.txt` | **C** | ✅ 22/22 |
-| s03e05 | 10 | свой сервис systemd | `.service` | B | план |
+| [s03e05](s03e05-systemd-service/) | 10 | свой сервис systemd | `ops-monitor.service` | **B** | ✅ 24/24 |
 | s03e06 | 10 | таймеры вместо cron | `.timer` | B | план |
 | s03e07 | 10 | `journalctl` (капстоун) | `journal_report.txt` | C | план |
 | s03e08 | 11 | диски и файловые системы | `disk_report.txt` | C | план |

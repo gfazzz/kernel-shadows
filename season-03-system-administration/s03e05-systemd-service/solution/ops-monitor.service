@@ -1,0 +1,97 @@
+# /etc/systemd/system/ops-monitor.service — ЭТАЛОН
+#
+# Установка:
+#   sudo install -m 0644 ops-monitor.service /etc/systemd/system/
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now ops-monitor.service
+# Проверка:
+#   systemd-analyze verify /etc/systemd/system/ops-monitor.service
+#   systemd-analyze security ops-monitor.service
+#
+# Комментарий к каждому решению — в конце файла.
+
+[Unit]
+Description=Ops monitor — сбор состояния серверов операции
+Documentation=file:/usr/local/share/doc/ops-monitor.md
+Wants=network-online.target
+After=network-online.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ops-monitor.sh
+Restart=on-failure
+RestartSec=10
+
+User=ops-monitor
+Group=ops-monitor
+
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+PrivateDevices=yes
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictSUIDSGID=yes
+CapabilityBoundingSet=
+StateDirectory=ops-monitor
+ReadWritePaths=/var/lib/ops-monitor
+
+MemoryMax=256M
+CPUQuota=20%
+TasksMax=32
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ops-monitor
+
+[Install]
+WantedBy=multi-user.target
+
+# ---------------------------------------------------------------------------
+# ПОЧЕМУ ИМЕННО ТАК
+#
+# Wants= рядом с After=.
+#   After задаёт только ПОРЯДОК: «если network-online.target запускается, то
+#   после него». Он не заставляет цель запуститься. Без Wants служба
+#   стартует немедленно, до появления сети, и падает на первом же запросе.
+#   Классическая ошибка «работает после ручного restart, не работает после
+#   перезагрузки» — почти всегда именно эта.
+#
+# ExecStart без конвейера.
+#   systemd не запускает оболочку: строка разбирается на аргументы, и «|»
+#   попадёт в скрипт как обычный аргумент. Нужен конвейер — либо
+#   `ExecStart=/bin/sh -c '...'`, либо, что правильнее, ничего: вывод и так
+#   уходит в журнал через StandardOutput=journal.
+#
+# Restart=on-failure, а не always.
+#   always перезапускает и после штатного завершения с кодом 0, превращая
+#   разовую задачу в вечный цикл. StartLimitBurst=5 за 300 секунд не даёт
+#   службе, падающей мгновенно, крутиться бесконечно.
+#
+# User= не root.
+#   Мониторинг читает состояние; ему не нужно ничего писать за пределами
+#   своего каталога. StateDirectory= создаёт /var/lib/ops-monitor с нужным
+#   владельцем автоматически — руками каталог создавать не надо.
+#
+# ProtectSystem=strict делает весь корень доступным только на чтение,
+#   поэтому ReadWritePaths= обязателен: без него служба не сможет писать
+#   даже в свой каталог. ProtectHome=yes прячет /home, /root и /run/user.
+#
+# NoNewPrivileges=yes.
+#   Запрещает процессу и его потомкам получать новые привилегии — в том
+#   числе через SUID-файлы. Ровно то, что нашлось в s03e02.
+#
+# CapabilityBoundingSet= (пустой список) снимает все возможности ядра.
+#   Пустое значение здесь не «сбросить настройку», а «пустой набор» —
+#   один из немногих случаев, когда пустота осмысленна.
+#
+# MemoryMax/CPUQuota/TasksMax.
+#   Служба, собирающая состояние, не должна уметь съесть сервер. TasksMax
+#   заодно ограничивает форк-бомбу — свою или чужую.
+#
+# [Install] WantedBy=multi-user.target.
+#   Без этой секции `systemctl enable` сообщит, что включать нечего:
+#   служба будет работать до первой перезагрузки и молча не вернётся.

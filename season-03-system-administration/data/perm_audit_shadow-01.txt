@@ -1,0 +1,45 @@
+# Снимок прав на shadow-server-01 — вывод `ls -l` по ключевым путям
+# Снят Анной Ковалёвой 17 октября, 03:45, вместе с файлами учётных записей.
+#
+# Формат строки ls -l:
+#   -rwxr-xr-x 1 root root 1234 Oct 17 03:45 /path/to/file
+#    │└┬┘└┬┘└┬┘   │    │
+#    │ │  │  └ права остальных      │    └ группа-владелец
+#    │ │  └ права группы            └ владелец
+#    │ └ права владельца
+#    └ тип: - файл, d каталог, l ссылка
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=== /etc ===
+-rw-r--r-- 1 root root      2891 Oct 13 09:12 /etc/passwd
+-rw-r----- 1 root shadow    1544 Oct 17 02:11 /etc/shadow
+-rw-r--r-- 1 root root       996 Oct 13 09:12 /etc/group
+-r--r----- 1 root root       755 Sep 02 14:20 /etc/sudoers
+-rw-rw-rw- 1 root root       412 Oct 16 23:58 /etc/hosts
+-rw-r--r-- 1 root root      3106 Oct 11 18:02 /etc/ssh/sshd_config
+-rw------- 1 root root      2602 Sep 02 14:19 /etc/ssh/ssh_host_ed25519_key
+
+=== домашние каталоги ===
+drwxr-xr-x 6 max     max     4096 Oct 17 01:40 /home/max
+drwx------ 5 viktor  viktor  4096 Oct 16 20:15 /home/viktor
+drwxr-xr-x 4 alex    alex    4096 Oct 15 12:30 /home/alex
+drwxr-x--- 5 anna    anna    4096 Oct 17 03:20 /home/anna
+drwxrwxrwx 3 dmitry  dmitry  4096 Oct 16 11:07 /home/dmitry
+drwxr-xr-x 3 devops  devops  4096 Oct 13 04:12 /home/devops
+
+=== ключи и конфигурация пользователей ===
+-rw------- 1 max     max      411 Oct 10 09:30 /home/max/.ssh/id_ed25519
+-rw-r--r-- 1 max     max      102 Oct 10 09:30 /home/max/.ssh/id_ed25519.pub
+-rw-r--r-- 1 dmitry  dmitry   411 Oct 16 11:07 /home/dmitry/.ssh/id_ed25519
+-rw------- 1 anna    anna     411 Oct 12 08:00 /home/anna/.ssh/id_ed25519
+-rw-r--r-- 1 devops  devops   799 Oct 13 04:12 /home/devops/.ssh/authorized_keys
+
+=== общие каталоги ===
+drwxrwxrwt 8 root root  4096 Oct 17 03:44 /tmp
+drwxrwxrwx 4 root root  4096 Oct 14 16:22 /srv/shared
+drwxrws--- 3 root ops-logs 4096 Oct 15 10:11 /var/log/ops
+
+=== служебные каталоги ===
+drwxr-xr-x 2 root root  4096 Oct 11 12:00 /var/backups
+-rw-r--r-- 1 root root 18204 Oct 17 03:40 /var/log/auth.log
+-rw-rw-rw- 1 root root  9820 Oct 17 03:41 /var/log/ops/audit.log

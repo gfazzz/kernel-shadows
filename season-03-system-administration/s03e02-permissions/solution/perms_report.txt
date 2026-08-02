@@ -1,0 +1,49 @@
+# ОТЧЁТ ФОРЕНЗИКИ — s03e02 (ЭТАЛОН, открывать после своей попытки)
+# Объект: снимки прав и SUID-файлов с shadow-server-01
+#
+# Как получены значения (A — perm_audit, S — suid_scan):
+#   rows() { grep -E '^[-dl]' "$1"; }        # только строки прав
+#
+#   world_writable_files  rows $A | awk '$1 ~ /^-.{7}w/ {print $NF}'
+#   world_writable_dirs   rows $A | awk '$1 ~ /^d.{7}w/ {print $NF}'
+#   unsafe_shared_dirs    из предыдущего — те, где 10-й символ не t
+#   exposed_private_keys  rows $A | awk '$NF ~ /id_ed25519$/ && $1 !~ /^-rw-------/'
+#   suid_total            rows $S | awk '$1 ~ /^-..s/' | wc -l
+#   sgid_total            rows $S | awk '$1 ~ /^-.....s/' | wc -l
+#   suid_outside_usr      rows $S | awk '$1 ~ /^-..s/ && $NF !~ /^\/usr\//'
+#
+# Восьмеричные права считаются из строки rwx: r=4, w=2, x=1 по каждой тройке.
+
+shadow_octal=640
+sudoers_octal=440
+dmitry_home_octal=777
+world_writable_files=/etc/hosts,/var/log/ops/audit.log
+world_writable_dirs=/home/dmitry,/srv/shared,/tmp
+unsafe_shared_dirs=/home/dmitry,/srv/shared
+exposed_private_keys=/home/dmitry/.ssh/id_ed25519
+suid_total=12
+sgid_total=3
+suid_outside_usr=/home/devops/.cache/bash,/opt/tools/netcheck
+planted_suid=/home/devops/.cache/bash
+
+# Что здесь важно
+#
+# /home/devops/.cache/bash — копия оболочки с битом SUID и владельцем root.
+# Запустивший её получает права root без пароля и без sudo, а лежит она там,
+# куда никто не смотрит. Это способ вернуться после того, как учётку закроют:
+# удалишь devops — файл останется, и права у него от root, а не от devops.
+#
+# /opt/tools/netcheck — тоже SUID вне /usr, но дата другая и путь осмысленный.
+# Так выглядит утилита, которую кто-то из команды поставил сам и выдал ей
+# лишние права «чтобы работало». Не атака, но ровно та же дыра.
+#
+# /etc/hosts с правами 666 — любой пользователь может дописать туда строку
+# и увести трафик куда угодно (разбирали в s02e04). Файл выглядит безобидно
+# именно потому, что менять его обычно и правда нужно.
+#
+# /home/dmitry с правами 777 без sticky — соседи могут не только читать,
+# но и удалять файлы. У /tmp права те же, но есть t: удалить чужое нельзя.
+# Один символ разницы.
+#
+# Приватный ключ dmitry с правами 644 читают все, кто есть на машине.
+# SSH откажется им пользоваться (s02e08), но скопировать его это не мешает.

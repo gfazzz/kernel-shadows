@@ -1,0 +1,52 @@
+# ОТЧЁТ ФОРЕНЗИКИ — s03e01 (ЭТАЛОН, открывать после своей попытки)
+# Объект: снимки /etc/passwd, /etc/group, /etc/shadow с shadow-server-01
+#
+# Как получены значения (P, G, S — три файла из data/):
+#   noc() { grep -vE '^[[:space:]]*(#|$)' "$1"; }   # отбросить шапку
+#
+#   accounts_total      noc $P | wc -l
+#   system_accounts     noc $P | awk -F: '$3 < 1000' | wc -l
+#   human_accounts      noc $P | awk -F: '$3 >= 1000 && $3 != 65534' | wc -l
+#   uid0_accounts       noc $P | awk -F: '$3 == 0 {print $1}' | sort | paste -sd, -
+#   sudo_members        noc $G | awk -F: '$1=="sudo" {print $4}'
+#   passwordless        noc $S | awk -F: '$2 == "" {print $1}'
+#   locked_accounts     noc $S | awk -F: '$2 ~ /^!/ {print $1}'
+#   service_with_shell  noc $P | awk -F: '$3 < 1000 && $1 != "root" &&
+#                                          $7 ~ /(bash|zsh|\/sh)$/ {print $1}' | sort | paste -sd, -
+#   ops_logs_members    noc $G | awk -F: '$1=="ops-logs" {print $4}' | tr ',' '\n' | wc -l
+
+accounts_total=23
+system_accounts=16
+human_accounts=6
+uid0_accounts=devops,root
+sudo_members=max,viktor,devops,monitoring
+passwordless=devops
+locked_accounts=dmitry
+service_with_shell=devops,monitoring,postgres
+ops_logs_members=2
+backdoor_account=devops
+
+# Что в этих числах важно
+#
+# devops — учётная запись с UID 0. Ядру всё равно, как она называется:
+# права определяются числом, а не именем. Это полноценный root, заведённый
+# в обход всякого sudo, и вдобавок с ПУСТЫМ полем пароля — то есть вход
+# без пароля вообще.
+#
+# monitoring — вторая подсадка, и она тоньше. UID 107, имя как у служебной,
+# но: интерактивная оболочка /bin/bash, заданный пароль и членство в группе
+# sudo. Настоящие служебные учётки (redis, prometheus, backup) имеют nologin
+# и в sudo не значатся. На эту разницу и надо было смотреть.
+#
+# Фильтр «не nologin» здесь недостаточен: у учётки sync оболочка /bin/sync —
+# она не nologin, но и не вход в систему, это способ выполнить одну команду.
+# Спрашивать надо про интерактивные оболочки: bash, sh, zsh.
+#
+# dmitry заблокирован — это не атака, а последствие: Анна закрыла учётку,
+# когда начала разбор. Заблокированный пароль не мешает входу по ключу,
+# и это отдельный разговор (s02e08).
+#
+# ops-logs состоит из двух человек (anna, max). Проверять членство только по
+# /etc/group нельзя: основная группа пользователя там не перечисляется — она
+# задана четвёртым полем в /etc/passwd. Здесь это не искажает ответ, но
+# привычка помнить об этом стоит дорого.

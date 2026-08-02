@@ -1,0 +1,24 @@
+# Снимок SUID/SGID-файлов на shadow-server-01
+# Команда: find / -xdev \( -perm -4000 -o -perm -2000 \) -type f -exec ls -l {} \;
+# Снято 17 октября, 03:50.
+#
+# SUID (s в позиции прав владельца) — программа выполняется с правами ВЛАДЕЛЬЦА,
+# а не того, кто её запустил. Для файла, принадлежащего root, это означает
+# выполнение с правами root любым пользователем.
+# SGID (s в позиции прав группы) — то же для группы.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+-rwsr-xr-x 1 root root    72504 Mar 23  2025 /usr/bin/su
+-rwsr-xr-x 1 root root   232416 Apr 03  2025 /usr/bin/sudo
+-rwsr-xr-x 1 root root    68208 Mar 23  2025 /usr/bin/passwd
+-rwsr-xr-x 1 root root    52880 Mar 23  2025 /usr/bin/chsh
+-rwsr-xr-x 1 root root    88304 Mar 23  2025 /usr/bin/gpasswd
+-rwsr-xr-x 1 root root    39144 Mar 23  2025 /usr/bin/newgrp
+-rwsr-xr-x 1 root root    35200 Feb 21  2025 /usr/bin/umount
+-rwsr-xr-x 1 root root    55528 Feb 21  2025 /usr/bin/mount
+-rwsr-xr-x 1 root root   190888 Apr 11  2025 /usr/lib/openssh/ssh-keysign
+-rwxr-sr-x 1 root shadow  38912 Mar 23  2025 /usr/bin/chage
+-rwxr-sr-x 1 root tty     35048 Feb 21  2025 /usr/bin/wall
+-rwxr-sr-x 1 root crontab 43888 Mar 12  2025 /usr/bin/crontab
+-rwsr-xr-x 1 root root  1234376 Oct 13 04:09 /usr/sbin/sshd_backup
+-rwsr-xr-x 1 root root  1183448 Oct 13 04:11 /home/devops/.cache/bash
+-rwsr-xr-x 1 root root    35200 Oct 09 22:14 /opt/tools/netcheck

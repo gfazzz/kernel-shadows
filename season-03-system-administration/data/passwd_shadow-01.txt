@@ -1,0 +1,31 @@
+# Снимок /etc/passwd с shadow-server-01 (ЦОД «Москва-1»)
+# Снят Анной Ковалёвой 17 октября, 03:40, сразу после обнаружения вторжения.
+# Копия сделана до любых изменений на машине — это вещественное доказательство.
+#
+# Формат (7 полей через двоеточие):
+#   логин:пароль:UID:GID:комментарий:домашний каталог:оболочка
+# Поле пароля давно содержит «x» — сам хеш лежит в /etc/shadow.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+sshd:x:103:65534::/run/sshd:/usr/sbin/nologin
+postgres:x:104:110:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
+redis:x:105:111::/var/lib/redis:/usr/sbin/nologin
+prometheus:x:106:112::/var/lib/prometheus:/usr/sbin/nologin
+max:x:1000:1000:Maxim Sokolov:/home/max:/bin/bash
+viktor:x:1001:1001:Viktor Petrov:/home/viktor:/bin/bash
+alex:x:1002:1002:Alex Sokolov:/home/alex:/bin/bash
+anna:x:1003:1003:Anna Kovaleva:/home/anna:/bin/bash
+dmitry:x:1004:1004:Dmitry Orlov:/home/dmitry:/bin/bash
+backup:x:1005:1005:backup service account:/var/backups:/usr/sbin/nologin
+devops:x:0:0:devops:/home/devops:/bin/bash
+monitoring:x:107:113::/var/lib/monitoring:/bin/bash

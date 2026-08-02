@@ -1,0 +1,37 @@
+# Снимок /etc/group с shadow-server-01
+# Снят вместе с /etc/passwd 17 октября, 03:40.
+#
+# Формат (4 поля через двоеточие):
+#   имя_группы:пароль:GID:список дополнительных членов
+# Основная группа пользователя в этом списке НЕ значится — она задана
+# четвёртым полем в /etc/passwd. Это ловушка при подсчёте «кто в группе».
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+root:x:0:
+daemon:x:1:
+bin:x:2:
+sys:x:3:
+adm:x:4:syslog,max,anna
+tty:x:5:
+disk:x:6:devops
+sudo:x:27:max,viktor,devops,monitoring
+www-data:x:33:
+plugdev:x:46:
+staff:x:50:
+users:x:100:
+systemd-network:x:102:
+systemd-resolve:x:103:
+messagebus:x:105:
+postgres:x:110:
+redis:x:111:
+prometheus:x:112:
+monitoring:x:113:
+max:x:1000:
+viktor:x:1001:
+alex:x:1002:
+anna:x:1003:
+dmitry:x:1004:
+backup:x:1005:
+ops-net:x:1100:alex
+ops-logs:x:1101:anna,max
+ops-services:x:1102:dmitry
+nogroup:x:65534:

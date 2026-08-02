@@ -19,11 +19,13 @@ Season 3: System Administration    Серия s03e05 (Episode 10, ч. 2)
 ```
 ● sshd-helper.service - SSH connection helper
      Loaded: loaded (/etc/systemd/system/sshd-helper.service; enabled)
-     Active: active (running) since Mon 2025-10-14 22:41:03 MSK
+     Active: active (running) since Mon 2025-10-14 22:07:05 MSK
    Main PID: 6623 (sshd)
 ```
 
 > — Вот кто их запускает. Не они сами. Их запускает система — исправно, при каждой загрузке, потому что кто-то её об этом попросил.
+
+> — Работает пятые сутки без перерыва, — добавляет Борис. — И заметьте: `enabled`. Даже если бы машину перезагрузили, он вернулся бы сам, без всякого участия того, кто его поставил. Ровно на это `enabled` и рассчитан.
 
 Он открывает сам файл:
 

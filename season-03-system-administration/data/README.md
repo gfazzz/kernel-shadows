@@ -15,6 +15,8 @@
 | `suid_scan_shadow-01.txt` | s03e02 | результат `find / -perm -4000 -o -perm -2000` |
 | `ps_shadow-01.txt` | s03e04 | таблица процессов, снята 17.10 в 07:42 |
 | `proc_shadow-01.txt` | s03e04 | `exe`, `cwd`, `cmdline`, `status`, `fd` по четырём PID |
+| `journal_shadow-01.txt` | s03e07 | журнал за 14.10 21:00 — 15.10 00:35, формат `short-iso` |
+| `journal_err_shadow-01.txt` | s03e07 | то же окно с `-p err` — записей об атаке там нет |
 
 ## Как пользоваться
 
@@ -27,6 +29,7 @@ noc $D/passwd_shadow-01.txt | awk -F: '$3 == 0 {print $1}'      # все UID 0
 grep -E '^[-dl]' $D/suid_scan_shadow-01.txt | awk '$1 ~ /^-..s/'  # SUID-файлы
 grep -vE '^#|^USER' $D/ps_shadow-01.txt | awk '$6 ~ /^Z/'         # зомби
 awk '/^=== /{p=$0; gsub(/[^0-9]/,"",p)} /^exe -> /{print p, $0}' $D/proc_shadow-01.txt
+grep -E 'Failed|Accepted|COMMAND=' $D/journal_shadow-01.txt        # хронология вечера
 ```
 
 > В снимках намеренно оставлены следы вторжения и обычная небрежность

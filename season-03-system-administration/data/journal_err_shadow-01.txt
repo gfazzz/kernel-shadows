@@ -1,0 +1,16 @@
+# Выборка из журнала shadow-server-01 по приоритету
+# То же окно, но только записи уровня err и выше.
+#
+# Команда:
+#   journalctl --since '2025-10-14 21:00' --until '2025-10-15 00:35' -p err -o short-iso
+#
+# Уровни (man 3 syslog): 0 emerg, 1 alert, 2 crit, 3 err, 4 warning,
+# 5 notice, 6 info, 7 debug. «-p err» означает «err и всё, что серьёзнее».
+#
+# Обратите внимание: записей об атаке здесь НЕТ. Неудачный вход — это
+# notice, успешный вход — info, команда через sudo — notice. Фильтр по
+# приоритету показывает поломки, а не вторжения.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2025-10-14T21:22:40+0300 shadow-server-01 ops-check[3040]: cannot reach shadow-server-03: Connection timed out
+2025-10-14T23:46:17+0300 shadow-server-01 nginx[1103]: [error] 1103#1103: upstream timed out (110: Connection timed out)
+2025-10-15T00:03:55+0300 shadow-server-01 ops-check[3940]: cannot reach shadow-server-03: Connection timed out

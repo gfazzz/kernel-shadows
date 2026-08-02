@@ -1,0 +1,83 @@
+# Снимок системного журнала shadow-server-01
+# Окно: вечер 14 октября — ночь на 15 октября.
+#
+# Команда:
+#   journalctl --since '2025-10-14 21:00' --until '2025-10-15 00:35' -o short-iso
+#
+# Формат short-iso: ВРЕМЯ ХОСТ ИСТОЧНИК[PID]: СООБЩЕНИЕ
+# Время в локальной зоне сервера (MSK, +0300).
+#
+# Журнал сведён из всех источников сразу: sshd, sudo, systemd, ядро,
+# прикладные службы. Это и есть главное отличие journald от текстовых логов
+# в /var/log — не нужно решать заранее, в какой файл смотреть.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+2025-10-14T21:00:12+0300 shadow-server-01 ops-check[3001]: state collected: 4 hosts up, 0 down
+2025-10-14T21:05:12+0300 shadow-server-01 ops-check[3002]: state collected: 4 hosts up, 0 down
+2025-10-14T21:10:12+0300 shadow-server-01 ops-check[3003]: state collected: 4 hosts up, 0 down
+2025-10-14T21:15:12+0300 shadow-server-01 ops-check[3004]: state collected: 4 hosts up, 0 down
+2025-10-14T21:17:05+0300 shadow-server-01 CRON[3402]: pam_unix(cron:session): session opened for user root(uid=0) by (uid=0)
+2025-10-14T21:17:06+0300 shadow-server-01 CRON[3402]: (root) CMD (/usr/local/sbin/logrotate-ops.sh)
+2025-10-14T21:17:09+0300 shadow-server-01 CRON[3402]: pam_unix(cron:session): session closed for user root
+2025-10-14T21:20:12+0300 shadow-server-01 ops-check[3005]: state collected: 4 hosts up, 0 down
+2025-10-14T21:22:40+0300 shadow-server-01 ops-check[3040]: cannot reach shadow-server-03: Connection timed out
+2025-10-14T21:25:12+0300 shadow-server-01 ops-check[3006]: state collected: 4 hosts up, 0 down
+2025-10-14T21:30:02+0300 shadow-server-01 nginx[1103]: 10.0.7.14 - - "GET /api/status HTTP/1.1" 200 412
+2025-10-14T21:30:12+0300 shadow-server-01 ops-check[3007]: state collected: 4 hosts up, 0 down
+2025-10-14T21:35:12+0300 shadow-server-01 ops-check[3008]: state collected: 4 hosts up, 0 down
+2025-10-14T21:40:12+0300 shadow-server-01 ops-check[3009]: state collected: 4 hosts up, 0 down
+2025-10-14T21:44:51+0300 shadow-server-01 systemd[1]: Starting Daily apt download activities...
+2025-10-14T21:45:03+0300 shadow-server-01 systemd[1]: Finished Daily apt download activities.
+2025-10-14T21:45:12+0300 shadow-server-01 ops-check[3010]: state collected: 4 hosts up, 0 down
+2025-10-14T21:50:12+0300 shadow-server-01 ops-check[3011]: state collected: 4 hosts up, 0 down
+2025-10-14T21:55:12+0300 shadow-server-01 ops-check[3012]: state collected: 4 hosts up, 0 down
+2025-10-14T21:56:12+0300 shadow-server-01 sshd[2198]: Invalid user admin from 185.220.101.47 port 51102
+2025-10-14T21:56:14+0300 shadow-server-01 sshd[2198]: Failed password for invalid user admin from 185.220.101.47 port 51102 ssh2
+2025-10-14T21:56:41+0300 shadow-server-01 sshd[2199]: Invalid user oracle from 185.220.101.47 port 51118
+2025-10-14T21:56:43+0300 shadow-server-01 sshd[2199]: Failed password for invalid user oracle from 185.220.101.47 port 51118 ssh2
+2025-10-14T21:57:09+0300 shadow-server-01 sshd[2200]: Invalid user test from 185.220.101.47 port 51134
+2025-10-14T21:57:11+0300 shadow-server-01 sshd[2200]: Failed password for invalid user test from 185.220.101.47 port 51134 ssh2
+2025-10-14T21:57:35+0300 shadow-server-01 sshd[2201]: Failed password for root from 185.220.101.47 port 51150 ssh2
+2025-10-14T21:58:47+0300 shadow-server-01 sshd[2203]: Accepted publickey for dmitry from 185.220.101.47 port 51188 ssh2: ED25519 SHA256:7Kx9qL2mNvR8sT4uW1yZ0aB3cD5eF6gH7iJ8kL9mN0o
+2025-10-14T21:58:47+0300 shadow-server-01 sshd[2203]: pam_unix(sshd:session): session opened for user dmitry(uid=1004) by (uid=0)
+2025-10-14T21:58:48+0300 shadow-server-01 systemd-logind[720]: New session 412 of user dmitry.
+2025-10-14T22:00:12+0300 shadow-server-01 ops-check[3013]: state collected: 4 hosts up, 0 down
+2025-10-14T22:01:03+0300 shadow-server-01 sudo[3120]:  dmitry : TTY=pts/3 ; PWD=/home/dmitry ; USER=root ; COMMAND=/usr/sbin/useradd -u 0 -o -g 0 -m -s /bin/bash devops
+2025-10-14T22:01:03+0300 shadow-server-01 sudo[3120]: pam_unix(sudo:session): session opened for user root(uid=0) by dmitry(uid=1004)
+2025-10-14T22:01:04+0300 shadow-server-01 sudo[3120]: pam_unix(sudo:session): session closed for user root
+2025-10-14T22:01:04+0300 shadow-server-01 useradd[3121]: new user: name=devops, UID=0, GID=0, home=/home/devops, shell=/bin/bash, from=/dev/pts/3
+2025-10-14T22:02:11+0300 shadow-server-01 sudo[3141]:  dmitry : TTY=pts/3 ; PWD=/home/dmitry ; USER=root ; COMMAND=/usr/sbin/usermod -aG sudo devops
+2025-10-14T22:02:11+0300 shadow-server-01 sudo[3141]: pam_unix(sudo:session): session opened for user root(uid=0) by dmitry(uid=1004)
+2025-10-14T22:02:12+0300 shadow-server-01 sudo[3141]: pam_unix(sudo:session): session closed for user root
+2025-10-14T22:02:12+0300 shadow-server-01 usermod[3142]: add 'devops' to group 'sudo'
+2025-10-14T22:02:12+0300 shadow-server-01 usermod[3142]: add 'devops' to shadow group 'sudo'
+2025-10-14T22:03:40+0300 shadow-server-01 sudo[3168]:  dmitry : TTY=pts/3 ; PWD=/home/dmitry ; USER=root ; COMMAND=/bin/cp /bin/bash /home/devops/.cache/bash
+2025-10-14T22:03:40+0300 shadow-server-01 sudo[3168]: pam_unix(sudo:session): session opened for user root(uid=0) by dmitry(uid=1004)
+2025-10-14T22:03:41+0300 shadow-server-01 sudo[3168]: pam_unix(sudo:session): session closed for user root
+2025-10-14T22:03:41+0300 shadow-server-01 sudo[3170]:  dmitry : TTY=pts/3 ; PWD=/home/dmitry ; USER=root ; COMMAND=/bin/chmod 4755 /home/devops/.cache/bash
+2025-10-14T22:03:41+0300 shadow-server-01 sudo[3170]: pam_unix(sudo:session): session opened for user root(uid=0) by dmitry(uid=1004)
+2025-10-14T22:03:42+0300 shadow-server-01 sudo[3170]: pam_unix(sudo:session): session closed for user root
+2025-10-14T22:05:12+0300 shadow-server-01 ops-check[3014]: state collected: 4 hosts up, 0 down
+2025-10-14T22:06:55+0300 shadow-server-01 sudo[3204]:  dmitry : TTY=pts/3 ; PWD=/home/dmitry ; USER=root ; COMMAND=/bin/systemctl enable --now sshd-helper.service
+2025-10-14T22:06:55+0300 shadow-server-01 sudo[3204]: pam_unix(sudo:session): session opened for user root(uid=0) by dmitry(uid=1004)
+2025-10-14T22:06:56+0300 shadow-server-01 sudo[3204]: pam_unix(sudo:session): session closed for user root
+2025-10-14T22:07:02+0300 shadow-server-01 systemd[1]: Created symlink /etc/systemd/system/multi-user.target.wants/sshd-helper.service -> /etc/systemd/system/sshd-helper.service.
+2025-10-14T22:07:05+0300 shadow-server-01 systemd[1]: Started SSH connection helper.
+2025-10-14T22:08:12+0300 shadow-server-01 sshd[2203]: pam_unix(sshd:session): session closed for user dmitry
+2025-10-14T22:08:12+0300 shadow-server-01 systemd-logind[720]: Session 412 logged out. Waiting for processes to exit.
+2025-10-14T22:10:12+0300 shadow-server-01 ops-check[3015]: state collected: 4 hosts up, 0 down
+2025-10-14T22:20:01+0300 shadow-server-01 nginx[1104]: 10.0.7.14 - - "GET /api/status HTTP/1.1" 200 412
+2025-10-14T23:45:02+0300 shadow-server-01 kernel: clocksource: timekeeping watchdog on CPU0: Marking clocksource 'tsc' as unstable
+2025-10-14T23:45:03+0300 shadow-server-01 systemd-timesyncd[688]: Initial synchronization to time server 10.0.7.1:123 (system clock jumped by 5661s)
+2025-10-14T23:45:04+0300 shadow-server-01 systemd[1]: Time has been changed
+2025-10-14T23:45:09+0300 shadow-server-01 ops-check[3900]: state collected: 4 hosts up, 0 down
+2025-10-14T23:46:17+0300 shadow-server-01 nginx[1103]: [error] 1103#1103: upstream timed out (110: Connection timed out)
+2025-10-14T23:50:09+0300 shadow-server-01 ops-check[3016]: state collected: 4 hosts up, 0 down
+2025-10-14T23:55:09+0300 shadow-server-01 ops-check[3017]: state collected: 4 hosts up, 0 down
+2025-10-15T00:00:09+0300 shadow-server-01 ops-check[3018]: state collected: 4 hosts up, 0 down
+2025-10-15T00:03:55+0300 shadow-server-01 ops-check[3940]: cannot reach shadow-server-03: Connection timed out
+2025-10-15T00:05:09+0300 shadow-server-01 ops-check[3019]: state collected: 4 hosts up, 0 down
+2025-10-15T00:10:09+0300 shadow-server-01 ops-check[3020]: state collected: 4 hosts up, 0 down
+2025-10-15T00:15:09+0300 shadow-server-01 ops-check[3021]: state collected: 4 hosts up, 0 down
+2025-10-15T00:20:09+0300 shadow-server-01 ops-check[3022]: state collected: 4 hosts up, 0 down
+2025-10-15T00:25:09+0300 shadow-server-01 ops-check[3023]: state collected: 4 hosts up, 0 down
+2025-10-15T00:30:09+0300 shadow-server-01 ops-check[3024]: state collected: 4 hosts up, 0 down

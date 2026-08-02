@@ -1,0 +1,53 @@
+# Хронология вечера 14 октября — s03e07 (ЭТАЛОН)
+#
+# Команда, которой добыто каждое значение, — в комментарии над ним.
+# D=../data ; J=$D/journal_shadow-01.txt
+
+# --- Как вошли ---------------------------------------------------------------
+# grep -oE '([0-9]{1,3}\.){3}[0-9]{1,3}' $J | sort | uniq -c | sort -rn
+attack_source_ip=185.220.101.47
+
+# grep -c 'Failed password' $J
+#   НЕ grep -ci 'invalid user': таких строк шесть — по паре на каждое имя
+#   («Invalid user X» и «Failed password for invalid user X»), а неудачных
+#   попыток четыре, потому что четвёртая была под существующим root.
+failed_attempts=4
+
+# grep -oE 'Invalid user [a-z]+' $J | awk '{print $3}' | sort -u | paste -sd,
+#   root сюда не входит: он существует, и попытка под ним — не перебор имён.
+probed_usernames=admin,oracle,test
+
+# grep 'Accepted' $J | head -1
+first_success_login=2025-10-14T21:58:47
+compromised_account=dmitry
+
+# --- Что сделали -------------------------------------------------------------
+# grep -c 'COMMAND=' $J
+#   НЕ grep -c sudo: на каждую команду приходится ещё три строки pam_unix
+#   (session opened / closed), и наивный счёт даёт 20 вместо 5.
+sudo_commands=5
+
+# grep 'useradd\[' $J        — запись самой утилиты, на секунду позже sudo
+devops_created=2025-10-14T22:01:04
+
+# grep 'Created symlink' $J  — вот это и есть «enable»
+helper_enabled=2025-10-14T22:07:02
+# grep 'Started SSH connection helper' $J
+helper_started=2025-10-14T22:07:05
+
+# --- Простой -----------------------------------------------------------------
+# grep 'ops-check' $J | awk '{print $1}' — найти наибольший разрыв
+gap_start=2025-10-14T22:10:12
+gap_end=2025-10-14T23:45:09
+
+# 22:10 → 23:45 = 95 минут (по минутам, секунды не считаем)
+gap_minutes=95
+
+# grep 'clock jumped' $J | grep -oE '[0-9]+s' — 5661 секунда ≈ 94 минуты:
+# столько машина простояла в паузе, и это независимое подтверждение разрыва
+clock_jump_seconds=5661
+
+# --- Приоритеты --------------------------------------------------------------
+# grep -vE '^#|^$' $D/journal_err_shadow-01.txt | wc -l
+#   Ни одной записи про вход и sudo здесь нет: они уровня notice и info.
+err_records=3

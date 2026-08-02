@@ -1,0 +1,19 @@
+# /etc/systemd/system/ops-check.service — черновик Дмитрия (СТАРТЕР)
+#
+# Скопирован с ops-monitor.service из s03e05 без изменений: та же служба,
+# которая должна работать постоянно. Но теперь её запускает таймер —
+# и это меняет почти всё.
+#
+# Правь этот файл в artifacts/, потом проверяй:  bash tests/test.sh
+
+[Unit]
+Description=ops check
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/ops-check.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

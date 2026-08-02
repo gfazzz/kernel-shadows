@@ -1,0 +1,20 @@
+# /etc/systemd/system/ops-check.timer — черновик Дмитрия (СТАРТЕР)
+#
+# Дмитрий перенёс сюда строку из своего crontab:
+#   */5 * * * * /usr/local/bin/ops-check.sh
+# и заменил слово «cron» на «systemd». Больше ничего не изменилось.
+#
+# Правь этот файл в artifacts/, потом проверяй:  bash tests/test.sh
+#
+# Что должно получиться (подробности — в mission.md):
+#   запуск раз в пять минут, с догоном пропущенных запусков после простоя,
+#   с разбросом по времени, включаемый через timers.target.
+
+[Unit]
+Description=ops check
+
+[Timer]
+OnCalendar=*/5 * * * *
+
+[Install]
+WantedBy=multi-user.target

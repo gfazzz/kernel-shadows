@@ -1,0 +1,56 @@
+# Снимок дискового состояния shadow-server-01
+# Снят 21 октября в 16:32, сразу после сообщения Виктора «/var/log — 95 %».
+#
+# Четыре команды подряд, в том порядке, в каком их обычно и набирают.
+# Разделы помечены строками «=== команда ===».
+#
+# Читать снизу вверх бесполезно: смысл появляется только при сравнении
+# разделов между собой.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=== df -h ===
+Filesystem                   Size  Used Avail Use% Mounted on
+udev                         3.9G     0  3.9G   0% /dev
+tmpfs                        795M  1.2M  794M   1% /run
+/dev/mapper/ops--vg-root      20G  9.8G  9.1G  52% /
+/dev/mapper/ops--vg-var       12G  9.9G  1.2G  90% /var
+/dev/mapper/ops--vg-log       20G   18G  980M  95% /var/log
+/dev/mapper/ops--vg-spool    2.0G  120M  1.7G   7% /var/spool
+/dev/vda1                    512M  100M  412M  20% /boot
+tmpfs                        795M     0  795M   0% /run/user/1000
+
+=== df -i ===
+Filesystem                  Inodes   IUsed   IFree IUse% Mounted on
+udev                       1017234     481 1016753    1% /dev
+tmpfs                      1017234      52 1017182    1% /run
+/dev/mapper/ops--vg-root   1310720  188402 1122318   15% /
+/dev/mapper/ops--vg-var     786432   94118  692314   12% /var
+/dev/mapper/ops--vg-log    1310720   14027 1296693    2% /var/log
+/dev/mapper/ops--vg-spool   131072  131072       0  100% /var/spool
+/dev/vda1                    32768     312   32456    1% /boot
+
+=== lsblk -f ===
+NAME                    FSTYPE      LABEL      FSAVAIL FSUSE% MOUNTPOINTS
+vda
+├─vda1                  ext4        boot          412M    20% /boot
+└─vda2                  LVM2_member
+  ├─ops--vg-root        ext4        root          9.1G    52% /
+  ├─ops--vg-var         ext4        var           1.2G    90% /var
+  ├─ops--vg-spool       ext4        spool         1.7G     7% /var/spool
+  └─ops--vg-swap        swap                                  [SWAP]
+vdb                     LVM2_member
+  └─ops--vg-log         ext4        log           980M    95% /var/log
+
+=== du -h --max-depth=1 /var/log ===
+4.2G	/var/log/ops
+2.3G	/var/log/nginx
+1.1G	/var/log/journal
+120M	/var/log/apt
+88M	/var/log/postgresql
+16M	/var/log/installer
+7.9G	/var/log
+
+=== lsof +L1 ===
+COMMAND    PID USER   FD   TYPE DEVICE     SIZE/OFF NLINK   NODE NAME
+rsyslogd   709 root    7w   REG  253,3  10737418240     0   1573 /var/log/ops/audit.log.1 (deleted)
+nginx     1103 www-d   4w   REG  253,3      2097152     0   1601 /var/log/nginx/access.log.1 (deleted)

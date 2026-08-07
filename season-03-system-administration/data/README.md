@@ -17,6 +17,7 @@
 | `proc_shadow-01.txt` | s03e04 | `exe`, `cwd`, `cmdline`, `status`, `fd` по четырём PID |
 | `journal_shadow-01.txt` | s03e07 | журнал за 14.10 21:00 — 15.10 00:35, формат `short-iso` |
 | `journal_err_shadow-01.txt` | s03e07 | то же окно с `-p err` — записей об атаке там нет |
+| `disk_shadow-01.txt` | s03e08 | `df -h`, `df -i`, `lsblk -f`, `du /var/log`, `lsof +L1` |
 
 ## Как пользоваться
 

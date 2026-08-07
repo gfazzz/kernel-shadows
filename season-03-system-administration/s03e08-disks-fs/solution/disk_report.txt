@@ -1,0 +1,49 @@
+# Отчёт по дисковому состоянию shadow-server-01 — s03e08 (ЭТАЛОН)
+#
+# Команда, которой добыто каждое значение, — в комментарии над ним.
+# D=../data/disk_shadow-01.txt
+# sec() { awk -v s="$1" '$0=="=== "s" ===" {f=1; next} /^=== /{f=0} f' "$D"; }
+
+# --- Где кончается место -----------------------------------------------------
+# sec 'df -h' | awk 'NR>1 {gsub(/%/,"",$5); if ($5+0 > m) {m=$5; p=$6}} END{print p, m}'
+fullest_fs=/var/log
+fullest_fs_use=95%
+
+# --- Где кончилось не место --------------------------------------------------
+# sec 'df -i' | awk '$5=="100%" {print $6}'
+#   Мест на /var/spool 93 % свободно, а создать файл нельзя: кончились inode.
+#   Симптом «No space left on device» при пустом df -h — почти всегда это.
+inode_full_fs=/var/spool
+# sec 'df -h' | awk '$6=="/var/spool" {print $4}'
+inode_full_free=1.7G
+
+# --- Расхождение -------------------------------------------------------------
+# sec 'df -h' | awk '$6=="/var/log" {print $3}'
+var_log_df_used=18G
+# sec 'du -h --max-depth=1 /var/log' | awk '$2=="/var/log" {print $1}'
+var_log_du_total=7.9G
+#   du обходит имена в каталогах. Файл, у которого имя удалили, не обходится —
+#   а место занимает, пока его держит открытым хоть один процесс.
+
+# sec 'lsof +L1' | sort -k7 -nr | head -1
+deleted_file=/var/log/ops/audit.log.1
+deleted_holder_pid=709
+deleted_holder_command=rsyslogd
+deleted_file_bytes=10737418240
+#   10 GiB. logrotate удалил файл, не сказав rsyslogd перечитать дескрипторы.
+#   Лечится не rm, а `systemctl reload rsyslog` (или kill -HUP).
+
+# --- Что занимает место ------------------------------------------------------
+# sec 'du -h --max-depth=1 /var/log' | grep -v '/var/log$' | sort -h | tail -1
+#   ИМЕННО sort -h: обычный sort -n поставит первым «120M», потому что
+#   сравнивает 120 и 4.2 как числа, не глядя на буквы.
+biggest_subdir=/var/log/ops
+biggest_subdir_size=4.2G
+
+# --- Устройство --------------------------------------------------------------
+# sec 'df -h' | awk '$6=="/var/log" {print $1}'
+var_log_device=/dev/mapper/ops--vg-log
+# sec 'lsblk -f' | grep 'ops--vg-log'
+var_log_fstype=ext4
+# sec 'lsblk -f' | grep -c 'ops--vg-'   — root, var, spool, swap, log
+lvm_volumes=5

@@ -18,6 +18,7 @@
 | `suspicious_ips.txt` | s01e12 | база известных угроз (10 IP) для сверки в `log_analyzer.sh`. |
 | `report_template.txt` | s01e12 | шаблон security-отчёта (ориентир структуры). |
 | `required_tools.txt` | s01e13–s01e14 | манифест инструментов операции для `pkg_check`/`install_report_generator`. |
+| `moscow_server_access.txt` | s01e16 | снимок доступа на общем сервере: `whoami`, `id`, `ls -l /srv/ops`, `sudo -l` и журнал `sudo`. Первая чужая машина в курсе — здесь у файлов есть владелец, и это не вы. |
 
 ## Как пользоваться
 

@@ -1,0 +1,46 @@
+# Что покажет московский сервер — s01e16 (ЭТАЛОН)
+#
+# Команда, которой добыто каждое значение, — в комментарии над ним.
+# D=../data/moscow_server_access.txt
+# sec() { awk -v s="$1" '$0=="=== "s" ===" {f=1; next} /^=== /{f=0} f' "$D"; }
+
+# --- Кто я на этой машине ----------------------------------------------------
+# sec whoami
+whoami=max
+# sec id | grep -oE 'uid=[0-9]+' — число после uid=
+uid=1000
+# sec id — groups=1000(max),4(adm),1101(ops-logs): три группы.
+#   Ловушка: основная группа (gid=1000) перечислена и в groups= тоже,
+#   поэтому «gid плюс список» дало бы четыре.
+groups_total=3
+# та из групп, что названа по операции
+ops_group=ops-logs
+
+# --- Что я смогу прочитать в /srv/ops ----------------------------------------
+# sec 'ls -l /srv/ops' | awk '$1 ~ /^-...r..r../ {print $NF}'
+#   README: -rw-r--r-- — четвёртая тройка даёт r «остальным», то есть всем
+world_readable=README
+# access.log: -rw-r----- владелец root, группа adm. Я не root, но я в adm.
+readable_via_group=access.log
+# plan.txt: -rw------- владелец viktor. Ни группы, ни «остальных» — только он.
+unreadable=plan.txt
+# incoming: drwxrwxrwt — w для всех. Буква t на конце — sticky, но писать можно.
+world_writable_dir=incoming
+
+# --- Права ------------------------------------------------------------------
+# -rwxr-xr-x = 4+2+1 / 4+0+1 / 4+0+1
+collect_octal=755
+# -rw------- = 4+2+0 / 0 / 0
+plan_octal=600
+# -rwsr-xr-x — буква s вместо x у владельца: программа выполняется от root
+suid_file=mount-helper
+
+# --- sudo -------------------------------------------------------------------
+# sec 'sudo -l' — три строки после «may run the following commands»
+sudo_allowed_count=3
+# в каждой строке скобки (root) — от чьего имени
+sudo_runas=root
+# в журнале две строки с COMMAND= и без пометки об отказе
+sudo_used=2
+# третья строка журнала: «user NOT in sudoers» — команда не разрешена
+sudo_denied=/bin/cat

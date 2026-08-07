@@ -1,0 +1,40 @@
+# Что покажет московский сервер, когда ты на него зайдёшь
+# Прислал Дмитрий Орлов 8 октября, 21:40, с припиской:
+#   «Учётку завёл. Посмотри заранее, чтобы не удивляться. Это не твой ноутбук.»
+#
+# Четыре команды, выполненные от твоего имени на ops-moscow-01.
+# Разделы помечены строками «=== команда ===».
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=== whoami ===
+max
+
+=== id ===
+uid=1000(max) gid=1000(max) groups=1000(max),4(adm),1101(ops-logs)
+
+=== ls -l /srv/ops ===
+total 48
+drwxr-x---  2 root   ops-logs   4096 Oct  6 11:20 archive
+-rw-r-----  1 root   adm       12480 Oct  8 21:31 access.log
+-rw-r--r--  1 root   root       1024 Oct  2 09:14 README
+-rwxr-xr-x  1 root   root       3120 Oct  5 16:02 collect.sh
+-rw-------  1 viktor viktor      820 Oct  7 22:55 plan.txt
+-rw-rw-r--  1 dmitry ops-logs   2048 Oct  8 20:10 notes.txt
+drwxrwxrwt  2 root   root       4096 Oct  8 21:39 incoming
+-rwsr-xr-x  1 root   root      68208 Oct  1 00:00 mount-helper
+-rw-r--r--  1 max    max         640 Oct  8 21:40 hello.txt
+
+=== sudo -l ===
+Matching Defaults entries for max on ops-moscow-01:
+    env_reset, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin
+
+User max may run the following commands on ops-moscow-01:
+    (root) /usr/bin/apt update
+    (root) /usr/bin/apt install *
+    (root) /usr/bin/systemctl status ops-collect
+
+=== журнал sudo за 8 октября ===
+Oct  8 21:41:02 ops-moscow-01 sudo[4471]:      max : TTY=pts/2 ; PWD=/home/max ; USER=root ; COMMAND=/usr/bin/apt update
+Oct  8 21:41:19 ops-moscow-01 sudo[4488]:      max : TTY=pts/2 ; PWD=/home/max ; USER=root ; COMMAND=/usr/bin/apt install jq
+Oct  8 21:43:07 ops-moscow-01 sudo[4502]:      max : user NOT in sudoers ; TTY=pts/2 ; PWD=/srv/ops ; USER=root ; COMMAND=/bin/cat /srv/ops/plan.txt
+Oct  8 21:44:55 ops-moscow-01 sudo[4517]:   dmitry : TTY=pts/1 ; PWD=/srv/ops ; USER=root ; COMMAND=/usr/bin/systemctl restart ops-collect

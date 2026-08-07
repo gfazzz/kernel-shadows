@@ -9,6 +9,7 @@ Season 3: System Administration    Серия s03e03 (Episode 09, капстоу
 
 > **Требования среды:** bash, без root, без сети — политика пишется как файл, `sudo` не запускается. Критерии — в [`mission.md`](mission.md).
 > **Ранее:** в [`s03e01`](../s03e01-users-groups/) найдены подсаженные учётки `devops` и `monitoring`, в [`s03e02`](../s03e02-permissions/) — SUID-закладка и раздача прав «чтобы работало».
+> **Опирается на:** [`s01e16`](../../season-01-shell-foundations/s01e16-sudo-basics/) — что делает `sudo` и как читается `sudo -l`; здесь вы впервые пишете этот список сами.
 
 ---
 

@@ -9,6 +9,7 @@ Season 3: System Administration    Серия s03e01 (Episode 09, ч. 1)
 
 > **Требования среды:** bash, без root, без сети — разбираем снимки из [`data/`](../data/). Критерии — в [`mission.md`](mission.md).
 > **Ранее:** Season 2 закрыт — сеть под наблюдением, доступ по ключам, `sshd` закалён. Но кто-то уже внутри.
+> **Опирается на:** [`s01e16`](../../season-01-shell-foundations/s01e16-sudo-basics/) — там разобраны `id`, группы и `sudo -l`; здесь то же самое читается на глубину `/etc/passwd` и `/etc/shadow`.
 
 ---
 

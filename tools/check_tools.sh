@@ -26,8 +26,8 @@ mv|\bmv\s|s01e04
 mkdir|\bmkdir\b|s01e04
 touch|\btouch\b|s01e04
 rm|\brm\s+-|s01e04
-chmod|\bchmod\b|NONE
-sudo|sudo (apt|systemctl|ufw)|s03e09
+chmod|\bchmod\b|s01e15
+sudo|sudo (apt|systemctl|ufw)|s01e16
 man|\bman\s+[a-z]|s01e04
 pipe|\|\s*(wc|grep|sort|head|awk)|s01e10
 wc|\bwc\s+-l|s01e10

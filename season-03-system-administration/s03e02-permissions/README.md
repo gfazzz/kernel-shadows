@@ -9,6 +9,7 @@ Season 3: System Administration    Серия s03e02 (Episode 09, ч. 2)
 
 > **Требования среды:** bash, без root, без сети — разбираем снимки из [`data/`](../data/). Критерии — в [`mission.md`](mission.md).
 > **Ранее:** в [`s03e01`](../s03e01-users-groups/) ты нашёл две подсаженные учётные записи: `devops` с UID 0 и тихую `monitoring`.
+> **Опирается на:** [`s01e15`](../../season-01-shell-foundations/s01e15-permissions-basics/) — девять бит и восьмеричная запись оттуда; здесь добавляются три специальных бита и разбор чужой системы.
 
 ---
 

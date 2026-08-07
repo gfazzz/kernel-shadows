@@ -77,7 +77,9 @@
 | [s01e11](s01e11-awk-stats/) | 03 | `awk` + `sort`/`uniq` (статистика) | `attackers_report.txt` | **C** | 15/15 |
 | [s01e12](s01e12-sed-log-analyzer/) | 03 | `sed` + отчёт (капстоун) | `log_analyzer.sh` | **B** | 14/14 |
 | [s01e13](s01e13-apt-dpkg/) | 04 | `apt`/`dpkg` — управление пакетами | `pkg_check.sh` | **B** | 12/12 |
-| [s01e14](s01e14-batch-report/) | 04 | `xargs` batch + отчёт (капстоун сезона) | `install_report_generator.sh` | **B** | 15/15 |
+| [s01e14](s01e14-batch-report/) | 04 | `xargs` batch + отчёт (капстоун ep04) | `install_report_generator.sh` | **B** | 15/15 |
+| [s01e15](s01e15-permissions-basics/) | 04 | права, владелец, `chmod` | `setup_workspace.sh` | **A** | 23/23 |
+| [s01e16](s01e16-sudo-basics/) | 04 | `sudo` как механизм (финал сезона) | `access_answers.txt` | **C** | 22/22 |
 
 Прогнать весь курс: `make test` из корня (или `make test SEASON=season-01-shell-foundations`). Всё разом — `make check`.
 
@@ -483,7 +485,7 @@ season-01-shell-foundations/
 │   ├── tests/test.sh                  #   воспроизводимый тест (зелёный без root)
 │   └── artifacts/                     #   рабочая папка студента
 │
-└── s01e02-… … s01e14-batch-report/    # ещё 11 серий той же структуры (см. карту выше)
+└── s01e02-… … s01e16-sudo-basics/     # ещё 13 серий той же структуры (см. карту выше)
 ```
 
 ---

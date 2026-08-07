@@ -12,7 +12,7 @@
 **Время:** 4-5 часов
 **Сложность:** ⭐⭐⭐☆☆
 
-**Предыдущий эпизод:** [Episode 12: Backup & Recovery](../../season-03-system-administration/episode-12-backup-recovery/README.md) (Tallinn, Estonia)
+**Предыдущий эпизод:** [s03e13 — восстановление и проверка](../../season-03-system-administration/s03e13-restore-check/) (Tallinn, Estonia)
 **Следующий эпизод:** Episode 14: Docker Basics (Amsterdam, Netherlands)
 
 ---
@@ -3613,7 +3613,7 @@ cd ~/kernel-shadows/season-04-devops-automation/episode-13-git-version-control
 
 🇩🇪 Berlin • Chaos Computer Club • Infrastructure as Code
 
-[⬅️ Episode 12: Backup & Recovery](../../season-03-system-administration/episode-12-backup-recovery/README.md) | [⬆️ Season 4 Overview](../README.md) | [➡️ Episode 14: Docker Basics](../episode-14-docker-basics/README.md)
+[⬅️ s03e13 — финал Season 3](../../season-03-system-administration/s03e13-restore-check/) | [⬆️ Season 4 Overview](../README.md) | [➡️ Episode 14: Docker Basics](../episode-14-docker-basics/README.md)
 
 </div>
 

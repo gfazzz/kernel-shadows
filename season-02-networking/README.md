@@ -113,7 +113,10 @@ KERNEL SHADOWS — Season 2
 | [s02e06](s02e06-firewall-ufw/) | 07 | firewall `ufw`, разбор правил | `fw_report.txt` | **C** | 13/13 |
 | [s02e07](s02e07-block-botnet/) | 07 | блокировка ботнета (капстоун) | `block_botnet.sh` | B | 15/15 |
 | [s02e08](s02e08-ssh-keys/) | 08 | SSH-ключи (ed25519, права) | `ssh_key_check.sh` | A | 13/13 |
-| [s02e09](s02e09-ssh-hardening/) | 08 | закалка `sshd_config` + туннели (финал) | `sshd_config` | **B** | 14/14 |
+| [s02e09](s02e09-ssh-hardening/) | 08 | закалка `sshd_config` | `sshd_config` | **B** | 14/14 |
+| [s02e10](s02e10-ssh-tunnels/) | 08 | SSH-туннели: `-L`, `-R`, `-D`, `ProxyJump` | `~/.ssh/config` | **B** | ✅ 23/23 |
+| [s02e11](s02e11-wireguard/) | 08 | WireGuard: ключи, `AllowedIPs`, NAT | `wg0.conf` | **B** | ✅ 19/19 |
+| [s02e12](s02e12-firewall-log/) | 08 | журнал фаервола и `ufw limit` (финал сезона) | `fwlog_report.txt` | **C** | ✅ 22/22 |
 
 **Итого Season 2: 9 серий, 123 проверки — все зелёные без root/сети** (сетевые команды
 `ping`/`ss`/`dig`/`ufw`/`dpkg` мокаются или работают на фикстурах; §5.3). Реальные данные

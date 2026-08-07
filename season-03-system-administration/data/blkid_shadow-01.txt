@@ -1,0 +1,23 @@
+# Снимок blkid на shadow-server-01
+# Снят 22 октября в 09:05, после расширения тома log новым диском.
+#
+# Команда:
+#   blkid
+#
+# UUID генерируется при создании файловой системы и не меняется при
+# перезагрузке, переносе диска в другой порт или добавлении новых дисков.
+# Имя вида /dev/vdb — наоборот: это порядок, в котором ядро нашло устройства
+# при этой конкретной загрузке.
+#
+# Обратите внимание: /dev/vdc уже размечен под LVM (TYPE="LVM2_member")
+# и своей файловой системы не имеет — она у логического тома.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+/dev/vda1: LABEL="boot" UUID="9d21f4c7-3b8e-4a15-9f02-6c7d1e4a8b33" BLOCK_SIZE="4096" TYPE="ext4" PARTUUID="a1b2c3d4-01"
+/dev/vda2: UUID="Kf20xR-3dLm-9Qwe-7Yui-2Pas-4Dfg-8Hjk1z" TYPE="LVM2_member" PARTUUID="a1b2c3d4-02"
+/dev/vdb: UUID="Mn55tY-8kLp-2Zxc-4Vbn-6Qwe-1Rty-9Uio3p" TYPE="LVM2_member"
+/dev/vdc: UUID="Bh77qW-5nMk-3Xzc-8Lkj-0Poi-7Ytr-2Ews5d" TYPE="LVM2_member"
+/dev/mapper/ops--vg-root: LABEL="root" UUID="e4c8a17b-52d9-4f36-b0a1-7e93c65d284f" BLOCK_SIZE="4096" TYPE="ext4"
+/dev/mapper/ops--vg-var: LABEL="var" UUID="7a3f9d15-c862-4e07-91b4-2d5f8a06c3e9" BLOCK_SIZE="4096" TYPE="ext4"
+/dev/mapper/ops--vg-log: LABEL="log" UUID="1b6e5c40-9af3-4d28-83c7-5e10b742f9a6" BLOCK_SIZE="4096" TYPE="ext4"
+/dev/mapper/ops--vg-spool: LABEL="spool" UUID="c92d1873-4b60-45ea-a3f8-8c274e0b95d1" BLOCK_SIZE="4096" TYPE="ext4"
+/dev/mapper/ops--vg-swap: UUID="3f80b2ae-671c-4d95-8e23-a05f9c1d7648" TYPE="swap"

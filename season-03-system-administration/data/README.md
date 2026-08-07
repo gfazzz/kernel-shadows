@@ -19,6 +19,7 @@
 | `journal_err_shadow-01.txt` | s03e07 | то же окно с `-p err` — записей об атаке там нет |
 | `disk_shadow-01.txt` | s03e08, s03e09 | `df -h`, `df -i`, `lsblk -f`, `du /var/log`, `lsof +L1` |
 | `lvm_shadow-01.txt` | s03e09 | `pvs`, `vgs`, `lvs`, `lsblk -dn` после подключения диска |
+| `blkid_shadow-01.txt` | s03e10 | `blkid` — UUID, метки и типы всех устройств |
 
 ## Как пользоваться
 

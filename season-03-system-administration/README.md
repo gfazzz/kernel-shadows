@@ -98,7 +98,7 @@ Season 3 мигрирует с монолитных `episode-NN` (2667–3440 с
 | [s03e06](s03e06-systemd-timers/) | 10 | таймеры вместо cron | `ops-check.timer` + `.service` | **B** | ✅ 24/24 |
 | [s03e07](s03e07-journalctl/) | 10 | `journalctl` (капстоун) | `journal_report.txt` | **C** | ✅ 22/22 |
 | [s03e08](s03e08-disks-fs/) | 11 | диски и файловые системы | `disk_report.txt` | **C** | ✅ 21/21 |
-| s03e09 | 11 | LVM: PV, VG, LV | `lvm_plan.sh` | A | план |
+| [s03e09](s03e09-lvm/) | 11 | LVM: PV, VG, LV | `lvm_plan.sh` | **A** | ✅ 22/22 |
 | s03e10 | 11 | `fstab` и монтирование (капстоун) | `fstab` | B | план |
 | s03e11 | 12 | стратегии бэкапа, `rsync` | `backup.sh` | A | план |
 | s03e12 | 12 | расписание бэкапа таймером | `.timer` | B | план |

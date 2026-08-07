@@ -1,0 +1,36 @@
+# Снимок состояния LVM на shadow-server-01
+# Снят 21 октября в 17:40, после того как Виктор подключил новый диск.
+#
+# Команды:
+#   pvs ; vgs ; lvs ; lsblk -dn -o NAME,SIZE,TYPE
+#
+# Три уровня LVM:
+#   PV (physical volume)  — физический носитель, размеченный под LVM
+#   VG (volume group)     — общий котёл из нескольких PV
+#   LV (logical volume)   — том, нарезанный из котла; на нём файловая система
+#
+# Место для нового тома берётся из VG. Если VFree равен нулю, сначала надо
+# добавить в группу ещё один PV — сам по себе подключённый диск ей не виден.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=== pvs ===
+  PV         VG      Fmt  Attr PSize   PFree
+  /dev/vda2  ops-vg  lvm2 a--  <34.00g      0
+  /dev/vdb   ops-vg  lvm2 a--  <20.00g      0
+
+=== vgs ===
+  VG      #PV #LV #SN Attr   VSize   VFree
+  ops-vg    2   5   0 wz--n- <53.99g     0
+
+=== lvs ===
+  LV    VG      Attr       LSize  Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  log   ops-vg  -wi-ao---- 20.00g
+  root  ops-vg  -wi-ao---- 20.00g
+  spool ops-vg  -wi-ao----  2.00g
+  swap  ops-vg  -wi-ao----  4.00g
+  var   ops-vg  -wi-ao---- 12.00g
+
+=== lsblk -dn -o NAME,SIZE,TYPE ===
+vda   54G disk
+vdb   20G disk
+vdc  500G disk

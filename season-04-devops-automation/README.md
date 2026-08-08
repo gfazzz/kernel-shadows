@@ -104,7 +104,7 @@ Season 4 мигрирует с монолитных `episode-NN` (1929–3620 с
 | [s04e08](s04e08-deploy-rollback/) | 15 | выкат и откат (капстоун) | `rollback.sh` | **A** | ✅ 31/31 |
 | [s04e09](s04e09-ansible-inventory/) | 16 | Ansible: inventory и группы | `inventory.yml` | **B** | ✅ 21/21 |
 | [s04e10](s04e10-ansible-check/) | 16 | что изменится на 50 серверах: `--check --diff` | `plan_report.txt` | **C** | ✅ 22/22 |
-| s04e11 | 16 | аудит всего репозитория (финал сезона) | `iac_audit.sh` | A | план |
+| [s04e11](s04e11-iac-audit/) | 16 | аудит всего репозитория (финал сезона) | `iac_audit.sh` | **A** | ✅ 24/24 |
 
 Целевой баланс по §2A: 3 × Type A, 5 × Type B, 3 × Type C. Конфигураций больше
 половины — для сезона про DevOps это и есть предмет.

@@ -1,0 +1,52 @@
+# harden.yml — устранение находок аудита (СТАРТЕР)
+#
+# Так это написал бы человек, который вчера чинил машины руками, а сегодня
+# записал те же команды в YAML. Оно даже работает — один раз.
+#
+# Правь копию в artifacts/, потом проверяй:  bash tests/test.sh
+#
+# Что должно получиться (подробности — в mission.md):
+#
+#   Playbook описывает СОСТОЯНИЕ, а не действия. Проверка одна: может ли
+#   ansible сказать, что изменится, ДО запуска. Задача на command этого
+#   не позволяет — и в режиме проверки пропускается целиком, как те две
+#   из s04e10.
+#
+#   Плей адресован группе, а не всем машинам сразу. Права повышаются
+#   у задач, которым это нужно, а не у плея. Перезапуск службы —
+#   следствие изменения (handler + notify), а не отдельный шаг. Секрет
+#   приходит из vault и помечен no_log. Ошибки не игнорируются.
+
+- name: harden
+  hosts: all
+  become: true
+
+  vars:
+    registry_password: Sh4dow-Reg-2025!
+
+  tasks:
+    - ansible.builtin.shell: |
+        cp /dev/null /home/ops/.ssh/authorized_keys
+        cat /root/keys/max.pub /root/keys/dmitry.pub >> /home/ops/.ssh/authorized_keys
+
+    - name: запретить вход root
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        line: PermitRootLogin no
+
+    - name: перезапустить sshd
+      ansible.builtin.command: systemctl restart sshd
+
+    - name: закрыть каталог ключей
+      ansible.builtin.shell: chmod 700 /etc/ssl/private
+      ignore_errors: true
+
+    - name: пароль реестра
+      ansible.builtin.shell: echo "{{ registry_password }}" > /etc/ops/registry.pass
+
+    - name: поставить пакеты
+      ansible.builtin.command: apt-get install -y curl jq debsums
+
+    - name: проверить контрольные суммы
+      ansible.builtin.command: debsums -c
+      ignore_errors: true

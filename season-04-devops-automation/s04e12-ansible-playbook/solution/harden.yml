@@ -1,0 +1,117 @@
+# harden.yml — устранение находок аудита на пятидесяти машинах (ЭТАЛОН)
+#
+# Playbook описывает СОСТОЯНИЕ, а не действия. Проверка простая: по каждой
+# задаче ansible должен уметь ответить «изменится или нет» до запуска.
+# Задача на command этого не позволяет — и в режиме проверки пропускается
+# целиком, как те две из s04e10.
+#
+# Запуск: ansible-playbook -i inventory.yml harden.yml --check --diff
+#         ansible-playbook -i inventory.yml harden.yml --limit prod-web27*
+
+- name: Привести боевой контур к описанию
+  hosts: production
+  gather_facts: true
+
+  # Повышение прав — не свойство плея, а свойство задачи. По умолчанию
+  # подключаемся тем же ops, что и в инвентаре.
+  become: false
+
+  vars:
+    ssh_config: /etc/ssh/sshd_config
+    ssl_private: /etc/ssl/private
+
+  handlers:
+    # Перезапуск — следствие изменения, а не отдельный шаг. Если файл
+    # не менялся, служба не трогается: иначе прогон каждый раз рвал бы
+    # соединения на полусотне машин.
+    - name: перезапустить sshd
+      become: true
+      ansible.builtin.systemd:
+        name: sshd
+        state: restarted
+
+  tasks:
+    - name: доверенные ключи доступа
+      become: true
+      ansible.builtin.template:
+        src: authorized_keys.j2
+        dest: /home/ops/.ssh/authorized_keys
+        owner: ops
+        group: ops
+        mode: "0600"
+      tags: [ssh, access]
+
+    # regexp вместо простого добавления строки: иначе при каждом прогоне
+    # в файл дописывалась бы ещё одна. validate проверяет результат
+    # ДО подмены файла — сломанный sshd_config не доедет до машины.
+    - name: вход root по ssh запрещён
+      become: true
+      ansible.builtin.lineinfile:
+        path: "{{ ssh_config }}"
+        regexp: '^[#[:space:]]*PermitRootLogin[[:space:]]'
+        line: PermitRootLogin no
+        state: present
+        validate: /usr/sbin/sshd -t -f %s
+      notify: перезапустить sshd
+      tags: [ssh]
+
+    - name: каталог закрытых ключей закрыт
+      become: true
+      ansible.builtin.file:
+        path: "{{ ssl_private }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0700"
+      tags: [tls]
+
+    # Значение приходит из vault, в файле его нет. no_log закрывает и вывод,
+    # и diff: иначе секрет напечатается в журнале прогона.
+    - name: пароль доступа к реестру
+      become: true
+      ansible.builtin.copy:
+        content: "{{ registry_password }}"
+        dest: /etc/ops/registry.pass
+        owner: root
+        group: root
+        mode: "0600"
+      no_log: true
+      tags: [registry]
+
+    - name: базовый набор пакетов
+      become: true
+      ansible.builtin.apt:
+        name: "{{ base_packages }}"
+        state: present
+        update_cache: true
+        cache_valid_time: 3600
+      when: ansible_os_family == "Debian"
+      tags: [packages]
+
+    - name: журналы операции ротируются
+      become: true
+      ansible.builtin.template:
+        src: logrotate-ops.j2
+        dest: /etc/logrotate.d/ops
+        owner: root
+        group: root
+        mode: "0644"
+      tags: [logs]
+
+    # Единственная команда в playbook — и она объявлена безвредной явно:
+    # changed_when: false означает «эта задача только смотрит»,
+    # check_mode: false — «её можно выполнять и в режиме проверки».
+    # Без этой пары аудит целостности молчал бы ровно там, где нужен.
+    - name: контрольные суммы системных файлов
+      become: true
+      ansible.builtin.command: debsums -c
+      register: sums
+      changed_when: false
+      failed_when: sums.rc not in [0, 1]
+      check_mode: false
+      tags: [audit]
+
+    - name: отчёт о целостности
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }}: {{ 'расхождений нет' if sums.rc == 0 else sums.stdout_lines }}"
+      tags: [audit]

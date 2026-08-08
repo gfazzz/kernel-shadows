@@ -768,7 +768,7 @@ FADE TO:
 
 **Quality:** 4.7/5 ⭐⭐⭐⭐⭐ (Refactored October 2025)
 
-[⬆ Back to Main README](../README.md) | [➡️ Episode 13: Git & Version Control](episode-13-git-version-control/README.md)
+[⬆ Back to Main README](../README.md) | [➡️ s04e01 — Git: три зоны и чтение истории](s04e01-git-history/)
 
 </div>
 

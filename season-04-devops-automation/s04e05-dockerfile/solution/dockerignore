@@ -1,0 +1,30 @@
+# .dockerignore — что НЕ отправлять демону при сборке
+#
+# Контекст сборки — это всё, что docker получает при `docker build .`.
+# Без этого файла `COPY . /app` затягивает внутрь образа и .git, и ключи.
+
+.git
+.gitignore
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+secrets/
+
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+
+*.log
+tmp/
+.DS_Store
+
+Dockerfile
+docker-compose*.yml
+README.md
+docs/
+tests/

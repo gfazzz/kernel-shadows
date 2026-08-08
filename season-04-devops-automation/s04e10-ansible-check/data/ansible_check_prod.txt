@@ -1,0 +1,618 @@
+# Снимок прогона в режиме проверки, боевой контур, 31 октября 2025, 16:12.
+#
+# Собран командой:
+#   ansible-playbook -i inventory.yml site.yml --limit production --check --diff
+#
+# Сокращения при снятии снимка:
+#   * diff печатается один раз на задачу — для остальных хостов он совпадает,
+#     кроме случаев, где явно указан хост;
+#   * служебные сообщения ansible (предупреждения о версии python) убраны.
+# Строки ok:/changed:/skipping:/fatal: оставлены полностью, PLAY RECAP — целиком.
+
+$ ansible-playbook -i inventory.yml site.yml --limit production --check --diff
+
+PLAY [production] **************************************************************
+
+TASK [common : facts] *********************************************************
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+ok: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+fatal: [prod-db04.shadow.io]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host prod-db04.shadow.io port 22: Connection timed out", "unreachable": true}
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+fatal: [prod-cache02.shadow.io]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host prod-cache02.shadow.io port 22: Connection timed out", "unreachable": true}
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [common : packages] ******************************************************
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+ok: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [common : users] *********************************************************
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+ok: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [common : ssh-keys] ******************************************************
+--- before: /home/ops/.ssh/authorized_keys (prod-web27.shadow.io)
++++ after: /home/ops/.ssh/authorized_keys (prod-web27.shadow.io)
+@@ -1,3 +1,2 @@
+ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKq3rV8mJ2sQd1xTn0bYcF7wLpE4hRzS max@ops
+ ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIH9vGtY6kPmW3sXbN1qDcJ8fRhLzA5Ue dmitry@ops
+-ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIP2wKdN7bQxS4mVcE8hTrY1oZjG6aLuF root@kali
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+changed: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [common : sudoers] *******************************************************
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+ok: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [common : ntp] ***********************************************************
+--- before: /etc/systemd/timesyncd.conf
++++ after: /etc/systemd/timesyncd.conf
+@@ -1,3 +1,3 @@
+ [Time]
+-NTP=ntp.ubuntu.com
++NTP=0.nl.pool.ntp.org 1.nl.pool.ntp.org
+changed: [prod-web01.shadow.io]
+changed: [prod-web02.shadow.io]
+changed: [prod-web03.shadow.io]
+changed: [prod-web04.shadow.io]
+changed: [prod-web05.shadow.io]
+changed: [prod-web06.shadow.io]
+changed: [prod-web07.shadow.io]
+changed: [prod-web08.shadow.io]
+changed: [prod-web09.shadow.io]
+changed: [prod-web10.shadow.io]
+changed: [prod-web11.shadow.io]
+changed: [prod-web12.shadow.io]
+changed: [prod-web13.shadow.io]
+changed: [prod-web14.shadow.io]
+changed: [prod-web15.shadow.io]
+changed: [prod-web16.shadow.io]
+changed: [prod-web17.shadow.io]
+changed: [prod-web18.shadow.io]
+changed: [prod-web19.shadow.io]
+changed: [prod-web20.shadow.io]
+changed: [prod-web21.shadow.io]
+changed: [prod-web22.shadow.io]
+changed: [prod-web23.shadow.io]
+changed: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+changed: [prod-web27.shadow.io]
+changed: [prod-db01.shadow.io]
+changed: [prod-db02.shadow.io]
+changed: [prod-db03.shadow.io]
+changed: [prod-db05.shadow.io]
+changed: [prod-cache01.shadow.io]
+changed: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [common : sshd] **********************************************************
+--- before: /etc/ssh/sshd_config (prod-web27.shadow.io)
++++ after: /etc/ssh/sshd_config (prod-web27.shadow.io)
+@@ -32,7 +32,7 @@
+ #LoginGraceTime 2m
+-PermitRootLogin yes
++PermitRootLogin no
+ StrictModes yes
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+changed: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [common : firewall] ******************************************************
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+ok: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [monitor : unit] *********************************************************
+--- before: /etc/systemd/system/ops-monitor.service (prod-mon01.shadow.io)
++++ after: /etc/systemd/system/ops-monitor.service (prod-mon01.shadow.io)
+@@ -8,4 +8,5 @@
+ Restart=on-failure
++RestartSec=5s
+ User=ops
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+ok: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+changed: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [monitor : timer] ********************************************************
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+ok: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [common : logrotate] *****************************************************
+--- before: /etc/logrotate.d/ops (prod-db02.shadow.io)
++++ after: /etc/logrotate.d/ops (prod-db02.shadow.io)
+@@ -1,5 +1,5 @@
+ /var/log/ops/*.log {
+-    rotate 4
++    rotate 14
+     daily
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+ok: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+changed: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [common : ssl-perms] *****************************************************
+--- before: /etc/ssl/private (prod-web27.shadow.io)
++++ after: /etc/ssl/private (prod-web27.shadow.io)
+@@ -1,4 +1,4 @@
+ {
+-    "mode": "0755",
++    "mode": "0700",
+     "owner": "root",
+     "path": "/etc/ssl/private"
+ok: [prod-web01.shadow.io]
+ok: [prod-web02.shadow.io]
+ok: [prod-web03.shadow.io]
+ok: [prod-web04.shadow.io]
+ok: [prod-web05.shadow.io]
+ok: [prod-web06.shadow.io]
+ok: [prod-web07.shadow.io]
+ok: [prod-web08.shadow.io]
+ok: [prod-web09.shadow.io]
+ok: [prod-web10.shadow.io]
+ok: [prod-web11.shadow.io]
+ok: [prod-web12.shadow.io]
+ok: [prod-web13.shadow.io]
+ok: [prod-web14.shadow.io]
+ok: [prod-web15.shadow.io]
+ok: [prod-web16.shadow.io]
+ok: [prod-web17.shadow.io]
+ok: [prod-web18.shadow.io]
+ok: [prod-web19.shadow.io]
+ok: [prod-web20.shadow.io]
+ok: [prod-web21.shadow.io]
+ok: [prod-web22.shadow.io]
+ok: [prod-web23.shadow.io]
+ok: [prod-web24.shadow.io]
+ok: [prod-web25.shadow.io]
+ok: [prod-web26.shadow.io]
+changed: [prod-web27.shadow.io]
+ok: [prod-db01.shadow.io]
+ok: [prod-db02.shadow.io]
+ok: [prod-db03.shadow.io]
+ok: [prod-db05.shadow.io]
+ok: [prod-cache01.shadow.io]
+ok: [prod-mon01.shadow.io]
+ok: [prod-mon02.shadow.io]
+
+TASK [audit : checksums] ******************************************************
+skipping: [prod-web01.shadow.io]
+skipping: [prod-web02.shadow.io]
+skipping: [prod-web03.shadow.io]
+skipping: [prod-web04.shadow.io]
+skipping: [prod-web05.shadow.io]
+skipping: [prod-web06.shadow.io]
+skipping: [prod-web07.shadow.io]
+skipping: [prod-web08.shadow.io]
+skipping: [prod-web09.shadow.io]
+skipping: [prod-web10.shadow.io]
+skipping: [prod-web11.shadow.io]
+skipping: [prod-web12.shadow.io]
+skipping: [prod-web13.shadow.io]
+skipping: [prod-web14.shadow.io]
+skipping: [prod-web15.shadow.io]
+skipping: [prod-web16.shadow.io]
+skipping: [prod-web17.shadow.io]
+skipping: [prod-web18.shadow.io]
+skipping: [prod-web19.shadow.io]
+skipping: [prod-web20.shadow.io]
+skipping: [prod-web21.shadow.io]
+skipping: [prod-web22.shadow.io]
+skipping: [prod-web23.shadow.io]
+skipping: [prod-web24.shadow.io]
+skipping: [prod-web25.shadow.io]
+skipping: [prod-web26.shadow.io]
+skipping: [prod-web27.shadow.io]
+skipping: [prod-db01.shadow.io]
+skipping: [prod-db02.shadow.io]
+skipping: [prod-db03.shadow.io]
+skipping: [prod-db05.shadow.io]
+skipping: [prod-cache01.shadow.io]
+skipping: [prod-mon01.shadow.io]
+skipping: [prod-mon02.shadow.io]
+
+TASK [audit : cert-expiry] ****************************************************
+skipping: [prod-web01.shadow.io]
+skipping: [prod-web02.shadow.io]
+skipping: [prod-web03.shadow.io]
+skipping: [prod-web04.shadow.io]
+skipping: [prod-web05.shadow.io]
+skipping: [prod-web06.shadow.io]
+skipping: [prod-web07.shadow.io]
+skipping: [prod-web08.shadow.io]
+skipping: [prod-web09.shadow.io]
+skipping: [prod-web10.shadow.io]
+skipping: [prod-web11.shadow.io]
+skipping: [prod-web12.shadow.io]
+skipping: [prod-web13.shadow.io]
+skipping: [prod-web14.shadow.io]
+skipping: [prod-web15.shadow.io]
+skipping: [prod-web16.shadow.io]
+skipping: [prod-web17.shadow.io]
+skipping: [prod-web18.shadow.io]
+skipping: [prod-web19.shadow.io]
+skipping: [prod-web20.shadow.io]
+skipping: [prod-web21.shadow.io]
+skipping: [prod-web22.shadow.io]
+skipping: [prod-web23.shadow.io]
+skipping: [prod-web24.shadow.io]
+skipping: [prod-web25.shadow.io]
+skipping: [prod-web26.shadow.io]
+skipping: [prod-web27.shadow.io]
+skipping: [prod-db01.shadow.io]
+skipping: [prod-db02.shadow.io]
+skipping: [prod-db03.shadow.io]
+skipping: [prod-db05.shadow.io]
+skipping: [prod-cache01.shadow.io]
+skipping: [prod-mon01.shadow.io]
+skipping: [prod-mon02.shadow.io]
+
+PLAY RECAP ********************************************************************
+prod-web01.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web02.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web03.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web04.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web05.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web06.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web07.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web08.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web09.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web10.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web11.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web12.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web13.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web14.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web15.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web16.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web17.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web18.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web19.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web20.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web21.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web22.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web23.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web24.shadow.io     : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web25.shadow.io     : ok=12   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web26.shadow.io     : ok=12   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-web27.shadow.io     : ok=8    changed=4    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-db01.shadow.io      : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-db02.shadow.io      : ok=10   changed=2    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-db03.shadow.io      : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-db04.shadow.io      : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0
+prod-db05.shadow.io      : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-cache01.shadow.io   : ok=11   changed=1    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-cache02.shadow.io   : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0
+prod-mon01.shadow.io     : ok=10   changed=2    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+prod-mon02.shadow.io     : ok=12   changed=0    unreachable=0    failed=0    skipped=2    rescued=0    ignored=0
+
+# Для справки — те две задачи, которые в выводе выше пропущены на всех хостах:
+
+$ sed -n '96,110p' site.yml
+
+    - name: checksums
+      ansible.builtin.command: debsums -c
+      register: sums
+      changed_when: sums.rc != 0
+
+    - name: cert-expiry
+      ansible.builtin.command: openssl x509 -checkend 604800 -noout -in /etc/ssl/certs/ops.crt
+      register: cert
+      changed_when: false
+      failed_when: cert.rc != 0
+
+    - name: logrotate
+      ansible.builtin.copy:
+        src: logrotate-ops
+        dest: /etc/logrotate.d/ops

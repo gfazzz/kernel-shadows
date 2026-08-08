@@ -97,7 +97,7 @@ Season 4 мигрирует с монолитных `episode-NN` (1929–3620 с
 | [s04e01](s04e01-git-history/) | 13 | Git: три зоны, чтение истории | `history_report.txt` | **C** | ✅ 24/24 |
 | [s04e02](s04e02-branches-prepush/) | 13 | ветки, слияние, проверка перед push | `prepush_check.sh` | **A** | ✅ 20/20 |
 | [s04e03](s04e03-gitignore-secrets/) | 13 | утёкший секрет: `.gitignore`, `.env.example` (капстоун) | `gitignore` + `env.example` | **B** | ✅ 21/21 |
-| s04e04 | 14 | образы и слои: чтение `docker history` | `image_report.txt` | C | план |
+| [s04e04](s04e04-images-layers/) | 14 | образы и слои: чтение `docker history` | `image_report.txt` | **C** | ✅ 21/21 |
 | s04e05 | 14 | свой `Dockerfile` | `Dockerfile` | B | план |
 | s04e06 | 14 | несколько служб: `compose.yaml` (капстоун) | `compose.yaml` | B | план |
 | s04e07 | 15 | конвейер CI | `.github/workflows/ci.yml` | B | план |

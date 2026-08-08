@@ -1,0 +1,64 @@
+# Снимок образов на сборочной машине операции
+# Снят 27 октября в 11:20 Софи ван Дейк после того, как выгрузка образа
+# `ops/collector` неожиданно оказалась вдвое больше исходников.
+#
+# Пять команд подряд. Разделы помечены строками «=== команда ===».
+#
+# Как читать `docker history`: строки идут СВЕРХУ ВНИЗ от последнего слоя
+# к первому. Слой — это разница, внесённая одной инструкцией; удаление
+# в позднем слое не уменьшает образ, потому что ранние слои остаются.
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+=== docker images ===
+REPOSITORY       TAG        IMAGE ID       CREATED         SIZE
+ops/collector    1.4.0      7c2a91d4e8b3   2 hours ago     412MB
+ops/collector    latest     7c2a91d4e8b3   2 hours ago     412MB
+ops/api          2.1.0      1f8e33c07a5d   3 days ago      198MB
+ops/dashboard    0.9.2      b45d02fa9e61   6 days ago      126MB
+postgres         14-alpine  c9e7a1b3d820   3 weeks ago     238MB
+python           3.11       4d1e6f8a2c93   5 weeks ago     1.01GB
+python           3.11-slim  a72c5e04b1f8   5 weeks ago     130MB
+
+=== docker history ops/collector:1.4.0 ===
+IMAGE          CREATED        CREATED BY                                      SIZE
+7c2a91d4e8b3   2 hours ago    CMD ["python" "/app/collector.py"]              0B
+<missing>      2 hours ago    USER root                                       0B
+<missing>      2 hours ago    COPY . /app                                     1.42MB
+<missing>      2 hours ago    RUN /bin/sh -c rm -rf /tmp/deploy_key           0B
+<missing>      2 hours ago    RUN /bin/sh -c pip install -r requirements.…    148MB
+<missing>      2 hours ago    COPY deploy_key /tmp/deploy_key                 3.24kB
+<missing>      2 hours ago    RUN /bin/sh -c apt-get update && apt-get ins…   112MB
+<missing>      2 hours ago    ENV DB_PASSWORD=Sh4dow-Pr0d-2025!               0B
+<missing>      2 hours ago    WORKDIR /app                                    0B
+<missing>      5 weeks ago    /bin/sh -c #(nop)  CMD ["python3"]              0B
+<missing>      5 weeks ago    /bin/sh -c #(nop) ADD file:8f2c1e… in /         149MB
+
+=== docker inspect ops/collector:1.4.0 ===
+{
+  "Id": "sha256:7c2a91d4e8b3",
+  "RepoTags": ["ops/collector:1.4.0", "ops/collector:latest"],
+  "Parent": "",
+  "Config": {
+    "User": "",
+    "Env": [
+      "PATH=/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "PYTHON_VERSION=3.11.6",
+      "DB_PASSWORD=Sh4dow-Pr0d-2025!",
+      "OPS_ENDPOINT=https://ops.internal:8443"
+    ],
+    "Cmd": ["python", "/app/collector.py"],
+    "WorkingDir": "/app"
+  },
+  "Architecture": "amd64",
+  "Os": "linux",
+  "Size": 412000000
+}
+
+=== базовый образ по Dockerfile ===
+FROM python:3.11
+
+=== trivy image ops/collector:1.4.0 (сводка) ===
+Total: 63 (UNKNOWN: 0, LOW: 21, MEDIUM: 30, HIGH: 10, CRITICAL: 2)
+
+python:3.11        Total: 61 (LOW: 20, MEDIUM: 29, HIGH: 10, CRITICAL: 2)
+python:3.11-slim   Total: 9  (LOW: 4,  MEDIUM: 4,  HIGH: 1,  CRITICAL: 0)

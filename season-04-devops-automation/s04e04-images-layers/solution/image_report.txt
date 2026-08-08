@@ -1,0 +1,47 @@
+# Что показал разбор образа — s04e04 (ЭТАЛОН)
+#
+# Команда, которой добыто каждое значение, — в комментарии над ним.
+# D=../data/docker_ops_snapshot.txt
+# sec() { awk -v s="$1" '$0=="=== "s" ===" {f=1; next} /^=== /{f=0} f' "$D"; }
+
+# --- Что вообще лежит на машине ----------------------------------------------
+# sec 'docker images' | awk 'NR>1 {print $3}' | sort -u | wc -l
+#   ИМЕННО по IMAGE ID: ops/collector:1.4.0 и :latest — ОДИН образ с двумя
+#   тегами, и строк в выводе на один больше, чем образов.
+distinct_images=6
+# sec 'docker images' | awk 'NR>1 {print $NF, $1":"$2}' | sort -h | tail -1
+#   Крупнее всех не то, что собирали, а база: python:3.11 — гигабайт.
+largest_image=python:3.11
+largest_size=1.01GB
+
+# --- Слои ops/collector -------------------------------------------------------
+# sec 'docker history ops/collector:1.4.0' | awk 'NR>1' | grep -c .
+layers=11
+# та же таблица без строк с #(nop): крупнейший слой сборки — установка зависимостей.
+#   Слой базы весит 149MB, но его писали не вы; сборка добавила поверх ещё 260.
+biggest_build_instruction=RUN
+biggest_build_size=148MB
+
+# --- Что попало внутрь --------------------------------------------------------
+# COPY deploy_key /tmp/deploy_key  → RUN rm -rf /tmp/deploy_key
+deleted_file=/tmp/deploy_key
+# Слой удаления весит 0B, а слой копирования — 3.24kB, и он остался.
+#   Ключ по-прежнему извлекается: docker save образ | tar -x, или
+#   docker run --rm образ cat нужного слоя через `docker export` предыдущей
+#   ступени. Удаление в позднем слое ничего не освобождает.
+delete_freed_space=no
+# sec 'docker inspect ...' — массив Env виден любому, у кого есть образ
+secret_env_var=DB_PASSWORD
+secret_env_value=Sh4dow-Pr0d-2025!
+
+# --- От кого работает ---------------------------------------------------------
+# "User": "" в inspect означает НЕ «никто», а умолчание — root.
+#   Плюс в истории есть явная инструкция USER root.
+effective_user=root
+
+# --- База ---------------------------------------------------------------------
+base_image=python:3.11
+# sec 'trivy image ...' — строка Total по собранному образу
+critical_vulns=2
+# та же сводка, строка python:3.11-slim
+critical_vulns_slim=0

@@ -37,7 +37,7 @@ redirect|>\s*[a-z_]+\.(txt|log|conf)|s01e09
 editor|\b(nano|vim|vi)\b|s01e05
 ssh|\bssh\s|s02e08
 tar|\btar\s+-|s03e11
-curl|curl -[a-zA-Z]|NONE
+curl|curl -[a-zA-Z]|s02e03
 '
 
 echo "════════════════════════════════════════════════════════════"

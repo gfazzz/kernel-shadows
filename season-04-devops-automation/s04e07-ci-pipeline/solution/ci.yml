@@ -1,0 +1,126 @@
+# ci.yml — конвейер операции (ЭТАЛОН)
+#
+# Кладётся в репозиторий как .github/workflows/ci.yml.
+# Ниже прокомментировано не «что делает строка», а «почему она такая»:
+# почти каждая закрывает конкретный способ получить зелёную галочку
+# при непройденной проверке.
+
+name: CI
+
+# Проверка обязана приходить ДО слияния, иначе она сообщает о беде
+# постфактум. push оставлен, чтобы main проверялся и после слияния.
+# pull_request_target здесь не используется никогда: он даёт коду
+# из чужой ветки доступ к секретам репозитория.
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+# Токен job'а по умолчанию умеет писать в репозиторий. Здесь он не нужен
+# ни одному job — значит, только чтение.
+permissions:
+  contents: read
+
+# Второй push в ту же ветку отменяет предыдущий прогон: очередь не растёт,
+# и в бой не уезжает устаревшая сборка.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  IMAGE: registry.shadow.io/ops/collector
+
+jobs:
+  # ---- 1. проверки: единственный вход в конвейер -----------------------------
+  checks:
+    name: проверки репозитория
+    runs-on: ubuntu-22.04        # не latest: рантайм меняется молча, как и тег образа
+    timeout-minutes: 10          # зависший job иначе держит очередь до шести часов
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+        with:
+          fetch-depth: 0         # prepush_check смотрит диапазон, нужна история
+
+      # Без `|| true` и без continue-on-error: если проверка провалилась,
+      # обязан провалиться и job. Иначе галочка не значит ничего.
+      - name: что уйдёт в main
+        run: bash scripts/prepush_check.sh --repo . --base origin/main
+
+      # Данные из события — только через env и только в кавычках.
+      # Подстановка ${{ ... }} прямо в run вклеивает текст в команду
+      # до её разбора оболочкой.
+      - name: сообщение коммита
+        env:
+          MSG: ${{ github.event.head_commit.message }}
+        run: printf 'проверяю: %s\n' "${MSG}"
+
+  # ---- 2. сборка: один образ на всю цепочку ----------------------------------
+  build:
+    name: сборка образа
+    needs: checks
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+
+      # Секрет попадает в шаг переменной окружения, а не подстановкой в run:
+      # так он не окажется в тексте команды и в журнале прогона.
+      - name: вход в реестр
+        env:
+          REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
+        run: printf '%s' "${REGISTRY_PASSWORD}" | docker login registry.shadow.io -u ops --password-stdin
+
+      # Тег — хеш коммита. Неизменяемый тег это единственное, что делает
+      # возможным откат: «вернуть предыдущую версию» требует, чтобы
+      # предыдущая версия имела имя.
+      - name: собрать и отправить
+        run: |
+          docker build -t "${IMAGE}:${GITHUB_SHA}" .
+          docker push "${IMAGE}:${GITHUB_SHA}"
+
+  # ---- 3. стенд: то же самое, но не на клиентах ------------------------------
+  staging:
+    name: выкат на стенд
+    needs: build
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    environment: staging
+    steps:
+      - name: ключ выката
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${DEPLOY_KEY}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: выкатить
+        run: ssh ops@staging.shadow.io "docker pull ${IMAGE}:${GITHUB_SHA} && docker compose up -d"
+
+      # Выкат заканчивается не командой, а ответом машины.
+      - name: проверить готовность
+        run: curl -fsS --retry 10 --retry-delay 3 https://staging.shadow.io/healthz
+
+  # ---- 4. бой: только из main и только после человека ------------------------
+  production:
+    name: выкат в бой
+    needs: staging
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    environment: production      # required reviewers в настройках окружения
+    steps:
+      - name: ключ выката
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${DEPLOY_KEY}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: выкатить
+        run: ssh ops@prod.shadow.io "docker pull ${IMAGE}:${GITHUB_SHA} && docker compose up -d"
+
+      - name: проверить готовность
+        run: curl -fsS --retry 10 --retry-delay 3 https://ops.shadow.io/healthz

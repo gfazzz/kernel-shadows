@@ -1,0 +1,53 @@
+# ci.yml — конвейер операции (СТАРТЕР)
+#
+# Кладётся в репозиторий как .github/workflows/ci.yml.
+#
+# Этот файл написал Дмитрий за вечер, и он работает: галочка зелёная
+# на каждом коммите в main. Задача — понять, что именно эта галочка
+# означает, и переписать файл так, чтобы она означала то, что от неё ждут.
+#
+# Правь копию в artifacts/, потом проверяй:  bash tests/test.sh
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+
+env:
+  REGISTRY_PASSWORD: Sh4dow-Pr0d-2025!
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: что уйдёт в main
+        run: bash scripts/prepush_check.sh --repo . || true
+
+      - name: гигиена образа
+        continue-on-error: true
+        run: bash scripts/dockerfile_check.sh
+
+      - name: объявить сборку
+        run: echo "Собираю ${{ github.event.head_commit.message }}"
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+
+      - name: вход в реестр
+        run: echo "${REGISTRY_PASSWORD}" | docker login registry.shadow.io -u ops --password-stdin
+
+      - name: собрать и отправить
+        run: |
+          docker build -t registry.shadow.io/ops/collector:latest .
+          docker push registry.shadow.io/ops/collector:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: выкатить в бой
+        run: ssh ops@prod.shadow.io "docker pull registry.shadow.io/ops/collector:latest && docker compose up -d"

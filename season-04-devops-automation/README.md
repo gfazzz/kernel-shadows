@@ -100,7 +100,7 @@ Season 4 мигрирует с монолитных `episode-NN` (1929–3620 с
 | [s04e04](s04e04-images-layers/) | 14 | образы и слои: чтение `docker history` | `image_report.txt` | **C** | ✅ 21/21 |
 | [s04e05](s04e05-dockerfile/) | 14 | свой `Dockerfile` | `Dockerfile` + `dockerignore` | **B** | ✅ 20/20 |
 | [s04e06](s04e06-compose/) | 14 | несколько служб: `compose.yaml` (капстоун) | `compose.yaml` | **B** | ✅ 22/22 |
-| s04e07 | 15 | конвейер CI | `.github/workflows/ci.yml` | B | план |
+| [s04e07](s04e07-ci-pipeline/) | 15 | конвейер CI | `.github/workflows/ci.yml` | **B** | ✅ 24/24 |
 | s04e08 | 15 | выкат и откат (капстоун) | `rollback.sh` | A | план |
 | s04e09 | 16 | Ansible: inventory и группы | `inventory.yml` | B | план |
 | s04e10 | 16 | что изменится на 50 серверах: `--check --diff` | `plan_report.txt` | C | план |

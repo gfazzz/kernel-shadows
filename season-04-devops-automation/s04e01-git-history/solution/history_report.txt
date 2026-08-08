@@ -1,0 +1,52 @@
+# Что рассказала история репозитория — s04e01 (ЭТАЛОН)
+#
+# Команда, которой добыто каждое значение, — в комментарии над ним.
+# Всё выполняется внутри восстановленного репозитория.
+
+# --- Объём и авторы ----------------------------------------------------------
+# git rev-list --count HEAD
+total_commits=13
+# git rev-list --count --no-merges HEAD
+#   Разница ровно в одном коммите слияния. Он ничего не написал, но он есть,
+#   и в вопросе «сколько сделано» его обычно считать не надо.
+commits_no_merges=12
+# git log --format='%an' | sort -u | wc -l
+authors=3
+# git log --format='%an' | sort | uniq -c | sort -rn | head -1
+top_author=Max Sokolov
+top_author_commits=6
+
+# --- Опорные точки -----------------------------------------------------------
+# git rev-parse --short=7 "$(git rev-list --max-parents=0 HEAD)"
+#   --max-parents=0 — коммит без родителей, то есть корневой.
+first_commit=e5088de
+# git log -1 --format=%ad --date=short "$(git rev-list --max-parents=0 HEAD)"
+first_commit_date=2025-10-25
+# M="$(git rev-list --merges -1 HEAD)"
+# git rev-parse --short=7 "$(git merge-base "${M}^1" "${M}^2")"
+#   Точка расхождения — это ОБЩИЙ ПРЕДОК двух родителей слияния, а не первый
+#   коммит ветки. `git merge-base main monitoring` после слияния уже бесполезен:
+#   ветка стала предком main, и он вернёт её вершину.
+branch_point=886374e
+# git rev-list --merges -1 --abbrev-commit HEAD
+merge_commit=a5bcf28
+# git ls-files | wc -l
+#   ИМЕННО ls-files: `ls` покажет и .git, и то, что не отслеживается.
+files_tracked=9
+
+# --- Инцидент ----------------------------------------------------------------
+secret_file=.env
+# git log --all --oneline --diff-filter=A -- .env
+secret_added_in=174b20b
+# git log --all --oneline --diff-filter=D -- .env
+secret_removed_in=d90ad87
+# git show 174b20b:.env | grep DB_PASSWORD
+#   Файла нет в рабочем дереве, но он есть в истории — и будет там, пока
+#   историю не переписали. Удаление файла НЕ удаляет его из прошлых коммитов.
+secret_password=Sh4dow-Pr0d-2025!
+
+# --- Прочее ------------------------------------------------------------------
+# git log --no-merges --format='C %h' --numstat \
+#   | awk '/^C /{h=$2} /^[0-9]/{s[h]+=$1+$2} END{for(k in s) print s[k], k}' \
+#   | sort -rn | head -1
+largest_commit=a94ba71

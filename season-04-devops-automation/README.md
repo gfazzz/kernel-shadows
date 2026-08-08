@@ -102,7 +102,7 @@ Season 4 мигрирует с монолитных `episode-NN` (1929–3620 с
 | [s04e06](s04e06-compose/) | 14 | несколько служб: `compose.yaml` (капстоун) | `compose.yaml` | **B** | ✅ 22/22 |
 | [s04e07](s04e07-ci-pipeline/) | 15 | конвейер CI | `.github/workflows/ci.yml` | **B** | ✅ 24/24 |
 | [s04e08](s04e08-deploy-rollback/) | 15 | выкат и откат (капстоун) | `rollback.sh` | **A** | ✅ 31/31 |
-| s04e09 | 16 | Ansible: inventory и группы | `inventory.yml` | B | план |
+| [s04e09](s04e09-ansible-inventory/) | 16 | Ansible: inventory и группы | `inventory.yml` | **B** | ✅ 21/21 |
 | s04e10 | 16 | что изменится на 50 серверах: `--check --diff` | `plan_report.txt` | C | план |
 | s04e11 | 16 | аудит всего репозитория (финал сезона) | `iac_audit.sh` | A | план |
 

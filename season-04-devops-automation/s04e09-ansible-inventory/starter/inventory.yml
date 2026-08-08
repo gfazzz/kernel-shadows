@@ -1,0 +1,99 @@
+# inventory.yml — серверы операции (СТАРТЕР)
+#
+# Так этот файл выглядит сегодня. Он работает: `ansible all -m ping`
+# отвечает со всех пятидесяти машин.
+#
+# Правь копию в artifacts/, потом проверяй:  bash tests/test.sh
+
+all:
+  children:
+
+    web:
+      hosts:
+        prod-web01.shadow.io:
+        prod-web02.shadow.io:
+        prod-web03.shadow.io:
+        prod-web04.shadow.io:
+        prod-web05.shadow.io:
+        prod-web06.shadow.io:
+        prod-web07.shadow.io:
+        prod-web08.shadow.io:
+        prod-web09.shadow.io:
+        prod-web10.shadow.io:
+        prod-web11.shadow.io:
+        prod-web12.shadow.io:
+        prod-web13.shadow.io:
+        prod-web14.shadow.io:
+        prod-web15.shadow.io:
+        prod-web16.shadow.io:
+        prod-web17.shadow.io:
+        prod-web18.shadow.io:
+        prod-web19.shadow.io:
+        prod-web20.shadow.io:
+        prod-web21.shadow.io:
+        prod-web22.shadow.io:
+        prod-web23.shadow.io:
+        prod-web24.shadow.io:
+        prod-web25.shadow.io:
+        prod-web26.shadow.io:
+        prod-web27.shadow.io:
+        stg-web01.shadow.io:
+        stg-web02.shadow.io:
+        stg-web03.shadow.io:
+        stg-web04.shadow.io:
+        stg-web05.shadow.io:
+        stg-web06.shadow.io:
+        stg-web07.shadow.io:
+        stg-web08.shadow.io:
+      vars:
+        ansible_user: root
+        ansible_password: Sh4dow-Ops-2025!
+        ansible_ssh_common_args: -o StrictHostKeyChecking=no
+        ops_role: web
+        log_level: debug
+        open_ports: "80,443"
+
+    db:
+      hosts:
+        prod-db01.shadow.io:
+        prod-db02.shadow.io:
+        prod-db03.shadow.io:
+        prod-db04.shadow.io:
+        prod-db05.shadow.io:
+        stg-db01.shadow.io:
+        stg-db02.shadow.io:
+        stg-db03.shadow.io:
+        stg-db04.shadow.io:
+      vars:
+        ansible_user: root
+        ansible_password: Sh4dow-Ops-2025!
+        ansible_ssh_common_args: -o StrictHostKeyChecking=no
+        ops_role: db
+        log_level: debug
+        open_ports: "5432"
+
+    cache:
+      hosts:
+        prod-cache01.shadow.io:
+        prod-cache02.shadow.io:
+        stg-cache01.shadow.io:
+        stg-cache02.shadow.io:
+      vars:
+        ansible_user: root
+        ansible_password: Sh4dow-Ops-2025!
+        ansible_ssh_common_args: -o StrictHostKeyChecking=no
+        ops_role: cache
+        log_level: debug
+        open_ports: "6379"
+
+    monitoring:
+      hosts:
+        prod-mon01.shadow.io:
+        prod-mon02.shadow.io:
+      vars:
+        ansible_user: root
+        ansible_password: Sh4dow-Ops-2025!
+        ansible_ssh_common_args: -o StrictHostKeyChecking=no
+        ops_role: monitoring
+        log_level: debug
+        open_ports: "9090,3000"

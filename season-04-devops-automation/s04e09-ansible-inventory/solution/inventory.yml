@@ -1,0 +1,74 @@
+# inventory.yml — пятьдесят серверов операции (ЭТАЛОН)
+#
+# Две независимые оси: роль (что сервер делает) и контур (где он стоит).
+# Каждый хост попадает ровно в одну группу по каждой оси.
+#
+# Главное правило файла: переменная задаётся только на той оси, к которой
+# относится по смыслу. ops_role и open_ports — свойства роли; ops_env и
+# log_level — свойства контура. Если одну и ту же переменную задать
+# и там, и там, Ansible разрешит спор по алфавиту имён групп, а не по
+# вашему представлению о том, какая группа «главнее».
+
+all:
+  vars:
+    # Общее для всех — один раз и в одном месте.
+    ansible_user: ops
+    ansible_port: 22
+    ansible_python_interpreter: /usr/bin/python3
+    ntp_servers: "0.nl.pool.ntp.org 1.nl.pool.ntp.org"
+
+  children:
+
+    # ---- ось 1: роль ---------------------------------------------------------
+    web:
+      hosts:
+        prod-web[01:27].shadow.io:
+        stg-web[01:08].shadow.io:
+      vars:
+        ops_role: web
+        open_ports: "80,443"
+
+    db:
+      hosts:
+        prod-db[01:05].shadow.io:
+        stg-db[01:04].shadow.io:
+      vars:
+        ops_role: db
+        open_ports: "5432"
+
+    cache:
+      hosts:
+        prod-cache[01:02].shadow.io:
+        stg-cache[01:02].shadow.io:
+      vars:
+        ops_role: cache
+        open_ports: "6379"
+
+    monitoring:
+      hosts:
+        prod-mon[01:02].shadow.io:
+      vars:
+        ops_role: monitoring
+        open_ports: "9090,3000"
+
+    # ---- ось 2: контур -------------------------------------------------------
+    production:
+      hosts:
+        prod-web[01:27].shadow.io:
+        prod-db[01:05].shadow.io:
+        prod-cache[01:02].shadow.io:
+        prod-mon[01:02].shadow.io:
+      vars:
+        ops_env: prod
+        log_level: warn
+        backup_retention_days: 30
+
+    staging:
+      hosts:
+        stg-web[01:08].shadow.io:
+        stg-db[01:04].shadow.io:
+        stg-cache[01:02].shadow.io:
+      vars:
+        ops_env: staging
+        log_level: debug
+        backup_retention_days: 3

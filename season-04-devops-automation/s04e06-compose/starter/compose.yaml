@@ -1,0 +1,35 @@
+# compose.yaml для стека операции (СТАРТЕР)
+#
+# Дмитрий собрал это за вечер, чтобы «поднималось одной командой».
+# Оно поднимается. И база при этом смотрит в интернет, пароль лежит
+# открытым текстом, а данные исчезают при пересоздании контейнера.
+#
+# Правь этот файл в artifacts/, потом проверяй:  bash tests/test.sh
+#
+# Что должно получиться (подробности — в mission.md):
+#   наружу смотрит только то, что должно; секреты не в тексте файла;
+#   данные переживают пересоздание; сборщик ждёт готовую базу,
+#   а не просто «запущенный контейнер»; контейнеры не от root.
+
+version: "3"
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_PASSWORD: Sh4dow-Pr0d-2025!
+      POSTGRES_DB: ops
+    ports:
+      - "5432:5432"
+
+  collector:
+    image: ops/collector:latest
+    privileged: true
+    depends_on:
+      - db
+    environment:
+      DB_PASSWORD: Sh4dow-Pr0d-2025!
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - "8080:8080"

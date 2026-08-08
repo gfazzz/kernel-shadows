@@ -1,0 +1,115 @@
+# compose.yaml для стека операции (ЭТАЛОН)
+#
+# Проверить, что compose понял именно это:
+#   docker compose config          # эффективная конфигурация после подстановок
+#   docker compose config --services
+#   docker compose up -d && docker compose ps
+
+services:
+  db:
+    image: postgres:14.10-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ops
+      POSTGRES_USER: ops
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ops -d ops"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    cap_drop:
+      - ALL
+
+  collector:
+    image: ops/collector:1.5.0
+    restart: unless-stopped
+    user: "10001:10001"
+    read_only: true
+    tmpfs:
+      - /tmp
+    environment:
+      DB_HOST: db
+      DB_USER: ops
+      DB_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_password
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - backend
+      - frontend
+    ports:
+      - "127.0.0.1:8080:8080"
+    cap_drop:
+      - ALL
+
+networks:
+  backend:
+    internal: true
+  frontend:
+
+volumes:
+  db_data:
+
+secrets:
+  db_password:
+    file: ./secrets/db_password
+
+# ---------------------------------------------------------------------------
+# ПОЧЕМУ ИМЕННО ТАК
+#
+# Нет ключа `version`.
+#   Он был нужен схеме compose v1–v2 и с 2020 года не значит ничего; современный
+#   compose печатает предупреждение и игнорирует его. Файл начинается со `services`.
+#
+# У базы НЕТ `ports`.
+#   Публикация порта означает «слушать на всех интерфейсах хоста» — то есть
+#   база из стартера видна из интернета, если у машины белый адрес. Внутри
+#   сети `backend` контейнеры и так видят друг друга по имени службы (`db`),
+#   и никакая публикация для этого не нужна.
+#
+# `backend` помечена `internal: true`.
+#   Сеть без выхода наружу. Даже если в базе окажется что-то лишнее, оно не
+#   сможет никуда обратиться. `collector` подключён к обеим сетям — он и
+#   ходит в базу, и принимает запросы.
+#
+# Порт сборщика привязан к `127.0.0.1`.
+#   `"8080:8080"` слушает на всех адресах хоста; `"127.0.0.1:8080:8080"` —
+#   только локально, а наружу пускает обратный прокси. Та же мысль, что в
+#   s02e11: явный адрес слева обязателен.
+#
+# Пароль через `secrets`, а не `environment`.
+#   Переменные окружения видны в `docker inspect`, в `docker compose config`
+#   и в списке процессов хоста. Файл секрета монтируется в `/run/secrets/`
+#   и не попадает ни в образ, ни в метаданные. Официальные образы понимают
+#   пару `PASSWORD_FILE` вместо `PASSWORD` именно для этого.
+#
+# Именованный том `db_data`.
+#   Без него данные лежат в записываемом слое контейнера и исчезают при
+#   `docker compose down`. Именованный том переживает пересоздание и
+#   виден в `docker volume ls`.
+#
+# `depends_on` с `condition: service_healthy`.
+#   Простой список `depends_on: [db]` означает «запусти db раньше» — и всё.
+#   Контейнер базы запускается за долю секунды, а сама база готова принимать
+#   соединения через несколько. Сборщик успевает получить отказ и упасть.
+#   Условие по healthcheck — единственный способ дождаться готовности.
+#
+# `user`, `read_only`, `tmpfs`, `cap_drop`.
+#   Тот же набор, что `User=`, `ProtectSystem=strict` и
+#   `CapabilityBoundingSet=` в юните systemd из s03e05, только для контейнера.
+#   `read_only` требует `tmpfs` для того, что программе всё-таки надо писать.
+#
+# Чего здесь нет: `privileged: true` и монтирования docker.sock.
+#   Первое отключает почти всю изоляцию. Второе даёт контейнеру полный
+#   контроль над демоном docker, то есть над хостом: через сокет можно
+#   запустить контейнер с примонтированным корнем. Это не «немного прав»,
+#   это root на машине.

@@ -230,53 +230,39 @@ lsb_release -a
 ## 📊 Прогресс курса
 
 **Версия:** 0.8.0 (архивный baseline) → 2.0.0 (рефакторинг, ветка `v2.0-refactor`)
-**Статус:** 🚧 v0.8.x с открытыми долгами — все 32 эпизода структурно на месте, но курс **не** «100% complete» (открытые долги — в [STATUS.md](STATUS.md) и [V2.0_UPGRADE_PLAN.md](V2.0_UPGRADE_PLAN.md))
-**Структурная готовность:** 32/32 эпизода имеют `README + starter + solution + tests` (это **не** значит «воспроизводимо зелёные тесты» — см. STATUS.md)
+**Статус:** 🚧 рефакторинг v2.0 в работе — Seasons 1–5 пересобраны в атомарные серии
+и покрыты воспроизводимыми тестами; Seasons 6–8 пока в исходном виде.
+Открытые долги — в [STATUS.md](STATUS.md) и [V2.0_UPGRADE_PLAN.md](V2.0_UPGRADE_PLAN.md).
 
 ### Roadmap:
-- [x] Концепция и сюжет (глобальная распределённая операция)
+
+**Пересобрано в атомарные серии v2.0** (один концепт — одна задача, воспроизводимый
+тест без root и без сети; монолитные `episode-NN` вынесены в `personal/retired-sNN/`):
+
+| Сезон | Было | Стало | Проверок | Баланс типов |
+|---|---|---|---|---|
+| [Season 1: Shell & Foundations](season-01-shell-foundations/) | 4 эпизода | **16 серий** | 197 | 6A / 5B / 5C |
+| [Season 2: Networking](season-02-networking/) | 4 эпизода | **12 серий** | 187 | 3A / 5B / 4C |
+| [Season 3: System Administration](season-03-system-administration/) | 4 эпизода | **13 серий** | 281 | 3A / 5B / 5C |
+| [Season 4: DevOps & Automation](season-04-devops-automation/) | 4 эпизода | **12 серий** | 278 | 3A / 6B / 3C |
+| [Season 5: Security & Pentesting](season-05-security-pentesting/) | 4 эпизода | **12 серий** | 191 | 3A / 5B / 4C |
+
+**Итого: 65 серий, `make check` зелёный.**
+
+**В очереди на пересборку** (пока в исходном виде, монолитные эпизоды):
+
+- [ ] **Season 6: Embedded Linux & IoT** (Шэньчжэнь 🇨🇳) — Raspberry Pi, GPIO, MQTT, модули ядра
+- [ ] **Season 7: Production & Advanced** (Рейкьявик 🇮🇸) — Kubernetes, мониторинг, производительность
+- [ ] **Season 8: Final Operation** (глобальная) — финальная интеграция всех навыков
+
+**Сделано ранее:**
+
+- [x] Концепция и сюжет (глобальная распределённая операция, 8 стран, 27 персонажей)
 - [x] Структура 8 сезонов × 32 эпизода
-- [x] **Season 1: Shell & Foundations** (Episodes 01-04) — ✅ COMPLETE
-  - [x] Episode 01: Terminal Awakening
-  - [x] Episode 02: Shell Scripting Basics
-  - [x] Episode 03: Text Processing Masters
-  - [x] Episode 04: Package Management
-- [x] **Season 2: Networking** (Episodes 05-08) — ✅ COMPLETE
-  - [x] Episode 05: TCP/IP Fundamentals (Москва 🇷🇺)
-  - [x] Episode 06: DNS & Name Resolution (Стокгольм 🇸🇪)
-  - [x] Episode 07: Firewalls & iptables (Москва 🇷🇺)
-  - [x] Episode 08: VPN & SSH Tunneling (Стокгольм → Цюрих)
-- [x] **Season 3: System Administration** (Episodes 09-12) — ✅ COMPLETE
-  - [x] Episode 09: Users & Permissions (СПб 🇷🇺)
-  - [x] Episode 10: Processes & Systemd
-  - [x] Episode 11: Disk Management & LVM (Таллин 🇪🇪)
-  - [x] Episode 12: Backup & Recovery
-- [x] **Season 4: DevOps & Automation** (Episodes 13-16) — ✅ COMPLETE
-  - [x] Episode 13: Git & Version Control (Берлин 🇩🇪)
-  - [x] Episode 14: Docker Basics (Амстердам 🇳🇱)
-  - [x] Episode 15: CI/CD Pipelines (Берлин 🇩🇪)
-  - [x] Episode 16: Ansible & IaC (Амстердам → Берлин)
-- [x] **Season 8: Final Operation** (Episodes 29-32) — ✅ COMPLETE!
-  - [x] Episode 29: Начало бури (День 57, DDoS 100+ Gbps) ✅
-  - [x] Episode 30: Око бури (День 58, forensics & hardening) ✅
-  - [x] Episode 31: Контрнаступление (День 59, offensive ops) ✅
-  - [x] Episode 32: Финальная защита (День 60, FINALE!) ✅
-- [x] Аудит курса (4 октября 2025)
-- [x] Глобальная концепция (8 стран, 27 персонажей)
-- [x] Гибридный подход именования (10 октября 2025)
-- [x] Type B рефакторинг (Season 2, 3, 4)
-- [x] **Season 5: Security & Pentesting** (Episodes 17-20) — ✅ COMPLETE!
-- [x] **Season 6: Embedded Linux & IoT** (Episodes 21-24) — ✅ COMPLETE!
-- [x] **Season 7: Production & Advanced** (Episodes 25-28) — ✅ COMPLETE!
-- [x] **Season 8: Final Operation** (Episodes 29-32) — ✅ COMPLETE!
-  - [x] Episode 29: Начало бури (DDoS, zero-day, APT)
-  - [x] Episode 30: Око бури (forensics, hardening)
-  - [x] Episode 31: Контрнаступление (offensive ops, botnet cleanup)
-  - [x] Episode 32: Финальная защита (rootkit, Krylov defeated, FINALE!)
-- [x] LILITH — диегетический наставник во всех 32/32 эпизодах; CLI-прототип `tools/lilith.sh` (не live-AI)
-- [ ] Community testing & feedback (приоритет!)
-- [ ] Documentation final polish
-- [ ] **v2.0:** воспроизводимые тесты, нумерация `sNNeNN`, дробление серий, кумулятивность (см. [V2.0_UPGRADE_PLAN.md](V2.0_UPGRADE_PLAN.md))
+- [x] Аудит курса (4 октября 2025), гибридный подход именования
+- [x] LILITH — диегетический наставник во всех эпизодах; CLI-прототип `tools/lilith.sh` (не live-AI)
+- [ ] Этап 7b: сведение документации (после пересборки всех сезонов)
+- [ ] Этап 8: полировка и тег `v2.0.0` (см. [V2.0_UPGRADE_PLAN.md](V2.0_UPGRADE_PLAN.md))
 
 ### 📝 Аудит курса
 **Проведён:** 4 октября 2025

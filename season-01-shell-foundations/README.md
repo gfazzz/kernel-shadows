@@ -5,8 +5,7 @@
 СЕЗОН: 1 — Shell & Foundations
 ЛОКАЦИЯ: 🇷🇺 Новосибирск, Россия (Академгородок)
 ДНИ ОПЕРАЦИИ: 1-8 (из 60) — День 1: вербовка в Москве, Дни 2-8: работа из Новосибирска
-СТАТУС: v2.0 — 14 атомарных серий s01e01–14; литературизация по DoD §15: ВЕСЬ СЕЗОН
-КАЧЕСТВО: 4.75/5 average (историческая оценка старых Episodes 01-04)
+СТАТУС: v2.0 — 16 атомарных серий (s01e01–s01e16), 197 проверок
 ```
 
 ---
@@ -14,8 +13,6 @@
 ## 📖 О сезоне
 
 **Season 1** — это введение в Ubuntu Linux и работу с терминалом. Вы научитесь базовым командам, навигации, работе с файлами, text processing и package management. **Type B подход:** Linux tools first, bash second.
-
-**Педагогика:** Micro-cycles структура (10-15 мин), CS50-style (метафоры, ASCII диаграммы, "Aha!" моменты), LILITH интегрирована в теорию.
 
 **Главный герой:** Максим "Макс" Соколов — 28 лет, системный администратор из Новосибирска, нанятый Виктором Петровым для критической операции.
 
@@ -26,10 +23,10 @@
 **Персонажи:**
 - **Max Sokolov** — вы, главный герой
 - **Viktor Petrov** — заказчик (видеозвонки)
-- **LILITH** — AI-помощник, активируется в Episode 01
-- **Сергей Иванов** (Episode 02) — локальный ментор по скриптингу, работал в институте ядерной физики, знал отца Макса
-- **Ольга Петрова** (Episode 03) — data scientist из Yandex, эксперт по обработке логов
-- **Дмитрий Орлов** (Episode 02+) — DevOps engineer, знакомый по Linux User Group (видеозвонки)
+- **LILITH** — AI-помощник, активируется в первой серии
+- **Сергей Иванов** — локальный ментор по скриптингу, работал в институте ядерной физики, знал отца Макса
+- **Ольга Петрова** — data scientist из Yandex, эксперт по обработке логов
+- **Дмитрий Орлов** — DevOps engineer, знакомый по Linux User Group (видеозвонки)
 
 **Атмосфера:** Тишина сибирской осени. Гудение домашнего сервера. Кофе и терминал. Окно на желтый лес. Первый снег. Студенческое кафе с плакатами формул. НГУ campus. Unix традиции советской науки.
 
@@ -37,30 +34,12 @@
 
 ## 📚 Структура сезона
 
-| Episode | Название | Type | Сложность | Время | Качество | Статус |
-|---------|----------|------|-----------|-------|----------|--------|
-| **01** | Terminal Awakening | B | ⭐☆☆☆☆ | 3-4ч | 4.73/5 | ✅ Refactored |
-| **02** | Shell Scripting Basics | A* | ⭐⭐☆☆☆ | 3-4ч | 4.65/5 | ✅ Refactored |
-| **03** | Text Processing Masters | B | ⭐⭐☆☆☆ | 3-4ч | 4.77/5 | ✅ Refactored |
-| **04** | Package Management | B | ⭐⭐☆☆☆ | 2-2.5ч | 4.85/5 🏆 | ✅ Refactored |
+Season 1 пересобран в атомарные серии `sNNeNN` (см. [`V2.0_UPGRADE_PLAN.md`](../V2.0_UPGRADE_PLAN.md)):
+**один концепт — одна задача**, README 180–280 строк, `mission.md` с блоком «Требования
+среды», и **воспроизводимый тест** — зелёный без root и без сети, на Linux/macOS/WSL.
 
-**Общее время:** 11-14 часов
-**Type B episodes:** 3/4 (Episodes 01, 03, 04 — Linux tools first)
-**Type A justified:** 1/4 (Episode 02 — bash automation для мониторинга)
-
-**Интеграция:** Навыки из каждого эпизода используются в следующих сезонах. Season 8 финал объединяет все навыки курса.
-
----
-
-## 🆕 v2.0: атомарные серии (новый стандарт)
-
-Рефакторинг v2.0 (см. [`V2.0_UPGRADE_PLAN.md`](../V2.0_UPGRADE_PLAN.md)) дробит тяжёлые
-эпизоды на атомарные серии `sNNeNN`: **один концепт — одна задача**, README ≤ 650 строк,
-`mission.md` с блоком «Требования среды», единая форма `starter/`, и **воспроизводимый
-тест на фикстуре** (зелёный без root, идёт на Linux/macOS/WSL).
-
-**Season 1 пересобран: Episodes 01–04 → 14 атомарных серий**
-(включая две новые — s01e04 и s01e05 — которых в исходном курсе не было):
+**4 исходных эпизода → 16 серий, 197 проверок** (включая четыре новые серии —
+`s01e04`, `s01e05`, `s01e15`, `s01e16`, — которых в исходном курсе не было):
 
 | Серия | Из ep | Концепт | Задача (артефакт) | Type | Тест |
 |-------|-------|---------|-------------------|------|------|
@@ -95,50 +74,25 @@ T3 (Docker — только в Season 4), **T5 (редактор)** и **T6 (ф�
 [`tools/check_tools.sh`](../tools/check_tools.sh): он ищет forward-deps по инструментам,
 а не только по концептам.
 
-**Литературизация по DoD §15 завершена для всего Season 1** (README 180–280 строк прозой,
-`theory.md` — воспоминание от первого лица, `mission.md` — брифинг). В очереди — Season 2.
-
 ---
 
 ## 🎯 Чему вы научитесь
 
-### Episode 01: Terminal Awakening
-- ✅ Навигация по файловой системе (`cd`, `pwd`, `ls`)
-- ✅ Работа с файлами (`cat`, `less`, `head`, `tail`)
-- ✅ Поиск файлов (`find`)
-- ✅ Создание простых bash скриптов
-- ✅ Понимание структуры Linux filesystem
+**Ориентация и файлы** (`s01e01`–`s01e06`): где вы находитесь в дереве файловой
+системы и почему это вопрос с точным ответом; что показывает `ls` и что прячет;
+файловые операции и чтение `man`; правка файлов в `nano` и `vim`; обход дерева
+с условиями через `find`.
 
-### Episode 02: Shell Scripting Basics
-- ✅ Структура bash скриптов (shebang, комментарии)
-- ✅ Переменные в bash (`VAR="value"`, `$VAR`, `${VAR}`)
-- ✅ Условия (`if`, `[[ ]]`, операторы сравнения)
-- ✅ Циклы (`for`, `while`, `while read`)
-- ✅ Функции (`function_name() {}`, `local`, `return`)
-- ✅ Exit codes (`$?`, `exit 0/1`)
-- ✅ Автоматизация мониторинга серверов
+**Скрипты** (`s01e07`–`s01e09`): переменные и код возврата, условия и циклы,
+чтение списка построчно, логирование — и капстоун: мониторинг, который переживает
+недоступный хост.
 
-### Episode 03: Text Processing Masters
-- ✅ Pipes и redirects (`|`, `>`, `>>`, `<`, `2>`)
-- ✅ `grep` для поиска текста (regex, filters)
-- ✅ `awk` для обработки колонок (fields, conditions)
-- ✅ `sed` для замены текста (stream editing)
-- ✅ `cut`, `sort`, `uniq`, `wc` для обработки данных
-- ✅ Анализ логов (Apache Combined Log Format)
-- ✅ Извлечение IP адресов и User-Agents
-- ✅ TOP-N анализ (TOP-10 attackers)
+**Обработка текста** (`s01e10`–`s01e12`): `grep` и конвейеры, `awk` со статистикой
+по колонкам, `sed` — и разбор настоящего `access.log` с атакой внутри.
 
-### Episode 04: Package Management (Type B)
-- ✅ **APT** (Advanced Package Tool): `apt install`, `apt update`, `apt upgrade`
-- ✅ **DPKG** (Debian Package Manager): inspection и low-level контроль
-- ✅ **Repositories**: `/etc/apt/sources.list`, добавление сторонних репозиториев
-- ✅ **GPG keys**: безопасное добавление репозиториев (Docker example)
-- ✅ **Batch operations**: установка списка пакетов через xargs
-- ✅ **Verification**: проверка установленных пакетов (dpkg -l, which, --version)
-- ✅ **Cleanup**: autoremove, clean, системная гигиена
-- ✅ **Report generation**: ONE-LINER для отчёта (minimal bash)
-- ✅ **Type B philosophy**: использовать apt/dpkg, не переписывать их в bash
-
+**Система** (`s01e13`–`s01e16`): `apt`/`dpkg` как инструмент вместо самописного
+bash, пакетные операции через `xargs`, права и владелец файла, `sudo` как механизм —
+а не как заклинание перед командой.
 
 ---
 
@@ -156,7 +110,7 @@ T3 (Docker — только в Season 4), **T5 (редактор)** и **T6 (ф�
 
 Макс соглашается. $10K авансом. Виктор: *"Начнём с основ. Работай удалённо из Новосибирска. У тебя 24 часа."*
 
-### Episode 01 (день 2): Первое задание
+### День 2: первое задание (s01e01–s01e06)
 **Локация:** Квартира Max в Академгородке (home lab)
 
 Макс возвращается в Новосибирск. Получает доступ к тестовому серверу Виктора. Задание: найти скрытые файлы с координатами.
@@ -166,7 +120,7 @@ LILITH активируется:
 
 **Атмосфера:** Тишина сибирской осени. Желтые листья за окном, первый снег. Гудение домашнего сервера. Кофе и терминал. Первые шаги в операции.
 
-### Episode 02 (дни 3-4): Автоматизация
+### Дни 3–4: автоматизация (s01e07–s01e09)
 **Локация:** Квартира + кафе "Под Интегралом"
 
 Виктор: *"50 серверов нужно мониторить. Скрипты."*
@@ -180,7 +134,7 @@ LILITH активируется:
 
 **Атмосфера:** Кафе "Под Интегралом", плакаты с формулами, студенты, Wi-Fi. Первый снег за окном. Разговоры о Unix традициях советской науки.
 
-### Episode 03 (дни 5-6): Анализ атаки
+### Дни 5–6: анализ атаки (s01e10–s01e12)
 **Локация:** Квартира + НГУ campus
 
 Анна Ковалёва (видеозвонок из Москвы):
@@ -197,7 +151,7 @@ LILITH: *"Логи не врут. Люди — врут."*
 
 **Атмосфера:** НГУ, научная традиция Unix, белые доски с формулами, старые Sun Microsystems серверы, запах кофе и паяльников.
 
-### Episode 04 (дни 7-8): Инструменты (Type B)
+### Дни 7–8: инструменты и права (s01e13–s01e16)
 **Локация:** Квартира Max
 
 Виктор: *"Тебе нужны инструменты для операции. Вот список."* (nmap, tcpdump, wireshark, docker, etc.)
@@ -244,215 +198,35 @@ Max собирает вещи. Прощается с Новосибирском 
 
 ## 🚀 Как начать
 
-### Episode 01 — Terminal Awakening (Type B):
-
 ```bash
-cd season-01-shell-foundations/episode-01-terminal-awakening/
-
-# 1. Прочитайте README.md — 8 micro-cycles (сюжет + теория + практика)
-less README.md
-
-# 2. Следуйте циклам с практикой каждые 10-15 минут
-# Cycle 1: Первый вход (ssh, pwd, ls)
-# Cycle 2: Навигация (cd, ls -la, tree)
-# ... и так далее
-
-# 3. Скопируйте тестовую среду
-cp -r artifacts/test_environment ~/
-cd ~/test_environment/
-
-# 4. Практикуйте команды (следуйте README.md)
-pwd
-ls -la
-find . -name "briefing.txt"
-cat documents/briefing.txt
-# ... и так далее
-
-# 5. Финальное задание: создайте скрипт (Cycle 8)
-cp ~/kernel-shadows/season-01-shell-foundations/episode-01-terminal-awakening/starter.sh ./find_files.sh
-chmod +x find_files.sh
-nano find_files.sh
-
-# 6. Запустите тесты
-cd ~/kernel-shadows/season-01-shell-foundations/episode-01-terminal-awakening/tests/
-./test.sh
+cd season-01-shell-foundations/s01e01-terminal-awakening
+cat README.md            # сюжет, теория, задание
+cat mission.md           # критерии приёмки и требования среды
+cp starter/* artifacts/  # каркас с TODO
+$EDITOR artifacts/...    # ваша работа
+bash tests/test.sh       # проверка
 ```
 
-### Episode 02 — Shell Scripting Basics (Type A — justified):
+Дальше — по порядку серий из карты выше. Каждая серия самодостаточна: цель,
+одна теоретическая тема, задача с проверяемым артефактом и тест, который
+запускается без root и без сети.
 
-```bash
-cd season-01-shell-foundations/episode-02-shell-scripting/
-
-# 1. Прочитайте README.md — 8 micro-cycles
-less README.md
-
-# 2. Следуйте циклам (переменные → условия → циклы → функции)
-# Type A episode: bash scripting для автоматизации (мониторинг 50 серверов)
-
-# 3. Скопируйте артефакты
-cp artifacts/servers.txt .
-
-# 4. Создайте server_monitor.sh (следуя TODOs в starter.sh)
-cp starter.sh server_monitor.sh
-chmod +x server_monitor.sh
-nano server_monitor.sh
-
-# 5. Тестируйте функции по отдельности
-./server_monitor.sh  # Проверяет серверы, создаёт логи
-
-# 6. Проверьте результаты
-cat monitor.log
-cat alerts.txt
-
-# 7. Запустите автотесты
-./tests/test.sh
-```
-
-### Episode 03 — Text Processing Masters (Type B):
-
-```bash
-cd season-01-shell-foundations/episode-03-text-processing/
-
-# 1. Прочитайте README.md — 7 micro-cycles
-less README.md
-
-# 2. Следуйте циклам (grep → pipes → awk → sort+uniq → sed → combinations)
-# Type B episode: 73% Linux tools (grep, awk, pipes), 27% bash (minimal glue)
-
-# 3. Скопируйте артефакты
-mkdir -p ~/log_analysis
-cp artifacts/access.log ~/log_analysis/
-cp artifacts/suspicious_ips.txt ~/log_analysis/
-cd ~/log_analysis/
-
-# 4. Практикуйте ONE-LINERS (следуйте циклам в README.md)
-grep "03:47" access.log | head
-awk '{print $1}' access.log | sort | uniq -c | sort -nr | head -10
-grep "03:47" access.log | awk -F'"' '{print $6}' | sort | uniq -c
-
-# 5. Финал: создайте log_analyzer.sh (8 ONE-LINERS, minimal bash)
-cp ~/kernel-shadows/season-01-shell-foundations/episode-03-text-processing/starter.sh ./log_analyzer.sh
-nano log_analyzer.sh  # Заполни 10 TODOs
-
-# 6. Запустите анализ
-chmod +x log_analyzer.sh
-./log_analyzer.sh access.log suspicious_ips.txt final_report.txt
-
-# 7. Проверьте результаты
-cat final_report.txt
-cat top_attackers.txt
-
-# 8. Запустите автотесты
-cd ~/kernel-shadows/season-01-shell-foundations/episode-03-text-processing/tests
-./test.sh
-```
-
-### Episode 04 — Package Management (Type B):
-
-```bash
-cd season-01-shell-foundations/episode-04-package-management/
-
-# 1. Прочитайте README.md — 7 micro-cycles с теорией + практикой
-less README.md
-
-# 2. Изучите список инструментов
-cat artifacts/required_tools.txt
-
-# 3. Cycle 1-2: apt basics (следуйте README.md)
-sudo apt update
-apt search nmap
-apt show nmap
-sudo apt install -y nmap
-
-# 4. Cycle 3: dpkg inspection
-dpkg -l nmap
-dpkg -L nmap
-dpkg -S /usr/bin/nmap
-
-# 5. Cycle 4: Docker repository (manual installation)
-# Добавление GPG key
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
-  sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
-
-# Добавление repository
-echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
-  https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
-
-sudo apt update
-sudo apt install -y docker-ce docker-ce-cli containerd.io
-
-# 6. Cycle 5: Batch installation (ONE-LINER!)
-grep -v '^#' artifacts/required_tools.txt | grep -v '^$' | xargs sudo apt install -y
-
-# 7. Cycle 6: Verification
-while read pkg; do
-  [[ "$pkg" =~ ^# || -z "$pkg" ]] && continue
-  dpkg -l "$pkg" 2>/dev/null | grep -q "^ii" && echo "✓ $pkg" || echo "✗ $pkg"
-done < artifacts/required_tools.txt
-
-# 8. Cleanup
-sudo apt autoremove -y
-sudo apt clean
-
-# 9. Cycle 7: Generate report (ФИНАЛЬНОЕ ЗАДАНИЕ)
-# Вариант 1: Используй starter.sh (заполни TODOs)
-cp starter.sh install_report_generator.sh
-nano install_report_generator.sh
-bash install_report_generator.sh
-
-# Вариант 2: Используй ONE-LINER из artifacts/README.md
-# (см. artifacts/README.md → "Generate report" section)
-
-# 10. Проверь результат
-cat install_report.txt
-```
-
-**⚠️ ВАЖНО для Episode 04 (Type B):**
-- Episode 04 = **Type B** (95% apt/dpkg commands, 5% bash для отчёта)
-- **НЕ создавай bash wrapper** для установки пакетов! (apt делает это)
-- Финальное задание: minimal ONE-LINER для отчёта (40-80 строк)
-- Философия: "apt exists — use it, don't rewrite it"
-- Для 50 серверов используй Ansible (Season 4, Episode 16), не bash
-- Читай artifacts/README.md для workflow каждого цикла
-
-
----
-
-## 📊 Прогресс сезона
-
-**Версия:** v0.4.5.4 (Type B Refactoring Complete)
-**Статус:** Season 1 Complete! 🎉
-**Обновление:** Episodes 01-04 полностью рефакторены с Type B подходом (95% Linux tools, 5% bash), micro-cycles структурой, CS50-style педагогикой.
-
-- [x] **Episode 01** — Complete + Type B refactored (4.73/5) ✅
-- [x] **Episode 02** — Complete + Type A justified (4.65/5) ✅
-- [x] **Episode 03** — Complete + Type B refactored (4.77/5) ✅
-- [x] **Episode 04** — Complete + Type B refactored (4.85/5) 🏆 **ЭТАЛОН**
-- [x] **Season README** — Updated with Type B workflow
-
-**Type B Refactoring (v0.4.5.x):**
-- Episodes 01, 03, 04 = Type B (Linux tools first, bash second)
-- Episode 02 = Type A (bash automation justified — monitoring требует скрипт)
-- Micro-cycles структура (10-15 мин переключение внимания)
-- CS50-style педагогика (метафоры, ASCII диаграммы, "Aha!" моменты)
-- LILITH интегрирована в теорию (не только сюжет)
+Прогнать весь сезон разом: `make test SEASON=season-01-shell-foundations`.
+Посмотреть прогресс: `make progress` (засчитывается работа в `artifacts/`
+с зелёным тестом; наличие `solution/` прогрессом не считается).
 
 **См. также:**
 - [SCENARIO.md](../SCENARIO.md) — полный сценарий операции KERNEL SHADOWS
-- [CHARACTERS.md](../CHARACTERS.md) — биографии всех персонажей (27+)
-- [LOCATIONS.md](../LOCATIONS.md) — детальные описания всех локаций
-- [CURRICULUM.md](../CURRICULUM.md) — полный учебный план (8 сезонов)
-- [STATUS.md](../STATUS.md) — детальный прогресс рефакторинга
+- [CHARACTERS.md](../CHARACTERS.md) — биографии персонажей
+- [LOCATIONS.md](../LOCATIONS.md) — описания локаций
+- [CURRICULUM.md](../CURRICULUM.md) — учебный план (8 сезонов)
 
 ---
 
 ## 🤖 LILITH в Season 1
 
-LILITH активируется в Episode 01 и сопровождает вас через весь сезон:
+LILITH активируется в первой серии и сопровождает вас через весь сезон:
 
-**Episode 01:**
 > *"Я LILITH. Твой проводник в тенях. Покажи, на что ты способен, Max."*
 
 **Стиль:** Циничная, прямолинейная, помогает через вопросы (не даёт прямых ответов).
@@ -536,37 +310,11 @@ history          # Показать последние команды
 
 ## 🔄 Следующие шаги
 
-### После завершения Episode 01 (Type B):
-1. ✅ Освоили базовые команды (pwd, ls, cd, find, cat)
-2. ✅ Поняли структуру Linux filesystem
-3. ✅ Создали скрипт `find_files.sh` (10% задания, 90% — команды)
-4. ✅ Прошли все тесты (`./tests/test.sh`)
-5. ➡️ Переходите к Episode 02
-
-### После завершения Episode 02 (Type A — justified):
-1. ✅ Освоили bash scripting (переменные, условия, циклы, функции)
-2. ✅ Создали `server_monitor.sh` для автоматизации мониторинга
-3. ✅ Поняли когда bash scripting оправдан (автоматизация, нет готовых tools)
-4. ✅ Прошли все тесты (`./tests/test.sh`)
-5. ➡️ Переходите к Episode 03
-
-### После завершения Episode 03 (Type B):
-1. ✅ Освоили text processing tools (grep, awk, sed, pipes, sort, uniq)
-2. ✅ Научились строить ONE-LINERS (73% tools, 27% bash)
-3. ✅ Проанализировали логи атаки через commands (4400+ строк)
-4. ✅ Создали `log_analyzer.sh` (8 ONE-LINERS, minimal bash wrapper)
-5. ✅ Нашли TOP-10 атакующих IP (включая Tor exit node)
-6. ✅ Прошли все тесты (`./tests/test.sh`)
-7. ➡️ Переходите к Episode 04
-
-### После завершения Episode 04:
-1. ✅ Освоили package management (APT, DPKG) как **инструменты**
-2. ✅ Научились добавлять репозитории безопасно (GPG keys)
-3. ✅ Установили пакеты через apt commands (batch operations с xargs)
-4. ✅ Создали minimal ONE-LINER для генерации отчёта (НЕ bash wrapper!)
-5. ✅ Поняли **Type B philosophy**: используй apt, не переписывай apt в bash
-6. ✅ Установили security & networking tools для операции
-7. 🎉 **Season 1 ЗАВЕРШЁН!**
+К концу сезона у вас есть шестнадцать зелёных тестов и, что важнее,
+привычка задавать три вопроса: где я нахожусь, что здесь есть на самом деле
+и каким инструментом это делается штатно. `apt` существует двадцать семь лет —
+его не переписывают на bash; `awk` разбирает десять миллионов строк за секунду —
+их не перебирают циклом.
 
 ### Переход к Season 2:
 Макс садится в самолёт Новосибирск → Москва. Впереди — встреча с командой Виктора, новые локации (Москва → Стокгольм), первая реальная угроза (полковник Крылов).

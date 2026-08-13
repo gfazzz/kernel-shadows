@@ -63,8 +63,8 @@ KERNEL SHADOWS — Season 2
 - **Дмитрий Орлов** — DevOps engineer, embedded specialist
 
 **Эпизоды:**
-- Episode 05: TCP/IP Fundamentals (Москва)
-- Episode 07: Firewalls (Москва — возврат)
+- Дни 9, 13–14: адресация, диагностика, фаервол (`s02e01`–`s02e03`, `s02e06`–`s02e07`)
+
 
 ### Локация 2: Стокгольм, Швеция 🇸🇪
 
@@ -81,8 +81,8 @@ KERNEL SHADOWS — Season 2
 - **Katarina Lindström** — криптография, Stockholm University, DNS over TLS expert
 
 **Эпизоды:**
-- Episode 06: DNS & Name Resolution (Стокгольм)
-- Episode 08: VPN & SSH Tunneling (Стокгольм + Москва)
+- Дни 10–12: DNS и защита от подмены (`s02e04`–`s02e05`)
+- Дни 15–16: ключи, туннели, WireGuard (`s02e08`–`s02e12`)
 
 **Культурный контраст:**
 - **Россия:** Chaos, improvisation, "работает — не трогай", паранойя
@@ -100,7 +100,7 @@ KERNEL SHADOWS — Season 2
 Сетевые серии тестируются **без живой сети** — `ping`/`ss` подменяются мок-версиями
 (mock-first, §5.3).
 
-**Season 2 полностью пересобран: Episodes 05–08 → 9 атомарных серий ✅**
+**Season 2 пересобран: 4 исходных эпизода → 12 атомарных серий**
 (старые `episode-05…08` убраны; данные-пропсы сохранены в [`data/`](data/)):
 
 | Серия | Из ep | Концепт | Задача (артефакт) | Type | Тест |
@@ -118,7 +118,7 @@ KERNEL SHADOWS — Season 2
 | [s02e11](s02e11-wireguard/) | 08 | WireGuard: ключи, `AllowedIPs`, NAT | `wg0.conf` | **B** | ✅ 19/19 |
 | [s02e12](s02e12-firewall-log/) | 08 | журнал фаервола и `ufw limit` (финал сезона) | `fwlog_report.txt` | **C** | ✅ 22/22 |
 
-**Итого Season 2: 9 серий, 123 проверки — все зелёные без root/сети** (сетевые команды
+**Итого Season 2: 12 серий, 187 проверок — все зелёные без root/сети** (сетевые команды
 `ping`/`ss`/`dig`/`ufw`/`dpkg` мокаются или работают на фикстурах; §5.3). Реальные данные
 для практики — в [`data/`](data/).
 
@@ -127,239 +127,76 @@ KERNEL SHADOWS — Season 2
 только read-only `resolvectl`, `systemctl` → Season 3) и **T4** (`fail2ban` — превью, полноценно
 Season 5).
 
-**Литературизация по DoD §15 завершена для всего Season 2** (README 180–280 строк прозой,
-`theory.md` — воспоминание от первого лица, `mission.md` — брифинг с диагностикой).
-Все тесты усилены дискриминаторами: ожидания вычисляются по фикстурам, а не хранятся
+Тесты построены на дискриминаторах: ожидания вычисляются по фикстурам, а не хранятся
 константами, и каждый ловит конкретную реальную ошибку.
 
-**В очереди:** Season 3 «System Administration» (Episodes 09–12) → серии `s03e01+`.
-
 ---
 
-## 📚 Эпизоды
+## 🎬 Сюжетная линия
 
-### Episode 05: TCP/IP Fundamentals ✅
-**Локация:** 🇷🇺 Москва (ЦОД "Москва-1")
-**День:** 9 из 60
-**Время:** 4-5ч
-**Сложность:** ⭐⭐☆☆☆
+### День 9, Москва: первая атака (s02e01–s02e03)
 
-**Миссия:** Понять основы сетей, чтобы защитить инфраструктуру от атак Крылова.
+Макс прилетает в Москву и впервые видит команду вживую — Алекс, Анна, Дмитрий,
+Виктор. В тот же день ЦОД «Москва-1» получает DDoS: пятьдесят тысяч пакетов в
+секунду. Разбираться приходится с нуля: где машина в сети, что она слушает, где
+рвётся путь до сервера.
 
-**Теория:**
-- TCP/IP модель (4 слоя)
-- IP адреса (IPv4, IPv6, private vs public, loopback)
-- TCP vs UDP
-- Порты и сокеты
-- ICMP (ping, traceroute)
-- Routing (default gateway, routing table)
+**LILITH v2.0 — Networking Module.**
 
-**Практика:**
-- Определить IP адрес рабочей станции Max
-- Определить IP сервера Viktor по hostname
-- Проверить доступность (ping)
-- Traceroute — маршрут до сервера
-- Проверить открытые порты (netstat, ss)
-- Сканировать порты сервера Viktor (nmap)
-- Routing table
-- Создать network audit отчёт
+### Дни 10–12, Стокгольм: DNS (s02e04–s02e05)
 
-**Команды:**
-- `ip a` — IP адрес
-- `ping` — проверка доступности
-- `traceroute` / `tracepath` — маршрут
-- `netstat` / `ss` — открытые порты
-- `nmap` — сканирование портов
-- `ip route` — таблица маршрутизации
+Первая заграница и культурный шок: Bahnhof Pionen — ЦОД в ядерном бункере
+тридцатью метрами под гранитом. **Erik Johansson** (сетевой инженер, BGP и DNS)
+и **Katarina Lindström** (криптография, Stockholm University) учат читать
+резолвинг. Крылов отвечает подменой DNS-ответов.
 
-**Сюжет:**
-- Max прилетает в Москву
-- Первая встреча с командой (Алекс, Анна, Дмитрий, Виктор)
-- DDoS атака от Крылова (50,000 пакетов/сек)
-- LILITH v2.0 — Networking Module
+> Erik: *«In Sweden we take privacy seriously.»*
 
----
+### Дни 13–14, Москва: фаервол (s02e06–s02e07)
 
-### Episode 06: DNS & Name Resolution 🚧
-**Локация:** 🇸🇪 Стокгольм (Bahnhof Pionen Datacenter)
-**День:** 10-12 из 60
-**Время:** 3-4ч
-**Сложность:** ⭐⭐☆☆☆
+Возврат в Москву — и настоящий инцидент. Алекс: *«Фаервол. Сейчас. У нас пять
+минут до падения сервера.»* Макс закрывает периметр `ufw`, разбирает правила и
+блокирует ботнет по журналу.
 
-**Миссия:** Настроить DNS для скрытия инфраструктуры. Обнаружить DNS spoofing атаку от Крылова.
+**Поворот:** Крылов оставляет запись в логах — *«Соколов, передай брату: я найду
+вас. Обоих.»*
 
-**Теория:**
-- Как работает DNS
-- A, AAAA, CNAME, MX, TXT записи
-- `dig`, `nslookup`, `host`
-- `/etc/hosts` и `/etc/resolv.conf`
-- DNS spoofing и защита (DNSSEC, DNS over TLS)
+### Дни 15–16, Цюрих: шифрование (s02e08–s02e12)
 
-**Практика:**
-- Настроить локальный DNS через `/etc/hosts`
-- Проверить DNS записи сервера Viktor
-- Обнаружить DNS spoofing атаку (cache poisoning)
-- Настроить DoT (DNS over TLS)
+Анна обнаруживает DPI — глубокую инспекцию трафика. Фаервол блокирует атаки, но
+не прячет содержимое. Виктор: *«VPN в Цюрихе. Швейцария — нейтральная
+территория.»* Ключи SSH, закалка `sshd_config`, туннели, WireGuard для пятерых —
+и разбор журнала фаервола, где видно, что перебор прекратился ровно в ту минуту,
+когда атакующий вошёл легально.
 
-**Персонажи:**
-- **Erik Johansson** — network engineer, BGP/DNS expert
-- **Katarina Lindström** — криптография, Stockholm University
+Крылов пробует DPI и видит только шифрованный поток.
 
-**Сюжет:**
-- Max первый раз за границей (культурный шок)
-- Bahnhof Pionen — ядерный бункер 30м под землёй
-- DNS атаки усиливаются
-- Erik: "In Sweden we take privacy seriously"
-
----
-
-### Episode 07: Firewalls (iptables/ufw) 🚧
-**Локация:** 🇷🇺 Москва (возврат из Стокгольма)
-**День:** 13-14 из 60
-**Время:** 4-5ч
-**Сложность:** ⭐⭐⭐☆☆
-
-**Миссия:** Защитить серверы от DDoS атаки Крылова.
-
-**Теория:**
-- Netfilter и iptables
-- Chains: INPUT, OUTPUT, FORWARD
-- Правила: ACCEPT, DROP, REJECT
-- UFW (Uncomplicated Firewall)
-- nftables
-- Rate limiting
-
-**Практика:**
-- Настроить UFW: закрыть все порты кроме SSH (22)
-- Создать правила iptables для защиты от DDoS
-- Rate limiting: `iptables -m limit`
-- Логирование попыток атак
-- Автоматическая блокировка атакующих IP
-
-**Сюжет:**
-- **INCIDENT:** DDoS атака на ЦОД "Москва-1" — 50K пакетов/сек
-- Алекс: "Файрвол. Сейчас. У нас 5 минут до падения сервера."
-- Паника. Макс применяет знания. UFW + iptables rate limiting.
-- **Twist:** Крылов оставляет сообщение в логах: *"Соколов, передай брату — я найду вас. Обоих."*
-
----
-
-### Episode 08: VPN & SSH Tunneling ✅
-**Локация:** 🇨🇭 Цюрих (Switzerland) — Season 2 Finale
-**День:** 15-16 из 60
-**Время:** 6-7ч (8 micro-cycles)
-**Сложность:** ⭐⭐⭐⭐☆
-**Статус:** ✅ COMPLETE + REFACTORED (v0.4.5.8)
-**Тип:** Type A (Workflow Automation)
-
-**Миссия:** Настроить VPN для безопасной коммуникации команды после угрозы DPI от Крылова.
-
-**🎯 Type A Episode:**
-- Workflow automation для VPN setup (5 членов команды)
-- Multi-step process: SSH keys × 5 → configs → WireGuard × 6 → coordination
-- Bash автоматизирует, НЕ заменяет инструменты (ssh-keygen, wg, wg-quick)
-- 60-70% времени: изучение SSH/VPN концептов
-- 30-40% времени: bash для автоматизации workflow
-
-**Что изучим (8 micro-cycles):**
-- **Цикл 1:** SSH Keys Basics (ed25519 > RSA, public/private, security)
-- **Цикл 2:** SSH Config Advanced (~/.ssh/config, ProxyJump, multiplexing)
-- **Цикл 3:** SSH Local Forward (remote → local, database access)
-- **Цикл 4:** SSH Remote Forward (local → remote, webhook exposure)
-- **Цикл 5:** Dynamic Forward (SOCKS proxy, all traffic tunneling)
-- **Цикл 6:** VPN Concepts (OpenVPN vs WireGuard, kernel vs userspace)
-- **Цикл 7:** WireGuard Setup (automated workflow, server + 5 clients)
-- **Цикл 8:** Final Audit (Season 2 Summary, security posture)
-
-**Практика:**
-- Генерация SSH ключей для команды (ed25519, permissions, fingerprints)
-- SSH config automation (aliases, jump hosts, connection reuse)
-- SSH tunneling: Local/Remote/Dynamic forward
-- SOCKS proxy для браузера (DNS leak prevention)
-- WireGuard VPN server в Цюрихе (ChaCha20-Poly1305 encryption)
-- Client configs для 5 членов (Viktor, Alex, Anna, Dmitry, Max)
-- Security testing (IP leak, DNS leak, WebRTC leak)
-- Comprehensive Season 2 Audit Report
-
-**Персонажи:**
-- **Виктор Петров** — координатор, решение о VPN в Цюрихе
-- **Алекс Соколов** — security expert, эмоциональная предыстория
-- **Анна Ковалёва** — forensics, обнаружила DPI угрозу
-- **Дмитрий Орлов** — DevOps, VPN infrastructure setup
-- **Макс Соколов** — главный герой, junior → competent (16 дней)
-- **LILITH v2.5** — Security Mode (синий режим — encryption)
-
-**Сюжет (Season 2 Finale):**
-- **День 15, 08:00** — Emergency meeting в Цюрихе
-- Анна обнаружила DPI (Deep Packet Inspection) от Крылова
-- Алекс: "Firewall блокирует атаки. Но НЕ шифрует трафик."
-- Виктор: "VPN сервер в Цюрихе. Швейцария — нейтральная территория."
-- Макс настраивает WireGuard для 5 членов команды
-- **23:00** — VPN operational, весь трафик зашифрован
-- Крылов пытался DPI → увидел только ChaCha20 encrypted data
-- **Season 2 Complete:** 4 episodes, Max: junior → competent
-- Character development: Confidence 35% → 78%
-- Next: Season 3 — System Administration (Санкт-Петербург → Таллин 🇪🇪)
-
-**Педагогика (CS50-style):**
-- ✅ 8 micro-cycles (interleaving каждые 12-15 минут)
-- ✅ 6 метафор (SSH Keys = Дом+Замок, Config = Телефонная книга, etc.)
-- ✅ 5+ ASCII diagrams (key generation flow, tunnel flow, VPN encryption)
-- ✅ 15+ LILITH quotes (интегрированы В теорию!)
-- ✅ 8 "Think before checking" упражнений
-- ✅ Type A philosophy explicit (таблица, сравнение с Episode 07)
-- ✅ Русские персонажи говорят на русском ✓
-
-**Файлы (после рефакторинга v0.4.5.8):**
-- `README.md` — 1,863 строк (было 3,458, **-46% size!**)
-- `solution/vpn_setup.sh` — 695 строк (Type A automation)
-- `artifacts/README.md` — 670 строк (было ~100, **+570%!**)
-- `starter.sh` — Type A aligned
-- `tests/test.sh` — comprehensive validation
-- `README.md.backup` — старая версия (reference)
-
-**Season 2 Balance:** 2 Type A (Episodes 05, 08) / 2 Type B (Episodes 06, 07) = 50/50 ✅
+**Дальше → Season 3: System Administration (Санкт-Петербург → Таллин 🇪🇪).**
 
 ---
 
 ## 🎯 Цели сезона
 
-### Технические навыки:
-- ✅ TCP/IP модель
-- ✅ IP адресация и subnetting
-- ✅ Диагностика сетей (ping, traceroute)
-- ✅ Порты и сервисы (netstat, ss, nmap)
-- 🔲 DNS (dig, nslookup, DNSSEC, DoT)
-- 🔲 Firewalls (ufw, iptables, rate limiting)
-- 🔲 VPN (OpenVPN, WireGuard)
-- 🔲 SSH (tunneling, port forwarding, keys)
+**Технические навыки:** модель TCP/IP и адресация; порты и сокеты — что слушает
+машина и на каком адресе; диагностика снизу вверх (`ping`, `traceroute`, `ss`,
+`curl`); DNS-резолвинг и распознавание подмены; фаервол `ufw` с ограничением
+частоты; ключи SSH и закалка `sshd_config`; туннели `-L`/`-R`/`-D`; WireGuard;
+чтение журнала фаервола.
 
-### Личный рост Max:
-- ✅ Первая командная работа (Алекс, Анна, Дмитрий, Виктор)
-- ✅ Первая поездка в Москву для работы
-- 🔲 Первый раз за границей (Стокгольм)
-- 🔲 Адаптация к международной команде
-- 🔲 Работа под давлением (DDoS атаки, Крылов)
+**Личный рост Макса:** первая работа в команде, первая поездка за границу,
+работа под давлением настоящего инцидента — и переход от «сделаю руками» к
+«настрою так, чтобы держалось само».
 
-### Сюжетная линия:
-- ✅ Знакомство с командой лично
-- ✅ Понимание угрозы Крылова
-- 🔲 Первые серьёзные атаки
-- 🔲 Международное сотрудничество (Erik, Katarina)
-- 🔲 Развитие отношений с Алексом (брат, ментор)
+**Сюжет:** знакомство с командой лично, осознание масштаба угрозы Крылова,
+первые серьёзные атаки, международное сотрудничество и сближение с Алексом.
 
 ---
 
 ## 📊 Прогресс
 
-**Эпизоды:** 4/4 (100%) ✅ **SEASON 2 COMPLETE!**
-
-| Episode | Название | Локация | Прогресс | Статус |
-|---------|----------|---------|----------|--------|
-| 05 | TCP/IP Fundamentals | Москва 🇷🇺 | 100% | ✅ Complete |
-| 06 | DNS & Name Resolution | Стокгольм 🇸🇪 | 100% | ✅ Complete |
-| 07 | Firewalls & iptables | Москва 🇷🇺 | 100% | ✅ Complete |
-| 08 | VPN & SSH Tunneling | 🇸🇪→🇷🇺→🇨🇭 | 100% | ✅ Complete (Finale!) |
+Прогнать сезон: `make test SEASON=season-02-networking` (12 серий, 187 проверок).
+Посмотреть, что пройдено: `make progress` — засчитывается работа в `artifacts/`
+с зелёным тестом.
 
 ---
 
@@ -398,14 +235,14 @@ Season 5).
 
 ### Local Experts (Season 2):
 
-#### Erik Johansson (Episode 06)
+#### Erik Johansson (Стокгольм)
 - **Роль:** Network engineer, Bahnhof employee
 - **Локация:** Стокгольм, Швеция
 - **Специализация:** BGP routing, DNS, datacenter infrastructure
 - **Характер:** Профессиональный, privacy-focused, Swedish pragmatism
 - **Цитата:** *"In Sweden we take privacy seriously. After WikiLeaks, Bahnhof refused government pressure."*
 
-#### Katarina Lindström (Episode 08)
+#### Katarina Lindström (Стокгольм)
 - **Роль:** Криптография researcher, Stockholm University
 - **Локация:** Стокгольм, Швеция
 - **Специализация:** SSL/TLS, DNS over TLS, cryptographic protocols

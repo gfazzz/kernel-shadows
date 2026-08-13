@@ -285,12 +285,11 @@ SUID-копия оболочки в её домашнем каталоге (`s03
 
 **Философия:** System Administration — это фундамент. Без понимания users, processes, disks невозможно администрировать cloud/containers/Kubernetes.
 
-**Type B Approach (после рефакторинга v0.4.5.9-12):**
-Season 3 использует **Type B** подход — акцент на **конфигурирование системы**, а не bash scripting:
-- Episode 09: Конфигурирование через `/etc/sudoers.d/`, `/etc/security/limits.conf`, PAM
-- Episode 10: Настройка systemd units с security hardening
-- Episode 11: Конфигурирование `/etc/fstab` + systemd disk monitoring
-- Episode 12: Systemd timers + logrotate (40% bash, 60% configs)
+**Акцент сезона — конфигурирование системы, а не bash-скрипты:**
+- учётные записи и права: `/etc/sudoers.d/`, `/etc/security/limits.conf`, PAM
+- службы: юниты systemd с ограничениями (`User=`, `ProtectSystem=`)
+- диски: `/etc/fstab` по UUID, наблюдение за местом
+- регламент: таймеры systemd и `logrotate` вместо самописных обёрток
 
 **Правило:** Используй готовые инструменты (systemd, PAM, logrotate), не переписывай их bash скриптами.
 

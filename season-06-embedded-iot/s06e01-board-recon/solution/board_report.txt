@@ -1,0 +1,84 @@
+# board_report.txt — паспорт платы shadow-node-07 (ЭТАЛОН)
+#
+# Над каждым значением — команда, которой оно добыто. Ни одно не взято
+# из головы: плата рассказывает о себе сама, надо только спросить.
+
+# ─────────────────────────────────────────────────────────────────
+# 1. Что это вообще за плата
+# ─────────────────────────────────────────────────────────────────
+
+# awk -F' = ' '$1 ~ /device-tree\/model$/ {print $2}' data/devicetree_node7.txt
+# То же самое на живой плате:  cat /proc/device-tree/model
+model=Raspberry Pi 4 Model B Rev 1.4
+
+# awk -F': ' '/^Hardware/{print $2}' data/cpuinfo_node7.txt
+soc=BCM2711
+
+# awk -F': ' '/^Serial/{print $2}' data/cpuinfo_node7.txt
+# Он же в дереве: /proc/device-tree/serial-number — два источника сошлись.
+serial=100000004f2b9c1e
+
+# awk '{print $(NF-1)}' data/uname_node7.txt   (предпоследнее поле uname -a)
+# Плата — aarch64. Ноутбук — x86_64. Это разные машины, и это весь сезон.
+board_arch=aarch64
+
+# grep -c '^processor' data/cpuinfo_node7.txt
+cores=4
+
+# ─────────────────────────────────────────────────────────────────
+# 2. Какое там ядро процессора
+# ─────────────────────────────────────────────────────────────────
+
+# awk -F': ' '/^CPU part/{print $2; exit}' data/cpuinfo_node7.txt
+cpu_part=0xd08
+
+# Соединяем implementer (0x41 = ARM) и part по справочнику:
+# awk '$1=="0x41" && $2=="0xd08" {print $3}' data/arm_cpu_parts.txt
+cpu_core=Cortex-A72
+
+# ─────────────────────────────────────────────────────────────────
+# 3. compatible: от частного к общему
+# ─────────────────────────────────────────────────────────────────
+
+# Список compatible корня: "raspberrypi,4-model-b brcm,bcm2711".
+# Первый элемент — самое частное: конкретная плата.
+compatible_specific=raspberrypi,4-model-b
+
+# Последний — самое общее: семейство SoC. Драйвер берёт самое частное
+# совпадение, а общее — запасной вариант.
+compatible_generic=brcm,bcm2711
+
+# ─────────────────────────────────────────────────────────────────
+# 4. Что на плате включено
+# ─────────────────────────────────────────────────────────────────
+
+# grep 'gpio@7e200000/status' data/devicetree_node7.txt
+gpio_status=okay
+
+# grep 'spi@7e204000/status' — вот почему датчик по SPI молчит:
+# узел выключен в дереве, паяльник тут ни при чём.
+spi_status=disabled
+
+# grep '/soc/.*/status = okay' data/devicetree_node7.txt | wc -l
+buses_okay=5
+
+# Из bootargs: sed 's/.*console=\([^ ]*\).*/\1/'
+# Плата без монитора говорит в UART — это её единственный голос при сбое.
+console=ttyS0,115200
+
+# ─────────────────────────────────────────────────────────────────
+# 5. Почему собранный бинарник не запустится
+# ─────────────────────────────────────────────────────────────────
+
+# uname -m на ноутбуке
+host_arch=x86_64
+
+# file build/collector -> "ELF 64-bit LSB executable, x86-64"
+binary_arch=x86-64
+
+# x86-64 != aarch64. Плата не поймёт ни одной инструкции этого файла:
+# «Exec format error» — не про права и не про библиотеки, а про архитектуру.
+runs_on_board=no
+
+# aarch64-linux-gnu-gcc -dumpmachine -> aarch64-linux-gnu
+cross_prefix=aarch64-linux-gnu

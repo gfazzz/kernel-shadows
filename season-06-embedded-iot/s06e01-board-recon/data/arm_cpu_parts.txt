@@ -1,0 +1,14 @@
+# Справочник ARM: implementer + part -> имя ядра.
+# Такие таблицы лежат в исходниках ядра (arch/arm64/include/asm/cputype.h)
+# и в util-linux (lscpu). Наизусть их никто не помнит — их смотрят.
+# Формат: implementer part core
+0x41 0xd03 Cortex-A53
+0x41 0xd04 Cortex-A35
+0x41 0xd07 Cortex-A57
+0x41 0xd08 Cortex-A72
+0x41 0xd09 Cortex-A73
+0x41 0xd0a Cortex-A75
+0x41 0xd0b Cortex-A76
+0x41 0xc07 Cortex-A7
+0x41 0xc08 Cortex-A8
+0x41 0xb76 ARM1176

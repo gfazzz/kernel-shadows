@@ -1,0 +1,9 @@
+# Рабочая машина Макса (ноутбук), НЕ плата.
+$ uname -m
+x86_64
+$ gcc -dumpmachine
+x86_64-linux-gnu
+$ aarch64-linux-gnu-gcc -dumpmachine
+aarch64-linux-gnu
+$ file build/collector
+build/collector: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, not stripped

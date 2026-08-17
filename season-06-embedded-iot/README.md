@@ -59,7 +59,7 @@ Season 6 мигрирует с монолитных `episode-NN` (1314–1571 с
 |-------|-------|---------|----------|------|--------|
 | s06e01 | 21 | что это за плата: `/proc/cpuinfo`, device-tree, архитектура | `board_report.txt` | **C** | ✅ 24 |
 | s06e02 | 21 | GPIO через sysfs: включить и не сжечь | `gpio_ctl.sh` | **A** | ✅ 32 |
-| s06e03 | 21 | загрузка платы: `config.txt`, `cmdline.txt` | `config.txt` | **B** | план |
+| s06e03 | 21 | загрузка платы: `config.txt`, `cmdline.txt` | `config.txt` + `cmdline.txt` | **B** | ✅ 24 |
 | s06e04 | 21 | устройство без диска: overlayfs, износ SD | `fstab` + overlay | **B** | план |
 | s06e05 | 22 | телеметрия дрона: разбор потока MAVLink | `telemetry_report.txt` | **C** | план |
 | s06e06 | 22 | план миссии: валидатор маршрута до вылета | `check_mission.sh` | **A** | план |

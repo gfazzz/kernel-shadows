@@ -1,0 +1,2 @@
+c7 01 4b 46 7f ff 0c 10 3a : crc=3a NO
+c7 01 4b 46 7f ff 0c 10 3a t=24875

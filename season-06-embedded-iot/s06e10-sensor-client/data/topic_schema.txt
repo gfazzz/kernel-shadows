@@ -1,0 +1,5 @@
+# Схема тем сети shadow_mesh — та же, под которую написан acl в s06e09.
+# {node} и {sensor} подставляются; в acl это pattern shadow/%u/telemetry/#
+# Формат: назначение=шаблон
+telemetry=shadow/{node}/telemetry/{sensor}
+command=shadow/{node}/cmd/{name}

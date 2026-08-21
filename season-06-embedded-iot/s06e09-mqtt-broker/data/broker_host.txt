@@ -1,0 +1,12 @@
+# Узел агрегации shadow-mesh.
+# Формат: ключ=значение
+host=10.30.4.11
+mqtt_tls_port=8883
+mqtt_plain_port=1883
+password_file=/etc/mosquitto/passwd
+acl_file=/etc/mosquitto/acl
+persistence_location=/var/lib/mosquitto/
+log_file=/var/log/mosquitto/mosquitto.log
+# Максимум сообщений в очереди отключённого клиента: узел, пропавший на
+# сутки, не должен съесть память брокера.
+max_queued=1000

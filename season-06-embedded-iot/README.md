@@ -47,13 +47,14 @@ Max в Китае. Huaqiangbei electronics market — можно купить В
 
 ---
 
-## 🆕 v2.0: пересборка в атомарные серии (в работе)
+## 🆕 v2.0: атомарные серии
 
-Season 6 мигрирует с монолитных `episode-NN` (1314–1571 строк) на атомарные серии
-`sNNeNN`: один концепт — одна задача, README 180–280 строк, воспроизводимый тест
-без root и без железа. План — [`V2.0_UPGRADE_PLAN.md`](../V2.0_UPGRADE_PLAN.md), этап 6.
+Season 6 пересобран с монолитных `episode-NN` (6088 строк на четыре эпизода) в
+12 атомарных серий `sNNeNN`: один концепт — одна задача, README 180–280 строк,
+воспроизводимый тест без root, без сети и без единой железки.
+План — [`V2.0_UPGRADE_PLAN.md`](../V2.0_UPGRADE_PLAN.md), этап 6.
 
-**Дробление 4 эпизодов → 12 серий:**
+**12 серий, 420 проверок:**
 
 | Серия | Из ep | Концепт | Артефакт | Type | Статус |
 |-------|-------|---------|----------|------|--------|
@@ -99,97 +100,86 @@ Type D появляется впервые в курсе: до сих пор с�
 
 ---
 
-## 📚 Эпизоды
+## 🎬 Сюжет сезона
 
-### Episode 21: Raspberry Pi & GPIO Programming
-**Время:** 4-5 часов  
-**Тип:** Embedded Basics (Type B + C programming)  
-**Локация:** Шэньчжэнь
+### День 43: плата без наклейки (s06e01–s06e02)
 
-**Чему научитесь:**
-- Embedded Linux architecture
-- Raspberry Pi setup и GPIO control
-- C programming для hardware (не MOONLIGHT уровень!)
-- Device Tree и bootloaders (U-Boot)
-- Remote access и camera streaming
+Ли Вэй, бывший инженер DJI, ставит перед Максом коробку с двадцатью семью
+одинаковыми платами и требует поставить на первую сборщик из Женевы. Тот
+отвечает `Exec format error`. Плата опознаётся по собственным ответам —
+`/proc/cpuinfo`, дерево устройств, `uname` — и заодно выясняется, что шина
+SPI выключена, а гребёнка наполовину занята консолью и `i2c`.
 
-**Инструменты:**
-- Raspberry Pi 4/5
-- GPIO libraries (WiringPi, gpiod)
-- C compiler (cross-compilation)
-- SSH, camera tools
+### День 44: узел, который переживёт зиму (s06e03–s06e04)
 
-**Сюжет:**
-Dmitry Orlov: *"Нам нужна камера наблюдения. Raspberry Pi + Ubuntu."* Viktor: *"Установи у здания Крылова. Скрытно."* Скрытая surveillance система на базе RPi. Live stream × stealth mode.
+Всё, что настроено руками, исчезает вместе с питанием, а SPI нельзя включить
+службой: дерево устройств фиксируется до старта ядра. Настройка переезжает в
+`config.txt` и `cmdline.txt`. Из коробки прошлых узлов половина карт мертва —
+корень уходит в режим только для чтения, и запись на карту падает с 478 МБ в
+сутки до двух.
 
----
+### День 45: дрон вернулся сам (s06e05–s06e07)
 
-### Episode 22: Drones & UAV Control
-**Время:** 5-6 часов  
-**Тип:** UAV Programming (Type B)  
-**Локация:** Шэньчжэнь (DJI)
+Аппарат разворачивается на полпути, оператор клянётся, что ничего не нажимал.
+По записи эфира видно: потеря навигационного решения на 28-й секунде и `RTL`
+на 29-й. Причина глубже — маршрут, который никто не проверил: незаполненная
+точка, заход в зону аэродрома, дальность в полтора раза больше запаса батареи.
+Появляется валидатор плана и набор параметров отказоустойчивости.
 
-**Чему научитесь:**
-- UAV (Unmanned Aerial Vehicle) architecture
-- MAVLink protocol
-- ArduPilot/PX4 autopilots
-- Autonomous flight programming
-- Command encryption (UART security)
+### День 46–47: сеть, которую слушали (s06e08–s06e10)
 
-**Инструменты:**
-- ArduPilot на Linux board
-- MAVLink protocol
-- Python для drone control
-- GPS/IMU telemetry
+Панель Чжан Мэй показывает двадцать семь зелёных узлов; третий мёртв трое
+суток — брокер отдаёт его последнее `online`. В журнале обнаруживается
+клиент, подписанный на `#`, и общий пароль открытым текстом. Брокер
+переезжает на TLS с именованными учётными записями и правами по темам, а на
+узлы ставится клиент, переживающий обрывы и не публикующий мусор с датчика.
 
-**Сюжет:**
-Li Wei (ex-DJI): *"Дрон для разведки. Но Крылов может перехватить команды через UART. Шифруй всё."* Autonomous drone для surveillance. Encryption для защиты от hijacking.
+### День 47–48: внутрь ядра (s06e11–s06e12)
+
+У промышленного датчика вибрации нет драйвера. Условие Ли Вэя — никакой
+отладки перезагрузками: логика выносится в файл без заголовков ядра и
+проверяется обычным `gcc`, в ядро уезжает двадцать строк обвязки. В финале
+буфер становится доступен снаружи через `/dev/shadow0` — и `cat` наконец
+завершается, а не крутится вечно.
+
+**Витор:** *«Собирайся. Здесь стало людно.»*
 
 ---
 
-### Episode 23: IoT Security & MQTT
-**Время:** 4-5 часов  
-**Тип:** IoT Configuration (Type B)  
-**Локация:** Шэньчжэнь
+## 🧩 Сквозной артефакт: `shadow_mesh`
 
-**Чему научитесь:**
-- IoT architecture и protocols
-- MQTT broker setup (Mosquitto)
-- TLS encryption для MQTT
-- Sensor networks
-- Firmware security basics
+Сеть наблюдения собирается по сериям и к финалу существует целиком:
 
-**Инструменты:**
-- MQTT (Mosquitto broker)
-- TLS certificates
-- IoT sensors (temperature, motion)
-- Python MQTT clients
-
-**Сюжет:**
-Zhang Mei (IoT architect): *"50 sensors. Вся инфраструктура. MQTT — standard. Но без TLS — это open book для Крылова."* Secure IoT sensor network. Encrypted communication. Real-time monitoring.
+```
+плата (s06e01–s06e04) ──▶ датчики по i2c/spi/1-wire
+        │                        │
+        │                   клиент-датчик (s06e10)
+        │                        │
+        ▼                        ▼
+    /dev/shadow0          брокер MQTT с TLS и ACL (s06e08–s06e09)
+  (s06e11–s06e12)                │
+                                 ▼
+              дрон с проверенным планом и failsafe (s06e05–s06e07)
+```
 
 ---
 
-### Episode 24: Kernel Modules & Device Drivers
-**Время:** 5-6 часов  
-**Тип:** Advanced C (Type B)  
-**Локация:** Шэньчжэнь
+## 🚫 Осознанно не переносится
 
-**Чему научитесь:**
-- Linux kernel modules
-- Device drivers basics
-- Character devices
-- Hardware interrupts
-- Real-time Linux (PREEMPT_RT)
+Аудит по монолитам `episode-21`–`episode-24` дал три темы, оставшиеся за
+рамками серий. Каждая закрыта ссылкой или разделом теории, а не выброшена:
 
-**Инструменты:**
-- Kernel development tools
-- Module compilation
-- Device driver frameworks
-- Real-time patches
+| Тема из монолита | Почему нет отдельной серии | Где закрыта |
+|---|---|---|
+| настройка камеры и стриминг | без камеры проверять нечего, а настройка сводится к вызову готовой утилиты | `s06e12`, `theory.md` §8: `/dev/video0` как символьное устройство, V4L2, `mmap` вместо копирования |
+| активное управление аппаратом (ARM, TAKEOFF, полёт по командам) | требует SITL или живого дрона; проверяемая часть — план и параметры — покрыта полностью | `s06e05`–`s06e07`, `theory.md`: `pymavlink`, SITL, порядок «валидатор → SITL → стенд → полёт» |
+| Real-time Linux и `PREEMPT_RT` | измеряется `cyclictest` на живой системе, а не текстом | `s06e11`, `theory.md` §8: `PREEMPT_RT`, изоляция ядер, `SCHED_FIFO`, «предсказуемость, а не скорость» |
 
-**Сюжет:**
-Li Wei: *"Custom hardware. Нужен driver. Kernel module. C programming hardcore."* Chen Xiaoming: *"Real-time constraints. Миллисекунды matter."* Custom driver для proprietary sensor. Kernel-level programming. **МАКСИМАЛЬНАЯ СЛОЖНОСТЬ.**
+Ещё две темы монолитов уже были закрыты раньше и не дублируются:
+укрепление SSH — [`s02e09`](../season-02-networking/s02e09-ssh-hardening/),
+служба systemd — [`s03e05`](../season-03-system-administration/s03e05-systemd-service/).
+Вместо них в сезоне появились две embedded-специфичные темы: загрузка платы
+(`s06e03`) и корень только для чтения (`s06e04`).
 
 ---
 
@@ -250,18 +240,20 @@ Li Wei: *"Custom hardware. Нужен driver. Kernel module. C programming hardc
 
 ---
 
-## ⚖️ Баланс Type A vs Type B
+## ⚖️ Баланс типов серий
 
-Season 6 фокус на embedded и IoT:
+| Тип | Серий | Что сдаётся | Чем проверяется |
+|---|---|---|---|
+| **A** — Automation | 2 | `gpio_ctl.sh`, `check_mission.sh` | запуск на макетах и фикстурах |
+| **B** — Configuration | 4 | `config.txt`, `fstab`, `failsafe.params`, `mosquitto.conf` | разбор текста и связей между значениями |
+| **C** — Investigation | 3 | отчёты по плате, телеметрии, обмену MQTT | пересчёт из снимков в `data/` |
+| **D** — Code | 3 | `sensor.py`, `shadow_ring.c`, `shadow_view.c` + драйверы | юнит-тесты поведения |
 
-- **Episode 21** (Type B + C): Embedded basics — Raspberry Pi, GPIO programming
-- **Episode 22** (Type B): UAV control — Drones, MAVLink, Python
-- **Episode 23** (Type B): IoT — MQTT, TLS, sensor networks
-- **Episode 24** (Type B + Advanced C): Kernel — modules, drivers, real-time
-
-**Ratio:** 90% configuration + C programming, 10% bash scripts
-
-**Философия:** Embedded Linux — это не scripting. Это C programming + hardware understanding + security.
+Type D появляется впервые: до сих пор студент писал скрипты и правил
+конфигурации, теперь пишет программу и отвечает за её поведение. Отсюда и
+устройство трёх последних серий: всё, что можно проверить дёшево, выносится
+туда, где это дёшево — время и случайность передаются параметрами, а логика
+модуля живёт в файле без единого заголовка ядра.
 
 ---
 
@@ -292,54 +284,66 @@ Season 6 фокус на embedded и IoT:
 
 ---
 
-## 🚨 Ключевые моменты сезона
+## 🚨 Что ломается в этом сезоне
 
-### Episode 21: Surveillance начинается
-Raspberry Pi камера установлена у здания Крылова. Live stream работает. Скрытая surveillance.
+Сезон построен вокруг ошибок, которые **выглядят как исправная работа**:
 
-### Episode 22: Drone hijacking attempt
-Крылов пытается перехватить drone через UART. Li Wei: *"Шифруй команды. AES."* Атака отражена. Autonomous flight успешен.
+| Находка | Почему её не видно |
+|---|---|
+| `Exec format error` | права на месте, файл на месте — не совпадает архитектура |
+| датчик молчит | узел шины выключен в дереве устройств, паяльник ни при чём |
+| карта умирает за полгода | запись изнашивает ячейки; `atime` пишет при каждом **чтении** |
+| дрон вернулся сам | никто не нажимал: сработал failsafe по потере навигации |
+| `85.0 °C` в телеметрии | значение проходит CRC и выглядит настоящим |
+| панель показывает `online` | брокер отдаёт `retained` мёртвого узла третьи сутки |
+| узлы «мигают» | два устройства с одним `client_id` выбивают друг друга |
+| конфигурация «защищена» | TLS настроен, но порт 1883 оставлен «на миграцию» |
+| `cat /dev/shadow0` не кончается | драйвер не возвращает ноль в конце |
 
-### Episode 23: IoT backdoor найден
-Zhang Mei находит backdoor в китайском IoT chip. Firmware reverse engineering. Vulnerability патчнута.
-
-### Episode 24: Custom driver (КУЛЬМИНАЦИЯ)
-Kernel module для proprietary sensor. **МАКСИМАЛЬНАЯ СЛОЖНОСТЬ.** C programming на kernel level. Real-time constraints. Драйвер работает. Sensor online.
-
-**Результат:** Вся surveillance infrastructure готова. Дроны. Камеры. Sensors. Всё зашифровано. Готово к финалу.
+Общее у всех: **система не сообщает об ошибке.** Она работает, отвечает и
+выглядит правильно — а неверна. Отсюда способ проверки, принятый в сезоне:
+не «запустилось ли», а «что именно из этого следует».
 
 ---
 
 ## 📊 Статистика сезона
 
-- **Эпизоды:** 4
-- **Время:** 18-22 часа
-- **C lines написано:** 500+
-- **Kernel modules:** 2
-- **Дронов собрано:** 1 (autonomous)
-- **IoT sensors deployed:** 50+
-- **MQTT messages encrypted:** 1000s
-- **Firmware backdoors найдено:** 1
-- **UART hijacking attempts blocked:** 1
-- **Китайская слежка:** Постоянная
+| | |
+|---|---|
+| Серий | 12 |
+| Автоматических проверок | 420 |
+| Type A / B / C / D | 2 / 4 / 3 / **3** |
+| Дни операции | 43–48 |
+| Требуется железа | **нисколько** |
+| Требуется root | только для `make test-integration` |
+
+Type D появляется в курсе впервые: три серии сдаются программой, и
+проверяется её поведение, а не текст.
 
 ---
 
 ## 🔗 Связь с другими сезонами
 
-**Prerequisites:**
-- Season 1-5 обязательны
-- **MOONLIGHT C knowledge** (если есть) — огромный плюс для Episodes 21, 24
+**Что понадобится из предыдущих:**
 
-**Season 6 подготавливает к:**
-- **Season 7:** Production monitoring (Prometheus для IoT)
-- **Season 8:** Финальная битва (все системы используются)
+| Откуда | Что именно |
+|---|---|
+| [S1](../season-01-shell-foundations/) | текстовые инструменты: `awk`, `grep`, перенаправления |
+| [S2](../season-02-networking/) | ключи вместо паролей, шифрование канала, чтение трафика |
+| [S3](../season-03-system-administration/) | `fstab`, монтирование по идентификатору, службы и журнал |
+| [S4](../season-04-devops-automation/) | идемпотентность, слои образов, пирамида проверок |
+| [S5](../season-05-security-pentesting/) | default-deny, сокращение прав, разбор снятых журналов |
 
-**Интеграция навыков:**
-- C (MOONLIGHT) → GPIO programming, kernel modules
-- Python (MOONLIGHT S4) → drone control, MQTT
-- Security (S5) → IoT security, firmware analysis
-- Networking (S2) → MQTT, UART protocols
+Знание C желательно, но не обязательно: Type D-серии дают интерфейс и
+Makefile готовыми, а писать предлагается арифметику, а не работу с ядром.
+
+**Что сезон даёт дальше:**
+
+- в [S7](../season-07-production-advanced/) появляется вопрос, как наблюдать
+  за двадцатью семью узлами, не выезжая на площадку, — а журналы у них
+  живут в памяти и исчезают при перезагрузке;
+- в [S8](../season-08-final-operation/) `shadow_mesh` работает как часть
+  общей инфраструктуры.
 
 ---
 
@@ -365,27 +369,25 @@ LILITH: *"Embedded Linux — это Linux без safety net. No GUI. No forgiven
 
 ## 🎯 Финал сезона
 
-**День 48, вечер. Шэньчжэнь. Lab.**
+**День 48. Шэньчжэнь, лаборатория.**
 
-Viktor (видеозвонок): *"Surveillance infrastructure ready?"*
+Ли Вэй читает вывод устройства и закрывает ноутбук.
 
-Max: *"Да. Raspberry Pi камеры — online. Drone autonomous flight — tested. 50 IoT sensors — encrypted MQTT. Kernel driver — работает. Всё готово."*
+> — Ты приехал с платой без наклейки. Уезжаешь с сетью: двадцать семь узлов,
+> дрон, брокер, свой клиент и своё устройство в ядре. Всё, что ты написал за
+> шесть дней, проверяется без единой железки — и это главное, что ты отсюда
+> увозишь.
 
-Li Wei: *"Firmware backdoors найдены и удалены. Китайские чипы — чисты. UART encryption — active. Крылов не перехватит."*
+Чжан Мэй присылает сводку: `shadow_mesh` поднят на всех площадках,
+посторонних подписчиков нет, панель показывает `offline` там, где
+действительно `offline`.
 
-Zhang Mei: *"MQTT TLS configured. Real-time monitoring. Если что-то двигается — мы знаем."*
+> — Одно на дорогу, — говорит Ли Вэй. — Ты научился не доверять: показаниям
+> датчика, параметру модуля, указателю из пользовательского пространства,
+> плану полёта и надписи «online». Это не паранойя. Это единственный способ
+> строить то, что работает на крыше зимой, когда рядом никого нет.
 
-**Анна (Interpol, видеозвонок):** *"Surveillance данные получаю. Excellent work. Episode 19 forensics + Episode 21-24 hardware = complete intelligence system."*
-
-**Chen Xiaoming:** *"Макс, ты за 8 дней прошёл путь от Linux sysadmin до embedded engineer. GPIO, drones, IoT, kernel modules. Impressive. Если захочешь работать в DJI — рекомендую."*
-
-**LILITH:** *"Embedded Linux освоен. Hardware hacking понят. IoT security — на практике. Season 7 — production deployment, Kubernetes, monitoring всей этой инфраструктуры. Готов?"*
-
-**Макс смотрит на стол. Raspberry Pi. Drone. Sensors. Oscilloscope. Kernel logs на экране.**
-
-**Макс:** *"Готов. Везём это всё в Исландию."*
-
-**Viktor:** *"Season 7 — Reykjavik. Deployment в production. Финальная подготовка. Season 8 — война. Но сейчас — отдохни. Earned it."*
+**Витор:** *«Собирайся. Здесь стало людно.»*
 
 ---
 
@@ -401,5 +403,4 @@ Zhang Mei: *"MQTT TLS configured. Real-time monitoring. Если что-то д�
 
 ---
 
-**Season 6 Status:** структурно 4/4 эпизода на месте (ep21–24). Открытые долги v2.0: достроить ep24 (готовый `.ko` вместо заглушки) и ep23; обновить CURRICULUM (ep23/24); см. [STATUS.md](../STATUS.md).
-**Первый эпизод:** [Episode 21: Raspberry Pi & GPIO Programming](./episode-21-raspberry-pi/)
+**Первая серия:** [s06e01 — Плата без наклейки](./s06e01-board-recon/)

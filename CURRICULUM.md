@@ -878,7 +878,7 @@ Dmitry: *"50 серверов вручную? Нет. Docker, Ansible, CI/CD. Е
 - 🐍 Python (IoT automation, MQTT security)
 - 📊 JSON (MQTT payloads, configs)
 - 🔧 Device configs (config.txt, device tree, secure boot)
-- 📡 Device drivers и модули ядра (Episode 24; выделенная серия UART/I2C/SPI — descoped, см. §6 плана)
+- 📡 Device drivers и модули ядра (s06e11–s06e12: собираемый `.ko`, `/dev/shadow0`)
 - 🚁 MAVLink протокол + шифрование команд
 - 🔐 IoT Security (firmware reverse engineering, MQTT TLS, secure updates)
 - 📝 Shell scripts (startup automation)
@@ -886,6 +886,12 @@ Dmitry: *"50 серверов вручную? Нет. Docker, Ansible, CI/CD. Е
 
 **Контекст:**
 Viktor: *"Нужна разведка. Дроны. Летишь в Шэньчжэнь — hardware Silicon Valley."* Max в Китае. Культурный шок × 100. Huaqiangbei electronics market — можно купить ВСЁ. Li Wei (ex-DJI) обучает embedded Linux + IoT security. Неоновый киберпанк IRL. Сборка дронов, Raspberry Pi, kernel modules, hardware hacking. **ОПАСНОСТЬ:** Krylov пытается перехватить drone во время разведки через UART exploitation — шифрование команд + secure boot спасают. Китайская слежка. Firmware reverse engineering для обнаружения backdoors в китайских чипах. Быстрый выезд после миссии. **СЛОЖНОСТЬ МАКСИМАЛЬНА:** C programming, real-time constraints, hardware protocols, IoT security — всё одновременно.
+
+> **v2.0:** Season 6 пересобран в 12 атомарных серий (`s06e01`–`s06e12`, 420 проверок,
+> 2A / 4B / 3C / **3D**). Описания эпизодов ниже сохранены как карта тем и сюжета;
+> актуальная разбивка — в [`season-06-embedded-iot/README.md`](season-06-embedded-iot/README.md).
+> Здесь же впервые появился **Type D** — серии, где сдаётся программа и проверяется
+> её поведение, и первые интеграционные тесты курса (`make test-integration`).
 
 ### Episode 21: Raspberry Pi & GPIO
 **Тема:** Основы embedded Linux
@@ -1007,9 +1013,13 @@ Viktor: *"Нужна разведка. Дроны. Летишь в Шэньчж�
 - Li Wei: "Kernel space — здесь нет прощения. Один segfault — kernel panic."
 - Финал сезона: разведка Krylov успешна, Max возвращается из Китая с критическими данными.
 
-> **Descoped:** ранее планировалась отдельная серия **Industrial Protocols (UART/I2C/SPI)**.
-> В текущей структуре её нет (Season 6 = RPi/GPIO → дроны → IoT/MQTT → kernel modules).
-> Тема — кандидат на возврат отдельной серией в будущих версиях (см. `V2.0_UPGRADE_PLAN.md` §6, T5).
+> **Про UART/I2C/SPI (бывший descoped-пункт).** Отдельной серии по промышленным
+> протоколам в сезоне нет, но темы разошлись по местам, где они возникают по делу:
+> UART — как единственный голос платы при сбое (`s06e01` — консоль в `bootargs`,
+> `s06e03` — `enable_uart` и `disable-bt`), I2C и SPI — как шины датчиков, которые
+> надо включить в дереве устройств (`s06e01` находит выключенный `spi@`, `s06e03`
+> его включает), 1-wire — через overlay с номером ножки. Разбор протоколов на
+> уровне осциллографа остаётся за рамками курса: без железа его нечем проверить.
 
 **Итог Season 6:** Embedded Linux освоен — от GPIO и дронов до IoT/MQTT и модулей ядра. Разведка Krylov успешна. Max возвращается из Китая с критическими данными.
 
@@ -1339,7 +1349,7 @@ Reconnaissance → Exploitation → Database dump (3.3 GB evidence) → The Arch
 - ✅ Season 3: System Administration (Episodes 09-12) — 100%
 - ✅ Season 4: DevOps & Automation (Episodes 13-16) — 100%
 - ✅ Season 5: Security & Pentesting (Episodes 17-20) — 100%
-- ✅ Season 6: Embedded Linux & IoT (Episodes 21-24) — 100%
+- ✅ Season 6: Embedded Linux & IoT (s06e01–s06e12, 420 проверок) — пересобран v2.0
 - ✅ Season 7: Production & Advanced (Episodes 25-28) — 100%
 - ✅ Season 8: Final Operation (Episodes 29-32) — 100%
 

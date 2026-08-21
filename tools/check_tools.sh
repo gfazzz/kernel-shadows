@@ -38,6 +38,9 @@ editor|\b(nano|vim|vi)\b|s01e05
 ssh|\bssh\s|s02e08
 tar|\btar\s+-|s03e11
 curl|curl -[a-zA-Z]|s02e03
+python3|python3[ -]|s06e10
+gcc|\bgcc\b|s06e01
+make|\bmake\s|s06e11
 '
 
 echo "════════════════════════════════════════════════════════════"

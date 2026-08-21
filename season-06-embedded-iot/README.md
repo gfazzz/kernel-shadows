@@ -62,7 +62,7 @@ Season 6 мигрирует с монолитных `episode-NN` (1314–1571 с
 | s06e03 | 21 | загрузка платы: `config.txt`, `cmdline.txt` | `config.txt` + `cmdline.txt` | **B** | ✅ 24 |
 | s06e04 | 21 | устройство без диска: overlayfs, износ SD | `fstab` | **B** | ✅ 28 |
 | s06e05 | 22 | телеметрия дрона: разбор потока MAVLink | `telemetry_report.txt` | **C** | ✅ 27 |
-| s06e06 | 22 | план миссии: валидатор маршрута до вылета | `check_mission.sh` | **A** | план |
+| s06e06 | 22 | план миссии: валидатор маршрута до вылета | `check_mission.sh` | **A** | ✅ 22 |
 | s06e07 | 22 | отказоустойчивость: failsafe, RTL, геозона | `failsafe.params` | **B** | план |
 | s06e08 | 23 | MQTT: топики, QoS, retained — разбор дампа | `mqtt_report.txt` | **C** | план |
 | s06e09 | 23 | брокер: `mosquitto.conf`, ACL, TLS | `mosquitto.conf` + ACL | **B** | план |

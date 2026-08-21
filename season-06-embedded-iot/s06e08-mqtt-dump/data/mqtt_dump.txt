@@ -1,0 +1,92 @@
+# Журнал брокера mosquitto, узел агрегации shadow-mesh.
+# Снят командой:  mosquitto -c /etc/mosquitto/mosquitto.conf -v
+# Для удобства разбора каждый пакет сведён к ОДНОЙ строке.
+#
+# broker=mosquitto 2.0.11
+# host=10.30.4.11
+# listener=1883
+# protocol=mqtt
+# tls=no
+#
+# Поля PUBLISH: d — дубликат, q — QoS, r — retained, m — идентификатор.
+# Флаг c в CONNECT: c1 — чистая сессия, c0 — сессия сохраняется.
+# k — keepalive в секундах. will — тема последнего слова (last will).
+1731920400.037 Received CONNECT from shadow-node-03 (c1, k60, u'ops', p'S3nsor!2025')
+1731920400.074 Sending CONNACK to shadow-node-03 (0, 0)
+1731920400.111 Received CONNECT from shadow-node-07 (c1, k60, u'ops', p'S3nsor!2025')
+1731920400.148 Sending CONNACK to shadow-node-07 (0, 0)
+1731920400.185 Received CONNECT from shadow-node-12 (c1, k60, u'ops', p'S3nsor!2025')
+1731920400.222 Sending CONNACK to shadow-node-12 (0, 0)
+1731920400.259 Received CONNECT from shadow-node-19 (c1, k60, u'ops', p'S3nsor!2025')
+1731920400.296 Sending CONNACK to shadow-node-19 (0, 0)
+1731920400.333 Received CONNECT from shadow-node-24 (c1, k60, u'ops', p'S3nsor!2025')
+1731920400.370 Sending CONNACK to shadow-node-24 (0, 0)
+1731920400.407 Received CONNECT from shadow-uav-03 (c1, k30, u'ops', p'S3nsor!2025')
+1731920400.444 Sending CONNACK to shadow-uav-03 (0, 0)
+1731920400.481 Received CONNECT from dashboard-01 (c0, k60, u'ops', p'S3nsor!2025')
+1731920400.518 Sending CONNACK to dashboard-01 (0, 0)
+1731920400.555 Received SUBSCRIBE from dashboard-01 ('shadow/+/telemetry/temp', QoS 0)
+1731920400.592 Received SUBSCRIBE from dashboard-01 ('shadow/+/telemetry/status', QoS 1)
+1731920400.629 Received CONNECT from mesh-recorder (c0, k60, u'ops', p'S3nsor!2025', will 'shadow/mesh-recorder/state')
+1731920400.666 Sending CONNACK to mesh-recorder (0, 0)
+1731920400.703 Received SUBSCRIBE from mesh-recorder ('shadow/+/telemetry/#', QoS 1)
+1731920400.740 Received CONNECT from mqtt-explorer-9f2a (c1, k60, u'ops', p'S3nsor!2025')
+1731920400.777 Sending CONNACK to mqtt-explorer-9f2a (0, 0)
+1731920400.814 Received SUBSCRIBE from mqtt-explorer-9f2a ('#', QoS 0)
+1731920400.851 Received PUBLISH from shadow-node-03 (d0, q0, r0, m0, 'shadow/03/telemetry/temp', ... (4 bytes)) payload='22.9'
+1731920400.888 Received PUBLISH from shadow-node-03 (d0, q1, r1, m1, 'shadow/03/telemetry/status', ... (6 bytes)) payload='online'
+1731920400.925 Received PUBLISH from shadow-node-07 (d0, q0, r0, m0, 'shadow/07/telemetry/temp', ... (4 bytes)) payload='21.9'
+1731920400.962 Received PUBLISH from shadow-node-07 (d0, q1, r1, m2, 'shadow/07/telemetry/status', ... (6 bytes)) payload='online'
+1731920400.999 Received PUBLISH from shadow-node-12 (d0, q0, r0, m0, 'shadow/12/telemetry/temp', ... (4 bytes)) payload='24.9'
+1731920401.036 Received PUBLISH from shadow-node-12 (d0, q1, r1, m3, 'shadow/12/telemetry/status', ... (6 bytes)) payload='online'
+1731920401.073 Received PUBLISH from shadow-node-19 (d0, q0, r0, m0, 'shadow/19/telemetry/temp', ... (4 bytes)) payload='21.4'
+1731920401.110 Received PUBLISH from shadow-node-19 (d0, q1, r1, m4, 'shadow/19/telemetry/status', ... (6 bytes)) payload='online'
+1731920401.147 Received PUBLISH from shadow-node-24 (d0, q0, r0, m0, 'shadow/24/telemetry/temp', ... (4 bytes)) payload='24.2'
+1731920401.184 Received PUBLISH from shadow-node-24 (d0, q1, r1, m5, 'shadow/24/telemetry/status', ... (6 bytes)) payload='online'
+1731920401.221 Received PUBLISH from shadow-uav-03 (d0, q0, r0, m0, 'shadow/uav03/telemetry/battery', ... (4 bytes)) payload='16.8'
+1731920401.258 Received PUBLISH from dashboard-01 (d0, q0, r0, m0, 'shadow/03/cmd/led', ... (3 bytes)) payload='off'
+1731920401.295 Received PUBLISH from shadow-node-03 (d0, q0, r0, m0, 'shadow/03/telemetry/temp', ... (4 bytes)) payload='23.2'
+1731920401.332 Received PUBLISH from shadow-node-07 (d0, q0, r0, m0, 'shadow/07/telemetry/temp', ... (4 bytes)) payload='21.3'
+1731920401.369 Received PUBLISH from shadow-node-12 (d0, q0, r0, m0, 'shadow/12/telemetry/temp', ... (4 bytes)) payload='24.0'
+1731920401.406 Received PUBLISH from shadow-node-19 (d0, q0, r0, m0, 'shadow/19/telemetry/temp', ... (4 bytes)) payload='21.2'
+1731920401.443 Received PUBLISH from shadow-node-24 (d0, q0, r0, m0, 'shadow/24/telemetry/temp', ... (4 bytes)) payload='23.6'
+1731920401.480 Received PUBLISH from shadow-uav-03 (d0, q0, r0, m0, 'shadow/uav03/telemetry/battery', ... (4 bytes)) payload='16.4'
+1731920401.517 Received PUBLISH from dashboard-01 (d0, q0, r0, m0, 'shadow/07/cmd/led', ... (2 bytes)) payload='on'
+1731920401.554 Received PUBLISH from shadow-node-03 (d0, q0, r0, m0, 'shadow/03/telemetry/temp', ... (4 bytes)) payload='21.4'
+1731920401.591 Received PUBLISH from shadow-node-07 (d0, q0, r0, m0, 'shadow/07/telemetry/temp', ... (4 bytes)) payload='21.5'
+1731920401.628 Received PUBLISH from shadow-node-12 (d0, q0, r0, m0, 'shadow/12/telemetry/temp', ... (4 bytes)) payload='23.5'
+1731920401.665 Received PUBLISH from shadow-node-19 (d0, q0, r0, m0, 'shadow/19/telemetry/temp', ... (4 bytes)) payload='26.0'
+1731920401.702 Received PUBLISH from shadow-node-24 (d0, q0, r0, m0, 'shadow/24/telemetry/temp', ... (4 bytes)) payload='21.7'
+1731920401.739 Received PUBLISH from shadow-uav-03 (d0, q0, r0, m0, 'shadow/uav03/telemetry/battery', ... (4 bytes)) payload='16.0'
+1731920401.776 Socket error on client shadow-node-03, disconnecting.
+1731920401.813 Received PUBLISH from dashboard-01 (d0, q0, r0, m0, 'shadow/12/cmd/led', ... (3 bytes)) payload='off'
+1731920401.850 Received PUBLISH from shadow-node-07 (d0, q0, r0, m0, 'shadow/07/telemetry/temp', ... (4 bytes)) payload='22.3'
+1731920401.887 Received PUBLISH from shadow-node-07 (d0, q1, r1, m6, 'shadow/07/telemetry/status', ... (6 bytes)) payload='online'
+1731920401.924 Received PUBLISH from shadow-node-12 (d0, q0, r0, m0, 'shadow/12/telemetry/temp', ... (4 bytes)) payload='24.8'
+1731920401.961 Received PUBLISH from shadow-node-12 (d0, q1, r1, m7, 'shadow/12/telemetry/status', ... (6 bytes)) payload='online'
+1731920401.998 Received PUBLISH from shadow-node-19 (d0, q0, r0, m0, 'shadow/19/telemetry/temp', ... (4 bytes)) payload='26.7'
+1731920402.035 Received PUBLISH from shadow-node-19 (d0, q1, r1, m8, 'shadow/19/telemetry/status', ... (6 bytes)) payload='online'
+1731920402.072 Received PUBLISH from shadow-node-24 (d0, q0, r0, m0, 'shadow/24/telemetry/temp', ... (4 bytes)) payload='24.5'
+1731920402.109 Received PUBLISH from shadow-node-24 (d0, q1, r1, m9, 'shadow/24/telemetry/status', ... (6 bytes)) payload='online'
+1731920402.146 Received PUBLISH from shadow-uav-03 (d0, q0, r0, m0, 'shadow/uav03/telemetry/battery', ... (4 bytes)) payload='15.6'
+1731920402.183 Received CONNECT from shadow-node-12 (c1, k60, u'ops', p'S3nsor!2025')
+1731920402.220 Client shadow-node-12 already connected, closing old connection.
+1731920402.257 Sending CONNACK to shadow-node-12 (0, 0)
+1731920402.294 Received PUBLISH from dashboard-01 (d0, q0, r0, m0, 'shadow/19/cmd/led', ... (2 bytes)) payload='on'
+1731920402.331 Received PUBLISH from shadow-node-07 (d0, q0, r0, m0, 'shadow/07/telemetry/temp', ... (4 bytes)) payload='23.4'
+1731920402.368 Received PUBLISH from shadow-node-12 (d0, q0, r0, m0, 'shadow/12/telemetry/temp', ... (4 bytes)) payload='26.9'
+1731920402.405 Received PUBLISH from shadow-node-19 (d0, q0, r0, m0, 'shadow/19/telemetry/temp', ... (4 bytes)) payload='21.3'
+1731920402.442 Received PUBLISH from shadow-node-24 (d0, q0, r0, m0, 'shadow/24/telemetry/temp', ... (4 bytes)) payload='26.2'
+1731920402.479 Received PUBLISH from shadow-uav-03 (d0, q0, r0, m0, 'shadow/uav03/telemetry/battery', ... (4 bytes)) payload='15.2'
+1731920402.516 Received CONNECT from shadow-node-12 (c1, k60, u'ops', p'S3nsor!2025')
+1731920402.553 Client shadow-node-12 already connected, closing old connection.
+1731920402.590 Sending CONNACK to shadow-node-12 (0, 0)
+1731920402.627 Received PUBLISH from dashboard-01 (d0, q0, r0, m0, 'shadow/24/cmd/led', ... (3 bytes)) payload='off'
+1731920402.664 Received PUBLISH from shadow-node-07 (d0, q0, r0, m0, 'shadow/07/telemetry/temp', ... (4 bytes)) payload='22.7'
+1731920402.701 Received PUBLISH from shadow-node-12 (d0, q0, r0, m0, 'shadow/12/telemetry/temp', ... (4 bytes)) payload='21.9'
+1731920402.738 Received PUBLISH from shadow-node-19 (d0, q0, r0, m0, 'shadow/19/telemetry/temp', ... (4 bytes)) payload='21.7'
+1731920402.775 Received PUBLISH from shadow-node-24 (d0, q0, r0, m0, 'shadow/24/telemetry/temp', ... (4 bytes)) payload='22.9'
+1731920402.812 Received PUBLISH from shadow-uav-03 (d0, q0, r0, m0, 'shadow/uav03/telemetry/battery', ... (4 bytes)) payload='14.8'
+1731920402.849 Received PUBLISH from dashboard-01 (d0, q0, r0, m0, 'shadow/03/cmd/led', ... (2 bytes)) payload='on'
+1731920402.886 Sending PUBLISH to mqtt-explorer-9f2a (d0, q0, r0, m0, 'shadow/07/telemetry/temp', ... (4 bytes))
+1731920402.923 Sending PUBLISH to dashboard-01 (d0, q0, r0, m0, 'shadow/07/telemetry/temp', ... (4 bytes))

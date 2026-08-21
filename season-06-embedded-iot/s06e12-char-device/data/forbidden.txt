@@ -1,0 +1,7 @@
+# Чего в драйвере быть не должно.
+# Формат: идентификатор <TAB> регулярка <TAB> почему
+memcpy_user	memcpy[[:space:]]*\([[:space:]]*(buf|ubuf|user)	указатель из пользовательского пространства нельзя разыменовывать напрямую: нужен copy_to_user
+float	(^|[^_[:alnum:]])(float|double)[[:space:]]+[a-zA-Z_]	в ядре нет плавающей точки
+stdio	#include[[:space:]]*<stdio\.h>	стандартной библиотеки C в ядре нет
+malloc	(^|[^_[:alnum:]])malloc[[:space:]]*\(	в ядре kmalloc/kzalloc
+sprintf_user	(^|[^_[:alnum:]])sprintf[[:space:]]*\(	без ограничения длины: в ядре snprintf/scnprintf

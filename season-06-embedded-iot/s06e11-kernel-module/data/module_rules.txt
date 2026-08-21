@@ -1,0 +1,17 @@
+# Требования к исходнику модуля ядра. Проверяются структурно: тест ищет
+# эти конструкции в shadow_mod.c.
+#
+# Формат: идентификатор <TAB> регулярка <TAB> пояснение
+# Разделитель — табуляция: в регулярках встречается «|».
+init	module_init[[:space:]]*\(	точка входа объявлена через module_init()
+exit	module_exit[[:space:]]*\(	точка выхода объявлена через module_exit()
+license	MODULE_LICENSE[[:space:]]*\("GPL	без совместимой лицензии ядро метит себя tainted и закрывает часть символов
+author	MODULE_AUTHOR[[:space:]]*\(	кто написал — видно в modinfo
+descr	MODULE_DESCRIPTION[[:space:]]*\(	что делает — видно в modinfo
+version	MODULE_VERSION[[:space:]]*\(	версия — видна в modinfo
+param	module_param[[:space:]]*\(	параметр модуля объявлен
+param_perm	module_param[[:space:]]*\([^)]*0[0-7][0-7][0-7][[:space:]]*\)	права на файл параметра заданы восьмеричным числом
+param_desc	MODULE_PARM_DESC[[:space:]]*\(	параметр описан для modinfo
+init_mark	__init	функция инициализации помечена __init: память освободится после загрузки
+exit_mark	__exit	функция выгрузки помечена __exit
+pr_api	pr_(info|err|warn|debug)[[:space:]]*\(	сообщения через pr_*, а не голый printk без уровня

@@ -67,7 +67,7 @@ Season 6 мигрирует с монолитных `episode-NN` (1314–1571 с
 | s06e08 | 23 | MQTT: топики, QoS, retained — разбор дампа | `mqtt_report.txt` | **C** | ✅ 26 |
 | s06e09 | 23 | брокер: `mosquitto.conf`, ACL, TLS | `mosquitto.conf` + `acl` | **B** | ✅ 45 |
 | s06e10 | 23 | клиент-датчик на Python | `sensor.py` | **D** | ✅ 39 |
-| s06e11 | 24 | модуль ядра: сборка, загрузка, параметры | `shadow_mod.c` | **D** | план |
+| s06e11 | 24 | модуль ядра: сборка, загрузка, параметры | `shadow_ring.c` + `shadow_mod.c` | **D** | ✅ 69 |
 | s06e12 | 24 | символьное устройство (финал сезона) | `shadow_dev.c` | **D** | план |
 
 Целевой баланс по §2A: 2 × Type A, 4 × Type B, 3 × Type C, **3 × Type D**. Здесь

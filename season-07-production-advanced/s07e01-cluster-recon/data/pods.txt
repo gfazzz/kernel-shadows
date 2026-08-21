@@ -1,0 +1,10 @@
+# kubectl get pods -n aurora -o wide
+# Снято 2026-08-21 09:14 UTC, кластер verne-prod.
+NAME                             READY   STATUS              RESTARTS       AGE   IP           NODE       NOMINATED
+aurora-api-7d4f8b6c9-2xk4l       1/1     Running             0              3h12m 10.42.1.15   verne-w1   <none>
+aurora-api-7d4f8b6c9-8rj2m       1/1     Running             0              3h12m 10.42.2.21   verne-w2   <none>
+aurora-api-7d4f8b6c9-c9v7t       0/1     Running             47 (2m ago)    3h12m 10.42.1.19   verne-w1   <none>
+aurora-api-7d4f8b6c9-dk3np       0/1     CrashLoopBackOff    12 (90s ago)   42m   10.42.2.28   verne-w2   <none>
+aurora-api-7d4f8b6c9-f5m8q       0/1     Pending             0              42m   <none>       <none>     <none>
+aurora-worker-5c8d94f7b-h2n6x    0/1     ImagePullBackOff    0              18m   10.42.3.11   verne-w3   <none>
+mesh-collector-6b7f9d54c-k7p3z   1/1     Running             2 (5h ago)     6h04m 10.42.3.7    verne-w3   <none>

@@ -84,7 +84,11 @@ exp_zombie=$(rows | awk '$6 ~ /^Z/ {print $2; exit}')
 exp_zparent=$(rows | awk -v p="${exp_zombie}" '$2==p {print $3; exit}')
 
 exp_kthreads=$(rows | awk '$2==2 || $3==2' | wc -l | tr -d ' ')
-naive_kthreads=$(rows | awk '{ $1=$1; sub(/^([^ ]+ ){7}/,""); if ($0 ~ /^\[/) n++ } END {print n+0}')
+# Команда — восьмое поле (user,pid,ppid,pcpu,pmem,stat,start,command). Берётся
+# по номеру, а не отрезанием семи полей регулярным выражением: интервал на
+# группе `([^ ]+ ){7}` mawk отрабатывает неверно, и «наивный» счёт молча
+# обнулялся — то есть самопроверка данных ловила не ловушку, а свой же awk.
+naive_kthreads=$(rows | awk '$8 ~ /^\[/ {n++} END {print n+0}')
 
 exp_topcpu=$(rows | sort -k4 -nr | awk '{print $2; exit}')
 exp_monitoring=$(rows | awk '$1 ~ /^monitor/' | wc -l | tr -d ' ')

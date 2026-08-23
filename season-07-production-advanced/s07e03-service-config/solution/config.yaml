@@ -1,0 +1,29 @@
+# config.yaml — настройки, которые можно показывать (ЭТАЛОН)
+#
+# Здесь всё, что помечено в app_config.txt как plain. AURORA_DB_DSN тут нет
+# и быть не может: он приходит из Secret по ссылке (s07e02).
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aurora-config
+  namespace: aurora
+  labels:
+    app: aurora-api
+data:
+  # Имя службы, а не адрес пода: 10.42.3.7 живёт до первого перезапуска и
+  # не разрешается по имени. Порт — тот, что объявлен у службы
+  # mesh-collector в services.txt.
+  AURORA_MESH_URL: "http://mesh-collector:9000"
+
+  # Все значения — строки. YAML прочитал бы 300 как число, а API-сервер
+  # отказывает ConfigMap с нестроковым значением в data. Кавычки здесь не
+  # украшение: без них `kubectl apply` возвращает ошибку типа.
+  AURORA_LOG_JSON: "true"
+  AURORA_LOG_LEVEL: "info"
+  AURORA_CACHE_TTL_S: "300"
+
+  # Совпадает с max пула postgres (см. журнал старта в s07e02): просить у
+  # базы больше соединений, чем у тебя есть, — способ получить очередь там,
+  # где её никто не ищет.
+  AURORA_MAX_INFLIGHT: "32"

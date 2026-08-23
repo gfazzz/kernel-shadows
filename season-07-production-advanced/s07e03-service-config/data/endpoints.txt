@@ -1,0 +1,21 @@
+# kubectl get endpoints -n aurora
+#
+# Единственная команда, которая отвечает на вопрос «а Service вообще
+# кого-нибудь нашёл». Пустой список — не ошибка и не предупреждение;
+# ни в событиях, ни в логах об этом ничего не будет.
+NAME             ENDPOINTS                                             AGE
+aurora-api       <none>                                                87d
+mesh-collector   10.42.3.7:9000                                        61d
+aurora-db        10.42.1.4:5432                                        94d
+
+# kubectl describe svc aurora-api -n aurora  (сокращено)
+Name:              aurora-api
+Namespace:         aurora
+Type:              NodePort
+Selector:          app=aurora-api,pod-template-hash=7d4f8b6c9
+Port:              <unset>  8080/TCP
+TargetPort:        80/TCP
+NodePort:          <unset>  31080/TCP
+Endpoints:
+Session Affinity:  None
+Events:            <none>

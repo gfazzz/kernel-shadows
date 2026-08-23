@@ -1,0 +1,22 @@
+# kubectl get svc -n aurora
+NAME             TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+aurora-api       NodePort    10.43.201.14    <none>        8080:31080/TCP   87d
+aurora-db        ClusterIP   10.43.77.9      <none>        5432/TCP         94d
+mesh-collector   ClusterIP   10.43.118.60    <none>        9000/TCP         61d
+
+# Разрешение имён изнутри пода:
+#
+#   $ cat /etc/resolv.conf
+#   nameserver 10.43.0.10
+#   search aurora.svc.cluster.local svc.cluster.local cluster.local
+#   options ndots:5
+#
+#   $ nslookup mesh-collector
+#   Name:   mesh-collector.aurora.svc.cluster.local
+#   Address: 10.43.118.60
+#
+#   $ nslookup 10.42.3.7
+#   ** server can't find 7.3.42.10.in-addr.arpa: NXDOMAIN
+#
+# Имя службы разрешается, адрес пода — нет. Адрес пода вдобавок меняется при
+# каждом перезапуске: 10.42.3.7 сегодня и 10.42.1.22 завтра.

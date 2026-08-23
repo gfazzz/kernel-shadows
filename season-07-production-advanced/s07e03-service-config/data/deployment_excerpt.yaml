@@ -1,0 +1,13 @@
+# Фрагмент выкаченного манифеста aurora-api — то, на что должен ссылаться
+# Service. Полный файл собран в s07e02.
+spec:
+  template:
+    metadata:
+      labels:
+        app: aurora-api
+    spec:
+      containers:
+        - name: aurora-api
+          ports:
+            - name: http
+              containerPort: 8080

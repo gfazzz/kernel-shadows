@@ -1,0 +1,60 @@
+# curl -s http://mesh-collector:9000/metrics
+#
+# Выдача mesh-collector, версия v2.0.0 — та же телеметрия после разбора.
+# Здесь придраться не к чему, и это тоже надо уметь показать.
+
+# HELP aurora_requests_total Обработано запросов
+# TYPE aurora_requests_total counter
+aurora_requests_total{method="GET",code="200"} 184213
+aurora_requests_total{method="GET",code="500"} 412
+aurora_requests_total{method="POST",code="200"} 20118
+aurora_requests_total{method="POST",code="500"} 97
+
+# HELP aurora_request_duration_seconds Время ответа
+# TYPE aurora_request_duration_seconds histogram
+aurora_request_duration_seconds_bucket{le="0.01"} 121004
+aurora_request_duration_seconds_bucket{le="0.05"} 190118
+aurora_request_duration_seconds_bucket{le="0.25"} 204601
+aurora_request_duration_seconds_bucket{le="1"} 204812
+aurora_request_duration_seconds_bucket{le="+Inf"} 204840
+aurora_request_duration_seconds_sum 9814.221
+aurora_request_duration_seconds_count 204840
+
+# HELP aurora_db_queries_total Запросов к базе с момента старта
+# TYPE aurora_db_queries_total counter
+aurora_db_queries_total{table="routes"} 88214
+aurora_db_queries_total{table="sessions"} 12907
+
+# HELP aurora_cache_size_bytes Размер кэша маршрутов
+# TYPE aurora_cache_size_bytes gauge
+aurora_cache_size_bytes 41893120
+
+# HELP aurora_active_connections Открытых соединений сейчас
+# TYPE aurora_active_connections gauge
+aurora_active_connections 27
+
+# HELP aurora_pool_wait_seconds Ожидание соединения из пула
+# TYPE aurora_pool_wait_seconds gauge
+aurora_pool_wait_seconds 0.004
+
+# HELP aurora_route_lookup_seconds Поиск маршрута
+# TYPE aurora_route_lookup_seconds histogram
+aurora_route_lookup_seconds_bucket{le="0.001"} 30112
+aurora_route_lookup_seconds_bucket{le="0.005"} 41880
+aurora_route_lookup_seconds_bucket{le="0.01"} 42901
+aurora_route_lookup_seconds_bucket{le="+Inf"} 43077
+aurora_route_lookup_seconds_sum 88.412
+aurora_route_lookup_seconds_count 43077
+
+# HELP aurora_endpoint_hits_total Обращения к конечным точкам
+# TYPE aurora_endpoint_hits_total counter
+aurora_endpoint_hits_total{route="/api/v1/order/:id"} 41
+aurora_endpoint_hits_total{route="/api/v1/route"} 20118
+aurora_endpoint_hits_total{route="/healthz"} 88104
+aurora_endpoint_hits_total{route="/ready"} 88104
+
+# HELP aurora_mesh_bytes_sent_total Отправлено узлам shadow_mesh
+# TYPE aurora_mesh_bytes_sent_total counter
+aurora_mesh_bytes_sent_total{node="edge-01"} 41882301
+aurora_mesh_bytes_sent_total{node="edge-02"} 39117440
+aurora_mesh_bytes_sent_total{node="edge-03"} 40228812

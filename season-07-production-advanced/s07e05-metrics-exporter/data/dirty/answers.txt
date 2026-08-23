@@ -1,0 +1,12 @@
+# Что нашёл promtool и живой Prometheus на этой выдаче.
+#
+# Первая колонка — код нарушения, вторая — семейство метрик.
+# Файл нужен тесту для сверки; check_metrics.sh открывать его не должен.
+#
+# code            metric
+unit              aurora_request_duration_milliseconds
+counter-suffix    aurora_db_queries
+no-help           aurora_active_connections
+no-type           aurora_pool_wait_seconds
+histogram         aurora_route_lookup_seconds
+cardinality       aurora_endpoint_hits_total

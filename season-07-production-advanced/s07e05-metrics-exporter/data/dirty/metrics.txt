@@ -1,0 +1,75 @@
+# curl -s http://aurora-api:8080/metrics
+#
+# Выдача mesh-collector, версия v1.4.0. Своя, написанная в спешке под
+# демонстрацию заказчику: «метрики есть».
+#
+# Строки, начинающиеся с решётки, — служебные: HELP и TYPE. Всё остальное —
+# «имя{метки} значение».
+
+# HELP aurora_requests_total Обработано запросов
+# TYPE aurora_requests_total counter
+aurora_requests_total{method="GET",code="200"} 184213
+aurora_requests_total{method="GET",code="500"} 412
+aurora_requests_total{method="POST",code="200"} 20118
+aurora_requests_total{method="POST",code="500"} 97
+
+# HELP aurora_request_duration_milliseconds Время ответа
+# TYPE aurora_request_duration_milliseconds gauge
+aurora_request_duration_milliseconds{quantile="0.5"} 41
+aurora_request_duration_milliseconds{quantile="0.99"} 380
+
+# HELP aurora_db_queries Запросов к базе с момента старта
+# TYPE aurora_db_queries counter
+aurora_db_queries{table="routes"} 88214
+aurora_db_queries{table="sessions"} 12907
+
+# HELP aurora_cache_size_bytes Размер кэша маршрутов
+# TYPE aurora_cache_size_bytes gauge
+aurora_cache_size_bytes 41893120
+
+# TYPE aurora_active_connections gauge
+aurora_active_connections 27
+
+# HELP aurora_pool_wait_seconds Ожидание соединения из пула
+aurora_pool_wait_seconds 0.004
+
+# HELP aurora_route_lookup_seconds Поиск маршрута
+# TYPE aurora_route_lookup_seconds histogram
+aurora_route_lookup_seconds_bucket{le="0.001"} 30112
+aurora_route_lookup_seconds_bucket{le="0.005"} 41880
+aurora_route_lookup_seconds_bucket{le="0.01"} 42901
+aurora_route_lookup_seconds_sum 88.412
+aurora_route_lookup_seconds_count 43077
+
+# HELP aurora_endpoint_hits_total Обращения к конечным точкам
+# TYPE aurora_endpoint_hits_total counter
+aurora_endpoint_hits_total{path="/api/v1/order/8831742"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831743"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831744"} 3
+aurora_endpoint_hits_total{path="/api/v1/order/8831745"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831746"} 2
+aurora_endpoint_hits_total{path="/api/v1/order/8831747"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831748"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831749"} 4
+aurora_endpoint_hits_total{path="/api/v1/order/8831750"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831751"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831752"} 2
+aurora_endpoint_hits_total{path="/api/v1/order/8831753"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831754"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831755"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831756"} 5
+aurora_endpoint_hits_total{path="/api/v1/order/8831757"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831758"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831759"} 2
+aurora_endpoint_hits_total{path="/api/v1/order/8831760"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831761"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831762"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831763"} 6
+aurora_endpoint_hits_total{path="/api/v1/order/8831764"} 1
+aurora_endpoint_hits_total{path="/api/v1/order/8831765"} 1
+
+# HELP aurora_mesh_bytes_sent_total Отправлено узлам shadow_mesh
+# TYPE aurora_mesh_bytes_sent_total counter
+aurora_mesh_bytes_sent_total{node="edge-01"} 41882301
+aurora_mesh_bytes_sent_total{node="edge-02"} 39117440
+aurora_mesh_bytes_sent_total{node="edge-03"} 40228812

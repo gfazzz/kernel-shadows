@@ -1,0 +1,8 @@
+# ps -eZ | grep -E 'aurora|nginx|sshd'
+system_u:system_r:httpd_t:s0            1841 ?  00:00:04 nginx
+system_u:system_r:sshd_t:s0              912 ?  00:00:00 sshd
+system_u:system_r:unconfined_service_t:s0 2210 ? 00:00:11 aurora-archiver
+#
+# Третья строка — то, что происходит с сервисом, для которого политики нет:
+# systemd запускает его в unconfined_service_t, и SELinux его почти не
+# ограничивает. «Отказов нет» здесь означает «правил нет», а не «безопасно».

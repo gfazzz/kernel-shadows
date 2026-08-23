@@ -1,0 +1,15 @@
+# Гистограмма aurora_request_duration_seconds — снимок «regression».
+# Снято за одно и то же окно в один и тот же час суток.
+# Корзины НАКОПИТЕЛЬНЫЕ: le="0.1" — все наблюдения быстрее 100 мс.
+# HELP aurora_request_duration_seconds Время ответа
+# TYPE aurora_request_duration_seconds histogram
+aurora_request_duration_seconds_bucket{le="0.025"} 3000
+aurora_request_duration_seconds_bucket{le="0.05"} 7000
+aurora_request_duration_seconds_bucket{le="0.1"} 12000
+aurora_request_duration_seconds_bucket{le="0.25"} 17000
+aurora_request_duration_seconds_bucket{le="0.5"} 18800
+aurora_request_duration_seconds_bucket{le="1"} 19700
+aurora_request_duration_seconds_bucket{le="2.5"} 19980
+aurora_request_duration_seconds_bucket{le="+Inf"} 20000
+aurora_request_duration_seconds_sum 2914.250
+aurora_request_duration_seconds_count 20000

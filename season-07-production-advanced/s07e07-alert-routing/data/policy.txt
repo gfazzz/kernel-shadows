@@ -1,0 +1,35 @@
+# Правила дежурства — то, о чём договорились после ночи с восемью звонками.
+#
+# Формат «ключ значение», чтобы проверять механически.
+
+# Куда что уходит. Приёмник page — телефон, ticket — трекер задач.
+route severity=page    receiver=oncall-phone
+route severity=ticket  receiver=tracker
+
+# Приёмник по умолчанию: оповещение, не подошедшее ни под одно правило,
+# обязано куда-то попасть. Иначе оно исчезает молча — и это худший исход
+# из возможных.
+default_receiver tracker
+
+# По каким меткам склеивать оповещения в одно сообщение. Одна авария на
+# одном узле одного пространства имён — одно сообщение, а не пять.
+# alertname сюда НЕ входит намеренно: склеивать надо разные оповещения
+# одной аварии, а группировка по alertname склеивает одинаковые.
+group_by cluster
+group_by namespace
+
+# Выдержки. group_wait — сколько ждать перед первым сообщением группы:
+# за это время подтянутся остальные оповещения той же аварии (в журнале
+# ночи разброс — сорок две секунды).
+min_group_wait      45s
+# group_interval — сколько ждать перед сообщением о ДОПОЛНЕНИИ группы.
+min_group_interval  5m
+# repeat_interval — как часто напоминать о том, что всё ещё горит.
+# Пять минут дали три бесполезных звонка подряд.
+min_repeat_interval 4h
+
+# Подавление: если цель недоступна, ошибки, задержка и перезапуски —
+# следствия, а не новости. Их не шлют, пока действует причина.
+inhibit source=AuroraTargetDown target=AuroraHighErrorRate    equal=job
+inhibit source=AuroraTargetDown target=AuroraHighLatency      equal=job
+inhibit source=AuroraTargetDown target=AuroraPodCrashLooping  equal=job

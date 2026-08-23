@@ -1,0 +1,18 @@
+# Настройка, которая действовала в ночь с восемью звонками.
+#
+# Это НЕ образец.
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: oncall-phone
+  group_by:
+    - alertname
+  group_wait: 0s
+  group_interval: 1m
+  repeat_interval: 5m
+
+receivers:
+  - name: oncall-phone
+    webhook_configs:
+      - url: https://hooks.pager.example/v1/send?token=8f14e45fceea167a5a36dedd4bea2543

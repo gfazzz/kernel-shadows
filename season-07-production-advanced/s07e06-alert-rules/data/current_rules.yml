@@ -1,0 +1,27 @@
+# Правила, которые действуют сейчас. Семьдесят четыре срабатывания за
+# месяц и ни одного про три происшествия из incidents.txt.
+#
+# Это НЕ образец.
+groups:
+  - name: aurora
+    rules:
+      - alert: HighCPU
+        expr: rate(container_cpu_usage_seconds_total{namespace="aurora"}[1m]) > 0.8
+        labels:
+          severity: page
+        annotations:
+          summary: Высокая загрузка процессора
+
+      - alert: HighMemory
+        expr: container_memory_working_set_bytes{namespace="aurora"} > 200000000
+        labels:
+          severity: page
+        annotations:
+          summary: Много памяти
+
+      - alert: Errors5xx
+        expr: aurora_requests_total{code="500"} > 100
+        labels:
+          severity: page
+        annotations:
+          summary: Ошибки

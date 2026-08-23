@@ -1,0 +1,20 @@
+# Метрики, которые действительно есть в хранилище. Правило, ссылающееся на
+# несуществующее имя, не ошибка: PromQL вернёт пустой результат, правило
+# никогда не сработает, и узнать об этом можно только не получив
+# оповещение в нужный момент.
+#
+# имя                                            откуда
+aurora_requests_total                            приложение (s07e05)
+aurora_request_duration_seconds_bucket           приложение (s07e05)
+aurora_request_duration_seconds_sum              приложение (s07e05)
+aurora_request_duration_seconds_count            приложение (s07e05)
+aurora_db_queries_total                          приложение
+aurora_cache_size_bytes                          приложение
+aurora_active_connections                        приложение
+aurora_pool_wait_seconds                         приложение
+aurora_route_lookup_seconds_bucket               приложение
+aurora_mesh_bytes_sent_total                     приложение
+up                                               Prometheus, состояние цели
+kube_pod_container_status_restarts_total         kube-state-metrics
+container_memory_working_set_bytes               cAdvisor
+container_cpu_cfs_throttled_seconds_total        cAdvisor

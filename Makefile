@@ -9,7 +9,7 @@
 #   make test SERIES=s01e10
 #   make test-repeat     два прогона подряд — проверка воспроизводимости (§4.3)
 #   make test-locale     прогон под LC_ALL=C и чужой TZ (§4.3)
-#   make test-integration тесты, которым нужен живой хост (сейчас таких нет)
+#   make test-integration тесты, которым нужен живой хост (s06e11, s06e12)
 #   make links           проверка ссылок между документами (§4.9)
 #   make tools           аудит forward-deps по инструментам (правило Сергея)
 #   make check           links + tools + test — то, что гоняет CI
@@ -62,7 +62,9 @@ test-locale:
 
 # Серии, которым нужен живой хост (systemd, Docker, root), выносятся сюда
 # отдельной целью с явной декларацией требований в mission.md (§7.1).
-# На сегодня таких серий в курсе нет: все 23 работают на фикстурах и моках.
+# Сейчас таких две — s06e11 и s06e12: сборка модуля ядра, insmod и чтение
+# /dev/shadow0. Без Linux, заголовков ядра или прав root обе сообщают SKIP,
+# поэтому основной прогон (make test) от окружения не зависит.
 test-integration:
 	@bash tools/run_integration.sh
 

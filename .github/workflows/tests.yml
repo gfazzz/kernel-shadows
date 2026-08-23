@@ -24,6 +24,11 @@ jobs:
         season:
           - season-01-shell-foundations
           - season-02-networking
+          - season-03-system-administration
+          - season-04-devops-automation
+          - season-05-security-pentesting
+          - season-06-embedded-iot
+          - season-07-production-advanced
     steps:
       - uses: actions/checkout@v4
 
@@ -128,8 +133,10 @@ jobs:
   integration:
     name: integration (по требованию)
     runs-on: ubuntu-latest
-    # Интеграционных тестов в курсе пока нет; работа существует, чтобы у S3+
-    # было куда класть проверки, которым нужны systemd, Docker или root.
+    # Сюда попадают проверки, которым нужны root, systemd или заголовки ядра:
+    # s06e11 и s06e12 собирают и загружают .ko. Без окружения они честно
+    # сообщают SKIP, поэтому основной прогон от них не зависит и работа
+    # запускается по требованию.
     if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4

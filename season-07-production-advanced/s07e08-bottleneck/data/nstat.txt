@@ -1,0 +1,11 @@
+# nstat -az   счётчики сетевого стека, разница за минуту наблюдения
+#
+# TcpExtListenOverflows — соединение не влезло в очередь принятия (backlog)
+# TcpExtListenDrops     — то же, отброшено
+# TcpRetransSegs        — повторно переданные сегменты
+TcpActiveOpens                  1842
+TcpPassiveOpens                 4128
+TcpRetransSegs                     3
+TcpExtListenOverflows              0
+TcpExtListenDrops                  0
+TcpExtTCPSynRetrans                2

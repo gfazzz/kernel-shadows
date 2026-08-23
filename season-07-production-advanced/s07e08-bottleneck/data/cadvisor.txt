@@ -1,0 +1,12 @@
+# Счётчики контейнера aurora-api из cAdvisor, разница за минуту наблюдения.
+#
+# container_cpu_cfs_periods_total           — сколько было стомиллисекундных окон
+# container_cpu_cfs_throttled_periods_total — в скольких из них квота кончилась
+#
+# Отношение второго к первому и есть доля троттлинга: сколько окон
+# контейнер простоял, упёршись в предел процессора.
+container_cpu_cfs_periods_total            600
+container_cpu_cfs_throttled_periods_total    6
+container_cpu_usage_seconds_total_delta     18
+container_memory_working_set_bytes  201326592
+container_spec_memory_limit_bytes   536870912

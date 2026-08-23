@@ -1,0 +1,9 @@
+# ss -tan | awk '{print $1}' | sort | uniq -c — снято в 08:48:20 UTC.
+#
+# состояние количество
+LISTEN         12
+SYN-RECV      128
+ESTAB         842
+TIME-WAIT    1204
+CLOSE-WAIT     37
+FIN-WAIT-1     19

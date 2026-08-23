@@ -1,0 +1,6 @@
+# kubectl get events -n aurora --sort-by=.lastTimestamp
+LAST SEEN   TYPE      REASON              OBJECT                          MESSAGE
+14m         Normal    ScalingReplicaSet   deployment/aurora-api           Scaled up replica set aurora-api-c3e9a5f04 to 1
+14m         Normal    Scheduled           pod/aurora-api-c3e9a5f04-t5n8j  Successfully assigned aurora/aurora-api-c3e9a5f04-t5n8j to verne-w2
+13m         Warning   Unhealthy           pod/aurora-api-c3e9a5f04-t5n8j  Readiness probe failed: HTTP probe failed with statuscode: 503
+2m          Warning   Unhealthy           pod/aurora-api-c3e9a5f04-t5n8j  Readiness probe failed: HTTP probe failed with statuscode: 503

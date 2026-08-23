@@ -1,0 +1,5 @@
+# kubectl get events -n aurora --sort-by=.lastTimestamp
+LAST SEEN   TYPE     REASON              OBJECT                          MESSAGE
+50s         Normal   ScalingReplicaSet   deployment/aurora-api           Scaled up replica set aurora-api-84fbc9d76 to 1
+40s         Normal   ScalingReplicaSet   deployment/aurora-api           Scaled down replica set aurora-api-6c5b74f9d to 4
+8s          Normal   Scheduled           pod/aurora-api-84fbc9d76-jw9rt  Successfully assigned aurora/aurora-api-84fbc9d76-jw9rt to verne-w1

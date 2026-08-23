@@ -1,0 +1,4 @@
+# kubectl get rs -n aurora -l app=aurora-api
+NAME                    DESIRED   CURRENT   READY   AGE
+aurora-api-6c5b74f9d    3         3         3       3h
+aurora-api-84fbc9d76    3         3         2       50s

@@ -1,0 +1,27 @@
+# kubectl get deploy aurora-api -n aurora -o yaml  (сокращено до сути)
+spec:
+  replicas: 5
+  progressDeadlineSeconds: 600
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    spec:
+      containers:
+        - name: aurora-api
+          image: registry.verne.internal/aurora-api:v2.5.0
+status:
+  observedGeneration: 9
+  replicas: 6
+  updatedReplicas: 1
+  readyReplicas: 5
+  availableReplicas: 5
+  conditions:
+    - type: Available
+      status: "True"
+      reason: MinimumReplicasAvailable
+    - type: Progressing
+      status: "True"
+      reason: ReplicaSetUpdated

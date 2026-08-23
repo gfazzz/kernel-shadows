@@ -134,7 +134,7 @@ Episode 18 сохранены как лаборатория `season-05/labs/web-
 - ✅ Season 4: DevOps & Automation (Episodes 13-16, Амстердам/Берлин 🇳🇱🇩🇪)
 - ✅ Season 5: Security & Pentesting (Episodes 17-20, Цюрих/Женева 🇨🇭)
 - ✅ Season 6: Embedded Linux & IoT (s06e01–s06e12, 420 проверок, Шэньчжэнь 🇨🇳)
-- ✅ Season 7: Production & Advanced (Episodes 25-28, Рейкьявик 🇮🇸)
+- ✅ Season 7: Production & Advanced (s07e01–s07e12, 426 проверок, Рейкьявик 🇮🇸)
 - ✅ Season 8: Final Operation (Episodes 29-32, Рейкьявик 🇮🇸)
 
 ### ⚡ Episode 29: Начало бури (Day 57) — ЭТАЛОН переплетённого контента!

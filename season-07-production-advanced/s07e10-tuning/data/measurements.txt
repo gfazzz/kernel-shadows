@@ -1,0 +1,17 @@
+# Что измерено на verne-w1 за час наблюдения под нагрузкой.
+#
+# Колонка «действие»:
+#   tune  — измерение требует изменения параметра
+#   -     — измерение приведено для расчёта или как контрольное
+#
+# id  величина                         значение  действие  чем снято
+M1  tcp_listen_overflows_per_min           184   tune   nstat -az | grep ListenOverflows
+M2  somaxconn_current                      128   -      sysctl net.core.somaxconn
+M3  app_requested_backlog                 4096   -      strace listen(3, 4096) при старте
+M4  nf_conntrack_count                  118000   tune   sysctl net.netfilter.nf_conntrack_count
+M5  nf_conntrack_max                    131072   -      sysctl net.netfilter.nf_conntrack_max
+M6  fd_open_max_observed                 14800   tune   lsof | wc -l на пике
+M7  file_max_current                     16384   -      sysctl fs.file-max
+M8  time_wait_sockets                    28000   -      ss -tan state time-wait | wc -l
+M9  swap_used_mb                             0   -      free -m: подкачка не используется
+M10 tcp_retrans_per_min                      3   -      nstat: повторов почти нет

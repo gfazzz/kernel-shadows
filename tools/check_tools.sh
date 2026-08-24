@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# check_tools.sh — аудит forward-deps по ИНСТРУМЕНТАМ (план §8, THEORY_MAP).
+# check_tools.sh — аудит forward-deps по ИНСТРУМЕНТАМ (THEORY_MAP).
 #
 # Зачем: курс легко ловит forward-deps по концептам (awk, systemd), но молча
 # пропускает ИНСТРУМЕНТЫ, которыми студент пользуется с первой серии и которым

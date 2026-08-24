@@ -182,7 +182,16 @@ mount -o remount,ro /
 
 ---
 
-## 7. Куда смотреть дальше
+## 7. Спросить у LILITH
+
+- *«Почему SD-карта в устройстве умирает быстрее, чем диск в сервере?»*
+- *«Как устроен overlayfs и что происходит с записью при корне только для чтения?»*
+- *«Куда девать журналы на узле, где нельзя писать на диск?»*
+- *«Чем `zram` лучше свопа на флеш-памяти?»*
+
+---
+
+## 8. Куда смотреть дальше
 
 - `man 5 fstab`, `man 8 mount`, `man 5 tmpfs`, `man 5 journald.conf`
 - `Documentation/filesystems/overlayfs.rst`, `Documentation/admin-guide/blockdev/zram.rst`

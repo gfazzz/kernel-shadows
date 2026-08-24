@@ -27,7 +27,7 @@ VERBOSE ?=
 
 export SEASON SERIES VERBOSE
 
-.PHONY: help test test-repeat test-locale test-integration links tools check progress clean-clone clean
+.PHONY: help test test-repeat test-locale test-integration links tools timeline check progress clean-clone clean
 
 help:
 	@echo "KERNEL SHADOWS — доступные цели:"
@@ -41,7 +41,8 @@ help:
 	@echo "  make test-integration     тесты, требующие живого хоста"
 	@echo "  make links                проверка ссылок между документами"
 	@echo "  make tools                аудит forward-deps по инструментам"
-	@echo "  make check                links + tools + test (как в CI)"
+	@echo "  make timeline             сквозная хронология: логистика канона"
+	@echo "  make check                links + tools + timeline + test (как в CI)"
 	@echo "  make progress             где я остановился"
 	@echo "  make clean-clone          приёмка на чистом клоне репозитория"
 	@echo "  make clean                убрать tests/logs"
@@ -74,7 +75,11 @@ links:
 tools:
 	@bash tools/check_tools.sh
 
-check: links tools test
+# §4.6: логистику не ловит ни тест, ни линтер — только сквозная таблица.
+timeline:
+	@bash tools/gen_timeline.sh --check
+
+check: links tools timeline test
 
 progress:
 	@bash tools/progress.sh

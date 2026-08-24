@@ -166,7 +166,16 @@ line  17:  unnamed  "shadow-sensor"  output  active-high [used]
 
 ---
 
-## 7. Куда смотреть дальше
+## 7. Спросить у LILITH
+
+- *«Почему интерфейс GPIO через sysfs объявили устаревшим и что пришло ему на смену?»*
+- *«Что физически произойдёт, если подать выход на выход, и чем это грозит плате?»*
+- *«Как сделать управление ножкой идемпотентным, если экспорт уже выполнен?»*
+- *«Как проверить работу с GPIO без единой железки?»*
+
+---
+
+## 8. Куда смотреть дальше
 
 - `Documentation/gpio/sysfs.rst` и `Documentation/ABI/obsolete/sysfs-gpio` — интерфейс и его статус
 - `libgpiod` (git.kernel.org/pub/scm/libs/libgpiod) — `gpioinfo`, `gpioset`, `gpiomon`, привязки к Python

@@ -180,7 +180,16 @@ kubectl get pod POD -o jsonpath='{.status.containerStatuses[0].lastState.termina
 
 ---
 
-## 8. Куда смотреть дальше
+## 8. Спросить у LILITH
+
+- *«Почему под может быть `Running` и при этом не готов принимать запросы?»*
+- *«Разбери жизненный цикл пода: какие состояния бывают и что означает каждое.»*
+- *«Чем проба готовности отличается от пробы живости и что ломается при их путанице?»*
+- *«Как по событиям понять, почему планировщик не разместил под?»*
+
+---
+
+## 9. Куда смотреть дальше
 
 - Kubernetes docs: Pod Lifecycle, Configure Liveness/Readiness/Startup Probes, Assign Memory Resources
 - «Kubernetes Up & Running» (Burns, Beda, Hightower); «Kubernetes Patterns» (Ibryam, Huß)

@@ -287,9 +287,11 @@ kernel-shadows/
 
 ## 🚀 Первая серия
 
-Курс v2.0 разбит на **атомарные серии** `sNNeNN`: один концепт — одна задача,
-45–60 минут. Начинать надо с первой — **s01e01: Terminal Awakening**. Карта всех
-14 серий Season 1 — в [season-01 README](season-01-shell-foundations/README.md).
+Курс разбит на **атомарные серии** `sNNeNN`: один концепт — одна задача,
+45–60 минут. Всего их 101 в восьми сезонах; начинать надо с первой —
+**s01e01: Terminal Awakening**. Карта всех 16 серий Season 1 — в
+[season-01 README](season-01-shell-foundations/README.md), полный указатель
+курса — в [CURRICULUM.md](CURRICULUM.md).
 
 ### Что лежит в каждой серии
 
@@ -479,7 +481,7 @@ sudo nano /etc/hosts
 
 **Шаблон issue:**
 ```markdown
-**Эпизод:** Season 1, Episode 01
+**Серия:** s01e01
 **ОС:** Ubuntu 24.04 LTS (WSL2 / Native / VM)
 **Проблема:** [краткое описание]
 
@@ -517,7 +519,7 @@ sudo nano /etc/hosts
 - [ ] Терминал открывается и работает
 - [ ] `git`, `curl`, `vim`/`nano` установлены
 - [ ] Репозиторий `kernel-shadows` склонирован
-- [ ] Episode 01 директория найдена и открыта
+- [ ] Каталог серии s01e01 найден и открыт
 - [ ] `README.md` прочитан (интегрированное руководство)
 - [ ] Готовы к первой миссии!
 
@@ -539,16 +541,15 @@ cd season-01-shell-foundations/s01e01-terminal-awakening
 less README.md && cat mission.md
 
 # 4. Взять каркас и выполнить задание
-cp starter/whereami.sh ./whereami.sh   # допишите TODO по README
+cp starter/whereami.sh artifacts/      # допишите TODO по README
 
-# 5. Проверить решение (воспроизводимый тест, без root)
+# 5. Проверить решение (воспроизводимый тест, без root и без сети)
 bash tests/test.sh
-
-# 6. Проверить решение
-cd tests && ./test.sh
 ```
 
-**Время прохождения Episode 01:** 3-4 часа (первый раз), 1-2 часа (с опытом).
+**Время прохождения s01e01:** ~45 минут по шапке серии. Весь курс —
+98 ч 25 мин чистого времени на задачи (измерено обходом шапок, см.
+[CURRICULUM.md](CURRICULUM.md)).
 
 ---
 

@@ -197,7 +197,7 @@ largest=$(find "$dir" -type f -exec du -k {} + | sort -rn | head -1 | cut -f2- |
 
 - `man find`, `man du`, `man xargs`
 - Shotts, «The Linux Command Line», гл. 17 «Searching for Files».
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

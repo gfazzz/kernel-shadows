@@ -156,7 +156,7 @@ ansible-lint harden.yml                                          # разбор 
 - Ansible docs: «Intro to playbooks», «Handlers: running operations on change», «Roles», «Protecting sensitive data with Ansible vault»
 - `ansible-doc -l`, `ansible-doc file` — какие модули есть и что они умеют
 - `ansible-lint` — набор правил, половину которых эта серия проверяет вручную
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

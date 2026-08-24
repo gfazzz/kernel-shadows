@@ -8,6 +8,8 @@
 # рефакторинг — этот не может (§4.7 плана).
 #
 #   tools/gen_index.sh            печатает указатель в stdout
+#
+# Пути в ссылках — относительно docs/, где живёт CURRICULUM.md.
 #   tools/gen_index.sh --counts   заодно прогоняет тесты (медленно, точно)
 #
 # Без root и без сети.
@@ -51,7 +53,7 @@ for season in season-*/; do
         mins="$(printf '%s' "${tm}" | grep -oE '[0-9]+' | head -1)"
         [ -n "${mins}" ] && season_min=$(( season_min + mins ))
         total_series=$(( total_series + 1 ))
-        printf '| [`%s`](%s) | %s | %s | %s | %s |\n' \
+        printf '| [`%s`](../%s) | %s | %s | %s | %s |\n' \
             "${id}" "${dir}" "${concept}" "${typ}" "${tm}" "${diff}"
     done
 

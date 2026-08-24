@@ -152,7 +152,7 @@ pre-commit install                     # менеджер хуков, стави
 - `man gitrevisions` (диапазоны), `man git-rev-list`, `man githooks`, `man git-rebase`
 - **Chacon & Straub, «Pro Git»** — главы 3 и 7
 - `git help workflows` — обзор схем ветвления
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

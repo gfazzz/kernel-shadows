@@ -221,7 +221,7 @@ DB_PASSWORD=Sh4dow-Pr0d-2025!
 - OWASP: «Secrets Management Cheat Sheet», «CI/CD Security»
 - `git log --all --name-only`, `git check-ignore -v`, `git ls-files`
 - Промышленные аналоги для сравнения: `gitleaks`, `trivy config`, `checkov`, `ansible-lint`, `hadolint`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

@@ -262,7 +262,7 @@ AURORA_MAX_INFLIGHT: "32"
 - «Systems Performance» (Gregg) — гл. 2 «Methodologies», гл. 6 «CPUs», гл. 9 «Disks»
 - `man vmstat`, `man iostat`, `man 8 nstat`, `man ss`
 - «The Art of Computer Systems Performance Analysis» (Jain) — про очереди и нелинейность
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

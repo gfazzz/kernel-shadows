@@ -270,7 +270,7 @@ bash tests/test.sh
 - «Incident Response & Computer Forensics» (Luttgens, Pepe, Mandia) — гл. про атрибуцию и её пределы
 - `man 1 git-commit`, раздел про `--author` и `-S` — почему поле автора и подпись это разное
 - Kahneman, «Thinking, Fast and Slow» — про подтверждающее искажение, которое здесь и работает
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

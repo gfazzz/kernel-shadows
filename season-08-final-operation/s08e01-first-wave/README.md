@@ -272,7 +272,7 @@ bash tests/test.sh
 - `man 8 nstat`, `man 8 ss` — откуда берутся оба снимка
 - RFC 4987 «TCP SYN Flooding Attacks and Common Mitigations» — разбор всех известных мер и их цены
 - «Systems Performance» (Gregg) — метод USE, применённый здесь к сетевому стеку
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

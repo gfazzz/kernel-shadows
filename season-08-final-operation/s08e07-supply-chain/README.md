@@ -260,7 +260,7 @@ bash tests/test.sh
 - Kubernetes documentation: Images — `imagePullPolicy` и ссылки по отпечатку
 - SLSA (Supply-chain Levels for Software Artifacts) — уровни зрелости цепочки поставок
 - Alex Birsan, «Dependency Confusion» — разбор путаницы пространств имён
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

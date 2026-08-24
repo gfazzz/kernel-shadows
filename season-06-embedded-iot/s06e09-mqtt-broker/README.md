@@ -208,7 +208,7 @@ bash tests/test.sh
 - `mosquitto_passwd(1)` — создание учётных записей
 - ACL: раздел «Access control» в документации mosquitto, подстановки `%u` и `%c`
 - OWASP IoT Top 10 — типовые ошибки в таких системах
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

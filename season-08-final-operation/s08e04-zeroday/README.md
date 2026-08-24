@@ -267,7 +267,7 @@ bash tests/test.sh
 - OWASP, «Virtual Patching Best Practices» — систематическое описание приёма
 - `man 5 nginx.conf` в дистрибутивах, где он есть; официальная справка полнее
 - RFC 9112 §7 — chunked-кодировка и почему её разбор — типичное место ошибок
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

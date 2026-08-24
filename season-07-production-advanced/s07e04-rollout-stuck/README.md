@@ -245,7 +245,7 @@ bash tests/test.sh
 - Kubernetes documentation: Deployments — Rolling Update, Progress Deadline Seconds, Rolling Back
 - `kubectl explain deployment.spec.strategy`; `kubectl rollout --help`
 - «Kubernetes Patterns» (Ibryam, Huß) — «Declarative Deployment»
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

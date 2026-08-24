@@ -186,7 +186,7 @@ update-initramfs -u        # пересобрать после изменени�
 - `man lvm`, `man pvcreate`, `man vgextend`, `man lvextend`, `man lvreduce`, `man lvmthin`, `man pvmove`, `man mdadm`
 - `man resize2fs`, `man xfs_growfs`, `man e2fsck`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — LVM и хранение.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

@@ -219,7 +219,7 @@ bash tests/test.sh
 - Полный список параметров: ardupilot.org → Complete Parameter List
 - PX4: Safety Configuration — те же идеи под другими именами
 - `MAVProxy`: `param show FS_*`, `param set`, `param diff`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

@@ -260,7 +260,7 @@ bash tests/test.sh
 - Регламенты ответственного раскрытия (ISO/IEC 29147) — порядок и сроки
 - GDPR, статьи про обработку и минимизацию персональных данных — почему PII вычищают
 - «The Cuckoo's Egg» (Stoll) — что бывает, когда действуешь через координатора, а не в одиночку
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

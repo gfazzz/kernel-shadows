@@ -204,7 +204,7 @@ Mon 2025-10-20 09:20:00     3min      Mon 2025-10-20 09:15:12     4min    ops-ch
 - `man systemd.timer`, `man systemd.time` (раздел «CALENDAR EVENTS»), `man systemd-analyze`
 - `man 5 crontab`, `man anacron` — чтобы видеть, откуда всё это выросло.
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — периодические задачи.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

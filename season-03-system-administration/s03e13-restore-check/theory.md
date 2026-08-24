@@ -134,7 +134,7 @@ Season 3 состоит из тринадцати разных тем, но ре
 - `man sha256sum`, `man comm`, `man tar`, `man pg_restore`
 - Google SRE Book, глава «Data Integrity: What You Read Is What You Wrote»
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — восстановление после сбоев.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

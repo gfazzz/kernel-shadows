@@ -256,7 +256,7 @@ prod-web27.shadow.io     : ok=8    changed=0    unreachable=0    failed=0
 
 - Ansible docs: «Intro to playbooks», «Handlers», «Modules by category», «Playbook keywords»
 - `ansible-playbook --check --diff`, `--tags`, `--limit`; `ansible-lint`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

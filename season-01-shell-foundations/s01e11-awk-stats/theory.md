@@ -128,7 +128,7 @@ grep -vE ' 200 ' access.log \
 - `man awk`, `man gawk`, `man sort`, `man uniq`
 - **Shotts, «The Linux Command Line», гл. 20** — обработка текста.
 - **Aho, Kernighan, Weinberger, «The AWK Programming Language»** — книга авторов языка, тонкая и до сих пор лучшая.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

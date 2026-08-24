@@ -216,7 +216,7 @@ bash tests/test.sh
 - Kubernetes documentation: Pod Lifecycle, Container Probes, Debug Running Pods
 - `kubectl` cheat sheet; `kubectl explain pod.status`
 - «Kubernetes Up & Running» (Burns, Beda, Hightower) — гл. 5 «Pods»
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

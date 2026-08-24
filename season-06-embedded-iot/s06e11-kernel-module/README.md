@@ -265,7 +265,7 @@ bash tests/test.sh
 - «Linux Kernel Development» (Love) — гл. 16 «The Page Cache», гл. 17 «Devices and Modules»
 - `Documentation/kbuild/modules.rst`, `Documentation/process/coding-style.rst`
 - `man 8 insmod`, `man 8 modinfo`, `man 8 modprobe`, `man 5 modprobe.d`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

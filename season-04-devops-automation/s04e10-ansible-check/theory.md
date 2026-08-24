@@ -147,7 +147,7 @@ ansible-playbook site.yml --diff            # применить и показа
 
 - Ansible docs: «Validating tasks: check mode and diff mode», «Playbook keywords», «Understanding variable precedence»
 - `ansible-playbook --check --diff`, `--limit`, `--tags`, `--list-tasks`
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

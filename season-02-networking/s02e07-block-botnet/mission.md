@@ -117,7 +117,7 @@ grep -E 'ufw deny from [^0-9]' artifacts/block_rules.sh # мусор — тож�
 после применения. А в логах фаервола после этого обнаружится строка, из-за
 которой Виктор переведёт команду на защищённые каналы.
 
-`block_botnet.sh` — активная оборона `netshield` (см. [`PROJECTS.md`](../../PROJECTS.md)).
+`block_botnet.sh` — активная оборона `netshield` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)).
 
 ## Кумулятивность
 

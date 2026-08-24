@@ -232,7 +232,7 @@ bash tests/test.sh
 - DS18B20 datasheet — откуда берётся значение 85 °C
 - `paho-mqtt` — клиент MQTT для Python; `python3 -m unittest` — юнит-тесты
 - «Exponential Backoff And Jitter» (AWS Architecture Blog) — про разброс
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

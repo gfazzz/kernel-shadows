@@ -193,7 +193,7 @@ bash tests/test.sh
 
 - `man nano`, `man vim`, и главное — команда `vimtutor` (интерактивный курс на 25 минут, установлен вместе с vim).
 - Shotts, «The Linux Command Line», гл. 12 «A Gentle Introduction to vi».
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

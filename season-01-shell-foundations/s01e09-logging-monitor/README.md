@@ -190,7 +190,7 @@ echo "[$(ts)] [UP]   $host" | tee -a "$log"
 
 - `man bash` (раздел Redirection), `man date`, `man tee`, `man logger`
 - Shotts, «The Linux Command Line», гл. 6 «Redirection», гл. 25–26 (скрипты).
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

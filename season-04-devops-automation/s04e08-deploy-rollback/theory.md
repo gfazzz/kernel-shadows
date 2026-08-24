@@ -124,7 +124,7 @@ contract  — убрать старое, когда старой версии к
 - Google SRE Book, гл. «Postmortem Culture: Learning from Failure»
 - Martin Fowler: «BlueGreenDeployment», «CanaryRelease», «ParallelChange»
 - Nicole Forsgren и др., «Accelerate» — время восстановления как метрика, а не частота отказов
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

@@ -214,7 +214,7 @@ awk '$0=="=== df -h ===" {f=1; next} /^=== /{f=0} f' $D/disk_shadow-01.txt
 - `man 5 fstab`, `man mount` (раздел «FILESYSTEM-INDEPENDENT MOUNT OPTIONS»), `man findmnt`, `man blkid`
 - `man systemd.mount`, `man systemd-fstab-generator` — как systemd превращает fstab в юниты.
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — монтирование.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

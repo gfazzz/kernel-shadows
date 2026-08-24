@@ -121,7 +121,7 @@ deb http://archive.ubuntu.com/ubuntu jammy main restricted universe multiverse
 - **Shotts, «The Linux Command Line», гл. 15** — управление пакетами.
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — глава о software management, включая сравнение семейств.
 - Debian Policy Manual, раздел о состояниях пакетов — если захочется первоисточник.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md), метки типов — [`PROJECTS.md`](../../PROJECTS.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md), метки типов — [`PROJECTS.md`](../../docs/PROJECTS.md)
 
 ## Спросить у LILITH
 

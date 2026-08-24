@@ -229,7 +229,7 @@ rollback.sh --journal FILE --host HOST --image IMAGE
 - Google SRE Book, гл. «Postmortem Culture» — почему разбор без поиска виноватого работает лучше
 - Martin Fowler, «BlueGreenDeployment», «ParallelChange» (expand/contract для схемы базы)
 - `docker compose ps`, `docker image ls --digests` — что именно сейчас запущено
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

@@ -236,7 +236,7 @@ Season 3: System Administration. Санкт-Петербург.
 
 - `man ufw`, `man ufw-framework`, `man iptables` (счётчики `-L -v`), `man journalctl` (`-k`)
 - `man 5 syslog.conf`, `man fail2ban-jail.conf`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

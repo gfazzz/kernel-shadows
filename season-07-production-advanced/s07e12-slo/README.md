@@ -257,7 +257,7 @@ Season 7 закончен: производственный контур пос�
 - «The Site Reliability Workbook» — гл. 2 и 5, там же таблица порогов скорости расхода
 - «Implementing Service Level Objectives» (Alex Hidalgo)
 - Prometheus documentation: Recording rules — как считать SLI без нагрузки на запросы
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

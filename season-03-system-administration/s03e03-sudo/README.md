@@ -201,7 +201,7 @@ awk -F: '$1 ~ /^ops-/{print $1": "$4}' ../data/group_shadow-01.txt  # готов
 - `man sudoers` (раздел «Command Environment» и «Sudoers Options»), `man sudo`, `man visudo`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — глава про `sudo` и делегирование.
 - Список известных способов выйти в оболочку из «безобидной» команды — проект GTFOBins.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

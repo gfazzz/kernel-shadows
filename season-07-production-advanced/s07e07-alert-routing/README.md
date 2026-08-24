@@ -249,7 +249,7 @@ bash tests/test.sh
 - Prometheus documentation: Alertmanager — Configuration, Routing tree, Inhibition, Silences, Notification template reference
 - `amtool config routes test` — проверка дерева маршрутов без запуска
 - «Prometheus: Up & Running» (Brazil) — гл. 19 «Alertmanager»
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

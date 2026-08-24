@@ -221,7 +221,7 @@ peer: sGA0Im1LFnYLXyTXTd8n/RH4PW1GzNdZOzLpXfxDhuo=
 
 - `man wg`, `man wg-quick`, `man wg-quick.8` (раздел про `Table`)
 - Официальная документация протокола: WireGuard whitepaper (криптография и рукопожатие).
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

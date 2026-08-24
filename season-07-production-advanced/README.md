@@ -55,7 +55,7 @@ Production-ready.»*
 Season 7 пересобран с монолитных `episode-NN` (6426 строк на четыре эпизода) в
 12 атомарных серий `sNNeNN`: один концепт — одна задача, README 180–280 строк,
 воспроизводимый тест без root, без сети и **без кластера**.
-План — [`V2.0_UPGRADE_PLAN.md`](../V2.0_UPGRADE_PLAN.md), этап 7.
+План — [`V2.0_UPGRADE_PLAN.md`](../docs/V2.0_UPGRADE_PLAN.md), этап 7.
 
 **12 серий, 426 проверок:**
 
@@ -412,7 +412,7 @@ Kubernetes SRE, до этого — инфраструктура крупной 
 - «Implementing Service Level Objectives» (Hidalgo)
 - SELinux Project documentation; CIS Benchmarks
 
-Полная библиография курса — [`RESOURCES.md`](../RESOURCES.md).
+Полная библиография курса — [`RESOURCES.md`](../docs/RESOURCES.md).
 
 ---
 

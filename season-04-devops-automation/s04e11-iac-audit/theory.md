@@ -119,7 +119,7 @@ git log --all -p -- .env                                    # содержимо
 - OWASP: «Secrets Management Cheat Sheet», «CI/CD Security Cheat Sheet»
 - Google SRE Book, гл. «Postmortem Culture» — как список правил пополняется после инцидентов
 - `git log -S`, `git log --all --name-only`, `git check-ignore -v`, `git filter-repo`
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

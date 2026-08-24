@@ -245,7 +245,7 @@ bash tests/test.sh
 - `chkrootkit`, `rkhunter`, GMER — перекрёстный взгляд в готовом виде
 - «The Rootkit Arsenal» (Blunden) — как прячут и как находят, оба направления
 - «The Art of Memory Forensics» (Ligh et al.) — взгляд снаружи через дамп памяти
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

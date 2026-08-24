@@ -149,7 +149,7 @@ chattr -i /etc/sudoers        # снять
 - `man chmod`, `man chown`, `man umask`, `man setfacl`, `man getfacl`, `man find`, `man chattr`
 - `man 2 stat` (поле `st_mode`), `man 7 inode` — как режим устроен внутри
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — права и ACL.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

@@ -253,7 +253,7 @@ bash tests/test.sh
 - `Documentation/admin-guide/sysctl/net.rst` и `fs.rst` в исходниках ядра
 - «Systems Performance» (Gregg) — гл. 10 «Network», раздел про тюнинг
 - Marek Majkowski, «SYN packet handling in the wild» — про две очереди на входе
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

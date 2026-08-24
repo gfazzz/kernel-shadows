@@ -7,7 +7,7 @@
 
 **Источников: 358. Серий, из которых собрано: 101.**
 
-Пересобрать: `bash tools/gen_bibliography.sh > RESOURCES.md`
+Пересобрать: `bash tools/gen_bibliography.sh > docs/RESOURCES.md`
 
 ---
 

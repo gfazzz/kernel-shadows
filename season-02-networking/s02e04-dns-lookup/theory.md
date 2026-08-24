@@ -120,7 +120,7 @@ cat /etc/nsswitch.conf       # порядок источников
 - `man dig`, `man host`, `man getent`, `man nsswitch.conf`, `man resolv.conf`, `man resolvectl`
 - **RFC 1034 / 1035** (основы DNS), **RFC 4033** (DNSSEC), **RFC 7858** (DNS over TLS)
 - **Liu, Albitz, «DNS and BIND»** — классика, если понадобится глубоко.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

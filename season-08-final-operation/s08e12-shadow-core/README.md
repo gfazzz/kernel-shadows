@@ -277,7 +277,7 @@ S8  финал                 и что ни одному ответу нель
 - «The Practice of System and Network Administration» (Limoncelli et al.) — что значит «принято»
 - Thompson, «Reflections on Trusting Trust» — почему проверка упирается в доверие
 - «The Checklist Manifesto» (Gawande) — почему полнота важнее качества отдельного пункта
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

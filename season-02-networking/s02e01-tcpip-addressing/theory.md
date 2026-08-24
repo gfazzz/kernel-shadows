@@ -116,7 +116,7 @@ IPv4 даёт около 4,3 миллиарда адресов, и они зак
 - **RFC 1918** (приватные диапазоны), **RFC 4632** (CIDR), **RFC 6598** (CGNAT)
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — глава о TCP/IP.
 - **Kurose, Ross, «Computer Networking: A Top-Down Approach»** — если захочется теории всерьёз.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

@@ -34,7 +34,7 @@
 
 ## 📚 Структура сезона
 
-Season 1 пересобран в атомарные серии `sNNeNN` (см. [`V2.0_UPGRADE_PLAN.md`](../V2.0_UPGRADE_PLAN.md)):
+Season 1 пересобран в атомарные серии `sNNeNN` (см. [`V2.0_UPGRADE_PLAN.md`](../docs/V2.0_UPGRADE_PLAN.md)):
 **один концепт — одна задача**, README 180–280 строк, `mission.md` с блоком «Требования
 среды», и **воспроизводимый тест** — зелёный без root и без сети, на Linux/macOS/WSL.
 
@@ -66,7 +66,7 @@ Season 1 пересобран в атомарные серии `sNNeNN` (см. [
 (mock-first §5.3); серии-разведки (`Type C`) сверяют находки студента с реальными
 данными в [`data/`](data/), вычисляя эталон при каждом запуске.
 
-**Закрытые forward-deps** (см. [`THEORY_MAP.md`](../THEORY_MAP.md)): T1 (`awk` — в s01e11),
+**Закрытые forward-deps** (см. [`THEORY_MAP.md`](../docs/THEORY_MAP.md)): T1 (`awk` — в s01e11),
 T3 (Docker — только в Season 4), **T5 (редактор)** и **T6 (файловые операции и `man`)**.
 Две последние нашлись при ревизии: студент с первой серии копировал файлы (`cp`) и правил
 их редактором, а ни то ни другое курс не объяснял **нигде**. Теперь это s01e04 и s01e05 —
@@ -216,10 +216,10 @@ bash tests/test.sh       # проверка
 с зелёным тестом; наличие `solution/` прогрессом не считается).
 
 **См. также:**
-- [SCENARIO.md](../SCENARIO.md) — полный сценарий операции KERNEL SHADOWS
-- [CHARACTERS.md](../CHARACTERS.md) — биографии персонажей
-- [LOCATIONS.md](../LOCATIONS.md) — описания локаций
-- [CURRICULUM.md](../CURRICULUM.md) — учебный план (8 сезонов)
+- [SCENARIO.md](../docs/SCENARIO.md) — полный сценарий операции KERNEL SHADOWS
+- [CHARACTERS.md](../docs/CHARACTERS.md) — биографии персонажей
+- [LOCATIONS.md](../docs/LOCATIONS.md) — описания локаций
+- [CURRICULUM.md](../docs/CURRICULUM.md) — учебный план (8 сезонов)
 
 ---
 

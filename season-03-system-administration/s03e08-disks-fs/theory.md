@@ -174,7 +174,7 @@ smartctl -a /dev/sda       # здоровье диска (пакет smartmontoo
 - `man df`, `man du`, `man lsof`, `man lsblk`, `man findmnt`, `man tune2fs`, `man resize2fs`, `man parted`, `man edquota`
 - `man 7 inode`, `man 2 unlink`, `man 5 ext4`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — хранение данных.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

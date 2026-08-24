@@ -290,7 +290,7 @@ kernel-shadows/
 Курс разбит на **атомарные серии** `sNNeNN`: один концепт — одна задача,
 45–60 минут. Всего их 101 в восьми сезонах; начинать надо с первой —
 **s01e01: Terminal Awakening**. Карта всех 16 серий Season 1 — в
-[season-01 README](season-01-shell-foundations/README.md), полный указатель
+[season-01 README](../season-01-shell-foundations/README.md), полный указатель
 курса — в [CURRICULUM.md](CURRICULUM.md).
 
 ### Что лежит в каждой серии

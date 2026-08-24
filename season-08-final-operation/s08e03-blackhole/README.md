@@ -279,7 +279,7 @@ TOTAL after_mbps=8230 capacity_mbps=10000 headroom_pct=17
 - RFC 5575 — flowspec: то же, но правилом вместо «выбросить всё»
 - «Algorithms» (Dasgupta, Papadimitriou, Vazirani), гл. 5–6 — жадные алгоритмы и когда они оптимальны
 - «Introduction to Algorithms» (Cormen et al.), гл. 16 и 35 — рюкзак, дробный и целочисленный
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

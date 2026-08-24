@@ -208,7 +208,7 @@ LILITH: ЭПИЗОД 07 ЗАВЕРШЁН ✓
 
 **Дальше → [`s02e08`](../s02e08-ssh-keys/) — SSH-ключи: доступ, который нельзя подобрать.**
 
-`block_botnet.sh` — активная оборона `netshield` (см. [`PROJECTS.md`](../../PROJECTS.md)).
+`block_botnet.sh` — активная оборона `netshield` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)).
 
 ---
 
@@ -218,7 +218,7 @@ LILITH: ЭПИЗОД 07 ЗАВЕРШЁН ✓
 
 - `man ufw`, `man iptables`, `man ipset`, `man fail2ban-client`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — фильтрация и защита.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

@@ -279,7 +279,7 @@ bash tests/test.sh
 - RFC 3339 и RFC 5424 — время в интернет-протоколах и в syslog
 - IANA Time Zone Database — почему смещение не свойство места, а свойство места **и момента**
 - «File System Forensic Analysis» (Carrier) — гл. 3, время в расследовании
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

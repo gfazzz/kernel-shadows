@@ -206,7 +206,7 @@ bash tests/test.sh
 - `man rsync` (разделы про `--link-dest`, `--delete`, косую черту в путях), `man sha256sum`
 - `man mkdir` (атомарность), `man flock`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — резервное копирование.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

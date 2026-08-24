@@ -223,7 +223,7 @@ bash tests/test.sh
 - Kubernetes documentation: Managing Resources for Containers; Configure Quality of Service; Assign Memory Resource
 - `kubectl explain deployment.spec.template.spec.containers.resources`
 - «Kubernetes Patterns» (Ibryam, Huß) — гл. 2 «Predictable Demands»
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

@@ -121,7 +121,7 @@ Host bastion
 
 - `man ssh`, `man ssh-keygen`, `man ssh_config`, `man sshd_config`, `man ssh-agent`, `man authorized_keys`
 - **RFC 4251–4254** (архитектура SSH), **RFC 8709** (ed25519 в SSH)
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

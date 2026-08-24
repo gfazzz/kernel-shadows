@@ -213,7 +213,7 @@ bash tests/test.sh
 
 - GitHub docs: «Workflow syntax», «Security hardening for GitHub Actions», «Using secrets», «Environments»
 - OpenSSF: «Scorecard» — почему закрепление версий проверяют автоматически
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

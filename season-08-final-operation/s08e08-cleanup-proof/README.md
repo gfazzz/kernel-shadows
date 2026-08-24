@@ -272,7 +272,7 @@ bash tests/test.sh
 - Ansible documentation: Idempotency — то же свойство со стороны развёртывания
 - NIST SP 800-61r2, «Computer Security Incident Handling Guide» — раздел Eradication and Recovery
 - «The Practice of System and Network Administration» (Limoncelli et al.) — про «сделал» и «проверил»
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

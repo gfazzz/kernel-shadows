@@ -203,7 +203,7 @@ bash tests/test.sh
 - `man lvm`, `man pvcreate`, `man vgextend`, `man lvextend`, `man lvreduce`, `man lvmthin`
 - `man resize2fs`, `man xfs_growfs`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — LVM.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

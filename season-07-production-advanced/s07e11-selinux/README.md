@@ -272,7 +272,7 @@ bash tests/test.sh
 - SELinux Notebook (Richard Haines) — самое полное описание модели
 - Red Hat, «Using SELinux» — практическая часть с булевыми переключателями
 - «SELinux System Administration» (Vermeulen)
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

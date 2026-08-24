@@ -236,7 +236,7 @@ bash tests/test.sh
 - Prometheus documentation: Metric and label naming, Exposition formats, Histograms and summaries, Instrumentation
 - `promtool check metrics` — то же самое, но официально
 - «Prometheus: Up & Running» (Brazil) — гл. 3 «Instrumentation», гл. 5 «Labels»
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

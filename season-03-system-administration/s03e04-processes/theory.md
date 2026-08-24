@@ -128,7 +128,7 @@ ionice -c3 -p 6623           # то же для диска: класс idle
 - `man ps`, `man 5 proc`, `man 7 signal`, `man 2 fork`, `man 2 execve`, `man strace`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — процессы и мониторинг.
 - **Love, «Linux System Programming»** — `fork`/`exec`, сигналы, системные вызовы.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

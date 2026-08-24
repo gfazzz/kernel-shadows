@@ -204,7 +204,7 @@ bash tests/test.sh
 - `man sha256sum`, `man comm`, `man cp`, `man find`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — восстановление после сбоев.
 - Google SRE Book, глава «Data Integrity: What You Read Is What You Wrote» — почему проверка важнее копирования.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

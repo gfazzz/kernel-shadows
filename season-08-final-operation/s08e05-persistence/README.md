@@ -270,7 +270,7 @@ bash tests/test.sh
 - `man 5 sudoers` — раздел про `NOPASSWD` и порядок разбора `sudoers.d`
 - AIDE documentation — контроль целостности файлов, тот же метод в готовом виде
 - MITRE ATT&CK, тактика Persistence (TA0003) — систематический перечень способов, включая те, что не вошли сюда
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

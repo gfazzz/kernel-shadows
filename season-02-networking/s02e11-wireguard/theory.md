@@ -155,7 +155,7 @@ ufw allow 51820/udp
 - `man wg`, `man wg-quick`, `man ip-route`
 - WireGuard whitepaper — протокол и криптография
 - `man 5 resolv.conf`, `man resolvectl` — что делает `DNS =` в конфиге
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

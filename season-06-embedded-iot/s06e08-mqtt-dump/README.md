@@ -221,7 +221,7 @@ QoS и retained — поля `q0`/`q1` и `r0`/`r1` внутри скобок.
 - `mosquitto.conf(5)`, `mosquitto_sub(1)`, `mosquitto_pub(1)`
 - HiveMQ MQTT Essentials — разбор QoS, retained, last will по шагам
 - `$SYS/#` — служебные темы брокера: клиенты, нагрузка, очереди
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

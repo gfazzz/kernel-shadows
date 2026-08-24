@@ -205,7 +205,7 @@ bash tests/test.sh
 - `/boot/overlays/README` на самой плате — список overlay с параметрами
 - `Documentation/admin-guide/kernel-parameters.txt` в исходниках ядра — все параметры `cmdline`
 - `dtoverlay -h`, `dtparam -h`, `vcgencmd get_config int`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

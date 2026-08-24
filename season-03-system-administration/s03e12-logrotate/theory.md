@@ -154,7 +154,7 @@ journalctl --vacuum-time=30d
 - `man logrotate`, `man 5 logrotate.conf`, `man 2 truncate`
 - `man rsyslogd`, `man nginx` (раздел «SIGNALS»), `man journald.conf`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — журналирование.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

@@ -200,7 +200,7 @@ bash tests/test.sh
 - `common.xml` в репозитории MAVLink — источник номеров и полей сообщений
 - ArduPilot documentation: режимы полёта, `custom_mode`, failsafe
 - `pymavlink` (`mavlogdump.py`, `mavgraph.py`) — как это разбирают в реальной работе
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

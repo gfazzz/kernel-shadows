@@ -52,7 +52,7 @@ Max в Китае. Huaqiangbei electronics market — можно купить В
 Season 6 пересобран с монолитных `episode-NN` (6088 строк на четыре эпизода) в
 12 атомарных серий `sNNeNN`: один концепт — одна задача, README 180–280 строк,
 воспроизводимый тест без root, без сети и без единой железки.
-План — [`V2.0_UPGRADE_PLAN.md`](../V2.0_UPGRADE_PLAN.md), этап 6.
+План — [`V2.0_UPGRADE_PLAN.md`](../docs/V2.0_UPGRADE_PLAN.md), этап 6.
 
 **12 серий, 420 проверок:**
 

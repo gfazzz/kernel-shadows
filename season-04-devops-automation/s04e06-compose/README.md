@@ -247,7 +247,7 @@ psql: error: connection to server ... failed: Connection refused
 
 - Docker docs: «Compose file reference», «Compose networking», «Use secrets in Compose»
 - `docker compose config`, `docker compose ps`, `docker compose logs -f`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

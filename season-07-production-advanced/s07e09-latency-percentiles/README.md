@@ -267,7 +267,7 @@ VERDICT inconclusive
 - «Prometheus: Up & Running» (Brazil) — гл. 3, раздел про гистограммы
 - «Systems Performance» (Gregg) — гл. 2, про то, почему средние вредны
 - Gil Tene, «How NOT to Measure Latency» — доклад про то, что перцентили ещё и врут по-другому
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

@@ -181,7 +181,7 @@ max            hard   nofile      16384
 - `man sudoers`, `man sudo`, `man visudo`, `man sudoreplay`, `man pam`, `man 5 limits.conf`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — делегирование прав.
 - GTFOBins — каталог «безобидных» команд с выходом в оболочку.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

@@ -205,7 +205,7 @@ check_mission.sh [--limits ФАЙЛ] [--nofly ФАЙЛ] ПЛАН.waypoints
 - MAVLink: `MAV_CMD` — полный список команд миссии; `MAV_FRAME` — системы отсчёта
 - ArduPilot Mission Planning, Geofence, Terrain Following
 - `man 1 awk` — раздел о пользовательских функциях
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

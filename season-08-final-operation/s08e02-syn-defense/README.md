@@ -278,7 +278,7 @@ SyncookiesRecv             0      2140
 - `man 8 nft`, `man 5 nftables` — синтаксис наборов правил, множества с временем жизни
 - RFC 4987 — меры против SYN-флуда и цена каждой
 - Документация ядра, `Documentation/networking/ip-sysctl.rst` — единственный источник, который не устаревает вместе со статьями
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

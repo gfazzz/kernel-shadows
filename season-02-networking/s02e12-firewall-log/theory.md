@@ -152,7 +152,7 @@ ufw status numbered                    # порядок правил (без с�
 - `man ufw`, `man ufw-framework`, `man iptables`, `man iptables-extensions` (модуль `recent`)
 - `man journalctl` (`-k`), `man dmesg`
 - `man fail2ban-jail.conf` — когда лимита пакетов мало
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

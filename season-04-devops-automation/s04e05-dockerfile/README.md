@@ -220,7 +220,7 @@ ops/collector   1.5.0   168MB    9 уязвимостей   collector (10001)
 
 - Документация Docker: «Dockerfile reference», «Best practices», «Multi-stage builds»
 - `man dockerignore`, `hadolint` — линтер Dockerfile
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

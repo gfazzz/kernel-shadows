@@ -246,7 +246,7 @@ bash tests/test.sh
 - Prometheus documentation: Alerting rules, Recording rules, Querying basics и functions
 - «Prometheus: Up & Running» (Brazil) — гл. 18 «Alerting»
 - «Site Reliability Engineering» (Beyer et al.) — гл. 6 «Monitoring Distributed Systems»; «My Philosophy on Alerting» (Rob Ewaschuk)
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

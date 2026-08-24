@@ -165,7 +165,7 @@ LILITH: ЭПИЗОД 06 ЗАВЕРШЁН ✓
 
 **Дальше → [`s02e06`](../s02e06-firewall-ufw/) — фаервол: кто и куда имеет право.**
 
-`dns_guard.sh` — модуль защиты DNS в `netshield` (см. [`PROJECTS.md`](../../PROJECTS.md)).
+`dns_guard.sh` — модуль защиты DNS в `netshield` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)).
 
 ---
 
@@ -176,7 +176,7 @@ LILITH: ЭПИЗОД 06 ЗАВЕРШЁН ✓
 - `man dig` (`+dnssec`, `@server`, `+trace`), `man resolvectl`
 - **RFC 4033** (DNSSEC), **RFC 7858** (DNS over TLS), **RFC 5452** (устойчивость к подмене)
 - Материалы Dan Kaminsky о механике отравления кеша — классика темы.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

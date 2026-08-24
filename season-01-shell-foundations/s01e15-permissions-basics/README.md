@@ -212,7 +212,7 @@ drwxr-x---  2 max  max  4096 Oct  8 21:14 logs
 **Справка и книги:**
 
 - `man chmod`, `man 1 stat`, `man umask`, `man ls` (раздел про длинный формат)
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

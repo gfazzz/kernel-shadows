@@ -132,4 +132,4 @@ ssh -i ~/.ssh/id_ed25519 user@server   # из ДРУГОГО терминала,
 обратном туннеле обязателен явный адрес.
 
 В Season 4 всё это ляжет под управление Ansible в составе `shadow_iac`
-(см. [`PROJECTS.md`](../../PROJECTS.md)).
+(см. [`PROJECTS.md`](../../docs/PROJECTS.md)).

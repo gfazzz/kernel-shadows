@@ -128,7 +128,7 @@ Baseline решает это иначе: измеряем нормальное �
 - `man ping`, `man traceroute`, `man mtr`, `man tcpdump`, `man ip-route`
 - **RFC 792** (ICMP), **RFC 1191** (Path MTU Discovery)
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — диагностика сети.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

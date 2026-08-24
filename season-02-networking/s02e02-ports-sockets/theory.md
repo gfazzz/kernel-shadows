@@ -105,7 +105,7 @@ ss -s            # сводка по сокетам
 - `man ss`, `man lsof`, `man nc`, файл `/etc/services`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — сетевые сервисы и их конфигурация.
 - **RFC 6335** — реестр портов IANA и правила их распределения.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

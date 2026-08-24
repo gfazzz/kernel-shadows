@@ -213,7 +213,7 @@ noc $J | grep 'ops-check' | awk '{print $1}' | sed -E 's/\+.*//'
 - `man journalctl`, `man systemd-journald.service`, `man journald.conf`, `man 3 syslog` (приоритеты)
 - `man systemd.journal-fields` — полный список полей, включая доверенные `_`-поля.
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — глава о журналировании.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

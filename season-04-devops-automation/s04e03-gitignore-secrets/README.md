@@ -237,7 +237,7 @@ $ git check-ignore -v .env .env.example docs/keys.md
 
 - `man gitignore`, `man git-check-ignore`, `man git-rm`
 - `github.com/github/gitignore` — готовые наборы под язык и инструмент.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

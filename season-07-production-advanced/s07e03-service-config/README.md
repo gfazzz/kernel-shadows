@@ -245,7 +245,7 @@ aurora-api   10.42.1.15:8080,10.42.1.19:8080,10.42.2.21:8080 + 2 more
 - Kubernetes documentation: Service, EndpointSlices, DNS for Services and Pods, ConfigMap
 - `kubectl explain service.spec.ports`; `kubectl get endpoints`
 - «Kubernetes Up & Running» (Burns, Beda, Hightower) — гл. 7 «Service Discovery»
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

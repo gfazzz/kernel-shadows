@@ -155,7 +155,7 @@ git fsck --lost-found           # осиротевшие объекты
 - `man git-log`, `man git-rev-list`, `man git-show`, `man gitrevisions`, `man git-reflog`
 - **Chacon & Straub, «Pro Git»** — главы 2, 3, 7; бесплатно на git-scm.com
 - `git help everyday` — набор команд на каждый день
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

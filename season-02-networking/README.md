@@ -94,7 +94,7 @@ KERNEL SHADOWS — Season 2
 
 ## 🆕 v2.0: атомарные серии (новый стандарт)
 
-Рефакторинг v2.0 (см. [`V2.0_UPGRADE_PLAN.md`](../V2.0_UPGRADE_PLAN.md)) дробит эпизоды на
+Рефакторинг v2.0 (см. [`V2.0_UPGRADE_PLAN.md`](../docs/V2.0_UPGRADE_PLAN.md)) дробит эпизоды на
 атомарные серии `sNNeNN`: один концепт — одна задача, README ≤ 650 строк, `mission.md`
 с блоком «Требования среды», единая `starter/`, `theory.md` и **воспроизводимый тест**.
 Сетевые серии тестируются **без живой сети** — `ping`/`ss` подменяются мок-версиями
@@ -123,7 +123,7 @@ KERNEL SHADOWS — Season 2
 для практики — в [`data/`](data/).
 
 Сезонный проект — **`netshield`** (адресация → защита DNS → firewall → шифрованный доступ;
-см. [`PROJECTS.md`](../PROJECTS.md)). Закрытые forward-deps: **T2** (`systemd-resolved` —
+см. [`PROJECTS.md`](../docs/PROJECTS.md)). Закрытые forward-deps: **T2** (`systemd-resolved` —
 только read-only `resolvectl`, `systemctl` → Season 3) и **T4** (`fail2ban` — превью, полноценно
 Season 5).
 

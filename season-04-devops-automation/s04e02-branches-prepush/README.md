@@ -213,7 +213,7 @@ chmod +x .git/hooks/pre-push
 - `man git-rev-list`, `man gitrevisions` (раздел про `..` и `...`), `man githooks`
 - `man git-rebase`, `man git-merge`
 - Chacon & Straub, «Pro Git», глава 3 — ветвление и слияние.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

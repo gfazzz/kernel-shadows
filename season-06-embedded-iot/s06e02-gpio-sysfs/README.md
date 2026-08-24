@@ -209,7 +209,7 @@ gpio_ctl.sh [--root КАТАЛОГ] [--map ФАЙЛ] КОМАНДА [АРГУМ�
 - `Documentation/gpio/sysfs.rst` в исходниках ядра — описание интерфейса и его статус
 - `libgpiod`: `gpioinfo`, `gpioget`, `gpioset` — современная замена sysfs
 - Raspberry Pi GPIO pinout (pinout.xyz) — как контакты гребёнки отображаются в номера GPIO
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

@@ -189,7 +189,7 @@ bash tests/test.sh
 - `man 5 proc` (раздел `/proc/cpuinfo`), `lscpu`, `file`, `uname`
 - Devicetree Specification (devicetree.org); `Documentation/devicetree/` в исходниках ядра
 - `arch/arm64/include/asm/cputype.h` — откуда берутся имена ядер по номерам
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

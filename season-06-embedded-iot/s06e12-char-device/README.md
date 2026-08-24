@@ -285,7 +285,7 @@ Season 6 закончен: плата, дрон, сеть и ядро. Даль�
 - `Documentation/filesystems/api-summary.rst`, `Documentation/driver-api/`
 - `man 2 read`, `man 2 open`, `man 9 copy_to_user`
 - `Documentation/dev-tools/sparse.rst` — про аннотацию `__user`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

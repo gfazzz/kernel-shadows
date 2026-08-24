@@ -170,7 +170,7 @@ PermitTunnel no
 
 - `man ssh`, `man ssh_config`, `man sshd_config`, `man ssh-agent`
 - `ssh -G`, `ssh -v` — что понято и что происходит
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

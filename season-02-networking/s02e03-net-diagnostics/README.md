@@ -194,7 +194,7 @@ LILITH: ЭПИЗОД 05 ЗАВЕРШЁН ✓
 
 **Дальше → [`s02e04`](../s02e04-dns-lookup/) — DNS: как имя превращается в адрес.**
 
-`net_diag.sh` — ядро мониторинга `netshield` (см. [`PROJECTS.md`](../../PROJECTS.md)); в Season 7 та же задача вернётся уже с Prometheus.
+`net_diag.sh` — ядро мониторинга `netshield` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)); в Season 7 та же задача вернётся уже с Prometheus.
 
 ---
 
@@ -204,7 +204,7 @@ LILITH: ЭПИЗОД 05 ЗАВЕРШЁН ✓
 
 - `man ping`, `man traceroute`, `man mtr`, `man ip-route`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — диагностика сети.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

@@ -204,7 +204,7 @@ bash tests/test.sh
 - `Documentation/filesystems/overlayfs.rst` в исходниках ядра
 - `raspi-config` → Performance → Overlay File System — готовый переключатель на Pi
 - JEDEC JESD84 (eMMC) и SD Physical Layer Spec — откуда берётся ресурс перезаписи
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

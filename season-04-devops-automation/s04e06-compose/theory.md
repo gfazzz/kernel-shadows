@@ -187,7 +187,7 @@ deploy:
 
 - Docker docs: «Compose file reference», «Compose networking», «Secrets in Compose», «Healthcheck»
 - `docker compose config`, `docker compose ps`, `docker scout` — проверка того, что получилось
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

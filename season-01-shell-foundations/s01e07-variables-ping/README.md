@@ -182,7 +182,7 @@ if [ "$code" -eq 0 ]; then status="UP"; else status="DOWN"; fi
 
 - `man ping`, `man bash` (раздел Special Parameters — про `$?`), `help set`
 - Shotts, «The Linux Command Line», гл. 24–25 (первые скрипты, переменные).
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

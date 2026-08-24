@@ -1,0 +1,16 @@
+# Поля в выгруженных доказательствах (база транзакций). Для раскрытия и
+# передачи прессе персональные данные должны быть вычищены; техническая
+# часть остаётся — она и есть доказательство.
+#
+# field kind keep_for_disclosure
+transaction_id   technical  yes
+amount           technical  yes
+timestamp        technical  yes
+wallet_from      technical  yes
+wallet_to        technical  yes
+victim_name      pii        no
+victim_email     pii        no
+victim_phone     pii        no
+victim_passport  pii        no
+c2_domain        technical  yes
+malware_hash     technical  yes

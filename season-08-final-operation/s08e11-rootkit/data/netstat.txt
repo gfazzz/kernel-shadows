@@ -1,0 +1,7 @@
+# ss -tlnp: слушающие TCP-порты по данным системной утилиты.
+#
+# proto local_port
+tcp 22
+tcp 80
+tcp 443
+tcp 9100

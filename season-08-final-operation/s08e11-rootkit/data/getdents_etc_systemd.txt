@@ -1,0 +1,7 @@
+# Список того же каталога, снятый прямым вызовом getdents независимым
+# сборщиком. Подмена readdir в библиотеке на него не влияет.
+#
+# name
+aurora-api.service
+node-exporter.service
+telemetry-sync.service

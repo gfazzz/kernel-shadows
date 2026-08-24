@@ -1,0 +1,9 @@
+# /proc/modules, снято независимо. Модуль, снявший себя из списка lsmod,
+# мог не убрать себя отсюда — или наоборот. Сравнивают оба направления.
+#
+# module
+ext4
+nf_tables
+xt_conntrack
+overlay
+diamorphine

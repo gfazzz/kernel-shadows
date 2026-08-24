@@ -1,0 +1,7 @@
+# Сессии SSH на узлах zurich-*, время UTC. Отпечаток — того ключа,
+# которым прошла аутентификация.
+#
+# time_utc node account fingerprint
+2025-11-22T13:32:11Z  zurich-app3  deploy  SHA256:9xK2mQ7pRxTf0aLd8sWc3EjHnKpMvXuYzAbC1yQv
+2025-11-22T14:32:21Z  zurich-app3  deploy  SHA256:9xK2mQ7pRxTf0aLd8sWc3EjHnKpMvXuYzAbC1yQv
+2025-11-23T07:12:44Z  zurich-app1  deploy  SHA256:9xK2mQ7pRxTf0aLd8sWc3EjHnKpMvXuYzAbC1yQv

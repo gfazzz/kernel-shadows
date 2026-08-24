@@ -1,0 +1,4 @@
+# /var/log/auth.log, локальное время узла, года в строке нет
+Nov 22 14:32:21 zurich-app3 sshd[3157]: Accepted publickey for deploy from 185.220.101.47 port 51234
+Nov 22 15:44:31 zurich-app3 sshd[4935]: session opened for user root by (uid=1001)
+Nov 22 14:30:59 zurich-app3 sshd[956]: Failed password for invalid user admin from 185.220.101.47 port 44112

@@ -1,0 +1,3 @@
+# события кластера, RFC 3339, UTC
+2025-11-22T14:19:18Z zurich-k8s1 Normal Created pod/aurora-api-7d9f4 container aurora-api
+2025-11-22T14:47:03Z zurich-k8s1 Warning BackOff pod/aurora-api-7d9f4 restarting failed container

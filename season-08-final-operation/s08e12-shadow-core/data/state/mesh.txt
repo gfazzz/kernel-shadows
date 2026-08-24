@@ -1,0 +1,3 @@
+# узел
+device /dev/shadow0
+ring_buffer ok

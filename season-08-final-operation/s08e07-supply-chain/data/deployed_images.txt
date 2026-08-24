@@ -1,0 +1,17 @@
+# Что реально запущено на узлах. Снято обходом кластера:
+#   kubectl get pods -A -o jsonpath=… | sort -u
+#
+# Прочерк вместо отпечатка означает, что образ подтянут по метке:
+# кластер не записал, что именно он скачал.
+#
+# узел образ отпечаток
+node46 ghcr.io/cert-manager:1.14.4 sha256:121ca65b9c75aecf4bc6b467d2622815000ec6d21d20d71d36451d6188ef491f
+node32 registry.aurora.internal/nginx-module-upload:2.4.1 sha256:deb628abd4321a607b18096efb051b3a21b3d6ae57c4f71cbb51d5f81894f775
+node29 registry-aurora.internal/postgres:16.2 sha256:ce97dbf308a3f9f980bc9f5e4a0bc5ba562d8ccebfa7d931b819769e1b53967d
+node49 ghcr.io/aurora-api:2.8.4 sha256:39e191095278da7bb8a0aece3e47de6e169f233c5ae6e90052a38b8dd277bdef
+node33 registry.aurora.internal/aurora-worker:2.8.4 sha256:11357f8a30d7761a1100ff311968bba316ec56adcdffdea03b30b1ce5d5c8b57
+node09 registry.aurora.internal/fluent-bit:2.2.2 -
+node45 ghcr.io/alertmanager:0.27.0 sha256:8485b7d20d2f96e36da89375d924fc39b449cd414d68a4468cdaf364ee38ac14
+node31 registry.aurora.internal/prometheus:2.50.1 sha256:b0315072e58f748ed06827bc8ba730d52a629e81f28147624a2ebc1fbfe235dc
+node29 registry.aurora.internal/node-exporter:1.7.0 sha256:b660840c11c6ffa9b58bf0498b812d6d83bf817741ed1557f32afa4312c8310c
+node18 registry.aurora.internal/redis:7.2.4 sha256:b1112984c48569fcb6cc20ba2b7c4044d10165ad9ef9435db50d2fd0d38d18eb

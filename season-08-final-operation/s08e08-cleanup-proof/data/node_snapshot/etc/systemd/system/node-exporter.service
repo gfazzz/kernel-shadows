@@ -1,0 +1,9 @@
+[Unit]
+Description=node_exporter
+
+[Service]
+ExecStart=/usr/local/bin/node_exporter
+User=nodeexp
+
+[Install]
+WantedBy=multi-user.target

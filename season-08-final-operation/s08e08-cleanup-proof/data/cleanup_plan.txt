@@ -1,0 +1,23 @@
+# План очистки узла zurich-app3. Составлен по находкам s08e05, согласован
+# с Сигрид в 12:10 UTC 58-го дня.
+#
+# Каждая строка — одно действие. Действие описывает СОСТОЯНИЕ, которого
+# надо достичь, а не команду, которую надо выполнить: «этого файла нет»,
+# «этой строки в файле нет», «этой учётной записи нет». Разница видна на
+# втором прогоне.
+#
+#   remove-file  <путь>                 файла быть не должно
+#   remove-line  <путь> <подстрока>     строки с этой подстрокой быть не должно
+#   remove-user  <путь> <имя>           учётной записи в файле быть не должно
+#
+# Чего в плане НЕТ и быть не может: «почистить authorized_keys». Там есть
+# и законный ключ, и он обязан остаться.
+
+remove-file  etc/cron.d/apt-daily-upgrade
+remove-file  etc/systemd/system/dbus-broker-relay.service
+remove-file  etc/profile.d/00-locale-fix.sh
+remove-file  etc/sudoers.d/90-deploy-ci
+remove-file  etc/ld.so.preload
+remove-line  root/.ssh/authorized_keys backup@localhost
+remove-line  etc/rc.local dbus-relay
+remove-user  etc/passwd sysbackup

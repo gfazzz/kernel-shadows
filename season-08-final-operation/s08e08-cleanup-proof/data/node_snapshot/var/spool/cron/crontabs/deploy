@@ -1,0 +1,2 @@
+# Личное расписание учётной записи deploy.
+*/10 * * * * /opt/aurora/bin/health-report.sh

@@ -1,0 +1,21 @@
+# Бюллетень безопасности, пришёл в 10:52 UTC 57-го дня операции.
+# Источник: список рассылки вендора, подтверждён CERT Iceland.
+#
+# ключ значение
+advisory_id            NE-2026-0041
+component              nginx-module-upload 2.4.1
+affected_versions      2.4.0, 2.4.1
+fixed_version          нет
+patch_eta_days         3
+severity               критическая
+vector                 удалённое выполнение кода, без аутентификации
+#
+# Условия, при которых код исполняется. Оба обязательны — по отдельности
+# ни одно не срабатывает.
+trigger_path           /api/upload
+trigger_header         Transfer-Encoding: chunked
+trigger_body_over_kb   512
+#
+# Временная мера, предложенная вендором до выхода исправления.
+vendor_workaround      отклонять запросы к /api/upload с chunked-кодировкой
+                       и телом свыше 512 КБ

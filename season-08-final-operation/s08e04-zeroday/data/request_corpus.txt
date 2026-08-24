@@ -1,0 +1,76 @@
+# Выборка запросов за час до бюллетеня, снята с балансировщика.
+#
+# Класс проставлен вручную при разборе: legit — обычная работа клиентов,
+# exploit — попытки, совпадающие с описанием из advisory.txt, borderline —
+# выполнено одно условие из двух.
+#
+# Тест прогонит по этому корпусу твою меру и проверит две вещи: что ни
+# одна попытка не прошла и что ни один законный запрос не потерян.
+#
+# method path transfer_encoding body_kb class
+GET   /metrics       none         8 legit
+POST  /api/upload    chunked   1024 exploit
+POST  /api/upload    chunked     64 borderline
+POST  /api/upload    none       140 legit
+POST  /api/upload    chunked    640 exploit
+POST  /api/upload    chunked    780 exploit
+POST  /api/orders    none         8 legit
+POST  /api/upload    none        12 legit
+POST  /api/upload    chunked    640 exploit
+POST  /api/orders    none         4 legit
+POST  /api/upload    none       220 legit
+GET   /api/orders    none         4 legit
+POST  /api/upload    chunked   1024 exploit
+POST  /api/upload    none      1500 borderline
+POST  /api/upload    chunked   2048 exploit
+POST  /api/orders    none        16 legit
+POST  /api/upload    none       310 legit
+POST  /api/upload    none       220 legit
+GET   /metrics       none        16 legit
+GET   /healthz       none         1 legit
+POST  /api/upload    none       310 legit
+POST  /api/upload    none       310 legit
+GET   /metrics       none         1 legit
+GET   /api/orders    none        16 legit
+GET   /metrics       none         1 legit
+POST  /api/upload    none       900 borderline
+POST  /api/orders    none         2 legit
+POST  /api/upload    none        12 legit
+GET   /api/orders    none         2 legit
+POST  /api/upload    chunked   1024 exploit
+POST  /api/upload    none       220 legit
+POST  /api/upload    none        48 legit
+POST  /api/upload    none       140 legit
+POST  /api/upload    chunked    640 exploit
+GET   /metrics       none        16 legit
+POST  /api/upload    chunked   4096 exploit
+POST  /api/upload    chunked     64 borderline
+POST  /api/upload    none        12 legit
+POST  /api/upload    none       310 legit
+POST  /api/upload    chunked   2048 exploit
+POST  /api/upload    none       140 legit
+POST  /api/upload    chunked     64 borderline
+GET   /healthz       none         1 legit
+GET   /healthz       none         2 legit
+GET   /api/orders    none        16 legit
+POST  /api/upload    none       310 legit
+POST  /api/upload    chunked     64 borderline
+POST  /api/orders    none        16 legit
+POST  /api/upload    chunked   2048 exploit
+POST  /api/upload    chunked    640 exploit
+POST  /api/upload    none       900 borderline
+POST  /api/upload    chunked   4096 exploit
+POST  /api/upload    none       900 borderline
+GET   /api/orders    none         2 legit
+GET   /healthz       none         1 legit
+GET   /healthz       none         2 legit
+POST  /api/upload    none       480 legit
+POST  /api/upload    none        12 legit
+GET   /api/orders    none         1 legit
+GET   /healthz       none        16 legit
+POST  /api/orders    none         8 legit
+POST  /api/upload    chunked   4096 exploit
+POST  /api/upload    none      1500 borderline
+GET   /metrics       none         1 legit
+POST  /api/upload    none       310 legit
+POST  /api/upload    chunked     64 borderline

@@ -96,7 +96,8 @@ not_migrated=()
 for season in "${seasons[@]}"; do
     mapfile -t series < <(find "${season}" -maxdepth 1 -type d -name 's[0-9][0-9]e[0-9][0-9]-*' | sort)
     if [ "${#series[@]}" -eq 0 ]; then
-        # Сезон ещё на схеме episode-NN: считать по сериям нечего.
+        # Сезон без серий sNNeNN. С 2026-08-24 таких в курсе нет — ветка
+        # оставлена на случай нового сезона, ещё не разбитого на серии.
         not_migrated+=("$(basename "${season}")")
         continue
     fi
@@ -135,7 +136,7 @@ if [ "${QUIET}" -eq 1 ]; then
 fi
 
 if [ "${#not_migrated[@]}" -gt 0 ]; then
-    echo "  ${D}Ещё не разбиты на серии (схема episode-NN):${N}"
+    echo "  ${D}Ещё не разбиты на серии:${N}"
     for s in "${not_migrated[@]}"; do
         printf '    %s%s%s\n' "${D}" "${s}" "${N}"
     done

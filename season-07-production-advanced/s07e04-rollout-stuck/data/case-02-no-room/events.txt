@@ -1,0 +1,5 @@
+# kubectl get events -n aurora --sort-by=.lastTimestamp
+LAST SEEN   TYPE      REASON              OBJECT                          MESSAGE
+9m          Normal    ScalingReplicaSet   deployment/aurora-api           Scaled up replica set aurora-api-b7d4f2a91 to 1
+9m          Warning   FailedScheduling    pod/aurora-api-b7d4f2a91-q8w3e  0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane}, 3 Insufficient memory. preemption: 0/4 nodes are available
+4m          Warning   FailedScheduling    pod/aurora-api-b7d4f2a91-q8w3e  0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane}, 3 Insufficient memory. preemption: 0/4 nodes are available

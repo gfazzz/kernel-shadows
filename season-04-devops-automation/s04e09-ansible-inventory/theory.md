@@ -127,7 +127,7 @@ production: { vars: { log_level: warn } }     # применится перво�
 
 - Ansible docs: «How to build your inventory», «Variable precedence: where should I put a variable?», «Patterns: targeting hosts and groups»
 - `ansible-inventory --graph`, `--host`; `ansible-lint`
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

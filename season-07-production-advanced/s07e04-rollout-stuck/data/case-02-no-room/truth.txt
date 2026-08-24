@@ -1,0 +1,11 @@
+# kubectl rollout status deployment/aurora-api -n aurora --timeout=120s
+Waiting for deployment "aurora-api" rollout to finish: 1 out of 5 new replicas have been updated...
+error: timed out waiting for the condition
+# exit code: 1
+#
+# Через 600 секунд после начала выката появится условие
+# Progressing=False, reason=ProgressDeadlineExceeded. До этого момента
+# kubectl молчит, а состояние уже безнадёжно: новая реплика не влезает
+# ни на один узел, а старую нельзя убрать — maxUnavailable равен нулю.
+verdict stuck
+cause scheduling

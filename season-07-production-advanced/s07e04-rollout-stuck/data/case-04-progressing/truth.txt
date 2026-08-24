@@ -1,0 +1,9 @@
+# kubectl rollout status deployment/aurora-api -n aurora --timeout=120s
+Waiting for deployment "aurora-api" rollout to finish: 3 out of 5 new replicas have been updated...
+deployment "aurora-api" successfully rolled out
+# exit code: 0
+#
+# Снимок сделан посреди нормального выката: новые поды поднимаются,
+# старые уходят, ни один под не застрял. Через минуту всё закончилось.
+verdict progressing
+cause none

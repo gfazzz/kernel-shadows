@@ -220,7 +220,7 @@ awk '/^=== /{p=$0; gsub(/[^0-9]/,"",p)} /^exe -> /{print p, $0}' $D/proc_shadow-
 - `man ps`, `man 5 proc`, `man 7 signal`, `man 2 fork`, `man 2 kill`, `man strace`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — глава о процессах.
 - Кернел-документация: `Documentation/filesystems/proc.rst`.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

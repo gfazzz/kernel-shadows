@@ -1,0 +1,3 @@
+# финал
+servers_up 50
+servers_total 50

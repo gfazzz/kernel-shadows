@@ -1,0 +1,74 @@
+# rules.yml — правила оповещения aurora (СТАРТЕР)
+#
+# Источники:
+#   data/incidents.txt         три происшествия, пороги и выдержки из разбора
+#   data/required_alerts.txt   что обязано быть и какой важности
+#   data/scrape.txt            период сбора — отсюда минимальное окно rate()
+#   data/metrics_available.txt какие имена метрик существуют
+#   data/promql_keywords.txt   что не является именем метрики
+#   data/current_rules.yml     как выглядит сейчас — не образец
+#
+# Выражения пишутся в одну строку: блочные скаляры (`|`, `>`) проверяющий
+# скрипт не читает. Всё, что содержит `{{`, берётся в кавычки — иначе YAML
+# примет фигурные скобки за начало отображения.
+
+groups:
+  - name: aurora-symptoms
+    # TODO: как часто вычислять правила группы.
+    interval:
+    rules:
+
+      # TODO: доля ошибок. Не количество: сто пятисоток — это авария ночью
+      # и норма в час пик. Числитель и знаменатель считаются на одном окне.
+      - alert: AuroraHighErrorRate
+        expr:
+        for:
+        labels:
+          severity:
+        annotations:
+          summary: ""
+          description: ""
+
+      # TODO: время ответа. Перцентиль считается по гистограмме; корзины
+      # реплик складываются, перцентили — нет.
+      - alert: AuroraHighLatency
+        expr:
+        for:
+        labels:
+          severity:
+        annotations:
+          summary: ""
+          description: ""
+
+      # TODO: цель недоступна для сбора. Приложение не может сообщить, что
+      # оно умерло, — эту метрику ставит сам Prometheus.
+      - alert: AuroraTargetDown
+        expr:
+        for:
+        labels:
+          severity:
+        annotations:
+          summary: ""
+          description: ""
+
+      # TODO: под перезапускается по кругу. Пользователь этого не видит,
+      # пока живы остальные реплики, — значит важность другая.
+      - alert: AuroraPodCrashLooping
+        expr:
+        for:
+        labels:
+          severity:
+        annotations:
+          summary: ""
+          description: ""
+
+      # TODO: метрики исчезли. Условие на пропавшем ряде не выполняется
+      # никогда, и тишина выглядит одинаково при порядке и при отказе.
+      - alert: AuroraMetricsAbsent
+        expr:
+        for:
+        labels:
+          severity:
+        annotations:
+          summary: ""
+          description: ""

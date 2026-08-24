@@ -1,0 +1,17 @@
+# kubectl logs aurora-api-7d4f8b6c9-2xk4l -n aurora --timestamps
+#
+# Холодный старт реплики, снятый на пустом узле. Показывает, сколько времени
+# проходит от запуска процесса до момента, когда приложение начинает слушать
+# порт. Всё, что до «listening», — это ещё не сервис.
+2026-08-21T09:11:32Z INFO  aurora-api v2.4.2 starting, pid 1
+2026-08-21T09:11:32Z INFO  config loaded from environment (14 keys)
+2026-08-21T09:11:33Z INFO  connecting to postgres at aurora-db:5432
+2026-08-21T09:11:35Z INFO  postgres pool ready (min=4 max=32)
+2026-08-21T09:11:35Z INFO  loading routing table from mesh-collector
+2026-08-21T09:12:08Z INFO  routing table loaded: 41822 prefixes in 33.1s
+2026-08-21T09:12:10Z INFO  listening on :8080
+2026-08-21T09:12:10Z INFO  readiness endpoint /ready now returns 200
+
+# Итог: от pid 1 до «listening» — 38 секунд. Тридцать три из них съедает
+# загрузка таблицы маршрутов; она растёт вместе с сетью shadow_mesh, то есть
+# со временем станет только дольше.

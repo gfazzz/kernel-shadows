@@ -177,7 +177,7 @@ awk '/^LISTEN/{print $4}' "$SNAP" | grep -E '^(0\.0\.0\.0|\[::\]):'   # толь
 
 **Дальше → [`s02e03`](../s02e03-net-diagnostics/) — `ping` и `traceroute`: жив ли хост и где обрыв.**
 
-Отчёт `ports_report.txt` — инвентаризация поверхности `netshield` (см. [`PROJECTS.md`](../../PROJECTS.md)); в s02e06 к нему добавится карта правил фаервола.
+Отчёт `ports_report.txt` — инвентаризация поверхности `netshield` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)); в s02e06 к нему добавится карта правил фаервола.
 
 ---
 
@@ -187,7 +187,7 @@ awk '/^LISTEN/{print $4}' "$SNAP" | grep -E '^(0\.0\.0\.0|\[::\]):'   # толь
 
 - `man ss`, `man nmap`, файл `/etc/services` — карта «порт → сервис»
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — сетевые сервисы.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

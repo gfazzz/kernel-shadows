@@ -181,7 +181,7 @@ done
 
 **Дальше → [`s02e09`](../s02e09-ssh-hardening/) — hardening `sshd` и туннели: финал Season 2.**
 
-`ssh_key_check.sh` — модуль доступа `netshield` (см. [`PROJECTS.md`](../../PROJECTS.md)).
+`ssh_key_check.sh` — модуль доступа `netshield` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)).
 
 ---
 
@@ -191,7 +191,7 @@ done
 
 - `man ssh-keygen`, `man ssh_config`, `man ssh-agent`, `man ssh-copy-id`
 - **RFC 8709** (ed25519 в SSH), **RFC 4251** (архитектура SSH)
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

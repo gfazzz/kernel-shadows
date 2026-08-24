@@ -1,0 +1,3 @@
+# прогон ansible --check
+idempotent yes
+changed 0

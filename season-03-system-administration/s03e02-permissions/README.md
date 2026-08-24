@@ -202,7 +202,7 @@ rows $D/suid_scan_shadow-01.txt  | awk '$1 ~ /^-.....s/ {print $NF}'      # SGID
 
 - `man chmod`, `man chown`, `man umask`, `man 7 inode` (раздел про режим), `man find` (`-perm`)
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — глава о правах доступа.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

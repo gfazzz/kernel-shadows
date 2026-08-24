@@ -1,0 +1,3 @@
+# итог службы
+NoNewPrivileges yes
+ProtectSystem strict

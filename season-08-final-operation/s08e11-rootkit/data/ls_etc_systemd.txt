@@ -1,0 +1,5 @@
+# ls -1 /etc/systemd/system — файлы, которые показывает система.
+#
+# name
+aurora-api.service
+node-exporter.service

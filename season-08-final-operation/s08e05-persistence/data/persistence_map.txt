@@ -1,0 +1,16 @@
+# Точки закрепления в Linux — куда смотрят, когда ищут «что запускается само».
+# Список согласован с Сигрид, дополнен по итогам разбора 57-го дня.
+#
+# категория путь примечание
+cron            /etc/crontab                   общесистемное расписание
+cron            /etc/cron.d                    каталог, каждый файл — расписание
+cron            /var/spool/cron/crontabs       личные расписания пользователей
+systemd         /etc/systemd/system            юниты и таймеры, приоритет выше пакетных
+shell-profile   /etc/profile.d                 выполняется при каждом входе
+shell-profile   /root/.bashrc                  то же, но только для root
+ssh-key         /root/.ssh/authorized_keys     вход без пароля
+ssh-key         /home                          то же для остальных: <дом>/.ssh/authorized_keys
+account         /etc/passwd                    учётные записи; смотреть на uid, а не на имя
+sudoers         /etc/sudoers.d                 повышение прав без пароля
+preload         /etc/ld.so.preload             библиотека, подгружаемая в КАЖДЫЙ процесс
+rc-local        /etc/rc.local                  выполняется при загрузке

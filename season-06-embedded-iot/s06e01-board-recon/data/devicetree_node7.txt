@@ -1,0 +1,14 @@
+# Обход /proc/device-tree на shadow-node-07.
+# Формат: путь = значение. Списки compatible разделены пробелом
+# (в самом дереве это строки через NUL), порядок сохранён как в дереве.
+/proc/device-tree/model = Raspberry Pi 4 Model B Rev 1.4
+/proc/device-tree/compatible = raspberrypi,4-model-b brcm,bcm2711
+/proc/device-tree/serial-number = 100000004f2b9c1e
+/proc/device-tree/soc/gpio@7e200000/compatible = brcm,bcm2711-gpio brcm,bcm2835-gpio
+/proc/device-tree/soc/gpio@7e200000/status = okay
+/proc/device-tree/soc/i2c@7e804000/status = okay
+/proc/device-tree/soc/spi@7e204000/status = disabled
+/proc/device-tree/soc/serial@7e201000/status = okay
+/proc/device-tree/soc/mmc@7e300000/status = okay
+/proc/device-tree/soc/usb@7e980000/status = okay
+/proc/device-tree/chosen/bootargs = coherent_pool=1M 8250.nr_uarts=1 console=ttyS0,115200 root=PARTUUID=6c586e13-02 rootfstype=ext4 rootwait

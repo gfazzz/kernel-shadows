@@ -1,8 +1,8 @@
 name: tests
 
-# План §7: unit-тесты гоняются на чистом Ubuntu без root и без сети.
+# Unit-тесты гоняются на чистом Ubuntu без root и без сети.
 # Матрица по сезонам с fail-fast: false — падение одного сезона не должно
-# скрывать состояние остальных (§7.3). Логи выкладываются всегда, включая
+# скрывать состояние остальных. Логи выкладываются всегда, включая
 # случай падения: без них отладка в CI встаёт.
 
 on:
@@ -24,6 +24,11 @@ jobs:
         season:
           - season-01-shell-foundations
           - season-02-networking
+          - season-03-system-administration
+          - season-04-devops-automation
+          - season-05-security-pentesting
+          - season-06-embedded-iot
+          - season-07-production-advanced
     steps:
       - uses: actions/checkout@v4
 
@@ -54,7 +59,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # §4.3: тест не должен зависеть ни от номера прогона, ни от локали и TZ.
+      # Тест не должен зависеть ни от номера прогона, ни от локали и TZ.
       - name: Два прогона подряд
         run: make test-repeat
 
@@ -71,19 +76,22 @@ jobs:
           retention-days: 14
 
   docs:
-    name: ссылки и forward-deps
+    name: ссылки, forward-deps и хронология
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Ссылки между документами (§4.9)
+      - name: Ссылки между документами
         run: make links
 
       - name: Аудит forward-deps по инструментам
         run: make tools
 
+      - name: Сквозная хронология
+        run: make timeline
+
   clean-clone:
-    name: приёмка на чистом клоне (§7.4)
+    name: приёмка на чистом клоне
     runs-on: ubuntu-latest
     steps:
       # fetch-depth: 0 — чтобы `git clone .` внутри цели видел полную историю.
@@ -93,12 +101,12 @@ jobs:
 
       # Ловит файлы, съеденные .gitignore, забытые git add и потерянные права
       # на test.sh: фикстуры курса — это логи, конфиги и ключи, то есть ровно
-      # то, что типовые правила игнорирования и вычёркивают (§11.3).
+      # то, что типовые правила игнорирования и вычёркивают.
       - name: make clean-clone
         run: make clean-clone
 
   artifacts-guard:
-    name: PR не тащит чужие решения (§11.1)
+    name: PR не тащит чужие решения
     runs-on: ubuntu-latest
     if: github.event_name == 'pull_request'
     steps:
@@ -128,8 +136,10 @@ jobs:
   integration:
     name: integration (по требованию)
     runs-on: ubuntu-latest
-    # Интеграционных тестов в курсе пока нет; работа существует, чтобы у S3+
-    # было куда класть проверки, которым нужны systemd, Docker или root.
+    # Сюда попадают проверки, которым нужны root, systemd или заголовки ядра:
+    # s06e11 и s06e12 собирают и загружают .ko. Без окружения они честно
+    # сообщают SKIP, поэтому основной прогон от них не зависит и работа
+    # запускается по требованию.
     if: github.event_name == 'workflow_dispatch'
     steps:
       - uses: actions/checkout@v4

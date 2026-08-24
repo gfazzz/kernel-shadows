@@ -1,0 +1,11 @@
+# Какие метки несут оповещения из s07e06 — по ним и придётся маршрутизировать.
+#
+# alertname                 severity  job          namespace  прочее
+AuroraHighErrorRate         page      aurora-api   aurora     —
+AuroraHighLatency           page      aurora-api   aurora     —
+AuroraTargetDown            page      aurora-api   aurora     instance
+AuroraPodCrashLooping       ticket    aurora-api   aurora     pod
+AuroraMetricsAbsent         ticket    aurora-api   aurora     —
+#
+# Метка cluster=verne-prod добавляется Prometheus через external_labels —
+# она есть у всех оповещений и понадобится, когда кластеров станет два.

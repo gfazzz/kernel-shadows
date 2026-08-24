@@ -1,0 +1,51 @@
+# kubectl get deploy aurora-api -n aurora -o yaml
+#
+# Тот манифест, который кластер исполняет прямо сейчас. Служебные поля
+# (managedFields, creationTimestamp, resourceVersion, status) убраны — они
+# добавлены самим кластером и в исходнике их нет.
+#
+# Это НЕ образец. Это то, что разбиралось в s07e01: три поломки родом отсюда.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aurora-api
+  namespace: aurora
+  labels:
+    app: aurora-api
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: aurora-api
+  template:
+    metadata:
+      labels:
+        app: aurora-api
+    spec:
+      containers:
+        - name: aurora-api
+          image: registry.verne.internal/aurora-api:v2.4.1
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8080
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            failureThreshold: 3

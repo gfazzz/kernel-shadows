@@ -210,7 +210,7 @@ grep -c 'UNION SELECT' "$L"     # попыток инъекции
 
 - `man grep`, `man 7 regex`
 - Shotts, «The Linux Command Line», гл. 19 «Regular Expressions», гл. 20 «Text Processing».
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

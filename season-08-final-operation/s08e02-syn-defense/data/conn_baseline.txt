@@ -1,0 +1,11 @@
+# Темп новых соединений на verne-edge2 в обычный день — чтобы предел
+# ставился по наблюдению, а не по вкусу. Медиана и 99-й перцентиль за
+# семь суток, посекундно.
+#
+# ключ значение
+new_conn_per_sec_p50            420
+new_conn_per_sec_p99           1180
+new_conn_per_sec_max_seen      1640
+new_conn_per_source_p99           6
+new_conn_per_source_max_seen     23
+distinct_sources_per_sec_p99   2900

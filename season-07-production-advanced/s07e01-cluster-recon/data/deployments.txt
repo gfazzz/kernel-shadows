@@ -1,0 +1,25 @@
+# kubectl get deploy -n aurora
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+aurora-api       2/5     5            2           94d
+aurora-worker    0/1     1            0           61d
+mesh-collector   1/1     1            1           61d
+
+# kubectl get deploy aurora-api -n aurora -o yaml  (фрагмент)
+spec:
+  replicas: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    spec:
+      containers:
+        - name: aurora-api
+          image: registry.verne.internal/aurora-api:v2.4.1
+status:
+  replicas: 5
+  updatedReplicas: 5
+  readyReplicas: 2
+  availableReplicas: 2
+  unavailableReplicas: 3

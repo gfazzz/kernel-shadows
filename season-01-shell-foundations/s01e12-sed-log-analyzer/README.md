@@ -205,7 +205,7 @@ LILITH: ASSESSMENT COMPLETE
 на твоей машине уже были. Скоро понадобится тот, которого нет.»
 ```
 
-`log_analyzer.sh` — модуль форензики твоего `shadow_toolkit` (см. [`PROJECTS.md`](../../PROJECTS.md)); в Season 5 он вернётся — уже против скомпрометированной системы, где журналы могли подделать.
+`log_analyzer.sh` — модуль форензики твоего `shadow_toolkit` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)); в Season 5 он вернётся — уже против скомпрометированной системы, где журналы могли подделать.
 
 **Дальше → [`s01e13`](../s01e13-apt-dpkg/) — `apt` и `dpkg`: инструменты, которых нет.**
 
@@ -217,7 +217,7 @@ LILITH: ASSESSMENT COMPLETE
 
 - `man sed`, `info sed` (раздел про команды `s`, `d`, `p` и адреса строк)
 - Shotts, «The Linux Command Line», гл. 21 «sed».
-- Глубже — [`theory.md`](theory.md), [`RESOURCES.md`](../../RESOURCES.md), метки Type A/B в [`PROJECTS.md`](../../PROJECTS.md).
+- Глубже — [`theory.md`](theory.md), [`RESOURCES.md`](../../docs/RESOURCES.md), метки Type A/B в [`PROJECTS.md`](../../docs/PROJECTS.md).
 
 **Как работать с LILITH:**
 

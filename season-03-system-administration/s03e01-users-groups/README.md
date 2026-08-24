@@ -211,7 +211,7 @@ noc $D/shadow_shadow-01.txt | awk -F: '{print $1, $2}'              # чем в�
 
 - `man 5 passwd`, `man 5 group`, `man 5 shadow`, `man getent`, `man 5 nsswitch.conf`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — глава об управлении учётными записями.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

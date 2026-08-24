@@ -222,7 +222,7 @@ tmp/deploy_key
 - `man docker-history`, `man docker-inspect`, `man docker-image`
 - Документация Docker: «Best practices for writing Dockerfiles», раздел про кеш слоёв.
 - `trivy`, `grype` — сканеры образов.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

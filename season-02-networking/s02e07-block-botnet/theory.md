@@ -116,7 +116,7 @@ sudo fail2ban-client set sshd unbanip 10.50.1.5
 - `man ufw`, `man iptables`, `man iptables-extensions`, `man ipset`, `man fail2ban-client`
 - **RFC 4987** — SYN-флуд и меры противодействия.
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — фильтрация трафика.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

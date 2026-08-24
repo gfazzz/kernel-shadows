@@ -1,0 +1,7 @@
+# Коммиты в репозиторий shadow_iac за месяц. Поле «автор» в git — это
+# строка, которую отправитель заполняет сам; подпись — отдельное поле.
+#
+# commit author_email signed committer_email date_utc subject
+a1f4c92  m.weber@zrh-fin.ch    no   ci-bot@aurora.internal  2025-10-26  registry host fix
+b73e118  d.orlov@aurora.team   yes  d.orlov@aurora.team     2025-10-28  add node_exporter role
+c02aa5d  a.kovaleva@aurora.team yes a.kovaleva@aurora.team  2025-11-02  rotate deploy key

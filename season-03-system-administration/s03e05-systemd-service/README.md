@@ -207,7 +207,7 @@ bash tests/test.sh
 - `man systemd.unit`, `man systemd.service`, `man systemd.exec`, `man systemd.resource-control`, `man systemctl`
 - `systemd-analyze verify`, `systemd-analyze security`, `systemd-analyze critical-chain`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — глава о systemd.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

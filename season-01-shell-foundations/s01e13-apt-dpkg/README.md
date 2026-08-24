@@ -183,7 +183,7 @@ fi
 - `man apt`, `man dpkg`, `man sources.list`
 - Shotts, «The Linux Command Line», гл. 15 «Package Management».
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — глава об управлении ПО.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

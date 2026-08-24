@@ -129,7 +129,7 @@ journalctl -t monitor --since "1 hour ago"
 - **Shotts, «The Linux Command Line», гл. 6** — перенаправление, `tee`, `/dev/null`.
 - **BashGuide, раздел Redirection** — разбор `2>&1` и порядка операций.
 - `man 5 logrotate.conf` — на будущее, перед Season 3.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

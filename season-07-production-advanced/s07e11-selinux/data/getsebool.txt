@@ -1,0 +1,12 @@
+# getsebool -a | grep httpd  (сокращено до относящегося к делу)
+#
+# Булевы переключатели — заранее заготовленные политикой развилки. Это
+# единственный способ поменять поведение SELinux, не собирая свой модуль.
+httpd_can_network_connect --> off
+httpd_can_network_connect_db --> off
+httpd_can_network_relay --> off
+httpd_read_user_content --> off
+httpd_unified --> off
+#
+# nginx пытается ходить в postgres (отказ 6). Разрешается переключателем
+# httpd_can_network_connect_db, а не правкой правил.

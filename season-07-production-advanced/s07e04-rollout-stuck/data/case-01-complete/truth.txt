@@ -1,0 +1,5 @@
+# kubectl rollout status deployment/aurora-api -n aurora --timeout=120s
+deployment "aurora-api" successfully rolled out
+# exit code: 0
+verdict complete
+cause none

@@ -131,7 +131,7 @@ LC_ALL=C grep -F 'ERROR' huge.log      # быстрее, если шаблон �
 - `man grep`, `man 7 regex`, `info grep` (раздел про BRE/ERE)
 - **Shotts, «The Linux Command Line», гл. 19–20** — регулярные выражения и обработка текста.
 - **Friedl, «Mastering Regular Expressions»** — если regex понадобятся всерьёз.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

@@ -1,0 +1,32 @@
+# acceptance.txt — приёмка инфраструктуры shadow_core.
+#
+# Двенадцать фаз, по одной на навык сезона. Каждая проверяет СВОЙСТВО, а не
+# константу, и возвращает pass/fail. Курс заканчивается не «поздравляем», а
+# прогоном, который возвращает ноль или не возвращает.
+#
+# Порядок фаз — фиксированный: это одна операция, а не двенадцать
+# упражнений. Формат:
+#
+#   phase <N> <сезон> <проверка> <аргументы...>   "человеческое описание"
+#
+# Виды проверок:
+#   kv     <файл> <ключ> <значение>     ключ равен значению
+#   max    <файл> <ключ> <n>            целое значение не больше n
+#   min    <файл> <ключ> <n>            целое значение не меньше n
+#   absent <файл>                       файла нет (достигнутое состояние)
+#   present<файл>                        файл есть
+#   same   <файлA> <файлB>              два списка совпадают (нет расхождения)
+#   subset <файлA> <файлB>              каждая строка A есть в B
+
+phase 1  S1 present toolkit.sh                       "S1: базовый инструментарий на месте"
+phase 2  S2 kv      ssh.txt PasswordAuthentication no "S2: вход по паролю закрыт"
+phase 3  S3 kv      service.txt NoNewPrivileges yes   "S3: служба ограничена в правах"
+phase 4  S4 kv      deploy.txt idempotent yes         "S4: развёртывание идемпотентно"
+phase 5  S5 min     cis.txt passed 18                 "S5: CIS-контролей пройдено не меньше 18"
+phase 6  S6 kv      mesh.txt device /dev/shadow0      "S6: узел shadow_mesh отвечает"
+phase 7  S7 max     slo.txt error_budget_pct 100      "S7: бюджет ошибок не превышен"
+phase 8  S8 absent  ld.so.preload                     "S8: закрепление снято"
+phase 9  S8 kv      verdict.txt attribution insufficient "S8: обвинение не выдвинуто без доказательств"
+phase 10 S8 subset  actions.txt authorized.txt  "S8: действия не вышли за ордер"
+phase 11 S8 same    ps.txt proc.txt             "S8: перекрёстный взгляд без расхождений"
+phase 12 S8 kv      final.txt servers_up 50           "S8: все узлы в строю"

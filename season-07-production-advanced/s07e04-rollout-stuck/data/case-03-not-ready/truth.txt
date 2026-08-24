@@ -1,0 +1,10 @@
+# kubectl rollout status deployment/aurora-api -n aurora --timeout=120s
+Waiting for deployment "aurora-api" rollout to finish: 1 out of 5 new replicas have been updated...
+error: deployment "aurora-api" exceeded its progress deadline
+# exit code: 1
+#
+# Новая версия запустилась, но проба готовности отвечает 503: приложение
+# не может договориться с зависимостью. Под живёт, трафика не получает,
+# и заменить им старую реплику кластер не имеет права.
+verdict stuck
+cause readiness

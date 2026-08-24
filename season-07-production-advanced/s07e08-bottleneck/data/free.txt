@@ -1,0 +1,7 @@
+# free -m   на узле verne-w1
+#
+# Смотреть надо на available, а не на free: free не учитывает кэш, который
+# ядро отдаст по первому требованию.
+               total        used        free      shared  buff/cache   available
+Mem:            7820        3128        2838          64        1854        4380
+Swap:              0           0           0

@@ -1,0 +1,3 @@
+# итог harden SSH
+PasswordAuthentication no
+PermitRootLogin no

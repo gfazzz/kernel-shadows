@@ -1,0 +1,7 @@
+# Выпущенные сертификаты и ключи брокера (лежат на узле агрегации).
+# Пути придумывать не надо — они уже такие.
+# Формат: ключ=значение
+ca_file=/etc/mosquitto/certs/ca.crt
+cert_file=/etc/mosquitto/certs/broker.crt
+key_file=/etc/mosquitto/certs/broker.key
+min_tls_version=tlsv1.2

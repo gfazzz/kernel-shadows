@@ -139,7 +139,7 @@ API_TOKEN=
 - `man gitignore`, `man git-check-ignore`, `man git-rm`, `man git-status`
 - `github.com/github/gitignore` — наборы под язык и инструмент
 - `git-secrets`, `gitleaks`, `trufflehog` — поиск секретов в истории
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

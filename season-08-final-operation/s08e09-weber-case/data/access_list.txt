@@ -1,0 +1,18 @@
+# Кто имел доступ на чтение к репозиторию shadow_iac на момент коммита
+# a1f4c92. Выгружено из системы управления доступом.
+#
+# person role
+m.weber      external-finance
+d.orlov      maintainer
+a.kovaleva   maintainer
+v.petrov     owner
+a.sokolov    reader
+max.sokolov  reader
+ci-bot       automation
+audit-ro     automation
+k.mueller    reader
+p.jansen     reader
+l.fischer    reader
+r.hoffmann   reader
+s.baumann    reader
+t.keller     reader

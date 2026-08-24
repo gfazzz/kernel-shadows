@@ -1,0 +1,11 @@
+# ls -lZ /srv/aurora/ /var/lib/aurora/
+/srv/aurora/:
+drwxr-xr-x. root root unconfined_u:object_r:default_t:s0       archive
+-rw-r--r--. root root unconfined_u:object_r:default_t:s0       index.html
+#
+# /var/lib/aurora/:
+drwx------. aurora aurora system_u:object_r:var_lib_t:s0       state
+-rw-------. aurora aurora system_u:object_r:var_lib_t:s0       state/last.db
+#
+# Каталог /srv/aurora создан вручную (mkdir), и файлы унаследовали тип
+# родителя — default_t. Веб-серверу нужен httpd_sys_content_t.

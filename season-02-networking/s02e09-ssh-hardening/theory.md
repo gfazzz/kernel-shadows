@@ -148,7 +148,7 @@ ssh -J bastion db.internal
 - `man sshd_config`, `man sshd` (ключи `-T`, `-t`), `man ssh_config`, `man wg`, `man wg-quick`
 - Рекомендации Mozilla по конфигурации OpenSSH — практичный чек-лист директив.
 - **RFC 4254** (каналы и проброс портов в SSH)
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

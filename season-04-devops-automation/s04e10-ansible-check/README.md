@@ -251,7 +251,7 @@ fatal: [prod-web27.shadow.io]: FAILED! => {"changed": false, "stdout": "debsums:
 
 - Ansible docs: «Validating tasks: check mode and diff mode», «Understanding privilege escalation», «Playbook keywords: `check_mode`»
 - `ansible-playbook --check --diff --limit ГРУППА`, `--tags`, `--list-hosts`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

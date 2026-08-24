@@ -212,7 +212,7 @@ done < "$list"
 
 - `help if`, `help while`, `help read`, `help test`, `man bash` (Parameter Expansion)
 - Shotts, «The Linux Command Line», гл. 27–29 (ветвление, циклы, чтение файлов).
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

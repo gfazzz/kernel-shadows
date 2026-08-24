@@ -1,0 +1,14 @@
+# kubectl get pods -n aurora --show-labels
+# Снято после выката манифеста из s07e02: пять реплик, все готовы.
+NAME                             READY   STATUS    RESTARTS   AGE     LABELS
+aurora-api-6c5b74f9d-2xk4l       1/1     Running   0          12m     app=aurora-api,pod-template-hash=6c5b74f9d
+aurora-api-6c5b74f9d-8rj2m       1/1     Running   0          12m     app=aurora-api,pod-template-hash=6c5b74f9d
+aurora-api-6c5b74f9d-c9v7t       1/1     Running   0          11m     app=aurora-api,pod-template-hash=6c5b74f9d
+aurora-api-6c5b74f9d-nq4wd       1/1     Running   0          11m     app=aurora-api,pod-template-hash=6c5b74f9d
+aurora-api-6c5b74f9d-vt8xs       1/1     Running   0          11m     app=aurora-api,pod-template-hash=6c5b74f9d
+mesh-collector-6b7f9d54c-k7p3z   1/1     Running   2          6h16m   app=mesh-collector,pod-template-hash=6b7f9d54c
+aurora-worker-84d9f6b5c-rr2vn    1/1     Running   0          9m      app=aurora-worker,pod-template-hash=84d9f6b5c
+
+# Обрати внимание на pod-template-hash: он меняется при каждой правке
+# шаблона. Селектор, в который его записали, перестанет работать после
+# первого же выката.

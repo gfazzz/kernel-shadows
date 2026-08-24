@@ -138,7 +138,7 @@ echo "hello" | sed 's/.*/[&]/'                              # & — вся со�
 - `man sed`, `info sed`
 - **Shotts, «The Linux Command Line», гл. 21** — `sed`, потоковое редактирование.
 - **Dougherty, Robbins, «sed & awk»** — классика O'Reilly, если понадобится всерьёз.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md) и [`PROJECTS.md`](../../PROJECTS.md) (метки Type A/B/C/D)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md) и [`PROJECTS.md`](../../docs/PROJECTS.md) (метки Type A/B/C/D)
 
 ## Спросить у LILITH
 

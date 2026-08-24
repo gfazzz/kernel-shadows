@@ -229,7 +229,7 @@ Season 2: Networking. Москва. Дальше — Стокгольм.
 Я буду рядом. В тенях. Всегда.»
 ```
 
-Твой `shadow_toolkit` за сезон вырос из пустого каталога в набор рабочих инструментов (см. [`PROJECTS.md`](../../PROJECTS.md)). В Season 2 у него появится сетевой слой — `netshield`.
+Твой `shadow_toolkit` за сезон вырос из пустого каталога в набор рабочих инструментов (см. [`PROJECTS.md`](../../docs/PROJECTS.md)). В Season 2 у него появится сетевой слой — `netshield`.
 
 **Дальше → [Season 2 «Networking»](../../season-02-networking/) — [`s02e01`](../../season-02-networking/s02e01-tcpip-addressing/): как машины находят друг друга.**
 
@@ -241,7 +241,7 @@ Season 2: Networking. Москва. Дальше — Стокгольм.
 
 - `man id`, `man groups`, `man sudo`, `man su`, `man 5 passwd`
 - `sudo -l` на своей машине — самый короткий способ увидеть, что вам разрешено.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

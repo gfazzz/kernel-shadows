@@ -191,7 +191,7 @@ grep -E '[[:space:]]ALLOW' "$FW" | awk '{print $1}' | sed 's|/.*||' | sort -un
 
 **Дальше → [`s02e07`](../s02e07-block-botnet/) — блокировка ботнета: капстоун эпизода.**
 
-Отчёт `fw_report.txt` вместе с `ports_report.txt` из s02e02 — полная карта поверхности `netshield` (см. [`PROJECTS.md`](../../PROJECTS.md)): что слушает и что из этого доступно.
+Отчёт `fw_report.txt` вместе с `ports_report.txt` из s02e02 — полная карта поверхности `netshield` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)): что слушает и что из этого доступно.
 
 ---
 
@@ -201,7 +201,7 @@ grep -E '[[:space:]]ALLOW' "$FW" | awk '{print $1}' | sed 's|/.*||' | sort -un
 
 - `man ufw`, `man iptables`, `man nft`, `man iptables-save`
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — сетевая безопасность.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

@@ -1,0 +1,11 @@
+# Режимы ArduCopter: custom_mode -> имя. Поле custom_mode в HEARTBEAT
+# хранит число; имя зависит от прошивки и берётся из её таблицы.
+0   STABILIZE
+2   ALT_HOLD
+3   AUTO
+4   GUIDED
+5   LOITER
+6   RTL
+9   LAND
+16  POSHOLD
+17  BRAKE

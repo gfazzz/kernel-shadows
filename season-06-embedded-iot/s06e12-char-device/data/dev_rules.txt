@@ -1,0 +1,15 @@
+# Требования к драйверу символьного устройства.
+# Формат: идентификатор <TAB> регулярка <TAB> пояснение
+fops	struct[[:space:]]+file_operations	таблица операций объявлена
+fops_owner	\.owner[[:space:]]*=[[:space:]]*THIS_MODULE	.owner не даёт выгрузить модуль во время работы с файлом
+fops_read	\.read[[:space:]]*=	операция чтения подключена
+fops_open	\.open[[:space:]]*=	операция открытия подключена
+fops_release	\.release[[:space:]]*=	операция закрытия подключена
+copy_to_user	copy_to_user[[:space:]]*\(	данные в пользовательское пространство копируются copy_to_user
+efault	[-]EFAULT	неудача copy_to_user обработана как -EFAULT
+ppos	\*ppos[[:space:]]*\+=	позиция чтения продвигается
+goto_unwind	goto[[:space:]]+err_	частичная инициализация откатывается лестницей меток
+lock	(mutex_lock|spin_lock)[a-z_]*[[:space:]]*\(	одновременное чтение защищено блокировкой
+unlock	(mutex_unlock|spin_unlock)[a-z_]*[[:space:]]*\(	блокировка снимается
+slice	shadow_copy_slice[[:space:]]*\(	сколько отдать — считает проверенная функция, а не драйвер
+license	MODULE_LICENSE[[:space:]]*\("GPL	без совместимой лицензии часть символов ядра недоступна

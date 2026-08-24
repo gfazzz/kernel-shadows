@@ -1,0 +1,12 @@
+# Наблюдения за три окна, снятые 56-го дня операции в 08:00.
+#
+# requests_good — запросы, ответившие не пятисоткой.
+# latency_good  — запросы быстрее 300 мс: значение корзины le="0.3"
+#                 гистограммы aurora_request_duration_seconds.
+#
+# Все величины целые: это счётчики наблюдений, а не доли.
+#
+# window requests_total requests_good latency_total latency_good
+window 30d 8640000 8602000 8640000 8520000
+window 6h    72000   71100    72000    67000
+window 1h    12000   11700    12000    10200

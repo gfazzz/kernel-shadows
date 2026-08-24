@@ -196,7 +196,7 @@ awk -F'"' '{print $3}' "$L" | awk '{print $1}' | sort | uniq -c  # статус�
 
 - `man awk` (или `man gawk`), `man sort`, `man uniq`
 - Shotts, «The Linux Command Line», гл. 20 «Text Processing».
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

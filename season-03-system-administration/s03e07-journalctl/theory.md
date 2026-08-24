@@ -146,7 +146,7 @@ echo "<3>не удалось подключиться к базе"   # попа�
 - `man journalctl`, `man journald.conf`, `man systemd.journal-fields`, `man 3 syslog`
 - `man logger`, `man systemd-cat`, `man logrotate`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — журналирование.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

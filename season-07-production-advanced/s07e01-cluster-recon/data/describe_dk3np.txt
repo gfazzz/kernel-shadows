@@ -1,0 +1,20 @@
+# kubectl describe pod aurora-api-7d4f8b6c9-dk3np -n aurora  (сокращено до сути)
+Name:             aurora-api-7d4f8b6c9-dk3np
+Namespace:        aurora
+Node:             verne-w2/10.30.0.22
+Status:           Running
+Containers:
+  aurora-api:
+    Image:          registry.verne.internal/aurora-api:v2.4.1
+    State:          Waiting
+      Reason:       CrashLoopBackOff
+    Last State:     Terminated
+      Reason:       Error
+      Exit Code:    1
+      Started:      Thu, 21 Aug 2026 08:41:02 +0000
+      Finished:     Thu, 21 Aug 2026 08:41:03 +0000
+    Ready:          False
+    Restart Count:  12
+
+# kubectl logs aurora-api-7d4f8b6c9-dk3np -n aurora --previous  (последние строки)
+2026-08-21T08:41:03Z FATAL config: required key "AURORA_DB_DSN" is missing

@@ -207,7 +207,7 @@ bash tests/test.sh
 - `man logrotate`, `man 5 logrotate.conf`, `man rsyslogd` (раздел про HUP), `man nginx` (сигналы)
 - `man journald.conf` — как то же самое устроено у journald.
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — журналирование.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

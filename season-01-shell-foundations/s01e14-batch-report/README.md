@@ -203,7 +203,7 @@ Ansible, научу в Season 4. Но человека, который не по
 
 - `man xargs`, `man apt`, `man dpkg`
 - Shotts, «The Linux Command Line», гл. 15 «Package Management», гл. 20 (`xargs` в конвейерах).
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

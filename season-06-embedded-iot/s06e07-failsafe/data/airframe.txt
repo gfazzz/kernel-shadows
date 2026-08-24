@@ -1,0 +1,8 @@
+# Аппарат shadow-uav-03: батарея и подвес.
+# Формат: ключ=значение
+battery_cells=4
+battery_chemistry=li-ion
+cell_min_volt=3.30
+cell_nominal_volt=3.60
+capacity_mah=6800
+hover_current_a=18.4

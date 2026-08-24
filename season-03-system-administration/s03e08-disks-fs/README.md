@@ -209,7 +209,7 @@ sec 'lsof +L1'
 - `man df`, `man du`, `man lsblk`, `man lsof`, `man tune2fs`, `man 5 ext4`
 - `man 7 inode`, `man 2 unlink` — почему `rm` удаляет имя, а не файл.
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — хранение данных.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

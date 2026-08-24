@@ -1,0 +1,13 @@
+# sysctl -a на verne-edge2, снято 57-го дня в 09:05 UTC, до правок.
+# Ядро 5.15.0-91-generic. Значения — те, что стоят прямо сейчас.
+#
+# ключ значение
+net.ipv4.tcp_syncookies              0
+net.ipv4.tcp_max_syn_backlog       128
+net.core.somaxconn                 128
+net.ipv4.tcp_synack_retries          5
+net.ipv4.tcp_abort_on_overflow       0
+net.core.netdev_max_backlog       1000
+net.ipv4.tcp_fin_timeout            60
+net.ipv4.conf.all.rp_filter          0
+net.netfilter.nf_conntrack_max    65536

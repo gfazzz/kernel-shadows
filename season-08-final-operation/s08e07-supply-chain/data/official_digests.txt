@@ -1,0 +1,13 @@
+# Перечень издателя: что и с каким отпечатком опубликовано.
+# Получено из подписанного индекса реестра, не из кластера.
+#
+# образ отпечаток
+ghcr.io/aurora-api:2.8.4 sha256:39e191095278da7bb8a0aece3e47de6e169f233c5ae6e90052a38b8dd277bdef
+ghcr.io/cert-manager:1.14.4 sha256:121ca65b9c75aecf4bc6b467d2622815000ec6d21d20d71d36451d6188ef491f
+ghcr.io/postgres:16.2 sha256:ce97dbf308a3f9f980bc9f5e4a0bc5ba562d8ccebfa7d931b819769e1b53967d
+registry.aurora.internal/aurora-worker:2.8.4 sha256:11357f8a30d7761a1100ff311968bba316ec56adcdffdea03b30b1ce5d5c8b57
+registry.aurora.internal/fluent-bit:2.2.2 sha256:b692d29afb0d915b626890ca058e8a676cc406c0538ca926e4a7554f0df8b1c3
+registry.aurora.internal/nginx-module-upload:2.4.1 sha256:4f8a1c7fecae6a0ae0348f92c1409fba12ba68f46d2c43ff6c2477a6326af839
+registry.aurora.internal/node-exporter:1.7.0 sha256:b660840c11c6ffa9b58bf0498b812d6d83bf817741ed1557f32afa4312c8310c
+registry.aurora.internal/prometheus:2.50.1 sha256:b0315072e58f748ed06827bc8ba730d52a629e81f28147624a2ebc1fbfe235dc
+registry.aurora.internal/redis:7.2.4 sha256:b1112984c48569fcb6cc20ba2b7c4044d10165ad9ef9435db50d2fd0d38d18eb

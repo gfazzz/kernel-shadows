@@ -1,0 +1,39 @@
+# Соглашения команды по метрикам — то, что проверяет check_metrics.sh.
+#
+# Порог кардинальности: сколько разных значений одной метки считается
+# приемлемым. Каждое сочетание значений меток — отдельный временной ряд, а
+# ряд стоит памяти в Prometheus постоянно, даже если данных по нему одна
+# точка. Двадцать — не физический предел, а граница, за которой команда
+# требует объяснений.
+max_label_values 20
+
+# Базовые единицы, которыми разрешено оканчивать имя метрики. Список — из
+# соглашений Prometheus: хранить всё в базовых единицах СИ и переводить
+# при показе, а не при записи.
+base_unit seconds
+base_unit bytes
+base_unit ratio
+base_unit celsius
+base_unit joules
+base_unit volts
+base_unit amperes
+base_unit meters
+base_unit grams
+
+# Единицы, встреченные в природе и запрещённые: они порождают графики, на
+# которых одна панель в миллисекундах, соседняя в секундах, и сравнить их
+# нельзя.
+bad_unit milliseconds
+bad_unit microseconds
+bad_unit nanoseconds
+bad_unit minutes
+bad_unit hours
+bad_unit days
+bad_unit kilobytes
+bad_unit megabytes
+bad_unit gigabytes
+bad_unit percent
+bad_unit ms
+bad_unit kb
+bad_unit mb
+bad_unit gb

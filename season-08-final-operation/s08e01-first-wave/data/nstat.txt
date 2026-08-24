@@ -1,0 +1,14 @@
+# nstat -az, узел verne-edge2, накоплено за окно 08:47:00-08:50:00 UTC.
+# Обнулено перед снятием: nstat -n && sleep 180 && nstat -az
+#
+# счётчик значение
+TcpInSegs                  432180000
+TcpPassiveOpens                20140
+TcpAttemptFails                    0
+TcpExtListenOverflows         184320
+TcpExtListenDrops             184320
+TcpExtTCPReqQFullDoCookies   1846000
+TcpExtSyncookiesSent         1846000
+TcpExtSyncookiesRecv               0
+TcpExtSyncookiesFailed             0
+TcpExtTCPSynRetrans             1204

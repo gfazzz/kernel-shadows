@@ -1,0 +1,9 @@
+# Канал до провайдера, площадка Цюрих. Снято 10:05 UTC.
+#
+# ключ значение
+capacity_mbps      10000
+inbound_mbps       11840
+util_pct             118
+drops_pct             16
+rtt_ms_p50           940
+rtt_ms_normal         12

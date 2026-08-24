@@ -216,7 +216,7 @@ localforward 15432 127.0.0.1:5432
 
 - `man ssh` (разделы `-L`, `-R`, `-D`, `-J`), `man ssh_config`, `man sshd_config` (`GatewayPorts`, `AllowTcpForwarding`)
 - `ssh -G хост` — эффективные значения всех параметров.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

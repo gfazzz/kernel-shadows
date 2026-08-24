@@ -1,0 +1,4 @@
+# /var/log/audit/audit.log, время в секундах эпохи UTC
+type=PATH msg=audit(1763822785.918:842): name=/etc/systemd/system/dbus-broker-relay.service nametype=CREATE
+type=EXECVE msg=audit(1763819511.601:266): argc=3 a0=/bin/sh a1=-c a2=curl
+type=PATH msg=audit(1763820326.548:534): name=/etc/ld.so.preload nametype=CREATE

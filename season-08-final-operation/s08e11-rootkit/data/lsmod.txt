@@ -1,0 +1,7 @@
+# lsmod — модули ядра по мнению системной утилиты.
+#
+# module
+ext4
+nf_tables
+xt_conntrack
+overlay

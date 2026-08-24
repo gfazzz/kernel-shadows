@@ -94,11 +94,11 @@ KERNEL SHADOWS — Season 2
 
 ## 🆕 v2.0: атомарные серии (новый стандарт)
 
-Рефакторинг v2.0 (см. [`V2.0_UPGRADE_PLAN.md`](../V2.0_UPGRADE_PLAN.md)) дробит эпизоды на
+Рефакторинг v2.0 (см. CHANGELOG) дробит эпизоды на
 атомарные серии `sNNeNN`: один концепт — одна задача, README ≤ 650 строк, `mission.md`
 с блоком «Требования среды», единая `starter/`, `theory.md` и **воспроизводимый тест**.
 Сетевые серии тестируются **без живой сети** — `ping`/`ss` подменяются мок-версиями
-(mock-first, §5.3).
+(mock-first).
 
 **Season 2 пересобран: 4 исходных эпизода → 12 атомарных серий**
 (старые `episode-05…08` убраны; данные-пропсы сохранены в [`data/`](data/)):
@@ -119,11 +119,11 @@ KERNEL SHADOWS — Season 2
 | [s02e12](s02e12-firewall-log/) | 08 | журнал фаервола и `ufw limit` (финал сезона) | `fwlog_report.txt` | **C** | ✅ 22/22 |
 
 **Итого Season 2: 12 серий, 187 проверок — все зелёные без root/сети** (сетевые команды
-`ping`/`ss`/`dig`/`ufw`/`dpkg` мокаются или работают на фикстурах; §5.3). Реальные данные
+`ping`/`ss`/`dig`/`ufw`/`dpkg` мокаются или работают на фикстурах). Реальные данные
 для практики — в [`data/`](data/).
 
 Сезонный проект — **`netshield`** (адресация → защита DNS → firewall → шифрованный доступ;
-см. [`PROJECTS.md`](../PROJECTS.md)). Закрытые forward-deps: **T2** (`systemd-resolved` —
+см. [`PROJECTS.md`](../docs/PROJECTS.md)). Закрытые forward-deps: **T2** (`systemd-resolved` —
 только read-only `resolvectl`, `systemctl` → Season 3) и **T4** (`fail2ban` — превью, полноценно
 Season 5).
 

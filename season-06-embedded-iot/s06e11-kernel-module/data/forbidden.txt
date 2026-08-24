@@ -1,0 +1,8 @@
+# Чего в модуле ядра быть НЕ должно.
+# Формат: идентификатор <TAB> регулярка <TAB> почему
+float	(^|[^_[:alnum:]])(float|double)[[:space:]]+[a-zA-Z_]	в ядре нет плавающей точки: FPU не сохраняется при переключении контекста
+stdio	#include[[:space:]]*<stdio\.h>	стандартной библиотеки C в ядре нет
+stdlib	#include[[:space:]]*<stdlib\.h>	стандартной библиотеки C в ядре нет
+malloc	(^|[^_[:alnum:]])malloc[[:space:]]*\(	в ядре kmalloc/kzalloc, а не malloc
+printf	(^|[^_[:alnum:]])printf[[:space:]]*\(	в ядре pr_info/printk, а не printf
+exit_call	(^|[^_[:alnum:]])exit[[:space:]]*\([0-9]	из ядра нельзя «выйти»

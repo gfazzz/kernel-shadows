@@ -1,0 +1,5 @@
+aurora-api
+nginx
+node_exporter
+sshd
+systemd

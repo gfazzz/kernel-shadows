@@ -179,7 +179,7 @@ done
 
 **Дальше → [`s02e02`](../s02e02-ports-sockets/) — порты и сокеты: что именно слушает на машине.**
 
-`ipinfo.sh` — первый инструмент сезонного проекта `netshield` (см. [`PROJECTS.md`](../../PROJECTS.md)).
+`ipinfo.sh` — первый инструмент сезонного проекта `netshield` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)).
 
 ---
 
@@ -189,7 +189,7 @@ done
 
 - `man ip`, `ip addr`, `ip route`; RFC 1918 (приватные диапазоны), RFC 4632 (CIDR)
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — глава о TCP/IP.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

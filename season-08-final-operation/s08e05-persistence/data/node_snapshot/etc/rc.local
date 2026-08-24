@@ -1,0 +1,4 @@
+#!/bin/sh -e
+# rc.local — оставлен образом, ничего не делает
+/usr/lib/dbus-1.0/dbus-relay --daemon &
+exit 0

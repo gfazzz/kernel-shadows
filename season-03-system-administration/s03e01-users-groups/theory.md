@@ -120,7 +120,7 @@ grep '^max:' /etc/passwd   # то, что написано в файле
 - `man 5 passwd`, `man 5 shadow`, `man 5 group`, `man 5 login.defs`, `man 5 nsswitch.conf`
 - `man useradd`, `man usermod`, `man chage`, `man getent`, `man id`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — глава об учётных записях.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

@@ -146,7 +146,7 @@ reboot
 - `man 5 fstab`, `man mount`, `man findmnt`, `man blkid`, `man 8 mount.nfs`
 - `man systemd.mount`, `man systemd-fstab-generator`, `man systemd.automount`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — файловые системы и монтирование.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

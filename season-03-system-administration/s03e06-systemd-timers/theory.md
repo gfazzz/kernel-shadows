@@ -132,7 +132,7 @@ systemctl edit ops-check.timer           # drop-in: изменить распи�
 - `man systemd.timer`, `man systemd.time`, `man systemd.service`, `man systemd-analyze`
 - `man 5 crontab`, `man anacron`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — периодические задачи.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

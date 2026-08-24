@@ -148,7 +148,7 @@ Init-скрипт отвечал на вопрос «какие команды �
 - `man systemd.unit`, `man systemd.service`, `man systemd.exec`, `man systemd.resource-control`
 - `man systemctl`, `man systemd-analyze`, `man systemd.directives` (указатель всех директив)
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — глава о systemd.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

@@ -1,0 +1,10 @@
+# Факты о плате shadow-node-07 (продолжение s06e01/s06e03).
+family=pi4
+ram_mb=2048
+root_partuuid=6c586e13-02
+boot_partuuid=6c586e13-01
+data_partuuid=6c586e13-03
+rootfstype=ext4
+# ресурс SD-карты по паспорту: сколько раз можно перезаписать ячейку
+sd_write_cycles=1000
+sd_size_gb=32

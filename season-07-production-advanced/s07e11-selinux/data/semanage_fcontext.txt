@@ -1,0 +1,11 @@
+# semanage fcontext -l | grep -E 'srv|var/www'  (сокращено)
+#
+# путь                                тип
+/srv/www(/.*)?                        httpd_sys_content_t
+/var/www(/.*)?                        httpd_sys_content_t
+/srv/aurora(/.*)?                     httpd_sys_content_t
+/var/lib/aurora(/.*)?                 var_lib_t
+#
+# Правило для /srv/aurora в политике ЕСТЬ — то есть контекст был задан
+# заранее, а файлы созданы после и метки не получили. Это чинится
+# восстановлением, а не добавлением правила.

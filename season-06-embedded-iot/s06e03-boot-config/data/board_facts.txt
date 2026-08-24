@@ -1,0 +1,15 @@
+# Факты о плате shadow-node-07, добытые в s06e01.
+# Формат: ключ=значение
+model=Raspberry Pi 4 Model B Rev 1.4
+soc=BCM2711
+family=pi4
+board_arch=aarch64
+serial=100000004f2b9c1e
+# из /proc/device-tree/chosen/bootargs текущего образа
+root_partuuid=6c586e13-02
+rootfstype=ext4
+console_speed=115200
+# состояние узлов дерева устройств на момент s06e01
+spi_status=disabled
+i2c_status=okay
+serial_status=okay

@@ -108,7 +108,7 @@ find . -name '*.tmp' -exec rm {} +    # накопить аргументы, к�
 - `man xargs`, `man find` (раздел `-exec`), `man apt`, `man dpkg`
 - **Shotts, «The Linux Command Line», гл. 15 и 20** — пакеты и `xargs` в конвейерах.
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — управление ПО и идемпотентность конфигураций.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md), проекты сезонов — [`PROJECTS.md`](../../PROJECTS.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md), проекты сезонов — [`PROJECTS.md`](../../docs/PROJECTS.md)
 
 ## Спросить у LILITH
 

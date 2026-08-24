@@ -9,7 +9,7 @@
 #   make test SERIES=s01e10
 #   make test-repeat     два прогона подряд — проверка воспроизводимости (§4.3)
 #   make test-locale     прогон под LC_ALL=C и чужой TZ (§4.3)
-#   make test-integration тесты, которым нужен живой хост (сейчас таких нет)
+#   make test-integration тесты, которым нужен живой хост (s06e11, s06e12)
 #   make links           проверка ссылок между документами (§4.9)
 #   make tools           аудит forward-deps по инструментам (правило Сергея)
 #   make check           links + tools + test — то, что гоняет CI
@@ -27,7 +27,7 @@ VERBOSE ?=
 
 export SEASON SERIES VERBOSE
 
-.PHONY: help test test-repeat test-locale test-integration links tools check progress clean-clone clean
+.PHONY: help test test-repeat test-locale test-integration links tools timeline check progress clean-clone clean
 
 help:
 	@echo "KERNEL SHADOWS — доступные цели:"
@@ -41,7 +41,8 @@ help:
 	@echo "  make test-integration     тесты, требующие живого хоста"
 	@echo "  make links                проверка ссылок между документами"
 	@echo "  make tools                аудит forward-deps по инструментам"
-	@echo "  make check                links + tools + test (как в CI)"
+	@echo "  make timeline             сквозная хронология: логистика канона"
+	@echo "  make check                links + tools + timeline + test (как в CI)"
 	@echo "  make progress             где я остановился"
 	@echo "  make clean-clone          приёмка на чистом клоне репозитория"
 	@echo "  make clean                убрать tests/logs"
@@ -62,7 +63,9 @@ test-locale:
 
 # Серии, которым нужен живой хост (systemd, Docker, root), выносятся сюда
 # отдельной целью с явной декларацией требований в mission.md (§7.1).
-# На сегодня таких серий в курсе нет: все 23 работают на фикстурах и моках.
+# Сейчас таких две — s06e11 и s06e12: сборка модуля ядра, insmod и чтение
+# /dev/shadow0. Без Linux, заголовков ядра или прав root обе сообщают SKIP,
+# поэтому основной прогон (make test) от окружения не зависит.
 test-integration:
 	@bash tools/run_integration.sh
 
@@ -72,7 +75,11 @@ links:
 tools:
 	@bash tools/check_tools.sh
 
-check: links tools test
+# §4.6: логистику не ловит ни тест, ни линтер — только сквозная таблица.
+timeline:
+	@bash tools/gen_timeline.sh --check
+
+check: links tools timeline test
 
 progress:
 	@bash tools/progress.sh

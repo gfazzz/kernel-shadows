@@ -1,0 +1,36 @@
+# service.yaml — постоянный адрес для непостоянного набора подов (СТАРТЕР)
+#
+# Источники:
+#   data/pods.txt               какие метки на подах на самом деле
+#   data/deployment_excerpt.yaml  как называется порт контейнера
+#   data/current_service.yaml   черновик, который ничего не соединяет
+#   data/endpoints.txt          чем это видно
+#
+# Блочная запись, отступ два пробела.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: aurora-api
+  namespace: aurora
+  labels:
+    app: aurora-api
+spec:
+  # TODO: тип службы. К aurora-api ходят только изнутри кластера.
+  type:
+
+  # TODO: по каким меткам искать поды. Проверь по pods.txt, скольких
+  # найдёт твой селектор — и не попадёт ли в него метка, которая меняется
+  # при каждом выкате.
+  selector:
+
+  ports:
+    # TODO: имя порта — пригодится, когда на службу подпишется Prometheus.
+    - name:
+      protocol: TCP
+      # TODO: port — на что стучатся клиенты.
+      port:
+      # TODO: targetPort — куда служба перекладывает соединение.
+      # Число или имя? Подумай, что придётся править при смене порта
+      # в приложении.
+      targetPort:

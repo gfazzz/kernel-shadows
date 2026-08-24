@@ -195,7 +195,7 @@ touch artifacts/workspace/logs/operation.log
 - `man mkdir`, `man cp`, `man mv`, `man rm`, `man touch`, `man man`
 - `man -k <тема>` (он же `apropos`) — поиск команды по описанию.
 - Shotts, «The Linux Command Line», гл. 4 «Manipulating Files and Directories».
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

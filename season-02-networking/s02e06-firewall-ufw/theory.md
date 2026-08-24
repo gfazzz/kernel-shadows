@@ -134,7 +134,7 @@ sudo iptables-restore < /etc/iptables/rules.v4
 - `man ufw`, `man ufw-framework`, `man iptables`, `man iptables-extensions`, `man nft`
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — глава о сетевой безопасности.
 - Документация Docker о взаимодействии с `iptables` и цепочке `DOCKER-USER`.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

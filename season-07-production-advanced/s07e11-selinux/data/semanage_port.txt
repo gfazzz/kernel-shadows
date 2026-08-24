@@ -1,0 +1,10 @@
+# semanage port -l | grep -E 'http_port_t|postgresql_port_t|unreserved'  (сокращено)
+#
+# тип                    протокол  порты
+http_port_t              tcp       80, 81, 443, 488, 8008, 8009, 8443, 9000
+postgresql_port_t        tcp       5432, 9898
+unreserved_port_t        tcp       1024-32767 (всё, что не назначено явно)
+#
+# Порт 9443 в http_port_t не входит, поэтому попал в unreserved_port_t, и
+# httpd_t запрещено на него садиться. Лечится добавлением порта к типу:
+#   semanage port -a -t http_port_t -p tcp 9443

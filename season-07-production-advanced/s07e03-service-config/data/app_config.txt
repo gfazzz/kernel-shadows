@@ -1,0 +1,28 @@
+# Настройки aurora-api — выписка из README приложения.
+#
+# Колонка kind решает, где настройке место:
+#   plain   — обычное значение, живёт в ConfigMap и лежит в git
+#   secret  — содержит учётные данные, живёт в Secret (заведён в s07e02)
+#
+# key                  kind    смысл
+key AURORA_DB_DSN        secret  строка подключения к postgres, содержит пароль
+key AURORA_MESH_URL      plain   адрес mesh-collector: схема, имя, порт
+key AURORA_LOG_JSON      plain   true|false, формат журнала
+key AURORA_LOG_LEVEL     plain   debug|info|warn|error
+key AURORA_CACHE_TTL_S   plain   время жизни записи в кэше маршрутов, секунды
+key AURORA_MAX_INFLIGHT  plain   потолок одновременных запросов к базе
+
+# Значения, согласованные для production (тикет AUR-411):
+value AURORA_LOG_JSON      true
+value AURORA_LOG_LEVEL     info
+value AURORA_CACHE_TTL_S   300
+value AURORA_MAX_INFLIGHT  32
+
+# AURORA_MESH_URL в тикете нет намеренно: адрес не согласовывают, его
+# выводят. Схема — http, имя и порт берутся из services.txt. Записывать туда
+# адрес пода нельзя: он меняется при каждом перезапуске и не разрешается по
+# имени (проверь nslookup в конце services.txt).
+#
+# AURORA_MAX_INFLIGHT = 32 совпадает с max пула postgres из журнала старта в
+# s07e02 («postgres pool ready (min=4 max=32)») — это не совпадение:
+# приложение не должно просить у базы больше соединений, чем у него есть.

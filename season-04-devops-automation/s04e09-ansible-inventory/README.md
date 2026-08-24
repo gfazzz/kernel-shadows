@@ -209,7 +209,7 @@ bash tests/test.sh
 
 - Ansible docs: «How to build your inventory», «Using variables», «Variable precedence: where should I put a variable?»
 - `ansible-inventory -i inventory.yml --graph`, `--host ИМЯ`, `--list`
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

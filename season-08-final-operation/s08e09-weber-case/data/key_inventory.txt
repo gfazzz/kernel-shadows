@@ -1,0 +1,6 @@
+# Кто каким ключом ходит. Снято с системы управления ключами.
+#
+# fingerprint owner_account shared_with_people note
+SHA256:9xK2mQ7pRxTf0aLd8sWc3EjHnKpMvXuYzAbC1yQv  deploy   6  общий ключ развёртывания
+SHA256:7dNqPwEr5tYu9iOp2aSdFgHjKlZxCvBnM3QwErTy  a.kovaleva  1  личный
+SHA256:q4WsXeCrVtBgNhYmJkLp0oI9uY7tR6eW5qZ3xC1v  m.weber     1  личный

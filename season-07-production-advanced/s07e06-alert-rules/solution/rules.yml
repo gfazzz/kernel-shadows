@@ -1,0 +1,73 @@
+# rules.yml — правила оповещения aurora (ЭТАЛОН)
+#
+# Пять правил вместо трёх. Ни одно не про ресурсы: будят по тому, что
+# видит пользователь, а загрузка процессора пользователю не видна.
+#
+# Окно rate() везде 5m при периоде сбора 15 с — четыре подряд пропущенные
+# выборки правило переживёт. Выдержки взяты из разбора происшествий.
+
+groups:
+  - name: aurora-symptoms
+    interval: 30s
+    rules:
+
+      # Доля ошибок, а не их количество: сто пятисоток в час — это авария
+      # ночью и норма в час пик. Числитель и знаменатель считаются на
+      # одном окне, иначе делятся величины из разных моментов времени.
+      # Порог 2 % при обычных 0.4 % и 18 % во время происшествия.
+      - alert: AuroraHighErrorRate
+        expr: sum(rate(aurora_requests_total{code=~"5.."}[5m])) / sum(rate(aurora_requests_total[5m])) > 0.02
+        for: 10m
+        labels:
+          severity: page
+        annotations:
+          summary: "aurora-api отдаёт ошибки"
+          description: "Доля 5xx за пять минут — {{ $value | humanizePercentage }} при пороге 2 %. Держится больше десяти минут."
+
+      # 95-й перцентиль по гистограмме. sum by (le) — сложение корзин по
+      # всем репликам: складывать корзины можно, складывать перцентили
+      # нельзя. Порог 300 мс при обычных 82 мс.
+      - alert: AuroraHighLatency
+        expr: histogram_quantile(0.95, sum by (le) (rate(aurora_request_duration_seconds_bucket[5m]))) > 0.3
+        for: 15m
+        labels:
+          severity: page
+        annotations:
+          summary: "aurora-api отвечает медленно"
+          description: "95-й перцентиль времени ответа {{ $value }} с при пороге 0.3 с. Держится больше пятнадцати минут."
+
+      # up ставит сам Prometheus: приложение не может сообщить, что оно
+      # умерло. Пять минут — чтобы перезапуск пода не будил человека.
+      - alert: AuroraTargetDown
+        expr: up{job="aurora-api"} == 0
+        for: 5m
+        labels:
+          severity: page
+        annotations:
+          summary: "цель aurora-api недоступна для сбора"
+          description: "Prometheus не может снять метрики с {{ $labels.instance }} больше пяти минут."
+
+      # Больше трёх перезапусков за четверть часа — это цикл, а не
+      # случайность. Задача, а не звонок: пользователь этого не видит,
+      # пока живы остальные реплики.
+      - alert: AuroraPodCrashLooping
+        expr: increase(kube_pod_container_status_restarts_total{namespace="aurora"}[15m]) > 3
+        for: 15m
+        labels:
+          severity: ticket
+        annotations:
+          summary: "под перезапускается по кругу"
+          description: "{{ $labels.pod }} перезапустился {{ $value }} раз за пятнадцать минут."
+
+      # Метрика пропала — это не «всё хорошо, ошибок нет». Условие,
+      # построенное на исчезнувшем ряде, не выполняется никогда, и тишина
+      # в мониторинге выглядит одинаково при полном порядке и при полном
+      # отказе. absent() — единственный способ отличить.
+      - alert: AuroraMetricsAbsent
+        expr: absent(aurora_requests_total{job="aurora-api"})
+        for: 10m
+        labels:
+          severity: ticket
+        annotations:
+          summary: "метрики aurora-api исчезли"
+          description: "Рядов aurora_requests_total у задания {{ $labels.job }} нет в хранилище больше десяти минут: остальные правила по нему молчат."

@@ -132,5 +132,5 @@ bash tests/test.sh
 в шапке — s01e09. Ни одна часть капстоуна не нова: новым является только то, что
 всё это собирается вместе без подсказок.
 
-Отчёт закрывает setup-фазу `shadow_toolkit` (см. [`PROJECTS.md`](../../PROJECTS.md));
+Отчёт закрывает setup-фазу `shadow_toolkit` (см. [`PROJECTS.md`](../../docs/PROJECTS.md));
 в Season 2 у проекта появится сетевой слой `netshield`.

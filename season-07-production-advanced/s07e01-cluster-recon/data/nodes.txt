@@ -1,0 +1,17 @@
+# kubectl get nodes -o wide
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP     OS-IMAGE
+verne-c1   Ready    control-plane   94d   v1.29.4   10.30.0.11      Ubuntu 22.04.4 LTS
+verne-w1   Ready    <none>          94d   v1.29.4   10.30.0.21      Ubuntu 22.04.4 LTS
+verne-w2   Ready    <none>          94d   v1.29.4   10.30.0.22      Ubuntu 22.04.4 LTS
+verne-w3   Ready    <none>          61d   v1.29.4   10.30.0.23      Ubuntu 22.04.4 LTS
+
+# kubectl describe nodes | grep -A3 Allocatable  (сведено)
+#
+# memory_requested_Mi — сумма requests ВСЕХ подов, уже назначенных на узел,
+# включая поды aurora-api. Планировщик считает место именно по requests, а не
+# по фактическому потреблению: свободно = allocatable - requested.
+#
+# NODE      cpu_allocatable  memory_allocatable_Mi  memory_requested_Mi
+verne-w1   3900m            7600                   7480
+verne-w2   3900m            7600                   7440
+verne-w3   3900m            3800                   3620

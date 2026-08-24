@@ -161,7 +161,7 @@ FROM python@sha256:9b8c1e…             # ровно тот образ, нав�
 - `man docker-build`, `man docker-history`, `man docker-inspect`, `man dockerignore`
 - Документация Docker: «Best practices for writing Dockerfiles», «Multi-stage builds»
 - `trivy`, `grype`, `dive` — сканирование и разбор слоёв
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

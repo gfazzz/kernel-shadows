@@ -226,7 +226,7 @@ git show <хеш>:.env
 
 - `man git-log`, `man git-rev-list`, `man git-show`, `man gitrevisions`
 - Chacon & Straub, «Pro Git» — главы 2 и 3 (основы и ветвление), доступна бесплатно.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

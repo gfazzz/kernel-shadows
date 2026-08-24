@@ -1,0 +1,8 @@
+# kubectl get pods -n aurora -l app=aurora-api
+NAME                          READY   STATUS              RESTARTS   AGE
+aurora-api-6c5b74f9d-2xk4l    1/1     Running             0          3h
+aurora-api-6c5b74f9d-8rj2m    1/1     Running             0          3h
+aurora-api-6c5b74f9d-c9v7t    1/1     Running             0          3h
+aurora-api-84fbc9d76-4dp2n    1/1     Running             0          50s
+aurora-api-84fbc9d76-8h6qk    1/1     Running             0          40s
+aurora-api-84fbc9d76-jw9rt    0/1     ContainerCreating   0          8s

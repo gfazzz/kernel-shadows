@@ -1,0 +1,21 @@
+# Свободное место в кластере verne-prod, пространство имён aurora.
+#
+# kubectl describe nodes | grep -A5 "Allocated resources"
+#
+# memory_others_Mi — сумма requests всех подов на узле, КРОМЕ aurora-api.
+# То есть место, занятое чужой нагрузкой; поды самого aurora-api сюда не
+# входят — их размер как раз и предстоит выбрать.
+#
+# Свободно под aurora-api  =  memory_allocatable_Mi - memory_others_Mi
+#
+# Планировщик размещает под целиком на один узел: пять реплик по 300 Mi не
+# влезут в два узла со свободными 400 Mi каждый, хотя суммарно 800 > 5 * 300
+# неверно и в этом виде. Считать надо по узлам, а не по сумме.
+#
+# control-plane verne-c1 в таблице нет: на нём taint, рабочую нагрузку туда
+# не размещают (см. событие FailedScheduling в s07e01).
+#
+# NODE      cpu_allocatable_m  memory_allocatable_Mi  memory_others_Mi
+verne-w1   3900               7600                   6968
+verne-w2   3900               7600                   6928
+verne-w3   3900               3800                   3620

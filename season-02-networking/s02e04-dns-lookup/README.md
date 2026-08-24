@@ -196,7 +196,7 @@ grep -B1 'status:' "$C"                     # заголовки всех отв
 
 **Дальше → [`s02e05`](../s02e05-dns-spoofing-guard/) — обнаружение подмены DNS: капстоун эпизода.**
 
-Отчёт `dns_report.txt` — базовая карта имён `netshield` (см. [`PROJECTS.md`](../../PROJECTS.md)); в s02e05 она станет эталоном, с которым сверяют текущие ответы.
+Отчёт `dns_report.txt` — базовая карта имён `netshield` (см. [`PROJECTS.md`](../../docs/PROJECTS.md)); в s02e05 она станет эталоном, с которым сверяют текущие ответы.
 
 ---
 
@@ -207,7 +207,7 @@ grep -B1 'status:' "$C"                     # заголовки всех отв
 - `man dig`, `man host`, `man getent`, `man hosts`, `man resolv.conf`, `man nsswitch.conf`
 - **RFC 1034 / 1035** — основы DNS; **RFC 7766** — DNS поверх TCP.
 - Nemeth и др., «UNIX and Linux System Administration Handbook» — глава о DNS.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

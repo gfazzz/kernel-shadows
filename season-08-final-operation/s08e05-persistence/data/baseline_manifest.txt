@@ -1,0 +1,27 @@
+# Эталонный перечень: снят с чистого узла того же образа 49-го дня, сразу
+# после развёртывания. Путь относительно корня снимка и контрольная сумма
+# содержимого (SHA-256).
+#
+# Считалось так:
+#   find . -type f | LC_ALL=C sort | while read -r f; do
+#       printf '%s  %s\n' "${f#./}" "$(sha256sum "$f" | cut -d' ' -f1)"
+#   done
+#
+# Перечень отвечает на два вопроса: появился ли файл, которого не было, и
+# изменился ли тот, который был. На третий вопрос — «а был ли узел чистым
+# 49-го дня» — не отвечает никто, и это стоит помнить.
+#
+# путь контрольная_сумма
+etc/cron.d/logrotate-aurora  12859cf2f0e828afd542fe805b93c6376d70776db34ec945d4b9f83d6952eb3c
+etc/crontab  c818c6159ba951e6a2d5bde4e555cd4066870748b299bdd89fabf8a5000f463a
+etc/passwd  6aceeef6c0112df1fd334372c82bdda42cab6e50d602daa3e9351f2de9e701cd
+etc/profile.d/aurora-env.sh  2840aab8956833826188ff79c7f703a324830e3e362c314ca95df97330a44f63
+etc/rc.local  98c2903aa7b1f5bca4583c624038e08bc2e677de92eea580cf075ad7c568b027
+etc/sudoers.d/aurora-ops  f269d9406587fc709e48bceb10c7fea7cf18ea1bac018366133c2500678ff89f
+etc/systemd/system/aurora-api.service  df30ddbc921b060018280c83adad1386bc08086c1cfd2b1ae408a7fe3afa7606
+etc/systemd/system/node-exporter.service  9e77eec6bb0b005c191d5e900c6f3fdcf5a23e4bdcd2637bd1c6f2bcb8169663
+home/anna/.ssh/authorized_keys  6cb22447a947d5e8a5e6591df72d20d67eeace6df25a8a9d90cc5bafac7b3027
+home/deploy/.ssh/authorized_keys  d8abd9a171cb3de97ec498460d4b8632637a16d2cddd850dd80ffea210888d50
+root/.bashrc  b03692c1cd56b2305b98daa123baa681006d3fec3a9e635f41733c0d8ac72e5f
+root/.ssh/authorized_keys  40d39baeaceac1f3e17ec5f3b2c92acc0707b1be8036a7866d702acd6c489388
+var/spool/cron/crontabs/deploy  df1f8116ac9e6ca051af2a0f4ffac909191bf26bdd0818b5d095fcc7fcc33480

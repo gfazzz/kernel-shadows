@@ -151,7 +151,7 @@ sudo -u другой_пользователь ls /путь            # посм
 
 - `man chmod`, `man 1 stat`, `man umask`, `man chown`, `man id`
 - `man 7 inode` — как режим устроен внутри (пригодится в Season 3)
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

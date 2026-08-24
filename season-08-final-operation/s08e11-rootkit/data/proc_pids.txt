@@ -1,0 +1,13 @@
+# Список каталогов /proc/<pid>, снятый обходом самого /proc независимым
+# сборщиком. Это процессы, которые РЕАЛЬНО существуют для ядра.
+#
+# pid comm
+1 systemd
+441 systemd-journal
+612 sshd
+789 nginx
+790 nginx
+1204 aurora-api
+1533 node_exporter
+2571 bash
+3900 kworker-hide

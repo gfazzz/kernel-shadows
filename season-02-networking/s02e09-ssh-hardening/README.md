@@ -192,7 +192,7 @@ grep -iE '^[[:space:]]*PermitRootLogin([[:space:]]|=)' artifacts/sshd_config \
 
 - `man sshd_config`, `man ssh` (`-L`, `-R`, `-D`, `ProxyJump`), `man wg`, `man wg-quick`
 - Рекомендации Mozilla по конфигурации OpenSSH — практичный чек-лист.
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

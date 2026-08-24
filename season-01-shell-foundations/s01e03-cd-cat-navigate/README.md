@@ -166,7 +166,7 @@ cat .next_server                    # IP, порт, пользователь
 
 - `help cd`, `man cat`, `man less`, `man head`
 - Shotts, «The Linux Command Line», гл. 3 «Exploring the System».
-- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../RESOURCES.md).
+- Глубже — [`theory.md`](theory.md) и корневой [`RESOURCES.md`](../../docs/RESOURCES.md).
 
 **Как работать с LILITH:**
 

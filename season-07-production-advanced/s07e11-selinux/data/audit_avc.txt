@@ -1,0 +1,12 @@
+# ausearch -m AVC -ts recent   (сокращено до сути, метки времени убраны:
+# они менялись бы при каждом снятии, а разбор от них не зависит)
+#
+# Каждая строка отказа читается так:
+#   scontext — кто пытался          tcontext — к чему
+#   tclass   — какого рода объект    { … }    — какое действие
+type=AVC msg=audit(1): avc:  denied  { read } for  pid=1841 comm="nginx" name="index.html" dev="vda1" ino=131074 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:default_t:s0 tclass=file permissive=0
+type=AVC msg=audit(2): avc:  denied  { getattr } for  pid=1841 comm="nginx" path="/srv/aurora/index.html" dev="vda1" ino=131074 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:default_t:s0 tclass=file permissive=0
+type=AVC msg=audit(3): avc:  denied  { read } for  pid=1841 comm="nginx" name="archive" dev="vda1" ino=131073 scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:default_t:s0 tclass=dir permissive=0
+type=AVC msg=audit(4): avc:  denied  { name_bind } for  pid=1841 comm="nginx" src=9443 scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:unreserved_port_t:s0 tclass=tcp_socket permissive=0
+type=AVC msg=audit(5): avc:  denied  { name_bind } for  pid=1841 comm="nginx" src=9443 scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:unreserved_port_t:s0 tclass=tcp_socket permissive=0
+type=AVC msg=audit(6): avc:  denied  { name_connect } for  pid=1841 comm="nginx" dest=5432 scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:postgresql_port_t:s0 tclass=tcp_socket permissive=0

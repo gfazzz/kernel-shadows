@@ -1,0 +1,5 @@
+# lsblk -o NAME,PARTUUID,FSTYPE,SIZE,LABEL на карте узла shadow-node-07
+# Формат: имя  PARTUUID  тип_ФС  размер  назначение
+mmcblk0p1  6c586e13-01  vfat  512M  boot
+mmcblk0p2  6c586e13-02  ext4  8G    root
+mmcblk0p3  6c586e13-03  ext4  4G    data

@@ -170,7 +170,7 @@ borg create repo::snapshot /var/log/ops
 - `man rsync`, `man sha256sum`, `man tar`, `man ssh` (раздел `authorized_keys`)
 - документация `restic`, `borg` — если своё писать не хочется
 - **Nemeth и др., «UNIX and Linux System Administration Handbook»** — резервное копирование.
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

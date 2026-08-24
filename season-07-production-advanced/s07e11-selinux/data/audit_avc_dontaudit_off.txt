@@ -1,0 +1,16 @@
+# Тот же час, но снятый после `semanage dontaudit off`.
+#
+# Политика содержит правила dontaudit — «запрещать и НЕ записывать». Они
+# существуют, чтобы журнал не забивался безобидными отказами, и они же
+# делают разбор невозможным: программа получает отказ, в журнале пусто.
+#
+# Выключать dontaudit на время разбора и включать обратно после —
+# стандартный приём, о котором узнают позже, чем следовало бы.
+type=AVC msg=audit(1): avc:  denied  { read } for  pid=1841 comm="nginx" name="index.html" scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:default_t:s0 tclass=file permissive=0
+type=AVC msg=audit(2): avc:  denied  { getattr } for  pid=1841 comm="nginx" path="/srv/aurora/index.html" scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:default_t:s0 tclass=file permissive=0
+type=AVC msg=audit(3): avc:  denied  { read } for  pid=1841 comm="nginx" name="archive" scontext=system_u:system_r:httpd_t:s0 tcontext=unconfined_u:object_r:default_t:s0 tclass=dir permissive=0
+type=AVC msg=audit(4): avc:  denied  { name_bind } for  pid=1841 comm="nginx" src=9443 scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:unreserved_port_t:s0 tclass=tcp_socket permissive=0
+type=AVC msg=audit(5): avc:  denied  { name_bind } for  pid=1841 comm="nginx" src=9443 scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:unreserved_port_t:s0 tclass=tcp_socket permissive=0
+type=AVC msg=audit(6): avc:  denied  { name_connect } for  pid=1841 comm="nginx" dest=5432 scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:postgresql_port_t:s0 tclass=tcp_socket permissive=0
+type=AVC msg=audit(7): avc:  denied  { search } for  pid=1841 comm="nginx" name="aurora" scontext=system_u:system_r:httpd_t:s0 tcontext=system_u:object_r:var_lib_t:s0 tclass=dir permissive=0
+type=AVC msg=audit(8): avc:  denied  { write } for  pid=2210 comm="aurora-archiver" name="tmp" scontext=system_u:system_r:unconfined_service_t:s0 tcontext=system_u:object_r:tmp_t:s0 tclass=dir permissive=0

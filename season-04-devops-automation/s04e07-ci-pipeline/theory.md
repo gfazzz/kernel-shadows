@@ -158,7 +158,7 @@ deploy:
 - GitHub docs: «Workflow syntax», «Security hardening for GitHub Actions», «Using environments for deployment»
 - OpenSSF Scorecard — почему закрепление версий действий проверяют автоматически
 - Nicole Forsgren, Jez Humble, Gene Kim, «Accelerate» — что именно измеряют DORA-метрики
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

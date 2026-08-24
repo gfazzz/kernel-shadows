@@ -1,0 +1,3 @@
+# SLO
+error_budget_pct 87
+verdict burning

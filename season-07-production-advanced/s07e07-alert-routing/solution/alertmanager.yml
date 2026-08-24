@@ -1,0 +1,88 @@
+# alertmanager.yml — кому и как сообщать (ЭТАЛОН)
+#
+# Задача не в том, чтобы доставить все оповещения. Задача в том, чтобы
+# ночью прозвучал один звонок на одну аварию.
+
+global:
+  resolve_timeout: 5m
+
+# Дерево маршрутов. Корень задаёт умолчания, ветки уточняют.
+route:
+  # Приёмник по умолчанию: оповещение, не подошедшее ни под одну ветку,
+  # обязано куда-то попасть. Трекер, а не телефон: неизвестное оповещение
+  # ночью — не повод будить.
+  receiver: tracker
+
+  # Склеиваем по кластеру и пространству имён: одна авария в одном
+  # namespace — одно сообщение. alertname сюда не входит намеренно —
+  # группировка по нему склеила бы одинаковые оповещения разных аварий и
+  # оставила бы разные оповещения одной аварии по разным сообщениям.
+  group_by:
+    - cluster
+    - namespace
+
+  # Сорок пять секунд на то, чтобы подтянулись остальные оповещения той же
+  # аварии: в журнале ночи разброс между первым и последним — сорок две.
+  group_wait: 45s
+  # Пять минут перед сообщением о дополнении уже отправленной группы.
+  group_interval: 5m
+  # Четыре часа между напоминаниями. Пять минут дали три бесполезных
+  # звонка подряд про то, что дежурный уже знал.
+  repeat_interval: 4h
+
+  routes:
+    # Симптом, видимый пользователю, — телефон.
+    - matchers:
+        - severity = page
+      receiver: oncall-phone
+      group_wait: 45s
+      group_interval: 5m
+      repeat_interval: 4h
+
+    # Всё остальное — задача в трекер, в рабочее время.
+    - matchers:
+        - severity = ticket
+      receiver: tracker
+      group_wait: 5m
+      group_interval: 30m
+      repeat_interval: 12h
+
+# Подавление следствий. Если цель недоступна, её ошибки, задержка и
+# перезапуски — не новости: они и есть недоступность, увиденная с трёх
+# сторон. equal: job означает «подавлять только у той же цели», иначе
+# один упавший узел заглушил бы весь кластер.
+inhibit_rules:
+  - source_matchers:
+      - alertname = AuroraTargetDown
+    target_matchers:
+      - alertname = AuroraHighErrorRate
+    equal:
+      - job
+
+  - source_matchers:
+      - alertname = AuroraTargetDown
+    target_matchers:
+      - alertname = AuroraHighLatency
+    equal:
+      - job
+
+  - source_matchers:
+      - alertname = AuroraTargetDown
+    target_matchers:
+      - alertname = AuroraPodCrashLooping
+    equal:
+      - job
+
+receivers:
+  # Адрес с учётными данными не лежит в файле: Alertmanager умеет читать
+  # его из отдельного файла, который монтируется из Secret. Этот файл —
+  # в git, и в нём остаётся только путь.
+  - name: oncall-phone
+    webhook_configs:
+      - url_file: /etc/alertmanager/secrets/pager_url
+        send_resolved: true
+
+  - name: tracker
+    webhook_configs:
+      - url_file: /etc/alertmanager/secrets/tracker_url
+        send_resolved: false

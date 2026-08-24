@@ -1,0 +1,16 @@
+# kubectl get events -n aurora --sort-by=.lastTimestamp
+# ВНИМАНИЕ: события живут ограниченное время (по умолчанию 1 час).
+# «В событиях ничего нет» не означает «ничего не происходило».
+LAST SEEN   TYPE      REASON              OBJECT                                 MESSAGE
+42m         Warning   FailedScheduling    pod/aurora-api-7d4f8b6c9-f5m8q         0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane}, 3 Insufficient memory. preemption: 0/4 nodes are available
+41m         Normal    Scheduled           pod/aurora-api-7d4f8b6c9-dk3np         Successfully assigned aurora/aurora-api-7d4f8b6c9-dk3np to verne-w2
+40m         Normal    Pulled              pod/aurora-api-7d4f8b6c9-dk3np         Container image "registry.verne.internal/aurora-api:v2.4.1" already present on machine
+40m         Warning   BackOff             pod/aurora-api-7d4f8b6c9-dk3np         Back-off restarting failed container aurora-api in pod aurora-api-7d4f8b6c9-dk3np
+18m         Normal    Scheduled           pod/aurora-worker-5c8d94f7b-h2n6x      Successfully assigned aurora/aurora-worker-5c8d94f7b-h2n6x to verne-w3
+18m         Warning   Failed              pod/aurora-worker-5c8d94f7b-h2n6x      Failed to pull image "registry.verne.internal/aurora-worker:v1.9.3": manifest unknown: manifest tagged by "v1.9.3" is not found
+17m         Warning   Failed              pod/aurora-worker-5c8d94f7b-h2n6x      Error: ErrImagePull
+16m         Warning   BackOff             pod/aurora-worker-5c8d94f7b-h2n6x      Back-off pulling image "registry.verne.internal/aurora-worker:v1.9.3"
+9m          Warning   Unhealthy           pod/aurora-api-7d4f8b6c9-c9v7t         Readiness probe failed: HTTP probe failed with statuscode: 503
+6m          Warning   Unhealthy           pod/aurora-api-7d4f8b6c9-c9v7t         Readiness probe failed: HTTP probe failed with statuscode: 503
+2m          Normal    Killing             pod/aurora-api-7d4f8b6c9-c9v7t         Container aurora-api failed liveness probe, will be restarted
+2m          Normal    Pulled              pod/aurora-api-7d4f8b6c9-c9v7t         Container image "registry.verne.internal/aurora-api:v2.4.1" already present on machine

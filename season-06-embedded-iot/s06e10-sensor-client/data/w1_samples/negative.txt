@@ -1,0 +1,2 @@
+b2 fe 4b 46 7f ff 0c 10 2d : crc=2d YES
+b2 fe 4b 46 7f ff 0c 10 2d t=-4875

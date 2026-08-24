@@ -157,7 +157,7 @@ __pycache__
 - Docker docs: «Dockerfile reference», «Best practices for writing Dockerfiles», «Multi-stage builds», «Build secrets»
 - `hadolint` — линтер Dockerfile; `dive` — разбор слоёв
 - `man dockerignore`
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

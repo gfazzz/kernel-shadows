@@ -139,7 +139,7 @@ max  ALL=(root)  /usr/bin/apt update
 
 - `man id`, `man groups`, `man sudo`, `man sudoers`, `man su`, `man 5 passwd`
 - `man visudo` — почему этот файл правят особой командой
-- Корневой [`RESOURCES.md`](../../RESOURCES.md)
+- Корневой [`RESOURCES.md`](../../docs/RESOURCES.md)
 
 ## Спросить у LILITH
 

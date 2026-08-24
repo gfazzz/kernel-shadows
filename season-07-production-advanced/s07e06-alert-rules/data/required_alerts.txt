@@ -1,0 +1,15 @@
+# Что обязано быть, по итогам разбора происшествий.
+#
+# alert <имя> severity=<page|ticket> min_for=<ключ из incidents.txt>
+#             metric=<метрика, на которую опирается> threshold=<ключ или ->
+#
+# severity=page   — будить человека ночью
+# severity=ticket — заводить задачу, смотреть в рабочее время
+#
+# Правило деления на severity одно: будят по симптому, который видит
+# пользователь. Всё остальное — задача.
+alert AuroraHighErrorRate    severity=page   min_for=for_error_ratio  metric=aurora_requests_total                      threshold=threshold_error_ratio
+alert AuroraHighLatency      severity=page   min_for=for_latency      metric=aurora_request_duration_seconds_bucket     threshold=threshold_latency_p95_s
+alert AuroraTargetDown       severity=page   min_for=for_target_down  metric=up                                         threshold=-
+alert AuroraPodCrashLooping  severity=ticket min_for=for_crashloop    metric=kube_pod_container_status_restarts_total   threshold=-
+alert AuroraMetricsAbsent    severity=ticket min_for=for_absent       metric=aurora_requests_total                      threshold=-

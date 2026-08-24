@@ -160,7 +160,7 @@ shell-скриптинг.
 
 ```bash
 # 1. Форк и ветка от актуальной линии
-git checkout v2.0-refactor
+git checkout main
 git pull
 git checkout -b feat/s03e07-journal-priorities
 
@@ -169,7 +169,7 @@ git checkout -b feat/s03e07-journal-priorities
 # 3. Коммит: Conventional Commits, тело на русском
 git commit -m "feat(s03e07): приоритеты journald и восстановление хронологии"
 
-# 4. PR в v2.0-refactor с описанием: что меняется и чем проверено
+# 4. PR в main с описанием: что меняется и чем проверено
 ```
 
 **Правила коммитов:**

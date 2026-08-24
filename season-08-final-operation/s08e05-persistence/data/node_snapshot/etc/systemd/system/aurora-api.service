@@ -1,0 +1,11 @@
+[Unit]
+Description=aurora-api
+After=network-online.target
+
+[Service]
+ExecStart=/opt/aurora/bin/aurora-api --config /etc/aurora/api.yml
+User=aurora
+NoNewPrivileges=yes
+
+[Install]
+WantedBy=multi-user.target

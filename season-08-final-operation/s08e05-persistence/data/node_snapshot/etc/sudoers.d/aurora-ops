@@ -1,0 +1,1 @@
+%ops ALL=(ALL) /usr/bin/systemctl restart aurora-api

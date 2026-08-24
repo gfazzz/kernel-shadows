@@ -1,0 +1,2 @@
+# Ротация журналов aurora-api. Поставлено ролью ansible 49-го дня.
+30 3 * * * root /usr/sbin/logrotate /etc/logrotate.d/aurora

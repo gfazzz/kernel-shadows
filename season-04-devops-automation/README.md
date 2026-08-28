@@ -1,15 +1,15 @@
-# SEASON 4: DEVOPS & AUTOMATION 🚢🇳🇱🇩🇪
+# SEASON 4: DEVOPS & AUTOMATION 🇳🇱🇩🇪
 
 > **"50 серверов вручную? Нет. Docker, Ansible, CI/CD. Едем в Европу — Амстердам и Берлин, DevOps столицы."**
 > — Dmitry Orlov
 
 ---
 
-## 📍 География и контекст
+## География и контекст
 
 **Локации:** 🇳🇱 Амстердам, Нидерланды → 🇩🇪 Берлин, Германия
 **Дни операции:** 25-32 из 60
-**Время прохождения:** 18-22 часа
+**Время прохождения:** 11 ч 20 мин (12 серий, 278 проверок)
 **Сложность:** ⭐⭐⭐⭐☆
 
 ### Почему Амстердам и Берлин?
@@ -29,7 +29,7 @@
 
 ---
 
-## 🎬 Сюжетная линия Season 4
+## Сюжетная линия Season 4
 
 ### Завязка
 
@@ -42,16 +42,16 @@ Dmitry Orlov (звонок после):
 ### Что происходит в Season 4
 
 **Модернизация инфраструктуры:**
-- **Episode 13 (Берлин):** Git для infrastructure as code — версионирование конфигов, branching strategy
-- **Episode 14 (Амстердам):** Docker — контейнеризация всех инструментов операции
-- **Episode 15 (Берлин):** CI/CD pipelines — автоматические тесты и deploy
-- **Episode 16 (Амстердам):** Ansible — автоматизация настройки 50+ серверов одной командой
+- **`s04e01`–`s04e03` (Берлин):** git как источник правды для конфигов; секрет, попавший в историю
+- **`s04e04`–`s04e06` (Амстердам):** образы и слои, сборка, Compose
+- **`s04e07`–`s04e08` (Берлин):** конвейер: что запускать и как откатываться
+- **`s04e09`–`s04e12` (Амстердам):** Ansible — инвентарь, режим проверки, аудит, playbook на 50 узлов
 
 **Кризисы:**
-1. **Git incident (Episode 13):** Кто-то закоммитил пароль от production сервера в public repo
-2. **Docker leak (Episode 14):** Supply chain attack — подозрение на предателя
-3. **CI/CD break (Episode 15):** Broken deployment разрушил production (rollback under pressure)
-4. **Ansible failure (Episode 16):** Mass configuration error на всех 50 серверах одновременно
+1. **Секрет в репозитории (`s04e03`):** пароль от боевого сервера попал в историю git — удалить файл недостаточно
+2. **Образ, которому верили (`s04e05`):** сборка тянет то, что никто не проверял
+3. **Выкат, который сломал бой (`s04e08`):** откат под давлением, и вопрос «чем он подтверждён»
+4. **Массовая ошибка настройки (`s04e10`):** режим проверки показал бы её до применения — если бы задачи не были на `shell`
 
 **Twist:** Marcus Weber (финансист операции) под подозрением — утечки информации продолжаются. Или это отвлекающий манёвр?
 
@@ -128,7 +128,7 @@ Git-серий создают настоящий репозиторий во в�
 
 ---
 
-## 👥 Персонажи Season 4
+## Персонажи Season 4
 
 ### Core Team (постоянные)
 
@@ -149,7 +149,7 @@ Git-серий создают настоящий репозиторий во в�
 - Удалённая поддержка из Москвы
 
 **Anna Kovaleva** — forensics expert
-- Роль в S4: Расследование supply chain attack (Episode 14)
+- Роль в S4: разбор цепочки поставок (`s04e04`–`s04e05`)
 - Удалённая поддержка
 
 **LILITH** — AI помощник
@@ -169,7 +169,7 @@ Git-серий создают настоящий репозиторий во в�
 - **Цитата:** "In CCC we say: Hacking is art. Infrastructure as Code is poetry."
 - **Встречи:** Chaos Computer Club (Берлин), hackerspace'ы
 
-**Sophie van Dijk** (Episode 14) 🇳🇱
+**Sophie van Dijk** (`s04e04`–`s04e06`) 🇳🇱
 - **Специализация:** Docker, containerization, microservices
 - **Биография:**
   - 32 года, голландский Docker architect
@@ -180,7 +180,7 @@ Git-серий создают настоящий репозиторий во в�
 - **Цитата:** "Containers zijn als LEGO. Simple blocks, complex systems."
 - **Встречи:** Amsterdam Science Park datacenter, canal-side coffee meetings
 
-**Klaus Schmidt** (Episode 16) 🇩🇪
+**Klaus Schmidt** (`s04e09`–`s04e12`) 🇩🇪
 - **Специализация:** Ansible, Terraform, infrastructure automation
 - **Биография:**
   - 45 лет, ex-Siemens infrastructure lead (20 лет опыта)
@@ -201,13 +201,13 @@ Git-серий создают настоящий репозиторий во в�
 
 **Krylov** — полковник ФСБ
 - Роль в S4: Background threat
-- Атаки на CI/CD pipeline (Episode 15)
-- Попытки взлома Docker registry (Episode 14)
+- Атаки на конвейер сборки (`s04e07`–`s04e08`)
+- Попытки подмены в реестре образов (`s04e04`–`s04e05`)
 - Supply chain attack через compromised packages
 
 ---
 
-## 📚 Технологии Season 4
+## Технологии Season 4
 
 **Git и версионирование** (`s04e01`–`s04e03`): три зоны и чтение истории, ветки и
 проверка перед `push`, утёкший секрет и `.gitignore`. Инцидент: пароль от боевого
@@ -225,7 +225,7 @@ Git-серий создают настоящий репозиторий во в�
 
 ---
 
-## 🎯 Учебные цели Season 4
+## Учебные цели Season 4
 
 После прохождения Season 4 вы сможете:
 
@@ -265,29 +265,29 @@ Git-серий создают настоящий репозиторий во в�
 
 ---
 
-## 🗺️ Маршрут Season 4
+## Маршрут Season 4
 
 ```
-День 25-26 (Episode 13):  Берлин 🇩🇪 → Git & Version Control
-    ↓                      Chaos Computer Club, hackerspace
-    ↓                      Hans Müller: "Code is law. Git is constitution."
+Дни 25-26  s04e01–s04e03  Берлин 🇩🇪 → git как источник правды
+    ↓                       Chaos Computer Club, hackerspace
+    ↓                       Hans Müller: «Code is law. Git is constitution.»
 
-День 27-28 (Episode 14):  Амстердам 🇳🇱 → Docker Basics
-    ↓                      Science Park datacenter
-    ↓                      Sophie van Dijk: "Containers zijn als LEGO."
+Дни 27-28  s04e04–s04e06  Амстердам 🇳🇱 → образы, слои, Compose
+    ↓                       Science Park datacenter
+    ↓                       Sophie van Dijk: «Containers zijn als LEGO.»
 
-День 29-30 (Episode 15):  Берлин 🇩🇪 → CI/CD Pipelines
-    ↓                      Hans Müller returns
-    ↓                      CRISIS: Broken deployment in production
+Дни 29-30  s04e07–s04e08  Берлин 🇩🇪 → конвейер и откат
+    ↓                       Hans Müller возвращается
+    ↓                       КРИЗИС: сломанный выкат в бою
 
-День 31-32 (Episode 16):  Амстердам 🇳🇱 → Ansible & IaC
-                           Klaus Schmidt (via video from Tempelhof datacenter)
-                           FINALE: 50 серверов настроены одной командой
+Дни 31-32  s04e09–s04e12  Амстердам 🇳🇱 → Ansible и IaC
+                           Klaus Schmidt (по видео из Tempelhof)
+                           ФИНАЛ: 50 узлов приведены к состоянию одной командой
 ```
 
 ---
 
-## 🎬 Narrative Arc Season 4
+## Narrative Arc Season 4
 
 ### Act 1: Introduction to DevOps (Episodes 13-14)
 
@@ -306,7 +306,7 @@ Git-серий создают настоящий репозиторий во в�
 - Знакомство с CCC culture (Берлин)
 - Docker как первый шаг к современной инфраструктуре
 
-### Act 2: Automation Under Fire (Episode 15)
+### Акт 2: автоматизация под огнём (`s04e07`–`s04e08`)
 
 **Climax:**
 - CI/CD pipeline deployed
@@ -329,10 +329,10 @@ Git-серий создают настоящий репозиторий во в�
 - Supply chain attack investigation
 - Marcus Weber under suspicion
 
-### Act 3: Infrastructure as Code Victory (Episode 16)
+### Акт 3: инфраструктура как код (`s04e09`–`s04e12`)
 
 **Challenge:**
-- 50 серверов нужно настроить заново (после Episode 15 rollback)
+- 50 узлов нужно привести к состоянию заново (после отката в `s04e08`)
 - Виктор: "У нас 24 часа до deadline клиента."
 - Max + Dmitry + Klaus: Ansible playbook
 
@@ -350,7 +350,7 @@ Git-серий создают настоящий репозиторий во в�
 
 ---
 
-## 💡 Философия Season 4
+## Философия Season 4
 
 ### DevOps принципы (LILITH wisdom)
 
@@ -401,7 +401,7 @@ Git-серий создают настоящий репозиторий во в�
 
 ---
 
-## 🔗 Связь с другими сезонами
+## Связь с другими сезонами
 
 ### From Season 3:
 - **Users & Permissions** → используется в Ansible playbooks
@@ -423,7 +423,7 @@ Git-серий создают настоящий репозиторий во в�
 
 ---
 
-## 🎓 Skills Progression
+## Skills Progression
 
 **Начало Season 4:**
 - Max: традиционный sysadmin (SSH + ручная настройка)
@@ -443,11 +443,11 @@ Git-серий создают настоящий репозиторий во в�
 
 ---
 
-## 🏆 Итоговый проект Season 4
+## Итоговый проект Season 4
 
 **Нет отдельного финального проекта.**
 
-Все навыки из Episodes 13-16 естественно интегрируются в Episode 16 (Ansible) и используются в Season 5-8.
+Навыки всех двенадцати серий сходятся в `s04e12`: playbook устраняет находки аудита на всех пятидесяти узлах. Дальше они используются в Season 5–8.
 
 **К концу Season 4 у вас будет:**
 - ✅ Git repository с всеми конфигами операции
@@ -463,7 +463,7 @@ Git-серий создают настоящий репозиторий во в�
 
 ---
 
-## 📝 Цитаты Season 4
+## Цитаты Season 4
 
 **Hans Müller (CCC):**
 > "In Chaos Computer Club we have three rules: 1) Hack the planet. 2) Share the knowledge. 3) Version control everything. Git is not optional. Git is life."
@@ -481,14 +481,14 @@ Git-серий создают настоящий репозиторий во в�
 > "Automation is not laziness. It's self-preservation. At scale, manual work kills. Literally. System failures, burnout, 3 AM wake-up calls. Automate or die."
 
 **Max (evolution):**
-- Episode 13: "Зачем Git для конфигов? Я и так помню что менял."
-- Episode 14: "Docker сложный. Проще установить все в систему."
-- Episode 15: "Хорошо, CI/CD полезен. Но где staging?"
-- Episode 16: "Ansible — лучшее, что я видел. Настроить 50 серверов за 10 минут? Магия."
+- `s04e01`: «Зачем git для конфигов? Я и так помню, что менял.»
+- `s04e04`: «Контейнеры сложные. Проще поставить всё в систему.»
+- `s04e07`: «Хорошо, конвейер полезен. А где стенд?»
+- `s04e12`: «Ansible — лучшее, что я видел. Пятьдесят узлов за десять минут.»
 
 ---
 
-## 🎬 Начало Season 4
+## Начало Season 4
 
 **[KERNEL SHADOWS — SEASON 4: DEVOPS & AUTOMATION]**
 

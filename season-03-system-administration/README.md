@@ -1,4 +1,4 @@
-# SEASON 3: SYSTEM ADMINISTRATION
+# Season 3: System Administration
 ## Санкт-Петербург → Таллин, Эстония
 
 > *"Root access как заряженный пистолет. Не давай его кому попало."* — Андрей Волков

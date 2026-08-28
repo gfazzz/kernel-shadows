@@ -40,7 +40,7 @@
 
 ---
 
-## 🚧 История долгов v2.0 (закрыты)
+## История долгов v2.0 (закрыты)
 
 Раздел оставлен как хроника: по нему видно, что именно было не так и чем
 закрыто. Все пункты закрыты к 24 августа 2026.
@@ -55,7 +55,7 @@
 
 ---
 
-## 🧭 Карта типов серий — Seasons 1–2
+## Карта типов серий — Seasons 1–2
 
 Плановая проверка «курс про Linux, а не про bash»: сезон, состоящий из одних Type A,
 не принимается, а целевой состав работы — примерно поровну между разведкой
@@ -158,11 +158,11 @@ Episode 18 сохранены как лаборатория `season-05/labs/web-
 
 ---
 
-## 📜 Историческая сводка (legacy, до аудита v2.0)
+## Историческая сводка (legacy, до аудита v2.0)
 
 **Все 8 сезонов структурно укомплектованы (14 октября 2025). Отметки «100%» ниже — историческая самооценка автора; в v2.0 пересматриваются по факту прохождения воспроизводимых тестов.**
 
-### 🏆 Completed Seasons:
+### Completed Seasons:
 - ✅ Season 1: Shell & Foundations (Episodes 01-04, Новосибирск 🇷🇺)
 - ✅ Season 2: Networking (Episodes 05-08, Стокгольм 🇸🇪)
 - ✅ Season 3: System Administration (Episodes 09-12, Таллин 🇪🇪)
@@ -172,7 +172,7 @@ Episode 18 сохранены как лаборатория `season-05/labs/web-
 - ✅ Season 7: Production & Advanced (s07e01–s07e12, 426 проверок, Рейкьявик 🇮🇸)
 - ✅ Season 8: Final Operation (s08e01–s08e12, 355 проверок, глобально 🌐)
 
-### ⚡ Episode 29: Начало бури (Day 57) — ЭТАЛОН переплетённого контента!
+### Episode 29: Начало бури (Day 57) — ЭТАЛОН переплетённого контента!
 
 ### Проблема в оригинале:
 - ❌ **Рунглиш повсюду:** "DDoS mitigation", "rate limiting", "zero-day exploit"
@@ -231,18 +231,18 @@ LILITH: "Команда: sysctl..." [практика]
 
 **Episode 29 = эталон переплетённого контента без рунглиша! 🏆**
 
-### ⚡ Episode 30: Око бури (Day 58)
+### Episode 30: Око бури (Day 58)
 - Security audit (AIDE, auditd, fail2ban, SELinux)
 - Docker supply chain compromise analysis
 - Emergency infrastructure hardening
 
-### ⚡ Episode 31: Контрнаступление (Day 59)
+### Episode 31: Контрнаступление (Day 59)
 - Offensive operations против "Новой Эры"
 - Botnet cleanup (5,247 устройств через Ansible)
 - The Architect revealed
 - Responsible disclosure (Interpol)
 
-### ⚡ Episode 32: Финальная защита (Day 60)
+### Episode 32: Финальная защита (Day 60)
 - Ultimate integration всех навыков
 - Physical threat (Krylov vs Alex, Moscow)
 - Rootkit detection (kernel forensics)
@@ -252,7 +252,7 @@ LILITH: "Команда: sysctl..." [практика]
 
 ---
 
-## 🎉 TYPE B REFACTORING COMPLETE (v0.5.0)
+## TYPE B REFACTORING COMPLETE (v0.5.0)
 
 **3 Phases completed (4.5 hours):**
 - ✅ PHASE 1: Season 4 Episodes 14-16 (Docker, CI/CD, Ansible)
@@ -272,11 +272,11 @@ LILITH: "Команда: sysctl..." [практика]
 
 ---
 
-## 📊 Общий прогресс (историческая отметка): структурно 32/32 episodes
+## Общий прогресс (историческая отметка): структурно 32/32 episodes
 
 > ⚠️ *Историческая отметка «100%» ниже относится к структурной укомплектованности (наличие `solution/`+`tests/`), а не к воспроизводимости тестов. Честный статус — в шапке файла.*
 
-### 🎆 ФИНАЛ: v0.8.0 — KERNEL SHADOWS COMPLETE! (14 октября 2025)
+### ФИНАЛ: v0.8.0 — KERNEL SHADOWS COMPLETE! (14 октября 2025)
 
 **Season 8: Final Operation (Episodes 29-32) — COMPLETE!**
 
@@ -358,7 +358,7 @@ LILITH: "Команда: sysctl..." [практика]
 
 ---
 
-### v0.4.5.8 — Episode 08: VPN & SSH Tunneling Type A Refactoring — "Season 2 Finale!" ✅ (11 октября 2025)
+### v0.4.5.8 — Episode 08: VPN & SSH Tunneling Type A Refactoring — "Season 2 Finale!" (11 октября 2025)
 
 - [x] **Episode 08: VPN & SSH Tunneling — Type A Refactor + CS50 Pedagogy (100%)**
   - **SEASON 2 FINALE:** Episode 08 завершает Season 2 (Networking)
@@ -501,7 +501,7 @@ LILITH: "Команда: sysctl..." [практика]
 
 ---
 
-### v0.4.5.7 — Episode 07: Firewalls & iptables Type B Refactoring — "ufw > bash wrapper" ✅ (11 октября 2025)
+### v0.4.5.7 — Episode 07: Firewalls & iptables Type B Refactoring — "ufw > bash wrapper" (11 октября 2025)
 
 - [x] **Episode 07: Firewalls & iptables — Type B Refactor + CS50 Pedagogy (100%)**
   - **КРИТИЧЕСКОЕ РЕШЕНИЕ:** Правильно реклассифицирован как Type B (было Type A с bash wrappers!)
@@ -606,7 +606,7 @@ Episode 08: Type A (VPN setup)        ✅
 
 ---
 
-### v0.4.5.6 — Episode 06: DNS & Name Resolution Type B Refactoring — "dig > bash wrapper" ✅ (11 октября 2025)
+### v0.4.5.6 — Episode 06: DNS & Name Resolution Type B Refactoring — "dig > bash wrapper" (11 октября 2025)
 
 - [x] **Episode 06: DNS & Name Resolution — Type B Refactor (100%)**
   - **КРИТИЧЕСКОЕ РЕШЕНИЕ:** Правильно реклассифицирован как Type B (было предложено как Type A!)
@@ -724,7 +724,7 @@ Target: 50/50 Type A/B balance ✅
 
 ---
 
-### v0.4.5.5 — Episode 05: TCP/IP Fundamentals Type A Refactoring — "CS50-style Networking" ✅ (11 октября 2025)
+### v0.4.5.5 — Episode 05: TCP/IP Fundamentals Type A Refactoring — "CS50-style Networking" (11 октября 2025)
 
 - [x] **Episode 05: TCP/IP Fundamentals — Type A Refactor (100%)**
   - **Сохранён как Type A** (bash automation правильно применён для network audit)
@@ -807,7 +807,7 @@ Target: 50/50 Type A/B balance ✅
 
 ---
 
-### v0.4.5.4 — Episode 04: Package Management Type B Refactoring — "Type B Эталон" ✅ (10 октября 2025)
+### v0.4.5.4 — Episode 04: Package Management Type B Refactoring — "Type B Эталон" (10 октября 2025)
 
 - [x] **Episode 04: Package Management — Type B Refactor (100%)**
   - **Проблема:** Episode был Type A (80% bash, 355 строк solution wrapper для apt)
@@ -882,7 +882,7 @@ Target: 50/50 Type A/B balance ✅
 
 ---
 
-### v0.4.5.3 — Episode 03: Type B Refactoring Complete ✅ (11 октября 2025)
+### v0.4.5.3 — Episode 03: Type B Refactoring Complete (11 октября 2025)
 - [x] **Episode 03: Text Processing Masters — Type B Refactor (100%)**
   - **Проблема:** Episode был Type A (90% bash scripting, 366 строк solution)
   - **Решение:** Полный рефакторинг → Type B (70% Linux tools, 30% bash)
@@ -943,7 +943,7 @@ Target: 50/50 Type A/B balance ✅
   - Прогресс: 50% (16/32 episodes)
   - Следующая остановка: Season 5 — Цюрих 🇨🇭
 
-### v0.4.3 — Episode 16: Ansible & Infrastructure as Code 🤖🇳🇱🇩🇪 (SEASON 4 FINALE! 🎉)
+### v0.4.3 — Episode 16: Ansible & Infrastructure as Code 🇳🇱🇩🇪 (SEASON 4 FINALE! )
 - [x] **Season 4 Episode 16** (100%) — Ansible & IaC (Amsterdam → Berlin, дни 31-32) **SEASON 4 COMPLETE!**
   - Интегрированный README.md (1,693 строки):
     - Сюжет: Amsterdam Tempelhof datacenter, Klaus Schmidt (Ansible architect), возврат в Berlin для debriefing
@@ -1007,7 +1007,7 @@ Target: 50/50 Type A/B balance ✅
   - **Total:** 3,789 строк — Infrastructure as Code complete!
   - **SEASON 4 COMPLETE:** Git → Docker → CI/CD → Ansible = Full DevOps stack!
 
-### v0.4.2 — Episode 15: CI/CD Pipelines ⚙️🇩🇪
+### v0.4.2 — Episode 15: CI/CD Pipelines 🇩🇪
 - [x] **Season 4 Episode 15** (100%) — CI/CD Pipelines (Berlin, Germany, дни 29-30)
   - Интегрированный README.md (1,097 строк):
     - Сюжет: Возврат в Берлин, Chaos Computer Club, Hans Müller (returns)
@@ -1059,7 +1059,7 @@ Target: 50/50 Type A/B balance ✅
     10. Best practices (job dependencies, conditionals, caching, PR validation, health checks)
   - **Total:** 2,876 строк — CI/CD automation with incident response!
 
-### v0.4.1 — Episode 14: Docker Basics 🐳🇳🇱
+### v0.4.1 — Episode 14: Docker Basics 🇳🇱
 - [x] **Season 4 Episode 14** (100%) — Docker Basics (Amsterdam, Netherlands, дни 27-28)
   - Интегрированный README.md (1,352 строки):
     - Сюжет: Amsterdam Science Park, Sophie van Dijk (Docker architect, ex-Docker Inc.)
@@ -1112,7 +1112,7 @@ Target: 50/50 Type A/B balance ✅
     9. Best practices (multi-stage, health checks, .dockerignore, disk usage)
   - **Total:** 3,273 строки — Docker containerization complete!
 
-### v0.4.0 — Episode 13: Git & Version Control 📦🇩🇪 (SEASON 4 PREMIERE! 🎉)
+### v0.4.0 — Episode 13: Git & Version Control 🇩🇪 (SEASON 4 PREMIERE! )
 - [x] **Season 4 Episode 13** (100%) — Git & Version Control (Berlin, Germany, дни 25-26) **SEASON 4 STARTS!**
   - Интегрированный README.md (5,800+ строк):
     - Сюжет: Переезд в Берлин, Chaos Computer Club, Hans Müller (CCC member, DevOps expert)
@@ -1174,7 +1174,7 @@ Target: 50/50 Type A/B balance ✅
     - Technologies: Git, Docker, GitHub Actions, Ansible
     - Philosophy: "Automate or die at scale"
 
-### v0.3.3 — Episode 12: Backup & Recovery 💾🇪🇪 (SEASON 3 FINALE! 🎉)
+### v0.3.3 — Episode 12: Backup & Recovery 🇪🇪 (SEASON 3 FINALE! )
 - [x] **Season 3 Episode 12** (100%) — Backup & Recovery (Tallinn, Estonia, дни 23-24) **SEASON 3 COMPLETE!**
   - Интегрированный README.md (1,332 строки):
     - Сюжет: Krylov атакует! Database deleted, emergency restore, Liisa Kask (ex-Skype backup engineer)
@@ -1230,7 +1230,7 @@ Target: 50/50 Type A/B balance ✅
     12. Solution script functions validation
   - **Total:** 2,743 строки — Season 3 FINALE!
 
-### v0.3.2 — Episode 11: Disk Management & LVM 💾🇪🇪
+### v0.3.2 — Episode 11: Disk Management & LVM 🇪🇪
 - [x] **Season 3 Episode 11** (100%) — Disk Management & LVM (Tallinn, Estonia, дни 21-22)
   - Интегрированный README.md (1,222 строки):
     - Сюжет: Переезд СПб → Tallinn, Kristjan Tamm (e-Gov architect), Liisa Kask (backup specialist)
@@ -1276,7 +1276,7 @@ Target: 50/50 Type A/B balance ✅
     6. Disk health (SMART capability)
     7. Audit report existence
 
-### v0.3.1 — Episode 10: Processes & SystemD ⚙️🇷🇺
+### v0.3.1 — Episode 10: Processes & SystemD 🇷🇺
 - [x] **Season 3 Episode 10** (100%) — Processes & SystemD (Санкт-Петербург, дни 19-20)
   - Интегрированный README.md (2,000+ строк):
     - Сюжет: Boris Kuznetsov (ex-Red Hat, SystemD архитектор), продолжение в СПб
@@ -1323,7 +1323,7 @@ Target: 50/50 Type A/B balance ✅
     9. Report (exists, content, sections, permissions)
     10. Integration (service restart, manual backup trigger, health check)
 
-### v0.3.0 — Season 3: SYSTEM ADMINISTRATION BEGINS! 🇷🇺🎓
+### v0.3.0 — Season 3: SYSTEM ADMINISTRATION BEGINS! 🇷🇺
 - [x] **Season 3 Episode 09** (100%) — Users & Permissions (Санкт-Петербург, дни 17-18) **SEASON 3 PREMIERE!**
   - Интегрированный README.md (1,000+ строк):
     - Сюжет: Белые ночи СПб, ЛЭТИ, встреча с Andrei Volkov (ex-профессор Unix)
@@ -1374,7 +1374,7 @@ Target: 50/50 Type A/B balance ✅
     10. Documentation quality
     11. Integration tests
 
-### v0.2.4 — Season 2: NETWORKING COMPLETE! 🎉🔒
+### v0.2.4 — Season 2: NETWORKING COMPLETE!
 - [x] **Season 2 Episode 08** (100%) — VPN & SSH Tunneling (Стокгольм → Москва → Цюрих, дни 15-16) **SEASON 2 FINALE!**
   - Интегрированный README.md (3,458+ строк!) — самый большой эпизод:
     - Сюжет: Эмоциональный финал Season 2 (разговор Alex о его прошлом в ФСБ, Krylov эскалирует)
@@ -1448,7 +1448,7 @@ Target: 50/50 Type A/B balance ✅
 
 ---
 
-## 📚 Статус по сезонам
+## Статус по сезонам
 
 | Season | Название | Episodes | Прогресс | Статус |
 |--------|----------|----------|----------|--------|
@@ -1463,7 +1463,7 @@ Target: 50/50 Type A/B balance ✅
 
 ---
 
-## ✅ Что готово (v0.1.4)
+## Что готово (v0.1.4)
 
 ### Базовая документация:
 - ✅ **README.md** (14 KB) — описание курса, LILITH, структура (обновлено)
@@ -1476,7 +1476,7 @@ Target: 50/50 Type A/B balance ✅
 - ✅ **LICENSE** (GPL v3) — копилефт лицензия
 
 
-### Episode 01: Terminal Awakening (COMPLETE ✅):
+### Episode 01: Terminal Awakening (COMPLETE ):
 - ✅ **README.md** (1,263 строки) — интегрированный сюжет + теория + практика (NEW! ✨)
   - Сюжет сжат до 30 строк
   - 8 последовательных заданий
@@ -1499,7 +1499,7 @@ Target: 50/50 Type A/B balance ✅
 - **Сложность:** ⭐☆☆☆☆
 - **Структура:** Learn by Doing (практика → теория)
 
-### Episode 02: Shell Scripting Basics (COMPLETE ✅):
+### Episode 02: Shell Scripting Basics (COMPLETE ):
 - ✅ **README.md** (1,370+ строк) — интегрированный сюжет + теория + практика
   - 7 последовательных заданий (переменные → функции → финальный проект)
   - Теория Bash: shebang, переменные, условия, циклы, функции, exit codes
@@ -1524,7 +1524,7 @@ Target: 50/50 Type A/B balance ✅
 - **Структура:** Incremental Learning (от простого к сложному)
 - **Финальный проект:** Server monitoring script с логированием и алертами
 
-### Episode 03: Text Processing Masters (COMPLETE ✅):
+### Episode 03: Text Processing Masters (COMPLETE ):
 - ✅ **README.md** (1,500+ строк) — интегрированный сюжет + теория + практика
   - 9 последовательных заданий (grep → awk → sed → pipes → финальный проект)
   - Теория: grep/regex, awk колонки, sed замена, pipes/redirects
@@ -1555,7 +1555,7 @@ Target: 50/50 Type A/B balance ✅
 - **Финальный проект:** Log analyzer для forensics анализа
 - **Особенность:** Первая атака в сюжете, Anna Kovaleva, Tor exit node
 
-### Episode 07: Firewalls & iptables (COMPLETE ✅):
+### Episode 07: Firewalls & iptables (COMPLETE ):
 - ✅ **README.md** (2,738+ строк) — интегрированный сюжет + теория + практика
   - Сюжет: DDoS атака в реальном времени (03:47 Moscow time, 847 IPs, SYN flood)
   - 8 последовательных заданий с progressive hints (3-level system)
@@ -1600,11 +1600,11 @@ Target: 50/50 Type A/B balance ✅
 
 ---
 
-## 🎯 Критерии готовности эпизода
+## Критерии готовности эпизода
 
 Episodes 01-02 соответствуют ВСЕМ критериям:
 
-### Episode 01 ⭐⭐⭐⭐⭐
+### Episode 01
 1. ✅ **README.md** — интегрированный сюжет + теория + практика (1,263 строки)
 2. ✅ **starter.sh** — шаблон с TODO (60 строк)
 3. ✅ **solution/** — референсное решение (120 строк)
@@ -1613,7 +1613,7 @@ Episodes 01-02 соответствуют ВСЕМ критериям:
 6. ✅ **LILITH интеграция** — активный проводник
 7. ✅ **Season README** — обзор сезона
 
-### Episode 02 ⭐⭐⭐⭐⭐
+### Episode 02
 1. ✅ **README.md** — интегрированный сюжет + теория + практика (1,370+ строк)
 2. ✅ **starter.sh** — шаблон с TODO (130+ строк)
 3. ✅ **solution/** — полное решение (170+ строк)
@@ -1626,28 +1626,28 @@ Episodes 01-02 соответствуют ВСЕМ критериям:
 
 ---
 
-## 📅 Roadmap
+## Roadmap
 
-### ✅ v0.1.0 — Pilot Episode (DONE — 4 октября 2025)
+### v0.1.0 — Pilot Episode (DONE — 4 октября 2025)
 - [x] Базовая документация (README, SCENARIO, CURRICULUM, LILITH)
 - [x] Episode 01 полностью (mission, theory, practice, tests)
 - [x] Season 1 README
 - [x] LICENSE (GPL v3)
 
-### ✅ v0.1.4 — Episode 02 Ready (DONE — 4 октября 2025)
+### v0.1.4 — Episode 02 Ready (DONE — 4 октября 2025)
 - [x] Episode 02: Shell Scripting Basics (COMPLETE)
 - [x] Интегрированная структура обучения
 - [x] Production-ready server monitoring script
 - [x] Комплексные автотесты
 
-### ✅ v0.1.5 — Episode 03 Ready (DONE — 4 октября 2025)
+### v0.1.5 — Episode 03 Ready (DONE — 4 октября 2025)
 - [x] Episode 03: Text Processing Masters (COMPLETE)
 - [x] grep, awk, sed, pipes — полная теория + практика
 - [x] Реалистичный анализ логов (4,400+ строк)
 - [x] Forensics investigation сюжет (Anna Kovaleva, DDoS атака)
 - [x] Production-ready log analyzer
 
-### ✅ v0.1.6 — Episode 04 Ready (DONE — 4 октября 2025)
+### v0.1.6 — Episode 04 Ready (DONE — 4 октября 2025)
 - [x] Episode 04: Package Management (COMPLETE)
 - [x] APT, DPKG, Snap — полная теория + практика
 - [x] Репозитории, dependency resolution
@@ -1656,17 +1656,17 @@ Episodes 01-02 соответствуют ВСЕМ критериям:
 - [x] Non-interactive automation для production
 - [x] **Season 1 Complete!** 🎉
 
-### 📋 v0.3.0 — Season 2 Complete (цель: декабрь 2025)
+### v0.3.0 — Season 2 Complete (цель: декабрь 2025)
 - [ ] Episodes 05-08 (Networking: TCP/IP, DNS, Firewalls, VPN)
 - [ ] Локации: Москва 🇷🇺 → Стокгольм 🇸🇪
 - [ ] Новые персонажи: Alex (лично), Anna (лично), Erik Johansson, Katarina Lindström
 - [ ] Навыки интегрируются естественно без отдельных проектов
 
-### 📋 v0.5.0 — Seasons 1-4 Complete (цель: март 2026)
+### v0.5.0 — Seasons 1-4 Complete (цель: март 2026)
 - [ ] Seasons 3-4
 - [ ] LILITH CLI прототип
 
-### 📋 v1.0.0 — Full Release (цель: сентябрь 2026)
+### v1.0.0 — Full Release (цель: сентябрь 2026)
 - [ ] Все 8 сезонов (32 эпизода)
 - [ ] LILITH AI интеграция
 - [ ] Community testing
@@ -1674,7 +1674,7 @@ Episodes 01-02 соответствуют ВСЕМ критериям:
 
 ---
 
-## 🎬 Тестирование v0.1.3
+## Тестирование v0.1.3
 
 ### Как протестировать Episode 01:
 
@@ -1693,11 +1693,11 @@ chmod +x starter.sh
 cd artifacts/test_environment
 
 # 4. Следовать заданиям из README.md:
-#    - Задание 1: pwd (ориентация)
-#    - Задание 2: ls -l (что вокруг?)
-#    - Задание 3: ls -la (скрытые файлы)
-#    - Задание 4-7: навигация и чтение
-#    - Задание 8: создать скрипт find_files.sh
+# - Задание 1: pwd (ориентация)
+# - Задание 2: ls -l (что вокруг?)
+# - Задание 3: ls -la (скрытые файлы)
+# - Задание 4-7: навигация и чтение
+# - Задание 8: создать скрипт find_files.sh
 
 # 5. Запустить тесты
 cd ../../tests/
@@ -1713,7 +1713,7 @@ cd ../../tests/
 
 ---
 
-## 📊 Метрики проекта
+## Метрики проекта
 
 ### Текущие (v0.2.1):
 - **Эпизодов готово:** 6/32 (18.75%)
@@ -1734,7 +1734,7 @@ cd ../../tests/
 
 ---
 
-## 🔗 Связь с MOONLIGHT
+## Связь с MOONLIGHT
 
 **MOONLIGHT Course:**
 - Версия: v0.3.5
@@ -1750,7 +1750,7 @@ cd ../../tests/
 
 ---
 
-## 📝 Аудит курса (4 октября 2025)
+## Аудит курса (4 октября 2025)
 
 **Проведён полный аудит курса по 4 критериям:**
 - ✅ Полнота теории: 4.5/5
@@ -1773,7 +1773,7 @@ cd ../../tests/
 
 ---
 
-## 💡 Источники
+## Источники
 
 - **Концепция:** [Eurecable.com/ideas/973](https://eurecable.com/ideas/973) (3 октября 2025)
 - **Методология:** MOONLIGHT Course v3.0+ (LUNA Edition)
@@ -1781,7 +1781,7 @@ cd ../../tests/
 
 ---
 
-## 📝 История изменений
+## История изменений
 
 ### v0.1.0 (4 октября 2025) — Pilot Episode
 - ✅ Создана базовая документация
@@ -1806,7 +1806,7 @@ cd ../../tests/
 - ✅ Обновлён README.md с разделом "Инструменты разработчика"
 - ✅ Обновлён .gitignore (добавлен .progress)
 
-### v0.1.3 (4 октября 2025) — Integrated Learning Structure ⭐
+### v0.1.3 (4 октября 2025) — Integrated Learning Structure
 - ✅ Интегрированный Episode 01 README.md (1,263 строки)
   - Объединены mission.md + README.md → единый опыт
   - Сюжет сжат до 30 строк (был ~200)
@@ -1817,7 +1817,7 @@ cd ../../tests/
 - ✅ Оптимизация: 39 KB вместо 108 KB
 - ✅ Обновлена документация (STATUS, CONTRIBUTING)
 
-### v0.1.4 (4 октября 2025) — Shell Scripting Mastery ⭐
+### v0.1.4 (4 октября 2025) — Shell Scripting Mastery
 - ✅ Episode 02: Shell Scripting Basics (COMPLETE)
   - Интегрированный README.md (1,370+ строк)
   - 7 последовательных заданий (переменные → функции)
@@ -1834,7 +1834,7 @@ cd ../../tests/
 
 **Production Ready! 🚀**
 
-### v0.1.5 (4 октября 2025) — Text Processing Masters ⭐
+### v0.1.5 (4 октября 2025) — Text Processing Masters
 - ✅ Episode 03: Text Processing Masters (COMPLETE)
   - Интегрированный README.md (1,500+ строк)
   - 9 последовательных заданий (grep → awk → sed → pipes → final project)
@@ -1860,7 +1860,7 @@ cd ../../tests/
 
 **Production Ready! 🚀🔥**
 
-### v0.1.6 (4 октября 2025) — Package Management Complete ⭐
+### v0.1.6 (4 октября 2025) — Package Management Complete
 - ✅ Episode 04: Package Management (COMPLETE)
   - Интегрированный README.md (1,900+ строк)
   - 9 последовательных заданий (APT → DPKG → Snap → Docker → automation)
@@ -1890,11 +1890,11 @@ cd ../../tests/
 
 **Season 1 Complete! 🚀🔥🎉**
 
-### v0.1.6 (4 октября 2025) — Season 1 Integration Project ⭐
+### v0.1.6 (4 октября 2025) — Season 1 Integration Project
 - ✅ Season Project готов (позже удалён в v0.1.7)
 - ✅ Season 1 Complete! 🚀🔥🎉
 
-### v0.1.6+ (8 октября 2025) — Global Concept Integration ⭐⭐⭐
+### v0.1.6+ (8 октября 2025) — Global Concept Integration
 - ✅ **SCENARIO.md полностью переписан:**
   - Глобальная распределённая операция (8 стран, 60 дней)
   - География: Новосибирск → Москва → Стокгольм → СПб → Таллин → Амстердам → Берлин → Цюрих → Женева → Шэньчжэнь → Рейкьявик → Global
@@ -1918,7 +1918,7 @@ cd ../../tests/
 
 **Global Distributed Operation — READY! 🌍🚀**
 
-### v0.1.7 (8 октября 2025) — Season Projects Removal ⭐
+### v0.1.7 (8 октября 2025) — Season Projects Removal
 - ✅ **Season projects удалены из всего курса:**
   - season-01-shell-foundations/season-project/ удалён
   - Все упоминания убраны из README.md, CURRICULUM.md, STATUS.md
@@ -1963,7 +1963,7 @@ cd ../../tests/
 
 ---
 
-### v0.2.0 (8 октября 2025) — Season 2 Starts: TCP/IP Fundamentals ⭐🚀
+### v0.2.0 (8 октября 2025) — Season 2 Starts: TCP/IP Fundamentals
 - ✅ **Episode 05: TCP/IP Fundamentals (COMPLETE)**
   - Интегрированный README.md (3,000+ строк):
     - Сюжет: Max прилетает в Москву, встреча с командой

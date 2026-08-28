@@ -1,4 +1,4 @@
-# SEASON 2: NETWORKING
+# Season 2: Networking
 
 ```
 KERNEL SHADOWS — Season 2

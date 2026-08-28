@@ -1,4 +1,4 @@
-# SEASON 4: DEVOPS & AUTOMATION 🇳🇱🇩🇪
+# Season 4: DevOps & Automation
 
 > **"50 серверов вручную? Нет. Docker, Ansible, CI/CD. Едем в Европу — Амстердам и Берлин, DevOps столицы."**
 > — Dmitry Orlov

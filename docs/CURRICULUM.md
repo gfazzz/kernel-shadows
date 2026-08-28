@@ -106,7 +106,7 @@ bash tools/gen_index.sh
 
 **Итого по сезону:** 16 серий, 14 ч 05 мин чистого времени.
 
-## SEASON 2: NETWORKING
+## Season 2: Networking
 
 | Серия | Концепт | Тип | Время | Сложность |
 |---|---|---|---|---|
@@ -125,7 +125,7 @@ bash tools/gen_index.sh
 
 **Итого по сезону:** 12 серий, 10 ч 35 мин чистого времени.
 
-## SEASON 3: SYSTEM ADMINISTRATION
+## Season 3: System Administration
 
 | Серия | Концепт | Тип | Время | Сложность |
 |---|---|---|---|---|
@@ -145,7 +145,7 @@ bash tools/gen_index.sh
 
 **Итого по сезону:** 13 серий, 12 ч 05 мин чистого времени.
 
-## SEASON 4: DEVOPS & AUTOMATION 🚢🇳🇱🇩🇪
+## Season 4: DevOps & Automation
 
 | Серия | Концепт | Тип | Время | Сложность |
 |---|---|---|---|---|

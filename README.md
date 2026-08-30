@@ -3,7 +3,7 @@
 **Интерактивный курс по Linux: системное администрирование, сети, безопасность, эксплуатация.**
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Version](https://img.shields.io/badge/version-2.0.0-blue.svg)](docs/CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](docs/CHANGELOG.md)
 [![Series](https://img.shields.io/badge/серий-101-green.svg)](docs/CURRICULUM.md)
 [![Checks](https://img.shields.io/badge/проверок-2335-green.svg)](#инструменты)
 
@@ -246,7 +246,7 @@ bash tools/gen_timeline.sh       # хронология сюжета
 
 ## Состояние
 
-**Версия 2.0.0.** Все восемь сезонов пересобраны в атомарные серии и покрыты
+**Версия 1.0.0** — первый релиз. Восемь сезонов, все серии покрыты
 воспроизводимыми тестами.
 
 | | |
@@ -256,15 +256,15 @@ bash tools/gen_timeline.sh       # хронология сюжета
 | Чистого времени на задачи | 98 ч 25 мин (измерено) |
 | Требует root или сети | ни один тест |
 
-Предыдущая линия курса (32 монолитных эпизода) — в ветке
-`archive/main-pre-v2.0`. Таблица соответствия старых путей новым — в
+Черновики остались в истории репозитория: ветка `archive/main-pre-v2.0` —
+состояние до пересборки (32 монолитных эпизода), `v2.0-refactor` — ход самой
+пересборки. Таблица соответствия старых путей новым — в
 [docs/CHANGELOG.md](docs/CHANGELOG.md).
 
 **Чего курс пока не проходил:** его ни разу не прошли целиком снаружи.
-Нашли ошибку — [issue](https://github.com/gfazzz/kernel-shadows/issues) с
+Нашёл ошибку — [issue](https://github.com/gfazzz/kernel-shadows/issues) с
 выводом теста; это самая полезная помощь, которую сейчас можно оказать.
 
----
 
 ## Как поучаствовать
 

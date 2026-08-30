@@ -277,7 +277,7 @@ kernel-shadows/
 ├── LICENSE
 ├── season-01-shell-foundations/
 │   ├── data/                          # учебные данные для практики
-│   ├── s01e01-terminal-awakening/     # атомарные серии v2.0 (sNNeNN)
+│   ├── s01e01-terminal-awakening/     # серии в схеме sNNeMM
 │   ├── s01e02-ls-look-around/
 │   └── … s01e14-batch-report/
 └── ...

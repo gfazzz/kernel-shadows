@@ -326,8 +326,8 @@ Viktor: *"Начнём с основ. Покажи, что ты умеешь. Н
 - Встречи с локальными сисадминами (Sergey, Olga) для помощи
 
 **Персонажи:**
-- **Sergey Ivanov** (Episode 02) — локальный ментор по скриптингу, работал в институте ядерной физики
-- **Olga Petrova** (Episode 03) — data scientist, эксперт по обработке логов
+- **Sergey Ivanov** — локальный ментор по скриптингу, работал в институте ядерной физики
+- **Olga Petrova** — data scientist, эксперт по обработке логов
 
 **Результат:**
 Viktor доволен. Приглашает в Москву для более серьёзных задач.
@@ -351,8 +351,8 @@ Viktor доволен. Приглашает в Москву для более с
 - Anna присоединяется к команде для forensics
 
 **Персонажи:**
-- **Erik Johansson** (Episode 06) — шведский network engineer, Bahnhof, эксперт по BGP
-- **Katarina Lindström** (Episode 08) — криптография, HTTPS/TLS, Stockholm University
+- **Erik Johansson** — шведский network engineer, Bahnhof, эксперт по BGP
+- **Katarina Lindström** — криптография, HTTPS/TLS, Stockholm University
 
 **Локации:**
 - Москва: ЦОД "Москва-1", офис Viktor на Красной площади
@@ -379,10 +379,10 @@ Krylov оставляет сообщение в логах: *"Соколов, п
 - Viktor: *"Едешь в Санкт-Петербург, потом Таллин. Там есть люди, которые помогут."*
 
 **Персонажи:**
-- **Andrei Volkov** (Episode 09) — security admin из СПб, бывший университетский преподаватель Unix
-- **Boris Kuznetsov** (Episode 10) — SystemD architect, ex-Red Hat contributor, СПб
-- **Kristjan Tamm** (Episode 11) — эстонский IT-архитектор, эксперт по e-Government, LVM/RAID
-- **Liisa Kask** (Episodes 11-12) — backup engineer, работала на Skype (основан в Таллине)
+- **Andrei Volkov** — security admin из СПб, бывший университетский преподаватель Unix
+- **Boris Kuznetsov** — SystemD architect, ex-Red Hat contributor, СПб
+- **Kristjan Tamm** — эстонский IT-архитектор, эксперт по e-Government, LVM/RAID
+- **Liisa Kask** — backup engineer, работала на Skype (основан в Таллине)
 
 **Локации:**
 - СПб: Васильевский остров, ЛЭТИ (университет), ЦОД на набережной, белые ночи
@@ -408,9 +408,9 @@ Alex открывается о конфликте с Krylov: *"Я отказал
 - (Easter egg: Docker образ `moonlight_crypto_toolkit` от Виктора)
 
 **Персонажи:**
-- **Hans Müller** (Episode 13) — немецкий DevOps, Chaos Computer Club member, Git/CI/CD эксперт
-- **Sophie van Dijk** (Episode 14) — голландский Docker architect, работала в Docker Inc.
-- **Klaus Schmidt** (Episode 16) — Ansible/IaC специалист, ex-Siemens infrastructure lead
+- **Hans Müller** — немецкий DevOps, Chaos Computer Club member, Git/CI/CD эксперт
+- **Sophie van Dijk** — голландский Docker architect, работала в Docker Inc.
+- **Klaus Schmidt** — Ansible/IaC специалист, ex-Siemens infrastructure lead
 
 **Локации:**
 - Амстердам: Science Park datacenter cluster, каналы, велосипеды, coffeeshops
@@ -440,11 +440,11 @@ Supply chain attack на CI/CD — кто-то внутри команды пр�
 - Анна координирует защиту
 
 **Персонажи:**
-- **Eva Zimmerman** (Episode 17-19) — криптография, UBS security team, threat modeling
-- **Marcus Weber** (Episode 17-20) — финансист, серые связи, подозрительный персонаж
-- **Jean-Pierre Dubois** (Episode 17) — security researcher, threat modeling expert
-- **Dr. Heinrich Bauer** (Episode 19) — CERN network security, защищал LHC от кибератак
-- **Isabella Rossi** (Episode 20) — итальянский forensics expert (Interpol), incident response
+- **Eva Zimmerman** — криптография, UBS security team, threat modeling
+- **Marcus Weber** — финансист, серые связи, подозрительный персонаж
+- **Jean-Pierre Dubois** — security researcher, threat modeling expert
+- **Dr. Heinrich Bauer** — CERN network security, защищал LHC от кибератак
+- **Isabella Rossi** — итальянский forensics expert (Interpol), incident response
 
 **Локации:**
 - Цюрих: UBS underground datacenter (бункер под Альпами), Bahnhofstrasse (banking district)
@@ -480,9 +480,9 @@ Viktor: *"Нам нужна разведка. Дроны. Embedded систем�
 - Шифрование команд управления
 
 **Персонажи:**
-- **Li Wei** (Episode 21-22) — китайский embedded engineer, ex-DJI, drone expert
-- **Chen Xiaoming** (Episode 22) — UAV specialist, ArduPilot core contributor
-- **Zhang Mei** (Episode 24) — IoT architect, ex-Alibaba Cloud
+- **Li Wei** — китайский embedded engineer, ex-DJI, drone expert
+- **Chen Xiaoming** — UAV specialist, ArduPilot core contributor
+- **Zhang Mei** — IoT architect, ex-Alibaba Cloud
 
 **Локации:**
 - Huaqiangbei electronics market — огромный рынок электроники, можно купить ВСЁ
@@ -521,9 +521,9 @@ Viktor: *"Нам нужна разведка. Дроны. Embedded систем�
 - Финальный hardening
 
 **Персонажи:**
-- **Björn Sigurdsson** (Episode 25) — исландский Kubernetes SRE, ex-CCP Games (EVE Online)
-- **Guðrún Ásta** (Episode 26) — monitoring engineer, ex-Verne Global datacenter
-- **Þorsteinn Jónsson** (Episode 28) — security hardening expert, paranoid Viking admin
+- **Björn Sigurdsson** — исландский Kubernetes SRE, ex-CCP Games (EVE Online)
+- **Guðrún Ásta** — monitoring engineer, ex-Verne Global datacenter
+- **Þorsteinn Jónsson** — security hardening expert, paranoid Viking admin
 
 **Локации:**
 - Verne Global datacenter (бывшая военная база НАТО)
@@ -551,7 +551,7 @@ LILITH: *"Ты оказался здесь, потому что ты спосо�
 **Кульминация:**
 Viktor: *"Они идут. Krylov + 'Новая Эра'. Одновременно. Всё или ничего."*
 
-#### Episode 29: Начало бури (COMPLETE! )
+#### День 57 — первая волна (`s08e01`–`s08e05`)
 
 **День 57 операции (06:00-18:00 UTC) — 7 частей:**
 
@@ -575,10 +575,10 @@ Viktor: *"Они идут. Krylov + 'Новая Эра'. Одновременн�
    - 50/50 серверов стабильны, атака ослабевает
    - Финальное задание: Ночная смена (криптомайнинг обнаружен)
 
-**Результат Episode 29:** Инфраструктура выстояла первый день финальной атаки.
+**Итог дня 57:** Инфраструктура выстояла первый день финальной атаки.
 Макс доказал способность координировать оборону под стрессом.
 
-#### Episode 30: Око бури (COMPLETE! )
+#### День 58 — разбор (`s08e06`–`s08e09`)
 
 **День 58 операции — Forensics & Hardening:**
 - **Security audit full-scale:** AIDE, auditd, fail2ban, SELinux
@@ -589,7 +589,7 @@ Viktor: *"Они идут. Krylov + 'Новая Эра'. Одновременн�
 
 **Результат:** Инфраструктура укреплена, backdoors удалены, системы готовы к контратаке.
 
-#### Episode 31: Контрнаступление (COMPLETE! )
+#### День 59 — контрнаступление (`s08e10`)
 
 **День 59 операции — Offensive Operations:**
 - **Reconnaissance:** nmap, OSINT, fingerprinting серверов "Новой Эры"
@@ -601,7 +601,7 @@ Viktor: *"Они идут. Krylov + 'Новая Эра'. Одновременн�
 
 **Результат:** Offensive ops успешны, "Новая Эра" нейтрализована, evidence собраны.
 
-#### Episode 32: Финальная защита (COMPLETE! )
+#### День 60 — финал (`s08e11`–`s08e12`)
 
 **День 60 операции — FINALE:**
 
@@ -631,9 +631,9 @@ Viktor: *"Они идут. Krylov + 'Новая Эра'. Одновременн�
 Marcus Weber — НЕ предатель. Он был приманкой. Настоящий leak — security hole в старом коде.
 
 **Twist 2:**
-"The Architect" (лидер "Новой Эры") — раскрыт в Episode 31 (identity в базе данных)
+"The Architect" (лидер "Новой Эры") — раскрыт в `s08e10` (личность — в переданной выгрузке)
 
-#### Episode 31: Counterattack
+#### День 59: контрнаступление
 
 Алекс: *"Лучшая защита — нападение. Атакуем их инфраструктуру. Макс, дай мне root на staging серверах. Я пойду в их сети."*
 
@@ -649,7 +649,7 @@ Marcus Weber — НЕ предатель. Он был приманкой. Нас
 - Макс обеспечивает инфраструктуру для атаки
 - Дмитрий автоматизирует атаки через Ansible
 
-#### Episode 32: Final Stand
+#### День 60: последний рубеж
 
 **Последняя битва:**
 Крылов последняя попытка: физическое проникновение в московский ЦОД.
@@ -697,9 +697,9 @@ LILITH (финальное сообщение):
 
 Макс: *"Может быть. Может быть."*
 
-**[KERNEL SHADOWS — COMPLETE]**
+**[KERNEL SHADOWS — КОНЕЦ]**
 
-*Hint для возможного продолжения: Kali Linux spinoff? OPERATION PENUMBRA?*
+*Задел на продолжение: папка PENUMBRA в переданной выгрузке.*
 
 ---
 
@@ -764,7 +764,7 @@ LILITH (финальное сообщение):
 7. **DEBRIEFING** — анализ
 8. **CLIFFHANGER** — что дальше?
 
-### Пример (Season 2, Episode 06: DNS & Name Resolution, Stockholm):
+### Пример (Season 2, `s02e04`–`s02e05`: DNS, Стокгольм):
 ```
 BRIEFING:
 Виктор: "DNS атаки усиливаются. Летишь в Стокгольм. Erik Johansson встретит."

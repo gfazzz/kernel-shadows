@@ -240,6 +240,7 @@ bash tools/gen_timeline.sh       # хронология сюжета
 | [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) | установка и первая серия для новичка |
 | [docs/CHANGELOG.md](docs/CHANGELOG.md) | версии и таблица соответствия старых путей |
 | [docs/STATUS.md](docs/STATUS.md) | честный статус проекта |
+| [docs/CREDITS.md](docs/CREDITS.md) | благодарности и источники идеи |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | как участвовать |
 
 ---

@@ -27,7 +27,7 @@ VERBOSE ?=
 
 export SEASON SERIES VERBOSE
 
-.PHONY: help season-table test test-repeat test-locale test-integration links tools timeline check progress clean-clone clean
+.PHONY: help docs season-table test test-repeat test-locale test-integration links tools timeline check progress clean-clone clean
 
 help:
 	@echo "KERNEL SHADOWS — доступные цели:"
@@ -39,6 +39,7 @@ help:
 	@echo "  make test-repeat          два прогона подряд (воспроизводимость)"
 	@echo "  make test-locale          прогон под LC_ALL=C и чужим TZ"
 	@echo "  make test-integration     тесты, требующие живого хоста"
+	@echo "  make docs                 перегенерировать указатель серий"
 	@echo "  make season-table SEASON=…  таблица серий сезона из фактов"
 	@echo "  make links                проверка ссылок между документами"
 	@echo "  make tools                аудит forward-deps по инструментам"
@@ -69,6 +70,10 @@ test-locale:
 # поэтому основной прогон (make test) от окружения не зависит.
 test-integration:
 	@bash tools/run_integration.sh
+
+docs:
+	@python3 tools/update_index.py
+	@bash tools/gen_bibliography.sh >/dev/null && echo "docs/RESOURCES.md: библиография проверена"
 
 season-table:
 	@test -n "$(SEASON)" || { echo "нужно: make season-table SEASON=season-01-shell-foundations"; exit 2; }

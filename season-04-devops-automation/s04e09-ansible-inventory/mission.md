@@ -147,7 +147,7 @@ ansible-inventory -i artifacts/inventory.yml --host prod-web01.shadow.io
 `.gitignore` — [`s04e03`](../s04e03-gitignore-secrets/). Запрет на
 `StrictHostKeyChecking=no` продолжает
 [`s02e08`](../../season-02-networking/s02e08-ssh-keys/): ключ хоста — это
-единственная проверка, что вы разговариваете с тем же сервером, что вчера.
+единственная проверка, что ты разговариваешь с тем же сервером, что вчера.
 Отказ от входа под root — то же решение, что `User=` в юните
 [`s03e05`](../../season-03-system-administration/s03e05-systemd-service/) и
 `user:` в [`s04e06`](../s04e06-compose/). А хранение общих значений в одном

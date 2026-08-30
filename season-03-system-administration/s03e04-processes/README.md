@@ -208,8 +208,7 @@ awk '/^=== /{p=$0; gsub(/[^0-9]/,"",p)} /^exe -> /{print p, $0}' $D/proc_shadow-
 
 **Дальше → `s03e05` — свой сервис systemd: unit-файл как артефакт.**
 
-> Серия в работе: Season 3 пересобирается по плану v2.0. Пока её нет, следующий
-> шаг — практика на своей машине: `ps -eo user,pid,ppid,stat,command --forest`.
+> **Практика на своей машине:** `ps -eo user,pid,ppid,stat,command --forest`.
 
 ---
 

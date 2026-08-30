@@ -95,7 +95,7 @@ $EDITOR artifacts/compose.yaml
 bash tests/test.sh
 ```
 
-Если docker есть на вашей машине, стоит увидеть разницу своими глазами:
+Если docker есть на твоей машине, стоит увидеть разницу своими глазами:
 
 ```bash
 docker compose config          # что понял compose, с подставленными переменными

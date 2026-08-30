@@ -194,8 +194,7 @@ bash tests/test.sh
 
 **Дальше → `s03e13` — восстановление и проверка: финал сезона.**
 
-> Серия в работе: Season 3 пересобирается по плану v2.0. Пока её нет, следующий
-> шаг — практика на своей машине: `logrotate -d /etc/logrotate.conf` и
+> **Практика на своей машине:** `logrotate -d /etc/logrotate.conf` и
 > `cat /var/lib/logrotate/status`.
 
 ---

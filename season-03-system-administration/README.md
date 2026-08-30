@@ -176,7 +176,7 @@ Kristjan Tamm и эстонская электронная государств�
 
 ## Навыки Season 3
 
-После Season 3 вы сможете:
+После Season 3 ты сможешь:
 
 ✅ **Управлять пользователями и группами**
 ✅ **Настраивать permissions (chmod/chown), ACL, PAM**
@@ -255,30 +255,30 @@ Season 3 учит не просто командам, а **системному 
 ## Рекомендации по прохождению
 
 ### Для новичков:
-1. **Читайте man pages:** `man useradd`, `man chmod`, `man systemctl`
-2. **Тестируйте на VM/контейнере:** не на production!
-3. **Делайте backup перед изменениями**
-4. **Используйте LILITH для вопросов**
+1. **Читай man pages:** `man useradd`, `man chmod`, `man systemctl`
+2. **Тестируй на VM/контейнере:** не на production!
+3. **Делай backup перед изменениями**
+4. **Используй LILITH для вопросов**
 
 ### Для опытных:
-1. **Практикуйте production scenarios:** что если disk переполнен? что если база удалена?
-2. **Изучайте security implications:** SUID exploits, sudo misconfigurations
-3. **Автоматизируйте:** создайте Ansible playbooks для user management
-4. **Читайте deeper:** systemd architecture, LVM internals
+1. **Практикуй production scenarios:** что если disk переполнен? что если база удалена?
+2. **Изучай security implications:** SUID exploits, sudo misconfigurations
+3. **Автоматизируй:** создай Ansible playbooks для user management
+4. **Читай deeper:** systemd architecture, LVM internals
 
 ---
 
 ## Важные напоминания
 
 ### Security:
-- ⚠️ **НИКОГДА не давайте полный sudo всем**
-- ⚠️ **Проверяйте /etc/sudoers через visudo** (защита от syntax errors)
-- ⚠️ **Используйте `/etc/sudoers.d/` для модульности**
+- ⚠️ **НИКОГДА не давай полный sudo всем**
+- ⚠️ **Проверяй /etc/sudoers через visudo** (защита от syntax errors)
+- ⚠️ **Используй `/etc/sudoers.d/` для модульности**
 - ⚠️ **Permissions на /etc/shadow должны быть 640 или 600**
-- ⚠️ **Systemd services: включайте security hardening** (NoNewPrivileges, ProtectSystem)
-- ⚠️ **Systemd timers: используйте Persistent=true** (не пропустите запуски)
-- ⚠️ **Тестируйте backup recovery, а не только backup creation**
-- ⚠️ **"Untested backup = no backup"** — тестируйте restore каждый месяц
+- ⚠️ **Systemd services: включай security hardening** (NoNewPrivileges, ProtectSystem)
+- ⚠️ **Systemd timers: используй Persistent=true** (не пропустишь запуски)
+- ⚠️ **Тестируй backup recovery, а не только backup creation**
+- ⚠️ **"Untested backup = no backup"** — тестируй restore каждый месяц
 
 ### LILITH подход:
 - "Root — это оружие. Используй мудро."

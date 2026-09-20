@@ -5,7 +5,7 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](docs/CHANGELOG.md)
 [![Series](https://img.shields.io/badge/серий-101-green.svg)](docs/CURRICULUM.md)
-[![Checks](https://img.shields.io/badge/проверок-2335-green.svg)](#инструменты)
+[![Checks](https://img.shields.io/badge/проверок-2393-green.svg)](#инструменты)
 
 ---
 
@@ -253,7 +253,7 @@ bash tools/gen_timeline.sh       # хронология сюжета
 | | |
 |---|---|
 | Серий | 101 в 8 сезонах |
-| Автоматических проверок | 2335, все зелёные |
+| Автоматических проверок | 2393, все зелёные |
 | Чистого времени на задачи | 98 ч 25 мин (измерено) |
 | Требует root или сети | ни один тест |
 
